@@ -1,0 +1,19 @@
+// Light Theme Variables
+$theme-light: (
+  background: #ffffff,
+  text-color: #172b4d,
+  primary-color: #0c66e4,
+  button-hover: rgba(12, 102, 228, 0.8),
+  button-pressed: rgba(12, 102, 228, 0.6),
+);
+
+// Dark Theme Variables
+$theme-dark: (
+  background: #121212,
+  text-color: #ffffff,
+  primary-color: #0c66e4,
+  button-hover: rgba(12, 102, 228, 0.8),
+  button-pressed: rgba(12, 102, 228, 0.6),
+);
+
+$theme-current: $theme-light;

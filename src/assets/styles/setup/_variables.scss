@@ -1,18 +1,136 @@
-// Colors
-$clr1: #ce2e6c;
-$clr2: #4f3a65;
-$clr3: #574f7d;
-$clr4: #95adbe;
-$clr5: #dff0ea;
-$clr6: #fff;
-$clr7: #222;
-
-$gray1: #ddd;
-$gray2: #aaa;
-$gray3: #777;
-$gray4: #333;
-
 // Breakpoints
-$mobile-breakpoint: 460px;
-$narrow-breakpoint: 720px;
-$normal-breakpoint: 960px;
+$breakpoint-xs: 375px;
+$breakpoint-sm: 480px;
+$breakpoint-md: 790px;
+$breakpoint-lg: 1280px;
+
+// spacing 
+$ds-space-0: rem(0);                    // This uses the default 16px
+$ds-space-025: rem(2px);                  // 0.125rem = 2px
+$ds-space-050: rem(4px);                  // 0.25rem = 4px
+$ds-space-075: rem(6px);                  // 0.375rem = 6px
+$ds-space-100: rem(8px);                  // 0.5rem = 8px
+$ds-space-150: rem(12px);                 // 0.75rem = 12px
+$ds-space-200: rem(16px);                 // 1rem = 16px
+$ds-space-250: rem(20px);                 // 1.25rem = 20px
+$ds-space-300: rem(24px);                 // 1.5rem = 24px
+$ds-space-400: rem(32px);                 // 2rem = 32px
+$ds-space-500: rem(40px);                 // 2.5rem = 40px
+$ds-space-600: rem(48px);                 // 3rem = 48px
+$ds-space-800: rem(64px);                 // 4rem = 64px
+$ds-space-1000: rem(80px);                // 5rem = 80px
+
+$ds-space-negative-025: rem(-2px);        // -0.125rem = -2px
+$ds-space-negative-050: rem(-4px);        // -0.25rem = -4px
+$ds-space-negative-075: rem(-6px);        // -0.375rem = -6px
+$ds-space-negative-100: rem(-8px);        // -0.5rem = -8px
+$ds-space-negative-150: rem(-12px);       // -0.75rem = -12px
+$ds-space-negative-200: rem(-16px);       // -1rem = -16px
+$ds-space-negative-250: rem(-20px);       // -1.25rem = -20px
+$ds-space-negative-300: rem(-24px);       // -1.5rem = -24px
+$ds-space-negative-400: rem(-32px);       // -2rem = -32px
+
+// Text Colors
+$app-text: #172B4D;
+$app-text-accent-lime: #4C6B1F;
+$app-text-accent-lime-bolder: #37471F;
+$app-text-accent-red: #AE2E24;
+$app-text-accent-red-bolder: #5D1F1A;
+$app-text-accent-orange: #A54800;
+$app-text-accent-orange-bolder: #702E00;
+$app-text-accent-yellow: #7F5F01;
+$app-text-accent-yellow-bolder: #533F04;
+$app-text-accent-green: #216E4E;
+$app-text-accent-green-bolder: #164B35;
+$app-text-accent-teal: #206A83;
+$app-text-accent-teal-bolder: #164555;
+$app-text-accent-blue: #0055CC;
+$app-text-accent-blue-bolder: #09326C;
+$app-text-accent-purple: #5E4DB2;
+$app-text-accent-purple-bolder: #352C63;
+$app-text-accent-magenta: #943D73;
+$app-text-accent-magenta-bolder: #50253F;
+$app-text-accent-gray: #44546F;
+$app-text-accent-gray-bolder: #091E42;
+$app-text-disabled: #091E424F;
+$app-text-inverse: #FFFFFF;
+$app-text-selected: #0C66E4;
+$app-text-brand: #0C66E4;
+$app-text-danger: #AE2E24;
+$app-text-warning: #A54800;
+$app-text-warning-inverse: #172B4D;
+$app-text-success: #216E4E;
+$app-text-discovery: #5E4DB2;
+$app-text-information: #0055CC;
+$app-text-subtlest: #626F86;
+$app-text-subtle: #44546F;
+
+// Link Colors
+$app-link: #0C66E4;
+$app-link-pressed: #0055CC;
+$app-link-visited: #5E4DB2;
+$app-link-visited-pressed: #352C63;
+
+// Icon Colors
+$app-icon: #44546F;
+$app-icon-accent-lime: #6A9A23;
+$app-icon-accent-red: #C9372C;
+$app-icon-accent-orange: #E56910;
+$app-icon-accent-yellow: #B38600;
+$app-icon-accent-green: #22A06B;
+$app-icon-accent-teal: #2898BD;
+$app-icon-accent-blue: #1D7AFC;
+$app-icon-accent-purple: #8270DB;
+$app-icon-accent-magenta: #CD519D;
+$app-icon-accent-gray: #758195;
+$app-icon-disabled: #091E424F;
+$app-icon-inverse: #FFFFFF;
+$app-icon-selected: #0C66E4;
+$app-icon-brand: #0C66E4;
+$app-icon-danger: #C9372C;
+$app-icon-warning: #E56910;
+$app-icon-warning-inverse: #172B4D;
+$app-icon-success: #22A06B;
+$app-icon-discovery: #8270DB;
+$app-icon-information: #1D7AFC;
+$app-icon-subtle: #626F86;
+
+// Border Colors
+$app-border: #091E4224;
+$app-border-accent-lime: #6A9A23;
+$app-border-accent-red: #E2483D;
+$app-border-accent-orange: #E56910;
+$app-border-accent-yellow: #B38600;
+$app-border-accent-green: #22A06B;
+$app-border-accent-teal: #2898BD;
+$app-border-accent-blue: #1D7AFC;
+$app-border-accent-purple: #8270DB;
+$app-border-accent-magenta: #CD519D;
+$app-border-accent-gray: #758195;
+$app-border-disabled: #091E420F;
+$app-border-focused: #388BFF;
+$app-border-input: #8590A2;
+$app-border-inverse: #FFFFFF;
+$app-border-selected: #0C66E4;
+$app-border-brand: #0C66E4;
+$app-border-danger: #E2483D;
+$app-border-warning: #E56910;
+$app-border-success: #22A06B;
+$app-border-discovery: #8270DB;
+$app-border-information: #1D7AFC;
+$app-border-bold: #758195;
+ 
+// button Colors
+$dynamic-button: transparent;
+$dynamic-button-hovered: rgba(255, 255, 255, 0.20);
+$dynamic-button-pressed: rgba(255, 255, 255, 0.20);
+$dynamic-button-pressed-hovered: rgba(255, 255, 255, 0.20);
+$dynamic-button-primary: rgba(255, 255, 255, 0.20);
+$dynamic-button-primary-hovered: rgba(255, 255, 255, 0.36);
+$dynamic-button-primary-pressed: rgba(255, 255, 255, 0.36);
+$dynamic-button-highlighted: #DCDFE4;
+$dynamic-button-highlighted-hovered: #FFFFFF;
+$dynamic-icon: #FFFFFF;
+$dynamic-text: #FFFFFF;
+$dynamic-text-transparent: hsla(0, 0%, 100%, 0.16);
+

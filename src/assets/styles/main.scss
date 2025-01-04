@@ -1,39 +1,43 @@
 // Setup
-@import "setup/variables";
-@import "setup/functions";
-@import "setup/mixins";
-@import "setup/typography";
+@import 'setup/variables';
+@import 'setup/functions';
+@import 'setup/mixins';
+@import 'setup/typography';
 
 // Basics
-@import "basics/helpers";
-@import "basics/layout";
-@import "basics/base";
+@import 'basics/helpers';
+@import 'basics/layout';
+@import 'basics/base';
 // @import "basics/links";
-@import "basics/forms";
+@import 'basics/forms';
 
+// themes
+@import 'themes/theme-variables';
+@import 'themes/theme-mixins';
+@import 'themes/themes';
 
 // pages
-@import "RootCmp";
+@import 'RootCmp';
 
-@import "pages/AboutUs";
+@import 'pages/AboutUs';
 // @import "pages/HomePage";
-@import "pages/BoardIndex";
-@import "pages/ReviewIndex";
-@import "pages/UserDetails";
-@import "pages/TaskDetails";
-@import "pages/LoginSignup";
+@import 'pages/BoardIndex';
+@import 'pages/ReviewIndex';
+@import 'pages/UserDetails';
+@import 'pages/TaskDetails';
+@import 'pages/LoginSignup';
 
 // Components
-@import "cmps/list";
-@import "cmps/preview";
+@import 'cmps/list';
+@import 'cmps/preview';
 
-@import "cmps/AppHeader";
-@import "cmps/AppFooter";
-@import "cmps/UserMsg";
+@import 'cmps/AppHeader';
+@import 'cmps/AppFooter';
+@import 'cmps/UserMsg';
 
-@import "cmps/CardFilter";
-@import "cmps/ReviewEdit";
-@import "cmps/ReviewList";
-@import "cmps/ReviewPreview";
+@import 'cmps/CardFilter';
+@import 'cmps/ReviewEdit';
+@import 'cmps/ReviewList';
+@import 'cmps/ReviewPreview';
 // @import "cmps/BoardList";
 // @import "cmps/BoardPreview";

@@ -1,0 +1,18 @@
+// _themes.scss
+$theme-light: (
+  background: #ffffff,
+  text-color: $app-text,
+  primary-color: $dynamic-button-primary,
+  button-hover: $dynamic-button-primary-hovered,
+  button-pressed: $dynamic-button-primary-pressed,
+);
+
+$theme-dark: (
+  background: #121212,
+  text-color: $app-text-inverse,
+  primary-color: $dynamic-button-primary,
+  button-hover: $dynamic-button-primary-hovered,
+  button-pressed: $dynamic-button-primary-pressed,
+);
+
+$theme-current: $theme-light;

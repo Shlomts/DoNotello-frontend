@@ -1,0 +1,22 @@
+@mixin theme($theme) {
+  $background: map-get($theme, background);
+  $text-color: map-get($theme, text-color);
+  $primary-color: map-get($theme, primary-color);
+  $button-hover: map-get($theme, button-hover);
+  $button-pressed: map-get($theme, button-pressed);
+
+  background-color: $background;
+  color: $text-color;
+
+  .btn {
+    background-color: $primary-color;
+
+    &:hover {
+      background-color: $button-hover;
+    }
+
+    &:active {
+      background-color: $button-pressed;
+    }
+  }
+}
