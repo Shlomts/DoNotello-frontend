@@ -1,7 +1,7 @@
 // Setup
-@import 'setup/variables';
 @import 'setup/functions';
 @import 'setup/mixins';
+@import 'setup/variables';
 @import 'setup/typography';
 
 // Basics
@@ -11,10 +11,10 @@
 // @import "basics/links";
 @import 'basics/forms';
 
-// themes
-@import 'themes/theme-variables';
-@import 'themes/theme-mixins';
-@import 'themes/themes';
+// // themes
+// @import 'themes/theme-variables';
+// @import 'themes/theme-mixins';
+// @import 'themes/themes';
 
 // pages
 @import 'RootCmp';

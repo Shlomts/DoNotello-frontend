@@ -47,7 +47,6 @@
 .tag-text {
     color: $clr1;
     text-transform: uppercase;
-    @include type(boldCondensed);
 }
 
 // Media helpers
