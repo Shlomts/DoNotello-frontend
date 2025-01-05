@@ -1,0 +1,754 @@
+[
+    {
+        "title": "DoNotello - DEMO",
+        "isStarred": false,
+        "archivedAt": null,
+        "createdBy": {
+            "_id": "u101",
+            "fullname": "Abi Abambi",
+            "imgUrl": "http://some-img"
+        },
+        "style": {
+            "backgroundImage": ""
+        },
+        "labels": [
+            {
+                "id": "l101",
+                "title": "Priority: High",
+                "color": "#eb5a46"
+            },
+            {
+                "id": "l102",
+                "title": "Priority: Highest",
+                "color": "#f2d600"
+            },
+            {
+                "id": "l103",
+                "title": "Priority: Not sure",
+                "color": "#c4c4c4"
+            }
+        ],
+        "members": [
+            {
+                "_id": "u101",
+                "fullname": "Tal Taltal",
+                "imgUrl": "https://some-img-url.com/1"
+            },
+            {
+                "_id": "u102",
+                "fullname": "Josh Ga",
+                "imgUrl": "https://some-img-url.com/2"
+            },
+            {
+                "_id": "u103",
+                "fullname": "Sarah M",
+                "imgUrl": "https://some-img-url.com/3"
+            }
+        ],
+        "groups": [
+            {
+                "id": "g101",
+                "title": "Backlog-server",
+                "cards": [
+                    {
+                        "id": "c101",
+                        "title": "Set up server",
+                        "memberIds": ["u101", "u102", "u103"]
+                    },
+                    {
+                        "id": "c102",
+                        "title": "Database setup",
+                        "memberIds": []
+                    },
+                    {
+                        "id": "c103",
+                        "title": "API",
+                        "checklists": [
+                            {
+                                "id": "cl101",
+                                "title": "Tasks",
+                                "todos": [
+                                    {
+                                        "id": "t101",
+                                        "title": "Define routes",
+                                        "isDone": true
+                                    },
+                                    {
+                                        "id": "t102",
+                                        "title": "Test endpoints",
+                                        "isDone": false
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "c104",
+                        "title": "Authentication",
+                        "labelIds": ["l101"]
+                    },
+                    {
+                        "id": "c105",
+                        "title": "Data validation",
+                        "labelIds": []
+                    },
+                    {
+                        "id": "c106",
+                        "title": "Services",
+                        "style": {
+                            "backgroundImage": "https://some-service-image.jpg"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "g102",
+                "title": "Backlog-client",
+                "cards": [
+                    {
+                        "id": "c201",
+                        "title": "Add task details",
+                        "memberIds": []
+                    },
+                    {
+                        "id": "c202",
+                        "title": "Implement Sass",
+                        "dueDate": "2025-01-01",
+                        "labelIds": ["l101"]
+                    },
+                    {
+                        "id": "c203",
+                        "title": "Pages",
+                        "labelIds": ["l101"]
+                    },
+                    {
+                        "id": "c204",
+                        "title": "Icons",
+                        "comments": [
+                            {
+                                "id": "comm101",
+                                "title": "Need more design options",
+                                "createdAt": "2025-01-12",
+                                "byMember": {
+                                    "_id": "u102",
+                                    "fullname": "Josh Ga"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "c205",
+                        "title": "Make a great project with some awesome SASS and some beautiful components that will rock your world",
+                        "dueDate": "2025-01-07",
+                        "comments": [
+                            {
+                                "id": "comm102",
+                                "title": "This is coming along nicely",
+                                "createdAt": "2025-01-03",
+                                "byMember": {
+                                    "_id": "u101",
+                                    "fullname": "Tal Taltal"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "g103",
+                "title": "In development",
+                "cards": [
+                    {
+                        "id": "c301",
+                        "title": "Add npm libs",
+                        "checklists": [
+                            {
+                                "id": "cl201",
+                                "title": "Libraries",
+                                "todos": [
+                                    {
+                                        "id": "t201",
+                                        "title": "Install Axios",
+                                        "isDone": false
+                                    },
+                                    {
+                                        "id": "t202",
+                                        "title": "Install Lodash",
+                                        "isDone": false
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "c302",
+                        "title": "demo",
+                        "labelIds": ["l101"]
+                    }
+                ]
+            },
+            {
+                "id": "g104",
+                "title": "Done",
+                "cards": [
+                    {
+                        "id": "c401",
+                        "title": "Planning the cmps tree",
+                        "checklists": [
+                            {
+                                "id": "cl301",
+                                "title": "Tasks",
+                                "todos": [
+                                    {
+                                        "id": "t301",
+                                        "title": "Draft plan",
+                                        "isDone": true
+                                    },
+                                    {
+                                        "id": "t302",
+                                        "title": "Review with team",
+                                        "isDone": true
+                                    },
+                                    {
+                                        "id": "t303",
+                                        "title": "Finalize",
+                                        "isDone": true
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": "c402",
+                        "title": "Vars",
+                        "labelIds": []
+                    }
+                ]
+            },
+            {
+                "id": "g105",
+                "title": "QA",
+                "cards": [
+                    {
+                        "id": "c501",
+                        "title": "Unit testing",
+                        "labelIds": ["l101"]
+                    },
+                    {
+                        "id": "c502",
+                        "title": "Code refactoring",
+                        "labelIds": ["l102"]
+                    },
+                    {
+                        "id": "c503",
+                        "title": "Build basic template",
+                        "labelIds": ["l102"]
+                    },
+                    {
+                        "id": "c504",
+                        "title": "Check data",
+                        "labelIds": []
+                    },
+                    {
+                        "id": "c505",
+                        "title": "Check QA",
+                        "labelIds": []
+                    }
+                ]
+            }
+        ],
+        "activities": [
+            {
+                "id": "a101",
+                "title": "Changed card color",
+                "createdAt": "2025-01-01",
+                "byMember": {
+                    "_id": "u103",
+                    "fullname": "Sarah M",
+                    "imgUrl": "https://some-img-url.com/3"
+                },
+                "group": {
+                    "id": "g101",
+                    "title": "Backlog-server"
+                },
+                "card": {
+                    "id": "c101",
+                    "title": "Set up server"
+                }
+            }
+        ]
+    },
+	{
+		"title": "Project X Dashboard",
+		"isStarred": true,
+		"archivedAt": null,
+		"createdBy": {
+		  "_id": "u201",
+		  "fullname": "Alex Johnson",
+		  "imgUrl": "http://example-img-url.com/alex"
+		},
+		"style": {
+		  "backgroundImage": ""
+		},
+		"labels": [
+		  {
+			"id": "l201",
+			"title": "Critical",
+			"color": "#f44336"
+		  },
+		  {
+			"id": "l202",
+			"title": "In Progress",
+			"color": "#ff9800"
+		  },
+		  {
+			"id": "l203",
+			"title": "Completed",
+			"color": "#4caf50"
+		  }
+		],
+		"members": [
+		  {
+			"_id": "u201",
+			"fullname": "Alex Johnson",
+			"imgUrl": "https://example-img-url.com/alex"
+		  },
+		  {
+			"_id": "u202",
+			"fullname": "Mia Thompson",
+			"imgUrl": "https://example-img-url.com/mia"
+		  },
+		  {
+			"_id": "u203",
+			"fullname": "Liam Smith",
+			"imgUrl": "https://example-img-url.com/liam"
+		  }
+		],
+		"groups": [
+		  {
+			"id": "g201",
+			"title": "Planning",
+			"cards": [
+			  {
+				"id": "c201",
+				"title": "Define project scope",
+				"memberIds": ["u201", "u202"],
+				"labelIds": ["l201"]
+			  },
+			  {
+				"id": "c202",
+				"title": "Stakeholder meetings",
+				"dueDate": "2025-02-15",
+				"comments": [
+				  {
+					"id": "comm201",
+					"title": "Schedule meeting with stakeholders",
+					"createdAt": "2025-01-02",
+					"byMember": {
+					  "_id": "u203",
+					  "fullname": "Liam Smith"
+					}
+				  }
+				]
+			  }
+			]
+		  },
+		  {
+			"id": "g202",
+			"title": "Execution",
+			"cards": [
+			  {
+				"id": "c301",
+				"title": "Develop initial prototype",
+				"checklists": [
+				  {
+					"id": "cl201",
+					"title": "Prototype Tasks",
+					"todos": [
+					  { "id": "t201", "title": "Create wireframes", "isDone": true },
+					  { "id": "t202", "title": "Implement key features", "isDone": false }
+					]
+				  }
+				],
+				"memberIds": ["u201", "u203"],
+				"labelIds": ["l202"]
+			  },
+			  {
+				"id": "c302",
+				"title": "Integrate API",
+				"labelIds": ["l201"]
+			  }
+			]
+		  },
+		  {
+			"id": "g203",
+			"title": "Review",
+			"cards": [
+			  {
+				"id": "c401",
+				"title": "Code Review",
+				"memberIds": ["u202"],
+				"labelIds": ["l203"]
+			  },
+			  {
+				"id": "c402",
+				"title": "Feedback collection",
+				"comments": [
+				  {
+					"id": "comm301",
+					"title": "Gather insights from beta users",
+					"createdAt": "2025-01-10",
+					"byMember": {
+					  "_id": "u202",
+					  "fullname": "Mia Thompson"
+					}
+				  }
+				]
+			  }
+			]
+		  },
+		  {
+			"id": "g204",
+			"title": "Deployment",
+			"cards": [
+			  {
+				"id": "c501",
+				"title": "Finalize documentation",
+				"checklists": [
+				  {
+					"id": "cl301",
+					"title": "Docs Tasks",
+					"todos": [
+					  { "id": "t301", "title": "Update API references", "isDone": true },
+					  { "id": "t302", "title": "Add usage examples", "isDone": false }
+					]
+				  }
+				]
+			  },
+			  {
+				"id": "c502",
+				"title": "Launch campaign",
+				"labelIds": ["l202"]
+			  }
+			]
+		  }
+		],
+		"activities": [
+		  {
+			"id": "a201",
+			"title": "Updated checklist",
+			"createdAt": "2025-01-05",
+			"byMember": {
+			  "_id": "u202",
+			  "fullname": "Mia Thompson",
+			  "imgUrl": "https://example-img-url.com/mia"
+			},
+			"group": {
+			  "id": "g202",
+			  "title": "Execution"
+			},
+			"card": {
+			  "id": "c301",
+			  "title": "Develop initial prototype"
+			}
+		  }
+		]
+	  },
+	  {
+		"title": "Team Alpha Sprint",
+		"isStarred": false,
+		"archivedAt": null,
+		"createdBy": {
+		  "_id": "u301",
+		  "fullname": "Nina Patel",
+		  "imgUrl": "http://example-img-url.com/nina"
+		},
+		"style": {
+		  "backgroundImage": ""
+		},
+		"labels": [
+		  {
+			"id": "l301",
+			"title": "Urgent",
+			"color": "#e91e63"
+		  },
+		  {
+			"id": "l302",
+			"title": "Low Priority",
+			"color": "#9e9e9e"
+		  },
+		  {
+			"id": "l303",
+			"title": "Blocked",
+			"color": "#673ab7"
+		  }
+		],
+		"members": [
+		  {
+			"_id": "u301",
+			"fullname": "Nina Patel",
+			"imgUrl": "https://example-img-url.com/nina"
+		  },
+		  {
+			"_id": "u302",
+			"fullname": "Oliver Grant",
+			"imgUrl": "https://example-img-url.com/oliver"
+		  },
+		  {
+			"_id": "u303",
+			"fullname": "Sophia Lee",
+			"imgUrl": "https://example-img-url.com/sophia"
+		  }
+		],
+		"groups": [
+		  {
+			"id": "g301",
+			"title": "To Do",
+			"cards": [
+			  {
+				"id": "c601",
+				"title": "Gather requirements",
+				"memberIds": ["u301"],
+				"labelIds": ["l301"]
+			  },
+			  {
+				"id": "c602",
+				"title": "Create mockups",
+				"labelIds": ["l302"]
+			  }
+			]
+		  },
+		  {
+			"id": "g302",
+			"title": "In Progress",
+			"cards": [
+			  {
+				"id": "c701",
+				"title": "Develop feature X",
+				"checklists": [
+				  {
+					"id": "cl401",
+					"title": "Development Tasks",
+					"todos": [
+					  { "id": "t401", "title": "Set up project", "isDone": true },
+					  { "id": "t402", "title": "Write tests", "isDone": false }
+					]
+				  }
+				],
+				"memberIds": ["u302"],
+				"labelIds": ["l303"]
+			  },
+			  {
+				"id": "c702",
+				"title": "Bug fix #123",
+				"labelIds": ["l301"]
+			  }
+			]
+		  },
+		  {
+			"id": "g303",
+			"title": "Done",
+			"cards": [
+			  {
+				"id": "c801",
+				"title": "Review sprint goals",
+				"memberIds": ["u303"],
+				"labelIds": ["l302"]
+			  },
+			  {
+				"id": "c802",
+				"title": "Finalize design",
+				"checklists": [
+				  {
+					"id": "cl501",
+					"title": "Design Tasks",
+					"todos": [
+					  { "id": "t501", "title": "Adjust colors", "isDone": true },
+					  { "id": "t502", "title": "Refine typography", "isDone": true }
+					]
+				  }
+				]
+			  }
+			]
+		  }
+		],
+		"activities": [
+		  {
+			"id": "a301",
+			"title": "Completed card",
+			"createdAt": "2025-01-06",
+			"byMember": {
+			  "_id": "u301",
+			  "fullname": "Nina Patel",
+			  "imgUrl": "https://example-img-url.com/nina"
+			},
+			"group": {
+			  "id": "g303",
+			  "title": "Done"
+			},
+			"card": {
+			  "id": "c801",
+			  "title": "Review sprint goals"
+			}
+		  }
+		]
+	  },
+	  {
+		"title": "Creative Team Pipeline",
+		"isStarred": true,
+		"archivedAt": null,
+		"createdBy": {
+		  "_id": "u501",
+		  "fullname": "Chris Harper",
+		  "imgUrl": "http://example-img-url.com/chris"
+		},
+		"style": {
+		  "backgroundImage": ""
+		},
+		"labels": [
+		  {
+			"id": "l501",
+			"title": "High Priority",
+			"color": "#ff1744"
+		  },
+		  {
+			"id": "l502",
+			"title": "In Progress",
+			"color": "#2979ff"
+		  },
+		  {
+			"id": "l503",
+			"title": "Completed",
+			"color": "#00e676"
+		  }
+		],
+		"members": [
+		  {
+			"_id": "u501",
+			"fullname": "Chris Harper",
+			"imgUrl": "https://example-img-url.com/chris"
+		  },
+		  {
+			"_id": "u502",
+			"fullname": "Taylor Scott",
+			"imgUrl": "https://example-img-url.com/taylor"
+		  },
+		  {
+			"_id": "u503",
+			"fullname": "Jordan Lee",
+			"imgUrl": "https://example-img-url.com/jordan"
+		  }
+		],
+		"groups": [
+		  {
+			"id": "g501",
+			"title": "Ideas",
+			"cards": [
+			  {
+				"id": "c1301",
+				"title": "Brainstorm campaign concepts",
+				"memberIds": ["u501"],
+				"labelIds": []
+			  },
+			  {
+				"id": "c1302",
+				"title": "Create mood board",
+				"labelIds": ["l501"]
+			  }
+			]
+		  },
+		  {
+			"id": "g502",
+			"title": "Drafting",
+			"cards": [
+			  {
+				"id": "c1401",
+				"title": "Design initial layout",
+				"checklists": [
+				  {
+					"id": "cl801",
+					"title": "Layout Tasks",
+					"todos": [
+					  { "id": "t801", "title": "Sketch layout", "isDone": true },
+					  { "id": "t802", "title": "Add placeholder text", "isDone": false }
+					]
+				  }
+				],
+				"memberIds": ["u502", "u503"],
+				"labelIds": ["l502"]
+			  }
+			]
+		  },
+		  {
+			"id": "g503",
+			"title": "Review",
+			"cards": [
+			  {
+				"id": "c1501",
+				"title": "Feedback on visual elements",
+				"labelIds": ["l502"],
+				"comments": [
+				  {
+					"id": "comm501",
+					"title": "Consider using a softer color palette",
+					"createdAt": "2025-01-08",
+					"byMember": {
+					  "_id": "u501",
+					  "fullname": "Chris Harper"
+					}
+				  }
+				]
+			  }
+			]
+		  },
+		  {
+			"id": "g504",
+			"title": "Completed",
+			"cards": [
+			  {
+				"id": "c1601",
+				"title": "Finalize typography",
+				"labelIds": ["l503"],
+				"memberIds": ["u503"]
+			  },
+			  {
+				"id": "c1602",
+				"title": "Export final assets",
+				"labelIds": ["l503"],
+				"checklists": [
+				  {
+					"id": "cl901",
+					"title": "Export Tasks",
+					"todos": [
+					  { "id": "t901", "title": "Generate PNGs", "isDone": true },
+					  { "id": "t902", "title": "Generate PDFs", "isDone": true }
+					]
+				  }
+				]
+			  }
+			]
+		  }
+		],
+		"activities": [
+		  {
+			"id": "a501",
+			"title": "Added a new card",
+			"createdAt": "2025-01-09",
+			"byMember": {
+			  "_id": "u502",
+			  "fullname": "Taylor Scott",
+			  "imgUrl": "https://example-img-url.com/taylor"
+			},
+			"group": {
+			  "id": "g502",
+			  "title": "Drafting"
+			},
+			"card": {
+			  "id": "c1401",
+			  "title": "Design initial layout"
+			}
+		  }
+		]
+	  }  
+
+]
