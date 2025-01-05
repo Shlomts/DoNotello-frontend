@@ -1,4 +1,17 @@
-.main-container main {
+.main-container {
+  display: flex;
+  flex-direction: column;
+  
+  .content-layout {
     min-height: calc(100vh - 7rem);
-    overflow: hidden; // Quick fix for JSONs in <pre>
+    display: flex;
+    flex: 1; // Takes up the remaining space below the header
+
+    main {
+      flex: 2 400px; // Fills the remaining space next to the sidebar
+      overflow-y: auto; // Allows scrolling when content overflows
+      overflow-x: hidden;
+      min-width: 500px;
+    }
+  }
 }
