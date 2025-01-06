@@ -1,14 +1,24 @@
-import { CardList } from '../card/CardList'
+import { GroupDetails } from '../group/GroupDetails.jsx'
 
 
 export function GroupList() {
-        return (
-            <main className="group-list">
-                <header>
-                    <h2>Group List</h2>
-                </header>
+    return (
+        <section className="group-list">
+            < ul >
+                <li >
+                    <GroupDetails />
+                </li>
+            </ul >
+        </section >
 
-                <CardList />
-            </main>
-        )
+        // <section>
+        //     <ul className="group-list">
+        //         {groups.map(group =>
+        //             <li key={group._id}>
+        //                 <GroupDetails group={group} />
+        //             </li>)
+        //         }
+        //     </ul>
+        // </section>
+    )
 }

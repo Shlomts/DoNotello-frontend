@@ -23,6 +23,7 @@
 // @import "pages/HomePage";
 @import 'pages/BoardIndex';
 @import 'pages/ReviewIndex';
+@import 'pages/BoardDetails';
 @import 'pages/UserDetails';
 @import 'pages/TaskDetails';
 @import 'pages/LoginSignup';
@@ -30,6 +31,12 @@
 // Components
 @import 'cmps/list';
 @import 'cmps/preview';
+@import 'cmps/GroupList';
+@import 'cmps/GroupDetails';
+@import 'cmps/CardPreview';
+
+
+
 
 @import 'cmps/AppHeader';
 @import 'cmps/AppFooter';

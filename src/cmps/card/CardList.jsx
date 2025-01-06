@@ -2,13 +2,21 @@ import { CardPreview } from './CardPreview'
 
 
 export function CardList() {
-        return (
-            <main className="group-list">
-                <header>
-                    <h2>Card List</h2>
-                </header>
+    return (
+        <section>
+            <ul className="card-list">
+                    <CardPreview />
+            </ul>
+        </section>
 
-                <CardPreview />
-            </main>
-        )
+        // <section>
+        //     <ul className="card-list">
+        //         {cards.map(card =>
+        //             <li key={card._id}>
+        //                 <CardPreview card={card} />
+        //             </li>)
+        //         }
+        //     </ul>
+        // </section>
+    )
 }

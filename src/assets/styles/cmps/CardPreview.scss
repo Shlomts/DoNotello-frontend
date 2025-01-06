@@ -1,0 +1,24 @@
+.card-preview {
+    display: flex;
+    align-items: center;
+
+
+    min-height: rem(36px);
+    width: rem(256px);
+
+    border-radius: rem(8px);
+    border: 2px solid transparent;
+    background-color: #22272b;
+
+
+    h3 {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    &:hover {
+        border: 2px solid rgba(12, 102, 228, 0.8);
+        cursor: pointer;
+    }
+}

@@ -1,9 +1,9 @@
 
 
 export function CardPreview() {
-        return (
-            <div>
-                I am Card Preview
-            </div>
-        )
+    return (
+        <div className="card-preview">
+            <h3>card title</h3>
+        </div>
+    )
 }

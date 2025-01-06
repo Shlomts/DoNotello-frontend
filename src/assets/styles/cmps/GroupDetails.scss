@@ -1,0 +1,54 @@
+.group-details {
+    display: grid;
+    grid-template-rows: minmax(32px, auto) 1fr minmax(32px, auto);
+    padding: rem(8px);
+    gap: rem(8px);
+
+    // min-height: rem(88px);
+    // width: rem(272px);
+
+    border-radius: rem(12px);
+
+    align-items: center;
+    background-color: #101204;
+    color: #b6c2cf;
+
+
+    .group-header {
+        display: flex;
+        justify-content: space-between;
+        padding-inline: 4px;
+
+        h3,
+        span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+    }
+
+    .group-card {
+        display: flex;
+        flex-direction: column;
+        
+
+        overflow-y: auto;
+    }
+
+
+    .group-footer {
+        display: flex;
+        align-items: center;
+
+        width: rem(220px);
+        height: rem(32px);
+
+        border-radius: rem(8px);
+
+        &:hover {
+            background-color: #252a1e;
+            cursor: pointer;
+        }
+    }
+
+
+}

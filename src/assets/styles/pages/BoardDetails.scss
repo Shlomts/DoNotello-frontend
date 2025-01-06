@@ -1,0 +1,51 @@
+.board-details {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: rgb(59, 91, 81);
+
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        height: rem(56px);
+        padding: 0 rem(16px) 0 rem(10px);
+
+        background-color: aqua;
+
+        h1 {
+            font-size: rem(14px);
+            margin: 0;
+        }
+    }
+
+    .board-content {
+        display: flex;
+        overflow-x: auto;
+        align-items: flex-start;
+
+        padding-inline: rem(12px);
+
+
+        .add-group {
+            display: flex;
+            align-items: center;
+            min-height: rem(44px);
+            width: rem(272px);
+
+            margin-block-start: rem(14px);
+            margin-inline-start: rem(12px);
+
+            border-radius: rem(12px);
+            background-color: #ffffff3d;
+            color: #172b4d;
+
+            &:hover{
+                background-color: #091e4214;
+                cursor: pointer;
+            }
+        }
+    }
+}
