@@ -19,26 +19,35 @@
 // pages
 @import 'RootCmp';
 
-@import 'pages/AboutUs';
+@import 'pages/about-us';
 // @import "pages/HomePage";
-@import 'pages/BoardIndex';
-@import 'pages/ReviewIndex';
-@import 'pages/UserDetails';
-@import 'pages/TaskDetails';
-@import 'pages/LoginSignup';
+@import 'pages/board-index';
+@import 'pages/review-index';
+@import 'pages/user-details';
+@import 'pages/task-details';
+@import 'pages/login-signup';
 
 // Components
-@import 'cmps/list';
-@import 'cmps/preview';
+// app
+@import 'cmps/app/app-header';
+@import 'cmps/app/app-footer';
+@import 'cmps/app/side-bar';
+@import 'cmps/app/user-msg';
+@import 'cmps/app/list';
+@import 'cmps/app/preview';
 
-@import 'cmps/AppHeader';
-@import 'cmps/SideBar';
-@import 'cmps/AppFooter';
-@import 'cmps/UserMsg';
+// Board
+@import 'cmps/board/board-list';
+@import 'cmps/board/board-preview';
 
-@import 'cmps/CardFilter';
-@import 'cmps/ReviewEdit';
-@import 'cmps/ReviewList';
-@import 'cmps/ReviewPreview';
-@import "cmps/BoardList";
-@import "cmps/BoardPreview";
+// Group
+
+
+
+// Card
+@import 'cmps/card/_card-filter';
+
+// Review
+@import 'cmps/review/review-edit';
+@import 'cmps/review/review-list';
+@import 'cmps/review/review-preview';
