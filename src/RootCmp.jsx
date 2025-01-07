@@ -25,7 +25,7 @@ export function RootCmp() {
     <div className="main-container">
       <AppHeader />
       <div className="content-layout">
-        <SideBar />
+        {/* <SideBar /> */}
         <UserMsg />
 
         <main>
