@@ -8,7 +8,7 @@ export function SideBar() {
         <li >
           <Link to="/boards">
             <div></div>
-            <p>Boards</p>
+            <span>Boards</span>
           </Link>
         </li>
         <li>

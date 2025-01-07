@@ -1,6 +1,6 @@
 .board-sidebar {
   padding: 0 rem(16px);
-  margin: rem(40px) 0 0;
+  margin: rem(30px) 0 0;
   width: rem(256px);
   max-height: 90vh;
   display: flex;
@@ -9,14 +9,18 @@
   background-color: $app-sidebar-dark;
   color: $app-text-inverse;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  gap: rem(8px);
+  position: sticky;
+  top: 40px;
+  // gap: rem(6px);
+
+
 
   .sidebar-links {
     list-style: none;
     padding: 0;
 
     li {
-      margin-bottom: rem(15px);
+      margin: 0;
 
       a {
         display: flex;
@@ -24,10 +28,11 @@
         text-decoration: none;
         min-height: rem(20px);
         margin: 0;
-        padding: rem(6px) rem(8px);
+        padding: 6px 8px;
 
-        font-size: rem(16px);
+        font-size: rem(12px);
         color: $app-sidebar-dark-txt;
+        line-height: 1.6;
 
         div {
           width: 20px;
@@ -65,6 +70,7 @@
     font-size: rem(16px);
     margin-bottom: rem(20px);
     color: $app-sidebar-dark-txt;
+    word-break: break-word;
 
     .sidebar-logo {
       flex: 0 0 auto;
@@ -91,7 +97,7 @@
       color: #b5b5c3;
       font-size: rem(14px);
     }
-    
+
     &:hover {
       background-color: $app-sidebar-dark-hover;
       border-radius: rem(8px);
@@ -100,9 +106,9 @@
     }
   }
 }
-
 .saparete {
   height: 1px;
   background-color: #333c43;
-  margin: 20px 0;
+  margin-bottom: 15px;
+  margin-top: 20px;
 }

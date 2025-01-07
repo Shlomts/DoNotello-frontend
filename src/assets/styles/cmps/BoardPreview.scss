@@ -1,10 +1,55 @@
-.board-preview {
-    a {
-        color: $clr4;
-        padding: 0;
-    }    
-	p {
-		margin-block: 0 0.2rem;
-        font-size: .85em;
-	}
+.board-preview-card {
+  width: rem(190px);
+  height: rem(95px);
+  border-radius: rem(3px);
+  background: linear-gradient(#006644, #00875a);
+  padding: 4px 8px;
+  position: relative;
+  cursor: pointer;
+
+  &:hover .star-btn-container {
+    opacity: 1;
+  }
+
+  .board-prew-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    height: rem(80px);
+    background-color: transparent;
+
+    header.board-preview-title {
+      display: inline-block;
+      flex: 0 0 auto;
+      font-size: rem(16px);
+      font-weight: 700;
+      max-height: rem(40px);
+      overflow: hidden;
+      width: 100%;
+      word-break: break-word;
+    }
+
+    .board-preview-action {
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      width: 100%;
+      height: 10px;
+
+      .star-btn-container {
+        opacity: 0; // Hidden by default
+        transition: opacity 0.3s ease;
+
+        .star-btn {
+          background: transparent;
+          border: none;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  &.isStarred .star-btn-container {
+    opacity: 1; // Always show the star button when isStarred class is present
+  }
 }

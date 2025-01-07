@@ -1,22 +1,39 @@
-.board-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: .5em;
+.board-list-container {
+  //   height: 150px;
 
-    li {
-        display: grid;
-        grid-template-columns: max-content auto;
-        padding: .5em;
-        background-color: $clr2;
+  .board-list {
+    .list {
+      display: flex;
+      gap: rem(2px);
 
-        color: $clr6;
-
-        .actions {
-            justify-self: end;
-
-            button {
-                padding: .3em .5em;
-            }
-        }
+      li {
+        display: block;
+        background-color: transparent;
+        // padding: rem(8px);
+      }
     }
+  }
+  .add-board {
+    margin-top: 8px;
+    padding: 8px 12px;
+    width: rem(190px);
+    height: rem(95px);
+    display: flex;
+    border: none;
+    border-radius: rem(3px);
+    background-color: #282c34;
+    color: #b3bfcb;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    transition-duration: 85ms;
+    transition-property: background-color, border-color, box-shadow;
+    transition-timing-function: ease;
+    font-weight: 400;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: #333c43;
+    }
+  }
 }

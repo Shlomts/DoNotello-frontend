@@ -10,7 +10,8 @@ import {userService} from '../services/user'
 import {BoardList} from '../cmps/board/BoardList'
 
 export function BoardIndex() {
-  const boards = useSelector((storeState) => storeState.boardModule.boards)
+  // const boards = useSelector((storeState) => storeState.boardModule.boards)
+  const boards = boardService.getRamdonBoards()
 
   async function onRemoveBoard(boardId) {
     try {
@@ -23,7 +24,7 @@ export function BoardIndex() {
 
   async function onAddBoard() {
     const board = boardService.getEmptyBoard()
-    board.vendor = prompt('Vendor?')
+    board.title = prompt('title?')
     try {
       const savedBoard = await addBoard(board)
       showSuccessMsg(`Board added (id: ${savedBoard._id})`)
@@ -58,18 +59,44 @@ export function BoardIndex() {
           </span>
         </div>
       </header>
-      <div className="saparete"></div>
-
-      <section className="boards-container1">
-        <div className="one-p-icon"></div> <h3>Your Boards</h3>
-        <BoardList boards={boards} onRemoveBoard={onRemoveBoard} onUpdateBoard={onUpdateBoard} />
-        <button className="add-board" onClick={onAddBoard}>Create new board</button>
-      </section>
-      <section className="boards-container2">
-        <div className="all-p-icon"></div>
-        <h3>All boards in this Workspace</h3>
-        <BoardList boards={boards} onRemoveBoard={onRemoveBoard} onUpdateBoard={onUpdateBoard} />
-        <button className="add-board" onClick={onAddBoard}>Create new board</button>
+      <div className="saparete-boards"></div>
+      <section className="all-boards">
+        <section className="boards-container-stared-list">
+          <div className="boards-page-board-heder">
+            <div className="one-p-icon"></div> 
+            <h3>Starred boards</h3>
+          </div>
+          <BoardList
+            boards={boards}
+            onRemoveBoard={onRemoveBoard}
+            onUpdateBoard={onUpdateBoard}
+            onAddBoard={onAddBoard}
+          />
+        </section>
+        <section className="boards-container1">
+          <div className="boards-page-board-heder">
+            <div className="one-p-icon"></div> 
+            <h3>Your Boards</h3>
+          </div>
+          <BoardList
+            boards={boards}
+            onRemoveBoard={onRemoveBoard}
+            onUpdateBoard={onUpdateBoard}
+            onAddBoard={onAddBoard}
+          />
+        </section>
+        <section className="boards-container2 ">
+          <div className="boards-page-board-heder">
+            <div className="all-p-icon"></div>
+          <h3>All boards in this Workspace</h3>
+          </div>
+          <BoardList
+            boards={boards}
+            onRemoveBoard={onRemoveBoard}
+            onUpdateBoard={onUpdateBoard}
+            onAddBoard={onAddBoard}
+          />
+        </section>
       </section>
     </main>
   )

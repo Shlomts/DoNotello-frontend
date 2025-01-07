@@ -1,18 +1,21 @@
 .board-index {
-  padding: rem(20px);
-  max-width: rem(400px);
+  min-width: rem(500px);
   min-height: calc(100vh - 3.5rem);
-  padding: rem(32px);
+  padding-block: rem(32px);
 
   .workspace-header {
     display: flex;
     align-items: center;
     margin-bottom: rem(20px);
+    padding: rem(40px);
+    padding-bottom: rem(30px);
+
+
 
     .workspace-logo-container {
       flex: 0 0 auto;
-      width: rem(50px);
-      height: rem(50px);
+      width: rem(60px);
+      height: rem(60px);
       margin-right: 10px;
       border-radius: rem(4px);
       font-size: rem(30px);
@@ -30,71 +33,82 @@
       }
     }
     .title {
+      padding: 0;
+      line-height: 0.5;
+
       h2 {
-        margin: 0;
+        margin-inline-start: 5px;
         font-size: 18px;
-        color: #7f8c97;
+        color: #b6c2cf;
         line-height: 15px;
+        font-weight: bold;
       }
 
       .workspace-subtitle {
-        color: #7f8c97;
+        color: #b6c2cf;
+        margin-inline-start: 5px;
+        vertical-align: top;
+        font-size: 12px;
 
         .workspace-privacy {
-          color: #7f8c97;
+          color: #b6c2cf;
         }
+
+      }
+    }
+  
+  }
+  
+  
+  .all-boards {
+    margin: 0 2% 2% 0;
+  }
+  .boards-container1,
+  .boards-container2,
+  .boards-container-stared-list {
+    // margin-top: 20px;
+    // display: flex;
+    // flex-direction: column;
+    // justify-items: flex-start;
+    // justify-content: space-between;
+    // margin: 14px 0 0 40px;
+
+    h3 {
+      display: inline-block;
+      flex: 1;
+      font-size: rem(16px);
+      font-weight: 700;
+      line-height: rem(24px);
+      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #6c7782;
+    }
+    
+    .boards-page-board-heder {
+      display: flex;
+      position: relative;
+      padding-inline-start: 5px;
+      margin: 17px 0 0 52px;
+      
+      .one-p-icon,
+      .all-p-icon {
+        width: 20px;
+        height: 20px;
+        background-color: #44475a;
+        border-radius: 4px;
+        position: absolute;
+        left: -25px;
+        top: 0;
       }
     }
   }
-
-  .saparete {
-    height: 1px;
-    width: ram(400px);
-    background-color: #333c43;
-    margin: 20px 0;
-  }
 }
 
-//starter to the card cuz only one will stay in the cmp.jsx
-
-.boards-container1,
-.boards-container2 {
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 10px;
-
-  h3 {
-    margin-bottom: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #6c7782;
-  }
-
-  .add-board {
-    margin-top: 10px;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    background-color: #282c34;
-    color: #b3bfcb;
-    font-size: 14px;
-    transition: background-color 0.3s;
-    transition-duration: 85ms;
-    transition-property: background-color, border-color, box-shadow;
-    transition-timing-function: ease;
-    font-weight: 400;
-    height: rem(80px);
-    width:40%;
-
-    &:hover {
-      background-color: #333c43;
-    }
-  }
-  div {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-    background-color: #44475a;
-    border-radius: 4px;
-  }
+.saparete-boards {
+  height: 1px;
+  background-color: #333c43;
+  margin: 20px 0 5px 0;
+  padding: 0;
 }
