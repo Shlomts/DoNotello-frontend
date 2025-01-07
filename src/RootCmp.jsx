@@ -19,14 +19,17 @@ import {LoginSignup} from './pages/LoginSignup.jsx'
 import {Login} from './pages/Login.jsx'
 import {Signup} from './pages/Signup.jsx'
 import {SideBar} from './cmps/SideBar.jsx'
+import { DynaminModal } from './cmps/DynamicModal.jsx'
 
 export function RootCmp() {
   return (
     <div className="main-container">
       <AppHeader />
       <div className="content-layout">
-        {/* <SideBar /> */}
+        {/* need to hide the sidebar in homepage */}
+        <SideBar /> 
         <UserMsg />
+        <DynaminModal />
 
         <main>
           <Routes>

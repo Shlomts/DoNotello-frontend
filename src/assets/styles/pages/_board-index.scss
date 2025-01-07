@@ -1,5 +1,6 @@
 .board-index {
-  min-width: rem(500px);
+  // min-width: rem(500px);
+  max-width: rem(1500px);
   min-height: calc(100vh - 3.5rem);
   padding-block: rem(32px);
 
@@ -62,6 +63,7 @@
   
   .all-boards {
     margin: 0 2% 2% 0;
+    overflow-x: auto;
   }
   .boards-container1,
   .boards-container2,

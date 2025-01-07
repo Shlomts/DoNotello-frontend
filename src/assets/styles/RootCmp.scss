@@ -9,8 +9,6 @@
 
     main {
       flex: 2 400px; // Fills the remaining space next to the sidebar
-      overflow-y: auto; // Allows scrolling when content overflows
-      overflow-x: hidden;
       min-width: 500px;
     }
   }

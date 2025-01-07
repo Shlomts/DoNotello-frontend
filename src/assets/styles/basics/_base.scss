@@ -14,6 +14,8 @@
     font-size: 14px;
     // @include theme($theme-current);
     background-color: $app-root-dark-color;
+    overflow-y: hidden;
+    overflow-x: hidden;
   }
   
   h1,

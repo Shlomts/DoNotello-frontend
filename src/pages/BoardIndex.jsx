@@ -8,6 +8,8 @@ import {boardService} from '../services/board'
 import {userService} from '../services/user'
 
 import {BoardList} from '../cmps/board/BoardList'
+import {AddBoard} from '../cmps/board/AddBoard'
+import { onToggleModal } from '../store/actions/system.actions'
 
 export function BoardIndex() {
   // const boards = useSelector((storeState) => storeState.boardModule.boards)
@@ -22,16 +24,17 @@ export function BoardIndex() {
     }
   }
 
-  async function onAddBoard() {
-    const board = boardService.getEmptyBoard()
-    board.title = prompt('title?')
-    try {
-      const savedBoard = await addBoard(board)
-      showSuccessMsg(`Board added (id: ${savedBoard._id})`)
-    } catch (err) {
-      showErrorMsg('Cannot add board')
-    }
+  function onAddBoard() {
+    console.log('open modal')
+    //here i want to open the modal
+    onToggleModal({
+      cmp: AddBoard, // Pass the AddBoard component
+      props: {
+        onClose: onToggleModal, // Pass onClose handler
+      },
+    })
   }
+
   // Dont think we need here to update the boards //////////////////////////////
   async function onUpdateBoard(board) {
     const speed = +prompt('New speed?', board.speed)
@@ -63,7 +66,7 @@ export function BoardIndex() {
       <section className="all-boards">
         <section className="boards-container-stared-list">
           <div className="boards-page-board-heder">
-            <div className="one-p-icon"></div> 
+            <div className="one-p-icon"></div>
             <h3>Starred boards</h3>
           </div>
           <BoardList
@@ -75,7 +78,7 @@ export function BoardIndex() {
         </section>
         <section className="boards-container1">
           <div className="boards-page-board-heder">
-            <div className="one-p-icon"></div> 
+            <div className="one-p-icon"></div>
             <h3>Your Boards</h3>
           </div>
           <BoardList
@@ -88,7 +91,7 @@ export function BoardIndex() {
         <section className="boards-container2 ">
           <div className="boards-page-board-heder">
             <div className="all-p-icon"></div>
-          <h3>All boards in this Workspace</h3>
+            <h3>All boards in this Workspace</h3>
           </div>
           <BoardList
             boards={boards}
