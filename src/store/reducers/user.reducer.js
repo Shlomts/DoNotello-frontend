@@ -11,7 +11,14 @@ export const SET_SCORE = 'SET_SCORE'
 
 const initialState = {
     count: 10,
-    user: userService.getLoggedinUser(),
+    // user: userService.getLoggedinUser(),
+    user: { 
+        _id: 123, 
+        fullname: "Admin Admination", 
+        // imgUrl: user.imgUrl, 
+        // score: user.score, 
+        isAdmin: true 
+    },
     users: [],
     watchedUser : null
 }
