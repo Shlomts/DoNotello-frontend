@@ -14,15 +14,15 @@
     display: grid;
     grid-template-areas:
         "i1  h    btn"
-        ".   f    nav"
-        "i2  c1   nav"
-        "i2  c1   nav"
-        "i2  c1   nav";
+        ".   f    opt"
+        "i2  c1   opt"
+        "i2  c1   opt"
+        "i2  c1   opt";
 
     min-height: 600px;
     border-radius: 12px;
     border-color: transparent;
-    background-color: $clr1;
+    background-color: $clr6;
     position: absolute;
     z-index: 1000;
     top: 0;
@@ -30,18 +30,24 @@
     margin-top: 45px;
     max-width: 50%;
 
-    & * {
-        display: inline;
-    }
-
     button {
         grid-area: btn;
+        display: block;
+        max-width: fit-content;
+        max-height: fit-content;
+        top: 0;
+        justify-self: right;
+        margin: 0;
     }
 
-    .opt-bar{
-        grid-area: nav;
-
+    .opt-card {
         display: grid;
+        grid-template-columns: 20% 1fr;
+    }
+
+    .opt-bar {
+        grid-area: opt;
+
         grid-template-columns: 20% 1fr;
 
         span {

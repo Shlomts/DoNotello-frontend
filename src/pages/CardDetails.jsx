@@ -19,29 +19,41 @@ export function CardDetails() {
             </button>
             <div className="header icon">🖥️</div>
             <header className="header">
-                <h3> I'm Card Details</h3>
+                <h3> Card title</h3>
                 <p>
                     In list: <span>List Name</span>
                 </p>
             </header>
             <section className="opt-bar">
                 <ul>
-                    <span>➕</span>
-                    <li>Join</li>
-                    <span>🙆</span>
-                    <li>Members</li>
-                    <span>🏷️</span>
-                    <li>Labels</li>
-                    <span>✅</span>
-                    <li>Checklist</li>
-                    <span>📅</span>
-                    <li>Dates</li>
-                    <span>📎</span>
-                    <li>Attachment</li>
-                    <span>📌</span>
-                    <li>Location</li>
-                    <span>✏️</span>
-                    <li>Custom Fields</li>
+                    <li className="opt-card">
+                        <div>➕</div>
+                        <div>Join</div>
+                    </li>
+                    <li className="opt-card">
+                        <div>🙆</div>
+                        <div>Members</div>
+                    </li>
+                    <li className="opt-card">
+                        <div>🏷️</div>
+                        <div>Labels</div>
+                    </li>
+                    <li className="opt-card">
+                        <div>✅</div>
+                        <div>Checklist</div>
+                    </li>
+                    <li className="opt-card">
+                        <div>📅</div>
+                        <div>Dates</div>
+                    </li>
+                    <li className="opt-card">
+                        <div>📎</div>
+                        <div>Attachment</div>
+                    </li>
+                    <li className="opt-card">
+                        <div>📌</div>
+                        <div>Location</div>
+                    </li>
                 </ul>
             </section>
             <section className="notifications">
