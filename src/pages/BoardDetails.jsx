@@ -9,18 +9,34 @@ import { CardFilter } from "../cmps/card/CardFilter"
 import { GroupList } from "../cmps/group/GroupList"
 
 export function BoardDetails() {
+    const { boardId } = useParams()
+    const board = useSelector((storeState) => storeState.boardModule.board)
+    const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter())
+
+    useEffect(() => {
+        loadBoard(boardId)
+    }, [boardId])
+
+    // useEffect(() => {
+    //     loadBoards(filterBy)
+    // }, [filterBy])
+
+    if (!board) return <div>Loading...</div>
+
     return (
         <section className="board-details">
             <div className="header">
                 <section className="board-data">
-                    <h1>boardName</h1>
+                    <h1>{board.title}</h1>
                 </section>
                 <section className="board-edit">
                     <span>board-edit</span>
                 </section>
             </div>
             <div className="board-content">
-                <GroupList />
+                <GroupList
+                    groups={board.groups}
+                />
                 <button className="add-group">+ Add another list</button>
             </div>
         </section>

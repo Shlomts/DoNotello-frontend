@@ -4,42 +4,48 @@ import { saveToStorage, loadFromStorage } from '../util.service'
 import { makeId } from '../util.service'
 import { userService } from '../user'
 
-const BOARD_KEY = 'boardDB'
+const STORAGE_KEY = 'boardDB'
 _createBoards()
+
 
 export const boardService = {
     query,
     getById,
-    save,
+    saveBoard,
     remove,
     addBoardMsg,
+    saveCard,
 }
 window.cs = boardService
 
 
-async function query(filterBy = { txt: '', price: 0 }) {
-    var boards = await storageService.query(STORAGE_KEY)
-    const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
-
-    if (txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
-        boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
-    }
-    if (minSpeed) {
-        boards = boards.filter(board => board.speed >= minSpeed)
-    }
-    if(sortField === 'vendor' || sortField === 'owner'){
-        boards.sort((board1, board2) => 
-            board1[sortField].localeCompare(board2[sortField]) * +sortDir)
-    }
-    if(sortField === 'price' || sortField === 'speed'){
-        boards.sort((board1, board2) => 
-            (board1[sortField] - board2[sortField]) * +sortDir)
-    }
-    
-    boards = boards.map(({ _id, vendor, price, speed, owner }) => ({ _id, vendor, price, speed, owner }))
-    return boards
+async function query() {
+    return await storageService.get(STORAGE_KEY)
 }
+
+// async function query(filterBy = { txt: '', price: 0 }) {
+//     var boards = await storageService.query(STORAGE_KEY)
+//     const { txt, minSpeed, maxPrice, sortField, sortDir } = filterBy
+
+//     if (txt) {
+//         const regex = new RegExp(filterBy.txt, 'i')
+//         boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
+//     }
+//     if (minSpeed) {
+//         boards = boards.filter(board => board.speed >= minSpeed)
+//     }
+//     if(sortField === 'vendor' || sortField === 'owner'){
+//         boards.sort((board1, board2) => 
+//             board1[sortField].localeCompare(board2[sortField]) * +sortDir)
+//     }
+//     if(sortField === 'price' || sortField === 'speed'){
+//         boards.sort((board1, board2) => 
+//             (board1[sortField] - board2[sortField]) * +sortDir)
+//     }
+
+//     boards = boards.map(({ _id, vendor, price, speed, owner }) => ({ _id, vendor, price, speed, owner }))
+//     return boards
+// }
 
 function getById(boardId) {
     return storageService.get(STORAGE_KEY, boardId)
@@ -50,23 +56,31 @@ async function remove(boardId) {
     await storageService.remove(STORAGE_KEY, boardId)
 }
 
-async function save(board) {
+async function saveBoard(board) {
     var savedBoard
     if (board._id) {
         const boardToSave = {
             _id: board._id,
-            price: board.price,
-            speed: board.speed,
+            title: board.title,
+            isStarred: board.isStarred,
+            archivedAt: board.archivedAt,
+            createdBy: board.createdBy,
+            style: board.style,
+            labels: board.labels,
+            members: board.members,
+            groups: board.groups,
         }
         savedBoard = await storageService.put(STORAGE_KEY, boardToSave)
     } else {
         const boardToSave = {
-            vendor: board.vendor,
-            price: board.price,
-            speed: board.speed,
-            // Later, owner is set by the backend
-            owner: userService.getLoggedinUser(),
-            msgs: []
+            title: board.title,
+            isStarred: board.isStarred,
+            archivedAt: board.archivedAt,
+            createdBy: userService.getLoggedinUser(),
+            style: board.style,
+            labels: board.labels || [],
+            members: board.members || [],
+            groups: board.groups || [],
         }
         savedBoard = await storageService.post(STORAGE_KEY, boardToSave)
     }
@@ -88,34 +102,95 @@ async function addBoardMsg(boardId, txt) {
     return msg
 }
 
+function saveCard(boardId, groupId, card, activity) {
+    const board = getById(boardId)
+    const group = board.groups.find(group => group.id === groupId)
+
+    // PUT /api/board/b123/task/t678
+
+    // TODO: find the task, and update
+    const cardToUpdate = group.cards.find(cardToUpdate => cardToUpdate.id)
+
+    board.activities.unshift(activity)
+    saveBoard(board)
+    // return board
+    // return task
+}
+
 
 // for DEV 
 
 function _createBoards() {
-    let boards = loadFromStorage(BOARD_KEY)
+    let boards = loadFromStorage(STORAGE_KEY)
 
     if (!boards || !boards.length) {
         boards = [
-            _createBoard('hi'),
-            _createBoard('shalom'),
-            _createBoard('ma'),
-            _createBoard('kore')
+            _createBoard('DoNotello - DEMO'),
+            // _createBoard('2'),
+            // _createBoard('3'),
+            // _createBoard('4'),
+            // _createBoard('5'),
+            // _createBoard('6'),
         ]
-        saveToStorage(BOARD_KEY, boards)
+        saveToStorage(STORAGE_KEY, boards)
     }
 }
 
 function _createBoard(title) {
-    const board = _getEmptyBoard (title)
-    board.id = makeId()
+    const board = _getEmptyBoard(title)
+    board._id = makeId()
+    board.groups = [
+        _createGroup('Backlog-server'),
+        _createGroup('Backlog-client',
+            [
+                _createCard('Add task details')
+            ]),
+        _createGroup('In development',
+            [
+                _createCard('API'),
+                _createCard('demo')
+            ]),
+        _createGroup('Done',
+            [
+                _createCard('Planning the cmps tree'),
+                _createCard('Vars'),
+                _createCard('snippet'),
+            ]),
+        _createGroup('QA',
+            [
+                _createCard('Two'),
+                _createCard('Cards')
+            ]),
+        _createGroup('Ready to production',
+            [
+                _createCard('Two'),
+                _createCard('Cards')
+            ]),
+    ]
     return board
 }
 
-function _getEmptyBoard(title) {
-	return {
+function _createGroup(title, cards = []) {
+    return {
+        id: makeId(),
         title,
-		isStarred: false,
-		archivedAt: null,
+        cards,
+        style:{}
+    }
+}
+
+function _createCard(title) {
+    return {
+        id: makeId(),
+        title,
+    }
+}
+
+function _getEmptyBoard(title) {
+    return {
+        title,
+        isStarred: false,
+        archivedAt: null,
         createdBy: {},
         style: {
             backgroundImage: ""
@@ -124,5 +199,5 @@ function _getEmptyBoard(title) {
         members: [],
         groups: [],
         activities: []
-	}
+    }
 }
