@@ -1,0 +1,51 @@
+.backdrop {
+    z-index: 999;
+    position: fixed;
+    width: auto;
+    height: auto;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.535);
+}
+
+.card-details {
+    display: grid;
+    grid-template-areas:
+        "i1  h    btn"
+        ".   f    nav"
+        "i2  c1   nav"
+        "i2  c1   nav"
+        "i2  c1   nav";
+
+    min-height: 600px;
+    border-radius: 12px;
+    border-color: transparent;
+    background-color: $clr1;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    margin-top: 45px;
+    max-width: 50%;
+
+    & * {
+        display: inline;
+    }
+
+    button {
+        grid-area: btn;
+    }
+
+    .opt-bar{
+        grid-area: nav;
+
+        display: grid;
+        grid-template-columns: 20% 1fr;
+
+        span {
+            margin: 1em;
+        }
+    }
+}

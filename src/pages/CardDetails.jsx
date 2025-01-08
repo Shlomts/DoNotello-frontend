@@ -1,10 +1,14 @@
+import { Fragment } from "react"
 import { useNavigate } from "react-router"
 
 export function CardDetails() {
     const navigate = useNavigate()
 
     return (
-        <div className="card-details">
+        <Fragment>
+        <div className="backdrop">  </div>
+
+        <dialog open className="card-details">
             <button
                 onClick={(ev) => {
                     ev.preventDefault
@@ -43,12 +47,8 @@ export function CardDetails() {
             <section className="notifications">
                 Notifications
                 <div className="notifications">
-                    <span className="btn icon">
-                        👁️
-                    </span>
-                    <span className="btn txt">
-                        Watch
-                    </span>
+                    <span className="btn icon">👁️</span>
+                    <span className="btn txt">Watch</span>
                 </div>
             </section>
             <section>
@@ -58,13 +58,11 @@ export function CardDetails() {
                     <span className="btn txt">+</span>
                 </div>
             </section>
-            <section className="card-details labels">
+            <section className="labels">
                 <h4>Labels</h4>
 
-                <div className="card-details labels">
-                    <span className="btn avatar">
-                        label
-                    </span>
+                <div className="labels">
+                    <span className="btn avatar">label</span>
                     <span className="btn txt">+</span>
                 </div>
             </section>
@@ -101,6 +99,7 @@ export function CardDetails() {
                 <span className="avatar">😢</span>
                 <div className="comments">NOOOOOO</div>
             </section>
-        </div>
+        </dialog>
+        </Fragment>
     )
 }
