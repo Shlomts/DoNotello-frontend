@@ -25,8 +25,6 @@ export function BoardIndex() {
   }
 
   function onAddBoard() {
-    console.log('open modal')
-    //here i want to open the modal
     onToggleModal({
       cmp: AddBoard, // Pass the AddBoard component
       props: {

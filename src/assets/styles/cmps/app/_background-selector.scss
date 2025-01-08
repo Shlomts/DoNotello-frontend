@@ -1,0 +1,58 @@
+.background-selector {
+
+
+  .background-preview {
+    height: 150px;
+    width: 200px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+  }
+
+  .background-options {
+    display: flex;
+    gap: 10px;
+
+    .background-item {
+      width: 60px;
+      height: 40px;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      border: 2px solid transparent;
+      border-radius: 5px;
+
+      &.selected {
+        border-color: blue;
+      }
+
+      .checkmark {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        color: white;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        padding: 2px 5px;
+      }
+    }
+
+    .options-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 40px;
+      background: #333;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+}
