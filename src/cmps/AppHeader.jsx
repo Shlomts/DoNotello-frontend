@@ -30,19 +30,19 @@ export function AppHeader() {
 				<NavLink to="chat">Chat</NavLink>
 				<NavLink to="review">Review</NavLink> */}
 
-                {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
+                {/* {user?.isAdmin && <NavLink to="/admin">Admin</NavLink>}
 
 				{!user && <NavLink to="login" className="login-link">Login</NavLink>}
 				{user && (
 					<div className="user-info">
 						<Link to={`user/${user._id}`}>
-							{/* {user.imgUrl && <img src={user.imgUrl} />} */}
+							{user.imgUrl && <img src={user.imgUrl} />}
 							{user.fullname}
 						</Link>
-						{/* <span className="score">{user.score?.toLocaleString()}</span> */}
+						<span className="score">{user.score?.toLocaleString()}</span>
 						<button onClick={onLogout}>logout</button>
 					</div>
-				)}
+				)} */}
 			</nav>
 		</header>
 	)

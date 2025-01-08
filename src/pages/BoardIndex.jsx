@@ -29,7 +29,7 @@ export function BoardIndex() {
 
     async function onAddBoard() {
         const board = boardService.getEmptyBoard()
-        board.vendor = prompt("Vendor?")
+        board.title = prompt("Board name?")
         try {
             const savedBoard = await addBoard(board)
             showSuccessMsg(`Board added (id: ${savedBoard._id})`)

@@ -40,10 +40,10 @@ export function RootCmp() {
                     <Route path="review" element={<ReviewIndex />} />
                     <Route path="chat" element={<ChatApp />} />
                     <Route path="admin" element={<AdminIndex />} />
-                    <Route path="login" element={<LoginSignup />}>
+                    {/* <Route path="login" element={<LoginSignup />}>
                         <Route index element={<Login />} />
                         <Route path="signup" element={<Signup />} />
-                    </Route>
+                    </Route> */}
                 </Routes>
             </main>
             <AppFooter />

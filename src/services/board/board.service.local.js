@@ -1,16 +1,18 @@
 
 import { storageService } from '../async-storage.service'
+import { saveToStorage, loadFromStorage } from '../util.service'
 import { makeId } from '../util.service'
 import { userService } from '../user'
 
-const STORAGE_KEY = 'board'
+const BOARD_KEY = 'boardDB'
+_createBoards()
 
 export const boardService = {
     query,
     getById,
     save,
     remove,
-    addBoardMsg
+    addBoardMsg,
 }
 window.cs = boardService
 
@@ -84,4 +86,43 @@ async function addBoardMsg(boardId, txt) {
     await storageService.put(STORAGE_KEY, board)
 
     return msg
+}
+
+
+// for DEV 
+
+function _createBoards() {
+    let boards = loadFromStorage(BOARD_KEY)
+
+    if (!boards || !boards.length) {
+        boards = [
+            _createBoard('hi'),
+            _createBoard('shalom'),
+            _createBoard('ma'),
+            _createBoard('kore')
+        ]
+        saveToStorage(BOARD_KEY, boards)
+    }
+}
+
+function _createBoard(title) {
+    const board = _getEmptyBoard (title)
+    board.id = makeId()
+    return board
+}
+
+function _getEmptyBoard(title) {
+	return {
+        title,
+		isStarred: false,
+		archivedAt: null,
+        createdBy: {},
+        style: {
+            backgroundImage: ""
+        },
+        labels: [],
+        members: [],
+        groups: [],
+        activities: []
+	}
 }
