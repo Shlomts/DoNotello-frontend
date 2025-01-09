@@ -1,0 +1,97 @@
+.backdrop {
+    z-index: 999;
+    position: fixed;
+    width: auto;
+    height: auto;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.535);
+}
+
+.card-details {
+    display: grid;
+    grid-template-areas:
+        "i   h    btn"
+        ".    f    opt"
+        "i1   t1   opt"
+        "i2   t2   opt"
+        "i3   t3   opt"
+        "i4   t4   opt"
+        ;
+
+    grid-template-columns: auto 1fr auto;
+    min-height: 600px;
+    border-radius: 12px;
+    border-color: transparent;
+    background-color: #b6c2cf;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    margin-top: 45px;
+    max-width: 770px;
+    width: 100%;
+
+    button {
+        grid-area: btn;
+        display: block;
+        max-width: fit-content;
+        max-height: fit-content;
+        top: 0;
+        justify-self: right;
+        margin: 0;
+    }
+
+    .opt-card {
+        display: grid;
+        grid-template-columns: 20% 1fr;
+    }
+
+    .opt-bar {
+        grid-area: opt;
+
+        grid-template-columns: 20% 1fr;
+
+        span {
+            margin: 1em;
+        }
+    }
+
+    .user-opt {
+        grid-area: f;
+    }
+
+    .description {
+        grid-area: t1;
+        &.icon {
+            grid-area: i1;
+        }
+    }
+
+    .activity {
+        grid-area: t2;
+        &.icon {
+            grid-area: i2;
+        }
+    }
+
+    .user {
+        &.avatar {
+            grid-area: i3;
+        }
+    }
+
+    .input {
+        grid-area: t3;
+    }
+
+    .avatar {
+        grid-area: i4;
+    }
+
+    .comments {
+        grid-area: t4;
+    }
+}
