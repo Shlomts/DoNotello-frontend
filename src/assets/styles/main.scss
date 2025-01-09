@@ -27,19 +27,10 @@
 @import 'pages/task-details';
 @import 'pages/login-signup';
 @import 'pages/board-details';
-
-
 @import 'pages/card-details';
 
 
 // Components
-@import 'cmps/GroupList';
-@import 'cmps/GroupDetails';
-@import 'cmps/CardPreview';
-@import 'cmps/card-list';
-
-
-
 
 // app
 @import 'cmps/app/app-header';
@@ -54,13 +45,16 @@
 @import 'cmps/board/add-board';
 
 // Group
-
-
+@import 'cmps/group/group-list';
+@import 'cmps/group/group-details';
 
 // Card
-@import 'cmps/card/_card-filter';
+@import 'cmps/card/card-filter';
+@import 'cmps/card/card-preview';
+@import 'cmps/card/card-list';
 
-// Review
-@import 'cmps/review/review-edit';
-@import 'cmps/review/review-list';
-@import 'cmps/review/review-preview';
+
+// // Review
+// @import 'cmps/review/review-edit';
+// @import 'cmps/review/review-list';
+// @import 'cmps/review/review-preview';
