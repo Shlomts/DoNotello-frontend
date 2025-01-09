@@ -1,27 +1,21 @@
-import { userService } from '../../services/user'
-import { BoardPreview } from './BoardPreview'
+import {userService} from '../../services/user'
+import {BoardPreview} from './BoardPreview'
 
-export function BoardList({ boards, onRemoveBoard, onUpdateBoard }) {
-    
-    function shouldShowActionBtns(board) {
-        const user = userService.getLoggedinUser()
-        
-        if (!user) return false
-        if (user.isAdmin) return true
-        return board.owner?._id === user._id
-    }
-
-    return <section>
+export function BoardList({boards, onRemoveBoard, onUpdateBoard, onAddBoard}) {
+  return (
+    <section className="board-list-container">
+      <div className="board-list">
         <ul className="list">
-            {boards.map(board =>
-                <li key={board._id}>
-                    <BoardPreview board={board}/>
-                    {shouldShowActionBtns(board) && <div className="actions">
-                        <button onClick={() => onUpdateBoard(board)}>Edit</button>
-                        <button onClick={() => onRemoveBoard(board._id)}>x</button>
-                    </div>}
-                </li>)
-            }
+          {boards.map((board) => (
+            <li key={board._id}>
+              <BoardPreview board={board} />
+            </li>
+          ))}
+          <div className="add-board" onClick={onAddBoard}>
+            <p>Create new board</p>
+          </div>
         </ul>
+      </div>
     </section>
+  )
 }
