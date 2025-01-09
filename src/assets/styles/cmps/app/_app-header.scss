@@ -113,70 +113,76 @@
         height: 100%;
       }
     }
+  }
+  .user-dropdown {
+    position: absolute;
+    top: 48px;
+    right: 2px;
+    min-width: 304px;
+    max-height: 755px;
+    padding: rem(12px);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    list-style: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background-color: #242526;
+    box-shadow: var(--ds-shadow-overlay, 0px 8px 12px #091e4226, 0px 0px 1px #091e424f);
+    z-index: 100;
+    overflow-x: hidden;
+    overflow-y: auto;
+    color: #b6c2cf;
 
-    .user-dropdown {
-      position: absolute;
-      top: 48px;
-      right: 2px;
-      min-width: 304px;
-      max-height: 755px;
-      padding: rem(12px);
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 20px;
-      list-style: none;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      background-color: #242526;
-      box-shadow: var(--ds-shadow-overlay, 0px 8px 12px #091e4226, 0px 0px 1px #091e424f);
-      z-index: 100;
-      overflow-x: hidden;
-      overflow-y: auto;
-      color: #b6c2cf;
+    li {
+      padding: 8px 20px;
+      cursor: pointer;
+      // border-bottom: 1px solid #414548;
+      &.account {
+        border-bottom: 1px solid #414548;
+      }
+      &.log-out {
+        border-top: 1px solid #414548;
+      }
 
-      li {
-        padding: 8px 20px;
-        cursor: pointer;
-        // border-bottom: 1px solid #414548;
-        &.account {
-          border-bottom: 1px solid #414548;
-        }
-        &.log-out {
-          border-top: 1px solid #414548;
-        }
+      a {
+        color: #b6c2cf;
+        text-decoration: none;
+      }
 
-        a {
-          color: #b6c2cf;
-          text-decoration: none;
-        }
+      &:hover {
+        background-color: #333c43;
+        border-radius: 3px;
+      }
 
-        &:hover {
-          background-color: #333c43;
-          border-radius: 3px;
-        }
-
-
-        
+      .account {
         h2 {
           font-size: 14px;
           margin-block: 4px;
         }
+        .user-container {
+          display: flex;
 
-        .user-avatar {
-          margin-right: 8px;
-        }
+          .user-avatar {
+            margin-right: 8px;
+          }
+          .user-info {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
 
-        .user-name,
-        .user-email {
-          font-size: 12px;
+            .user-name,
+            .user-email {
+              font-size: 12px;
+            }
+          }
         }
-
-        .log-out {
-          background: none;
-          border: none;
-          font-size: 14px;
-          margin: 0;
-        }
+      }
+      .log-out {
+        background: none;
+        border: none;
+        font-size: 14px;
+        margin: 0;
       }
     }
   }

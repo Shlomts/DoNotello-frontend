@@ -81,21 +81,22 @@ export function AppHeader() {
                 <rect x="16" y="40" width="32" height="16" rx="8" fill="white" />
               </svg>
             </div>
-            {isDropdownOpen && (
+            {/* {isDropdownOpen && (
               <ul className="user-dropdown">
                 <li className="account">
                   <h2>Account</h2>
                   <div className="user-container">
                     <div className="user-avatar">
-                      {/* Random User SVG */}
                       <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="32" cy="32" r="30" stroke="white" strokeWidth="4" />
                         <circle cx="32" cy="24" r="10" fill="white" />
                         <rect x="16" y="40" width="32" height="16" rx="8" fill="white" />
                       </svg>
                     </div>
-                    <p className="user-name">{user.fullname}</p>
-                    <p className="user-email">{user.email}</p>
+                    <div className="user-info">
+                      <p className="user-name">{user.fullname}</p>
+                      <p className="user-email">{user.email}</p>
+                    </div>
                   </div>{' '}
                 </li>
                 <li>
@@ -108,7 +109,7 @@ export function AppHeader() {
                   <p onClick={onLogout}>Log out</p>
                 </li>
               </ul>
-            )}
+            )} */}
           </div>
         )}
       </nav>
