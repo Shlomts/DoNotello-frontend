@@ -5,23 +5,39 @@
     background-color: rgb(59, 91, 81);
 
 
-    .header {
+    header {
         display: flex;
         justify-content: space-between;
         align-items: center;
 
         height: rem(56px);
-        padding: 0 rem(16px) 0 rem(10px);
+        padding-inline: rem(16px);
 
         background-color: aqua;
+        color: #172b4d;
 
-        h1 {
-            font-size: rem(14px);
+        h3 {
+            font-size: rem(18px);
             margin: 0;
+        }
+
+        .left-header {
+            display: flex;
+            align-items: center;
+            gap: rem(4px);
+
+            &>* {
+                padding: rem(4px);
+                border-radius: rem(4px);
+            }
+
+            &>*:hover {
+                background-color: rgba(25, 38, 60, 0.08);
+            }
         }
     }
 
-    .board-content {
+    main {
         display: flex;
         flex-grow: 1;
         overflow-x: auto;
@@ -43,7 +59,7 @@
             background-color: #ffffff3d;
             color: #172b4d;
 
-            &:hover{
+            &:hover {
                 background-color: #091e4214;
                 cursor: pointer;
             }

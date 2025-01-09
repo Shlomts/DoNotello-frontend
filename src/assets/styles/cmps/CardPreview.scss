@@ -1,11 +1,13 @@
 .card-preview {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding-inline: rem(12px);
+    padding-block: rem(8px);
+    gap: rem(8px);
+    max-height: rem(36px);
+    min-width: rem(256px);
 
-
-    min-height: rem(36px);
-    width: rem(256px);
-    
 
     border-radius: rem(8px);
     border: 2px solid transparent;
@@ -19,7 +21,13 @@
     }
 
     &:hover {
-        border: 2px solid rgba(12, 102, 228, 0.8);
+        box-shadow:
+            rgba(0, 0, 0, 0) 0px 0px 0px 1px,
+            rgba(3, 4, 4, 0.5) 0px 1px 1px 0px,
+            rgba(3, 4, 4, 0.5) 0px 0px 1px 0px;
+            
+        // border-radius: rem(8px);
+        border: 2px solid #5c6bc0;
         cursor: pointer;
     }
 }

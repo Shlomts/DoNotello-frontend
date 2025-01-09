@@ -170,12 +170,13 @@ function _createBoard(title) {
     return board
 }
 
-function _createGroup(title, cards = []) {
+function _createGroup(title, cards = [], isStarred = false) {
     return {
         id: makeId(),
         title,
         cards,
-        style:{}
+        isStarred,
+        style: {}
     }
 }
 

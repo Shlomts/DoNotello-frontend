@@ -25,20 +25,39 @@ export function BoardDetails() {
 
     return (
         <section className="board-details">
-            <div className="header">
-                <section className="board-data">
-                    <h1>{board.title}</h1>
+
+            <header>
+                <section className="left-header">
+                    <h3>{board.title}</h3>
+                    <div className="isStarred">
+                        {board.isStarred ?
+                            'star'
+                            :
+                            'unstar'
+                        }
+                    </div>
+                    {/* <div className="change-icon">
+                        change
+                    </div>
+                    <div className="table-icon">
+                        table
+                    </div>
+                    <div className="customize-icon">
+                        customize
+                    </div> */}
                 </section>
-                <section className="board-edit">
-                    <span>board-edit</span>
+
+                <section className="right-header">
+                    {/* <span>board-edit</span> */}
                 </section>
-            </div>
-            <div className="board-content">
+
+            </header>
+            <main className="board-content">
                 <GroupList
                     groups={board.groups}
                 />
                 <button className="add-group">+ Add another list</button>
-            </div>
+            </main>
         </section>
     )
 }

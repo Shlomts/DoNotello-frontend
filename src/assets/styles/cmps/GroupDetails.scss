@@ -1,15 +1,80 @@
+
+// GRID //
+// .group-details {
+//     display: grid;
+//     grid-template-rows: minmax(32px, auto) 1fr minmax(32px, auto);
+//     padding: rem(8px);
+//     gap: rem(8px);
+
+//     // min-height: rem(88px);
+//     // width: rem(272px);
+
+//     border-radius: rem(12px);
+
+//     align-items: center;
+//     background-color: #101204;
+//     color: #b6c2cf;
+
+
+//     .group-header {
+//         display: flex;
+//         justify-content: space-between;
+//         padding-inline: 4px;
+
+//         h3,
+//         span {
+//             font-size: 14px;
+//             font-weight: 600;
+//         }
+//     }
+
+//     .group-cards {
+//         display: flex;
+//         flex-direction: column;
+//         // gap:rem(8px);
+//         overflow-y: auto;
+
+//         &.empty{
+//             height: 0;
+//             // gap: 0;
+//             align-items: center;
+//             justify-content: center;
+
+//         }
+//     }
+
+
+//     .group-footer {
+//         display: flex;
+//         align-items: center;
+
+//         width: rem(220px);
+//         height: rem(32px);
+
+//         border-radius: rem(8px);
+
+//         &:hover {
+//             background-color: #252a1e;
+//             cursor: pointer;
+//         }
+//     }
+
+
+// }
+
+
+// FLEX //
+
 .group-details {
-    display: grid;
-    grid-template-rows: minmax(32px, auto) 1fr minmax(32px, auto);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
     padding: rem(8px);
     gap: rem(8px);
 
-    // min-height: rem(88px);
-    // width: rem(272px);
-
     border-radius: rem(12px);
 
-    align-items: center;
     background-color: #101204;
     color: #b6c2cf;
 
@@ -17,19 +82,31 @@
     .group-header {
         display: flex;
         justify-content: space-between;
-        padding-inline: 4px;
+        align-items: center;
+        padding-inline-start: rem(12px);
+        padding-block-start: rem(8px);
 
         h3,
         span {
             font-size: 14px;
             font-weight: 600;
+            margin: 0;
         }
     }
 
-    .group-card {
+    .group-cards {
         display: flex;
         flex-direction: column;
+        // gap:rem(8px);
         overflow-y: auto;
+        flex-grow: 1;
+
+        &.empty{
+            // height: rem(88px);
+            align-items: center;
+            justify-content: center;
+
+        }
     }
 
 
@@ -37,6 +114,7 @@
         display: flex;
         align-items: center;
 
+        padding-inline-start: rem(8px);
         width: rem(220px);
         height: rem(32px);
 

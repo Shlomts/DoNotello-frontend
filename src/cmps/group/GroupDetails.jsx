@@ -7,7 +7,8 @@ export function GroupDetails({ group }) {
                 <h3>{group.title}</h3>
                 <span>#</span>
             </div>
-            <div className="group-cards">
+            <div className={`group-cards ${!group.cards || group.cards.length === 0 ? "empty" : ""}`}
+            >
                 <CardList
                     cards={group.cards}
                 />
