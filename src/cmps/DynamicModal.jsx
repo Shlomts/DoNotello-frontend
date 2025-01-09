@@ -12,7 +12,6 @@ export function DynaminModal(){
 	const Cmp = modalData.cmp
 	return (
 		<div className="dynamic-modal">
-			<button className="close" onClick={onCloseModal}>X</button>
 			<section className="content">
 				{Cmp && <Cmp {...modalData.props} onClose={onCloseModal}/>}
 			</section>

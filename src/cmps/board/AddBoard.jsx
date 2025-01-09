@@ -1,8 +1,4 @@
 import {useState} from 'react'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import Modal from 'react-bootstrap/Modal'
-import {onToggleModal} from '../../store/actions/system.actions'
 import {addBoard} from '../../store/actions/board.actions'
 import {showErrorMsg, showSuccessMsg} from '../../services/event-bus.service'
 import {BackgroundSelector} from '../BackgroundSelector'
@@ -52,9 +48,9 @@ export function AddBoard({ onClose }) {
       <div className="add-board-modal">
         <header className="modal-heder">
           <h2 className="title">Create Board</h2>
-          {/* <button className="close-btn" onClick={onClose}>
+          <button className="close-btn" onClick={onClose}>
             X
-          </button> */}
+          </button>
         </header>
         <div className="modal-body">
           <BackgroundSelector onSelectBackground={handleSelectBackground} />
