@@ -13,22 +13,26 @@
 .card-details {
     display: grid;
     grid-template-areas:
-        "i1  h    btn"
-        ".   f    opt"
-        "i2  c1   opt"
-        "i2  c1   opt"
-        "i2  c1   opt";
+        "i   h    btn"
+        ".    f    opt"
+        "i1   t1   opt"
+        "i2   t2   opt"
+        "i3   t3   opt"
+        "i4   t4   opt"
+        ;
 
+    grid-template-columns: auto 1fr auto;
     min-height: 600px;
     border-radius: 12px;
     border-color: transparent;
-    background-color: $clr6;
+    background-color: #b6c2cf;
     position: absolute;
     z-index: 1000;
     top: 0;
     left: 0;
     margin-top: 45px;
-    max-width: 50%;
+    max-width: 770px;
+    width: 100%;
 
     button {
         grid-area: btn;
@@ -53,5 +57,41 @@
         span {
             margin: 1em;
         }
+    }
+
+    .user-opt {
+        grid-area: f;
+    }
+
+    .description {
+        grid-area: t1;
+        &.icon {
+            grid-area: i1;
+        }
+    }
+
+    .activity {
+        grid-area: t2;
+        &.icon {
+            grid-area: i2;
+        }
+    }
+
+    .user {
+        &.avatar {
+            grid-area: i3;
+        }
+    }
+
+    .input {
+        grid-area: t3;
+    }
+
+    .avatar {
+        grid-area: i4;
+    }
+
+    .comments {
+        grid-area: t4;
     }
 }
