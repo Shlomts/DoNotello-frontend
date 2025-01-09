@@ -12,10 +12,15 @@ export function BoardDetails() {
     const { boardId } = useParams()
     const board = useSelector((storeState) => storeState.boardModule.board)
     const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter())
+    const [isAddingGroup, setIsAddingGroup] = useState(false)
 
     useEffect(() => {
         loadBoard(boardId)
     }, [boardId])
+
+    function handleWindowChange() {
+        isAddingGroup ? false : true
+    }
 
     // useEffect(() => {
     //     loadBoards(filterBy)
@@ -56,7 +61,37 @@ export function BoardDetails() {
                 <GroupList
                     groups={board.groups}
                 />
-                <button className="add-group">+ Add another list</button>
+                <section className="add-group">
+                    {isAddingGroup ? (
+
+                        <div className="add-group-form">
+                            <textarea
+                                value=""
+                                onChange=""
+                                placeholder="Enter"
+                                rows={3}
+                            />
+                            <div className="add-group-actions">
+                                <button className="add-group-btn">
+                                    Add list
+                                </button>
+                                <button
+                                    className="cancel-add-btn"
+                                    onClick={() => setIsAddingGroup(false)}
+                                >
+                                    X
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <button
+                            className="add-group-btn"
+                            onClick={() => setIsAddingGroup(true)}
+                        >
+                            + Add another list
+                        </button>
+                    )}
+                </section>
             </main>
         </section>
     )

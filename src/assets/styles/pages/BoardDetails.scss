@@ -55,7 +55,7 @@
             margin-block-start: rem(14px);
             margin-inline-start: rem(12px);
 
-            border-radius: rem(12px);
+            border-radius: rem(4px);
             background-color: #ffffff3d;
             color: #172b4d;
 
@@ -63,6 +63,11 @@
                 background-color: #091e4214;
                 cursor: pointer;
             }
+        }
+
+        .add-group-form {
+            display: flex;
+            flex-direction: column;
         }
     }
 }
