@@ -5,6 +5,7 @@ import { getRandomIntInclusive, makeId } from '../util.service'
 import { boardService as local } from './board.service.local'
 import { boardService as remote } from './board.service.remote'
 
+
 function getRamdonBoards(){
     let boards = []
     for(var i = 0 ; i < 2 ; i++){

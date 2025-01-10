@@ -2,7 +2,6 @@ import { GroupDetails } from '../group/GroupDetails.jsx'
 
 
 export function GroupList({ groups }) {
-
     if (!groups || !groups.length === 0) return <div>No groups to show</div>
 
     return (
