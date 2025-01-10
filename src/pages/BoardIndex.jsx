@@ -50,6 +50,7 @@ export function BoardIndex() {
   return (
     <main className="board-index">
       <header className="workspace-header">
+        <div className="logo-container">
         <div className="workspace-logo-container">
           <div className="workspace-logo">D</div>
         </div>{' '}
@@ -58,6 +59,7 @@ export function BoardIndex() {
           <span className="workspace-subtitle">
             Permium 🔒 <span className="workspace-privacy">Private</span>{' '}
           </span>
+        </div>
         </div>
       </header>
       <div className="saparete-boards"></div>
