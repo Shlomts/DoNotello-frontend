@@ -1,4 +1,10 @@
 .group-list{
     display: flex;
-    gap: rem(12px)
+    padding-inline: rem(6px);
+    margin-block-start: rem(12px);
+    // min-height:100vh;
+
+    li{
+        padding-inline: rem(6px);
+    }
 }

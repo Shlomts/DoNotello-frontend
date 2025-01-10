@@ -7,6 +7,7 @@ import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
 import { loadBoard, addBoardMsg } from "../store/actions/board.actions"
 import { CardFilter } from "../cmps/card/CardFilter"
 import { GroupList } from "../cmps/group/GroupList"
+import { Plus, Close, Star, Unstar } from "../cmps/SvgContainer"
 
 export function BoardDetails() {
     const { boardId } = useParams()
@@ -18,7 +19,7 @@ export function BoardDetails() {
         loadBoard(boardId)
     }, [boardId])
 
-    function handleWindowChange() {
+    function handleAddGroup() {
         isAddingGroup ? false : true
     }
 
@@ -36,9 +37,9 @@ export function BoardDetails() {
                     <h3>{board.title}</h3>
                     <div className="isStarred">
                         {board.isStarred ?
-                            'star'
+                            <Unstar />
                             :
-                            'unstar'
+                            <Star />
                         }
                     </div>
                     {/* <div className="change-icon">
@@ -68,18 +69,18 @@ export function BoardDetails() {
                             <textarea
                                 value=""
                                 onChange=""
-                                placeholder="Enter"
-                                rows={3}
+                                placeholder="Enter list name..."
+                                rows={1}
                             />
                             <div className="add-group-actions">
-                                <button className="add-group-btn">
+                                <button className="save-group-btn">
                                     Add list
                                 </button>
                                 <button
                                     className="cancel-add-btn"
                                     onClick={() => setIsAddingGroup(false)}
                                 >
-                                    X
+                                    <Close />
                                 </button>
                             </div>
                         </div>
@@ -88,7 +89,8 @@ export function BoardDetails() {
                             className="add-group-btn"
                             onClick={() => setIsAddingGroup(true)}
                         >
-                            + Add another list
+                            <Plus />
+                            Add another list
                         </button>
                     )}
                 </section>

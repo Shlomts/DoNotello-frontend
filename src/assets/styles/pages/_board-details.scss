@@ -14,10 +14,11 @@
         padding-inline: rem(16px);
 
         background-color: aqua;
-        color: #172b4d;
+        color: white;
 
         h3 {
             font-size: rem(18px);
+            font-weight: bold;
             margin: 0;
         }
 
@@ -43,24 +44,24 @@
         overflow-x: auto;
         align-items: flex-start;
 
-        padding-inline: rem(12px);
+        // padding-inline: rem(12px);
 
 
         .add-group {
             display: flex;
             align-items: center;
             min-height: rem(44px);
-            min-width: rem(272px);
+            min-width: rem(256px);
 
             margin-block-start: rem(14px);
-            margin-inline-start: rem(12px);
+            margin-inline-end: rem(12px);
+            background-color: rgba(255, 255, 255, 0.36);      
 
-            border-radius: rem(4px);
-            background-color: #ffffff3d;
+            border-radius: rem(12px);
             color: #172b4d;
 
             &:hover {
-                background-color: #091e4214;
+                background-color: #ffffff3d;
                 cursor: pointer;
             }
         }
@@ -68,6 +69,72 @@
         .add-group-form {
             display: flex;
             flex-direction: column;
+            gap: rem(8px);
+            padding: rem(8px);
+
+            margin-inline-end: rem(12px);
+            min-height: rem(88px);
+            min-width: rem(272px);
+
+            border-radius: rem(12px);
+
+            background-color: #101204;
+        }
+
+        textarea{
+            display: flex;
+            align-self: center;
+            width: rem(256px);
+            max-height: rem(32px);
+
+            padding-inline: rem(6px);
+            padding-block: rem(3px);
+
+            resize: none;
+            outline: none;
+            border-radius: rem(4px);
+
+            background-color: #22272b;
+            color: #B6C2CF;
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        .add-group-actions{
+            display: flex;
+            gap: rem(4px)
+        }
+
+        .save-group-btn{
+            align-self: flex-start;
+            border-radius: rem(3px);
+            margin: 0;
+
+            color: #1d2125;
+            background-color: #579dff;
+
+            font-weight: 500;
+            font-size: 1em;
+        }
+
+        .cancel-add-btn{
+            margin: 0;
+            padding: 0;
+
+            color: #b6c2cf;
+            background-color: transparent;
+        }
+
+        svg{
+            height: 20px;
+            width: 20px;
+        }
+
+        .add-group-btn{
+            display: flex;
+            align-items: center;
+            gap: rem(8px);
+            background-color: transparent;
         }
     }
 }
