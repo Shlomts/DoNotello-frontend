@@ -24,13 +24,18 @@ export function BoardIndex() {
     }
   }
 
-  function onAddBoard() {
-    onToggleModal({
-      cmp: AddBoard, // Pass the AddBoard component
-      props: {
-        onClose: onToggleModal, // Pass onClose handler
+  function onAddBoard(event) {
+    onToggleModal(
+      {
+        cmp: AddBoard,
+        props: {
+          onClose: onToggleModal,
+        },
+        trigger: 'board-index',
+        position: { bottom: 0, left: 357 }
       },
-    })
+      event
+    );
   }
 
   // Dont think we need here to update the boards //////////////////////////////

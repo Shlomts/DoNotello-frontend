@@ -4,7 +4,7 @@ import {showErrorMsg, showSuccessMsg} from '../../services/event-bus.service'
 import {BackgroundSelector} from '../BackgroundSelector'
 //as i can see the cmp isnt keep the data when you close the tab
 // and refresh the inputs. also isnt in the qparams
-export function AddBoard({ onClose }) {
+export function AddBoard({onClose}) {
   const [boardTitle, setBoardTitle] = useState('')
   const [isTitleInvalid, setIsTitleInvalid] = useState(false) // Track invalid state
   const [workspace, setWorkspace] = useState('DoNotello Workspace')
@@ -25,10 +25,6 @@ export function AddBoard({ onClose }) {
     onClose()
   }
 
-  // function onClose() {
-  //   onToggleModal()
-  // }
-
   function handleTitleChange(e) {
     setBoardTitle(e.target.value)
     if (e.target.value) setIsTitleInvalid(false) // Reset invalid state when input is valid
@@ -46,18 +42,19 @@ export function AddBoard({ onClose }) {
   return (
     <div className="modal-overlay">
       <div className="add-board-modal">
-        <header className="modal-heder">
+        <header className="modal-header">
           <h2 className="title">Create Board</h2>
           <button className="close-btn" onClick={onClose}>
             X
           </button>
         </header>
         <div className="modal-body">
+          <hr></hr>
           <BackgroundSelector onSelectBackground={handleSelectBackground} />
 
           <form onSubmit={handleSave}>
             <div className="title-input-container">
-              <label className="title">Board Title *</label>
+              <label className="title">Board Title</label>
               <input
                 className={`select ${isTitleInvalid ? 'invalid' : ''}`}
                 type="text"
@@ -82,18 +79,7 @@ export function AddBoard({ onClose }) {
             </button>
           </form>
         </div>
-        <footer className="modal-footer">
-          <div className="warning">
-            <div className="premium-container">
-              <span className="premium-logo">premium</span>
-            <p>
-              Create unlimited boards in Premium
-              <p>Free Workspaces can only have up to 10 boards.</p>
-            </p>
-            </div>
-          </div>
-          <p>By using images from Unsplash,you agree to their license and Terms of Service</p>
-        </footer>
+        <footer className="modal-footer"></footer>
       </div>
     </div>
 

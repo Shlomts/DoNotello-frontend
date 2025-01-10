@@ -11,7 +11,7 @@ export function BoardList({boards, onRemoveBoard, onUpdateBoard, onAddBoard}) {
               <BoardPreview board={board} />
             </li>
           ))}
-          <div className="add-board" onClick={onAddBoard}>
+          <div className="add-board" onClick={(event) => onAddBoard(event)}>
             <p>Create new board</p>
           </div>
         </ul>

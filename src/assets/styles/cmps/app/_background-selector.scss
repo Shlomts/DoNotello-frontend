@@ -1,20 +1,21 @@
 .background-selector {
+  display: flex;
+  flex-direction: column;
 
-
-  .background-preview {
-    height: 150px;
-    width: 200px;
-    background-size: cover;
-    background-position: center;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
+  .background-preview-container {
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: white;
-    font-weight: bold;
+    padding-bottom: 8px;
+    height: 150px;
+    .background-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 10px;
+    }
   }
-
   .background-options {
     display: flex;
     gap: 10px;
