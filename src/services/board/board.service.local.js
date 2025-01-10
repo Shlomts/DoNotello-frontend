@@ -57,15 +57,17 @@ async function remove(boardId) {
 }
 
 async function saveBoard(board) {
+    console.log(board)
     var savedBoard
     if (board._id) {
         const boardToSave = {
             _id: board._id,
-            title: board.title,
+            title: board.boardTitle,
+            workspace: board.workspace,
             isStarred: board.isStarred,
             archivedAt: board.archivedAt,
             createdBy: board.createdBy,
-            style: board.style,
+            style: board.backgroundUrl,
             labels: board.labels,
             members: board.members,
             groups: board.groups,
@@ -74,11 +76,12 @@ async function saveBoard(board) {
     } else {
         const boardToSave = {
             _id: makeId(),
-            title: board.title,
+            title: board.boardTitle,
+            workspace: board.workspace,
             isStarred: board.isStarred,
             archivedAt: board.archivedAt,
             createdBy: userService.getLoggedinUser(),
-            style: board.style,
+            style: board.backgroundUrl,
             labels: board.labels || [],
             members: board.members || [],
             groups: board.groups || [],
@@ -191,6 +194,7 @@ function _createCard(title) {
 function _getEmptyBoard(title) {
     return {
         title,
+        workspace:1,
         isStarred: false,
         archivedAt: null,
         createdBy: {},
