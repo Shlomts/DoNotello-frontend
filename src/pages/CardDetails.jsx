@@ -1,9 +1,11 @@
 import { Fragment } from "react"
 import { useNavigate } from "react-router"
+import { useParams } from "react-router"
 import { Card, Description, Members, Labels, Checklist, Dates, Close } from "../cmps/SvgContainer"
 
 export function CardDetails() {
     const navigate = useNavigate()
+    const { boardId } = useParams()
 
     return (
         <Fragment>
@@ -13,7 +15,7 @@ export function CardDetails() {
                 <button
                     onClick={(ev) => {
                         ev.preventDefault
-                        navigate("/board/:boardId")
+                        navigate(`/board/${boardId}`)
                     }}
                 >
                     <Close />
