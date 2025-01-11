@@ -16,20 +16,21 @@ import {
 import { CardFilter } from "../cmps/card/CardFilter"
 import { GroupList } from "../cmps/group/GroupList"
 import { Plus, Close, Star, Unstar } from "../cmps/SvgContainer"
+import { boardService } from "../services/board"
 
 export function BoardDetails() {
     const { boardId } = useParams()
     const board = useSelector((storeState) => storeState.boardModule.board)
     const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter())
     const [isAddingGroup, setIsAddingGroup] = useState(false)
-    const [groupName, setGroupName] = useState(null)
+    const [groupName, setGroupName] = useState("")
 
     useEffect(() => {
         loadBoard(boardId)
     }, [boardId])
 
     function handleAddGroup() {
-        isAddingGroup ? false : true
+        setIsAddingGroup((prev) => !prev)
     }
 
     function onSetGroupName(ev) {
@@ -38,13 +39,16 @@ export function BoardDetails() {
     }
 
     async function onAddGroup() {
-        // const groupToSave = {...board, speed}
-        const groupToSave = { title: groupName }
+        const groupToSave = boardService.getEmptyGroup()
+        groupToSave.title = groupName
+
         try {
-            addGroupToBoard(board, groupToSave)
-            showSuccessMsg(`Board updated, new list: ${groupToSave.title}`)
+            await addGroupToBoard(board, groupToSave)
+            showSuccessMsg(`Board updated, new group: ${groupToSave.title}`)
+            setGroupName("")
+            setIsAddingGroup(false)
         } catch (err) {
-            showErrorMsg("Cannot add lisr")
+            showErrorMsg("Cannot add group")
         }
     }
 

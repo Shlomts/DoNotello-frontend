@@ -15,6 +15,7 @@ export const boardService = {
     remove,
     addBoardMsg,
     saveCard,
+    addGroupToBoard,
 }
 window.cs = boardService
 
@@ -120,7 +121,6 @@ function saveCard(boardId, groupId, card, activity) {
     // return board
     // return task
 }
-
 
 // for DEV 
 

@@ -62,22 +62,33 @@ export async function updateBoard(board) {
     }
 }
 
-
-export async function addGroupToBoard(board, group) {
-    const groupToSave = { ...group, id: makeId(), cards: [] }
-
-    board.groups.push(groupToSave)
-
+export async function addGroupToBoard(board, groupToSave) {
     try {
-        await updateBoard(board)
-        showSuccessMsg(`Board updated, new speed: ${groupToSave.title}`)
+        const updatedGroups = [...board.groups, groupToSave]
+        const updatedBoard = { ...board, groups: updatedGroups }
+        await boardService.saveBoard(updatedBoard)
+        store.dispatch(getCmdUpdateBoard(updatedBoard))
     } catch (err) {
-        showErrorMsg("Cannot update board")
+        console.log("Cannot add group", err)
+        throw err
     }
 }
 
+// export async function addGroupToBoard(board, group) {
+//     const groupToSave = { ...group, id: makeId(), cards: [] }
+
+//     board.groups.push(groupToSave)
+
+//     try {
+//         await updateBoard(board)
+//         showSuccessMsg(`Board updated, new speed: ${groupToSave.title}`)
+//     } catch (err) {
+//         showErrorMsg("Cannot update board")
+//     }
+// }
+
 export async function addCardToGroup(board, group, card) {
-    const cardToSave = { ...card, id: makeId()}
+    const cardToSave = { ...card, id: makeId() }
     group.cards.push(cardToSave)
 
     try {
