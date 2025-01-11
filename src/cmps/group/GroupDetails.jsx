@@ -53,17 +53,11 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
                 </button>
             </div>
             <div
-                className={`group-cards ${!group.cards || group.cards.length === 0 ? "empty" : ""
-                    }`}
+                className={`group-cards ${!group.cards || group.cards.length === 0 ? "empty" : ""}`}
             >
                 <CardList cards={group.cards} />
             </div>
             <div className="group-footer">
-                {/* <span className="add-card-btn" onClick={() => onAddCard()}>
-                    <Plus />
-                    Add card
-                </span> */}
-
                 <section className="add-card">
                     {isAddingCard ? (
                         <div className="add-card-form">

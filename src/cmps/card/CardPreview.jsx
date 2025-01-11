@@ -6,7 +6,7 @@ export function CardPreview({ card }) {
 
     return (
         <Fragment>
-            <NavLink to={`/card/${card.id}`}>
+            <NavLink to={`/board/${boardId}/card/${card.id}`}>
                 <div className="card-preview">
                     <h3>{card.title}</h3>
                 </div>

@@ -40,9 +40,9 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
-}
+// a:hover {
+//   text-decoration: underline;
+// }
 
 ul {
   list-style: none;
@@ -56,6 +56,15 @@ input {
 svg{
   width: 1em;
   height: 1em;
+}
+
+button {
+	border: 0;
+	background-color: transparent;
+	color: whitesmoke;
+	padding: 5px 10px;
+	margin: 5px;
+	cursor: pointer;
 }
 
 .btn {

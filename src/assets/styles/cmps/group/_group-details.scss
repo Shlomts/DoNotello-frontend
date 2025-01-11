@@ -8,7 +8,6 @@
     padding-block-end: rem(8px);
 
     width: rem(272px);
-    // gap: rem(8px);
 
     border-radius: rem(12px);
 
@@ -20,12 +19,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-inline: rem(8px);
-        padding-block: rem(8px);
+        padding: rem(8px);
 
         h3 {
             padding: rem(6px) rem(8px) rem(6px) rem(12px);
-            font-size: 14px;
+            font-size: rem(16px);
             font-weight: 600;
             margin: 0;
         }
@@ -71,7 +69,7 @@
 
 
 
-        span {
+        .add-card {
             display: flex;
             align-items: center;
             gap: 8px;
