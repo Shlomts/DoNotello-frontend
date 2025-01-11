@@ -1,21 +1,34 @@
-import { CardList } from '../card/CardList.jsx'
-import { Plus } from '../SvgContainer.jsx'
+import { Plus } from "../SvgContainer.jsx"
+import { useState } from "react"
 
-import { useState } from 'react'
+import { CardList } from "../card/CardList.jsx"
+import {
+    showSuccessMsg,
+    showErrorMsg,
+} from "../../services/event-bus.service.js"
+import { Close } from "../SvgContainer.jsx"
+import { addCardToGroup } from "../../store/actions/board.actions.js"
 
-export function GroupDetails({ group }) {
+export function GroupDetails({ board , group }) {
     const [isAddingCard, setIsAddingCard] = useState(false)
     const [cardName, setCardName] = useState(null)
 
+    function onSetCardName(ev) {
+        const name = ev.target.value
+        setCardName(name)
+    }
+
     async function onAddCard() {
-        const cardToSave = { title: groupName }
+        const cardToSave = { title: cardName }
         try {
-            addGroupToBoard(board, groupToSave)
-            showSuccessMsg(`Board updated, new list: ${groupToSave.title}`)
+            addCardToGroup(board, group, cardToSave)
+            showSuccessMsg(`Board updated, new card: ${cardToSave.title}`)
         } catch (err) {
-            showErrorMsg("Cannot add list")
+            showErrorMsg("Cannot add card")
         }
     }
+
+    if (!group) return <div>Loading...</div>
 
     return (
         <section className="group-details">
@@ -32,54 +45,53 @@ export function GroupDetails({ group }) {
                 <CardList cards={group.cards} />
             </div>
             <div className="group-footer">
-                <span className="add-card-btn" onClick={() => onAddCard()}>
-                    
+                {/* <span className="add-card-btn" onClick={() => onAddCard()}>
                     <Plus />
                     Add card
-                
-                </span>
+                </span> */}
+
+                <section className="add-card">
+                    {isAddingCard ? (
+                        <div className="add-card-form">
+                            <textarea
+                                value={cardName}
+                                onChange={onSetCardName}
+                                placeholder="Enter"
+                                rows={3}
+                            />
+                            <div className="add-card-actions">
+                                <span
+                                    className="add-card-btn"
+                                    onClick={() => {
+                                        onAddCard()
+                                    }}
+                                >
+                                    Add card
+                                </span>
+                                <button
+                                    className="cancel-add-btn"
+                                    onClick={() => {
+                                        setIsAddingCard(false)
+                                        setCardName(null)
+                                    }}
+                                >
+                                    <Close />
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <button
+                            className="add-card-btn"
+                            onClick={() => {
+                                setIsAddingCard(true)
+                            }}
+                        >
+                            <Plus />
+                            Add another list
+                        </button>
+                    )}
+                </section>
             </div>
         </section>
     )
 }
-
-{/* <section className="add-card">
-{isAddingCard ? (
-    <div className="add-group-form">
-        <textarea
-            value={groupName}
-            onChange={onSetGroupName}
-            placeholder="Enter"
-            rows={3}
-        />
-        <div className="add-group-actions">
-            <button
-                className="add-group-btn"
-                onClick={() => {
-                    onAddGroup()
-                }}
-            >
-                Add list
-            </button>
-            <button
-                className="cancel-add-btn"
-                onClick={() => {
-                    setIsAddingGroup(false)
-                    setGroupName(null)
-                }}
-            >
-                X
-            </button>
-        </div>
-    </div>
-) : (
-    <button
-        className="add-group-btn"
-        onClick={() => {
-            setIsAddingGroup(true)
-        }}
-    >
-        + Add another list
-    </button>
-)}
-</section> */}

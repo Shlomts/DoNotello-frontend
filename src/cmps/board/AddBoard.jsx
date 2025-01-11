@@ -35,7 +35,6 @@ export function AddBoard({ onClose }) {
   }
 
   async function savedBoard( board) {
-    console.log("in savedBoard: " , board)
     try {
       const savedBoard = await addBoard(board)
       showSuccessMsg(`Board added (id: ${savedBoard._id})`)

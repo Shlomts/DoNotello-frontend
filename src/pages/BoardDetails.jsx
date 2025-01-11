@@ -78,7 +78,7 @@ export function BoardDetails() {
                 </section>
             </header>
             <main className="board-content">
-                <GroupList groups={board.groups} />
+                <GroupList board={board} groups={board.groups} />
                 <section className="add-group">
                     {isAddingGroup ? (
                         <div className="add-group-form">
