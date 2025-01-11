@@ -7,13 +7,13 @@
     top: 0;
     bottom: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.535);
+    background-color: rgba(7, 7, 13, 0.11);
 }
 
 .card-details {
     display: grid;
     grid-template-areas:
-        "i   h    btn"
+        "i    h    btn"
         ".    f    opt"
         "i1   t1   opt"
         "i2   t2   opt"
@@ -25,14 +25,17 @@
     min-height: 600px;
     border-radius: 12px;
     border-color: transparent;
-    background-color: #b6c2cf;
+    background-color: #323940;
+    color: #b6c2cf;
     position: absolute;
     z-index: 1000;
     top: 0;
     left: 0;
     margin-top: 45px;
-    max-width: 770px;
+    max-width: 768px;
     width: 100%;
+    padding: 20px;
+    gap: 8px;
 
     button {
         grid-area: btn;
@@ -41,18 +44,54 @@
         max-height: fit-content;
         top: 0;
         justify-self: right;
-        margin: 0;
+        margin: -5px -5px 0 0 ;
+        padding: 0;
+        background-color: transparent;
+        color: #b6c2cf;
+    }
+
+    header {
+        grid-area: h;
+        background-color: transparent;
+        color: #b6c2cf;
+        align-items: flex-start;
+        padding: 0;   
+        display: block;
+
+        h3 {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+        div {
+            display: block;
+            padding: 5px 0;
+        }
     }
 
     .opt-card {
-        display: grid;
-        grid-template-columns: 20% 1fr;
+        display: flex;
+        background-color: #3b444c;
+        width: 170px;
+        padding: 6px 12px;
+        margin-bottom: 8px;
+        border-radius: 3px;
+
+        &:hover {
+            background-color: rgb(69 80 90);
+        }
     }
 
+    .icon {
+        max-block-size: 0.1em;
+    }
+
+    .name {
+        padding-inline: 7px;
+
+    }
     .opt-bar {
         grid-area: opt;
-
-        grid-template-columns: 20% 1fr;
 
         span {
             margin: 1em;
@@ -70,28 +109,28 @@
         }
     }
 
-    .activity {
-        grid-area: t2;
-        &.icon {
-            grid-area: i2;
-        }
-    }
+    // .activity {
+    //     grid-area: t2;
+    //     &.icon {
+    //         grid-area: i2;
+    //     }
+    // }
 
-    .user {
-        &.avatar {
-            grid-area: i3;
-        }
-    }
+    // .user {
+    //     &.avatar {
+    //         grid-area: i3;
+    //     }
+    // }
 
-    .input {
-        grid-area: t3;
-    }
+    // .input {
+    //     grid-area: t3;
+    // }
 
-    .avatar {
-        grid-area: i4;
-    }
+    // .avatar {
+    //     grid-area: i4;
+    // }
 
-    .comments {
-        grid-area: t4;
-    }
+    // .comments {
+    //     grid-area: t4;
+    // }
 }
