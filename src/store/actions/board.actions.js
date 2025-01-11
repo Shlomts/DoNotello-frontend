@@ -74,6 +74,18 @@ export async function addGroupToBoard(board, groupToSave) {
     }
 }
 
+export async function removeGroupFromBoard(board, groupId) {
+    try {
+        const updatedGroups = board.groups.filter(group => group.id !== groupId)
+        const updatedBoard = { ...board, groups: updatedGroups }
+        await boardService.saveBoard(updatedBoard)
+        store.dispatch(getCmdUpdateBoard(updatedBoard))
+    } catch (err) {
+        console.log("Cannot remove group", err)
+        throw err
+    }
+}
+
 // export async function addGroupToBoard(board, group) {
 //     const groupToSave = { ...group, id: makeId(), cards: [] }
 

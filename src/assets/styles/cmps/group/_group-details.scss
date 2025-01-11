@@ -18,9 +18,9 @@
 
     .group-header {
         display: flex;
-        // justify-content: space-between;
+        justify-content: space-between;
         align-items: center;
-        padding-inline-start: rem(8px);
+        padding-inline: rem(8px);
         padding-block: rem(8px);
 
         h3 {
@@ -28,6 +28,24 @@
             font-size: 14px;
             font-weight: 600;
             margin: 0;
+        }
+
+        .remove-group-btn {
+            display: flex;
+            align-items: center;
+            padding: rem(4px);
+
+            border-radius: rem(8px);
+
+            &:hover {
+                background-color: #282f27;
+            }
+        }
+
+        svg {
+            width: rem(22px);
+            height: rem(22px);
+
         }
     }
 
@@ -65,7 +83,7 @@
             font-size: 14px;
         }
 
-        svg{
+        svg {
             width: 16px;
             height: 16px;
         }

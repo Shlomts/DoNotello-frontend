@@ -11,7 +11,8 @@ import {
     updateBoard,
     removeBoard,
     addBoardMsg,
-    addGroupToBoard
+    addGroupToBoard,
+    removeGroupFromBoard
 } from "../store/actions/board.actions"
 import { CardFilter } from "../cmps/card/CardFilter"
 import { GroupList } from "../cmps/group/GroupList"
@@ -36,6 +37,15 @@ export function BoardDetails() {
     function onSetGroupName(ev) {
         const name = ev.target.value
         setGroupName(name)
+    }
+
+    async function onRemoveGroup(groupId) {
+        try {
+            await removeGroupFromBoard(board, groupId)
+            showSuccessMsg('Group removed')
+        } catch (err) {
+            showErrorMsg('Cannot remove group')
+        }
     }
 
     async function onAddGroup() {
@@ -82,7 +92,11 @@ export function BoardDetails() {
                 </section>
             </header>
             <main className="board-content">
-                <GroupList board={board} groups={board.groups} />
+                <GroupList
+                    board={board}
+                    groups={board.groups}
+                    onRemoveGroup={onRemoveGroup}
+                />
                 <section className="add-group">
                     {isAddingGroup ? (
                         <div className="add-group-form">

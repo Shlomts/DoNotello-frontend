@@ -53,6 +53,11 @@ input {
   max-width: 100%;
 }
 
+svg{
+  width: 1em;
+  height: 1em;
+}
+
 .btn {
   min-width: rem(32px);
   max-width: rem(400px);
@@ -90,7 +95,4 @@ input {
   }
 }
 
-svg{
-  width: 1em;
-  height: 1em;
-}
+

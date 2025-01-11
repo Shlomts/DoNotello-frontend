@@ -9,7 +9,7 @@ import {
 import { Close } from "../SvgContainer.jsx"
 import { addCardToGroup } from "../../store/actions/board.actions.js"
 
-export function GroupDetails({ board , group }) {
+export function GroupDetails({ board, group, onRemoveGroup }) {
     const [isAddingCard, setIsAddingCard] = useState(false)
     const [cardName, setCardName] = useState(null)
 
@@ -34,13 +34,14 @@ export function GroupDetails({ board , group }) {
         <section className="group-details">
             <div className="group-header">
                 <h3>{group.title}</h3>
-                <span>X</span>
-                <span>#</span>
+                <button className="remove-group-btn"
+                    onClick={() => onRemoveGroup(group.id)}>
+                    <Close />
+                </button>
             </div>
             <div
-                className={`group-cards ${
-                    !group.cards || group.cards.length === 0 ? "empty" : ""
-                }`}
+                className={`group-cards ${!group.cards || group.cards.length === 0 ? "empty" : ""
+                    }`}
             >
                 <CardList cards={group.cards} />
             </div>

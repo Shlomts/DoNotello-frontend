@@ -15,7 +15,6 @@ export const boardService = {
     remove,
     addBoardMsg,
     saveCard,
-    addGroupToBoard,
 }
 window.cs = boardService
 
