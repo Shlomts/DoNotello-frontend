@@ -3,21 +3,21 @@
 
   .board-list {
     .list {
-      display: flex;
-      gap: rem(2px);
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(23%, 1fr));
+      column-gap: 2%;
+      row-gap: 20px;
 
       li {
         display: block;
         background-color: transparent;
-        // padding: rem(8px);
       }
     }
   }
   .add-board {
-    margin-top: 8px;
     padding: 8px 12px;
-    width: rem(190px);
-    height: rem(95px);
+    width: rem(191px);
+    height: rem(96px);
     display: flex;
     border: none;
     border-radius: rem(3px);
@@ -31,6 +31,10 @@
     font-weight: 400;
     align-items: center;
     justify-content: center;
+    
+    p {
+      margin: 0;
+    }
 
     &:hover {
       background-color: #333c43;
