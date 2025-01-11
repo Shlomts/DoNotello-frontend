@@ -34,7 +34,8 @@ export function AddBoard({ onClose }) {
     if (e.target.value) setIsTitleInvalid(false) // Reset invalid state when input is valid
   }
 
-  async function savedBoard() {
+  async function savedBoard( board) {
+    console.log("in savedBoard: " , board)
     try {
       const savedBoard = await addBoard(board)
       showSuccessMsg(`Board added (id: ${savedBoard._id})`)

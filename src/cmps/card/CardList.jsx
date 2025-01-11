@@ -2,6 +2,7 @@ import { CardPreview } from './CardPreview'
 
 
 export function CardList({ cards }) {
+    if (!cards || !cards.length === 0) return <div>No cards to show</div>
 
     return (
         // <section>
@@ -14,7 +15,7 @@ export function CardList({ cards }) {
             <ul className="card-list">
                 {cards.map(card =>
                     <li
-                        key={card._id}>
+                        key={card.id}>
                         <CardPreview
                             card={card}
                         />

@@ -4,7 +4,15 @@ import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
-import { loadBoard, addBoardMsg } from "../store/actions/board.actions"
+import {
+    loadBoard,
+    loadBoards,
+    addBoard,
+    updateBoard,
+    removeBoard,
+    addBoardMsg,
+    addGroupToBoard
+} from "../store/actions/board.actions"
 import { CardFilter } from "../cmps/card/CardFilter"
 import { GroupList } from "../cmps/group/GroupList"
 import { Plus, Close, Star, Unstar } from "../cmps/SvgContainer"
@@ -14,6 +22,7 @@ export function BoardDetails() {
     const board = useSelector((storeState) => storeState.boardModule.board)
     const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter())
     const [isAddingGroup, setIsAddingGroup] = useState(false)
+    const [groupName, setGroupName] = useState(null)
 
     useEffect(() => {
         loadBoard(boardId)
@@ -23,15 +32,26 @@ export function BoardDetails() {
         isAddingGroup ? false : true
     }
 
-    // useEffect(() => {
-    //     loadBoards(filterBy)
-    // }, [filterBy])
+    function onSetGroupName(ev) {
+        const name = ev.target.value
+        setGroupName(name)
+    }
+
+    async function onAddGroup() {
+        // const groupToSave = {...board, speed}
+        const groupToSave = { title: groupName }
+        try {
+            addGroupToBoard(board, groupToSave)
+            showSuccessMsg(`Board updated, new list: ${groupToSave.title}`)
+        } catch (err) {
+            showErrorMsg("Cannot add lisr")
+        }
+    }
 
     if (!board) return <div>Loading...</div>
 
     return (
         <section className="board-details">
-
             <header>
                 <section className="left-header">
                     <h3>{board.title}</h3>
@@ -56,29 +76,33 @@ export function BoardDetails() {
                 <section className="right-header">
                     {/* <span>board-edit</span> */}
                 </section>
-
             </header>
             <main className="board-content">
-                <GroupList
-                    groups={board.groups}
-                />
+                <GroupList groups={board.groups} />
                 <section className="add-group">
                     {isAddingGroup ? (
-
                         <div className="add-group-form">
                             <textarea
-                                value=""
-                                onChange=""
+                                value={groupName}
+                                onChange={onSetGroupName}
                                 placeholder="Enter list name..."
                                 rows={1}
                             />
                             <div className="add-group-actions">
-                                <button className="save-group-btn">
+                                <button
+                                    className="save-group-btn"
+                                    onClick={() => {
+                                        onAddGroup()
+                                    }}
+                                >
                                     Add list
                                 </button>
                                 <button
                                     className="cancel-add-btn"
-                                    onClick={() => setIsAddingGroup(false)}
+                                    onClick={() => {
+                                        setIsAddingGroup(false)
+                                        setGroupName(null)
+                                    }}
                                 >
                                     <Close />
                                 </button>
@@ -87,7 +111,9 @@ export function BoardDetails() {
                     ) : (
                         <button
                             className="add-group-btn"
-                            onClick={() => setIsAddingGroup(true)}
+                            onClick={() => {
+                                setIsAddingGroup(true)
+                            }}
                         >
                             <Plus />
                             Add another list

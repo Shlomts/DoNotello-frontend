@@ -2,7 +2,6 @@ import { GroupDetails } from '../group/GroupDetails.jsx'
 
 
 export function GroupList({ groups }) {
-
     if (!groups || !groups.length === 0) return <div>No groups to show</div>
 
     return (
@@ -18,7 +17,7 @@ export function GroupList({ groups }) {
             <ul className="group-list">
                 {groups.map(group =>
                     <li
-                        key={group._id}>
+                        key={group.id}>
                         <GroupDetails
                             group={group}
                         />

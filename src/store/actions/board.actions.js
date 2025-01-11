@@ -1,5 +1,6 @@
 import { boardService } from '../../services/board'
 import { store } from '../store'
+import { makeId } from '../../services/util.service'
 import { ADD_BOARD, REMOVE_BOARD, SET_BOARDS, SET_BOARD, UPDATE_BOARD, ADD_BOARD_MSG } from '../reducers/board.reducer'
 
 export async function loadBoards(filterBy) {
@@ -34,8 +35,9 @@ export async function removeBoard(boardId) {
 }
 
 export async function addBoard(board) {
+
     try {
-        const savedBoard = await boardService.save(board)
+        const savedBoard = await boardService.saveBoard(board)
         store.dispatch(getCmdAddBoard(savedBoard))
         return savedBoard
     } catch (err) {
@@ -46,7 +48,7 @@ export async function addBoard(board) {
 
 export async function updateBoard(board) {
     try {
-        const savedBoard = await boardService.save(board)
+        const savedBoard = await boardService.saveBoard(board)
         store.dispatch(getCmdUpdateBoard(savedBoard))
         return savedBoard
     } catch (err) {
@@ -65,6 +67,10 @@ export async function addBoardMsg(boardId, txt) {
         throw err
     }
 }
+
+
+
+
 
 // Command Creators:
 function getCmdSetBoards(boards) {
@@ -103,6 +109,20 @@ function getCmdAddBoardMsg(msg) {
         msg
     }
 }
+
+export async function addGroupToBoard( board, group ) {
+    const groupToSave = { ...group , id: makeId(), cards: [] }
+
+    board.groups.push(groupToSave)
+
+    try {
+        await updateBoard(board)
+        showSuccessMsg(`Board updated, new speed: ${groupToSave.title}`)
+    } catch (err) {
+        showErrorMsg("Cannot update board")
+    }
+}
+
 
 // unitTestActions()
 async function unitTestActions() {
