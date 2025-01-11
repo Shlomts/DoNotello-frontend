@@ -1,6 +1,8 @@
 import { CardList } from '../card/CardList.jsx'
 import { Plus } from '../SvgContainer.jsx'
 
+import { useState } from 'react'
+
 export function GroupDetails({ group }) {
     const [isAddingCard, setIsAddingCard] = useState(false)
     const [cardName, setCardName] = useState(null)
@@ -11,7 +13,7 @@ export function GroupDetails({ group }) {
             addGroupToBoard(board, groupToSave)
             showSuccessMsg(`Board updated, new list: ${groupToSave.title}`)
         } catch (err) {
-            showErrorMsg("Cannot add lisr")
+            showErrorMsg("Cannot add list")
         }
     }
 
@@ -41,8 +43,8 @@ export function GroupDetails({ group }) {
     )
 }
 
-<section className="add-card">
-{isAddingGroup ? (
+{/* <section className="add-card">
+{isAddingCard ? (
     <div className="add-group-form">
         <textarea
             value={groupName}
@@ -80,4 +82,4 @@ export function GroupDetails({ group }) {
         + Add another list
     </button>
 )}
-</section>
+</section> */}
