@@ -1,10 +1,26 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import { AddBoard } from './board/AddBoard'
+import { onToggleModal } from '../store/actions/system.actions'
 
 export function SideBar() {
   function goToBoard() {
    <Link to="/board"></Link>
   }
+
+  function onAddBoard(event) {
+    onToggleModal(
+      {
+        cmp: AddBoard,
+        props: {
+          onClose: onToggleModal,
+        },
+        trigger: 'sidebar', // Pass trigger location
+      },
+      event
+    );
+  }
+
   const boards = boardService.getRamdonBoards()
   return (
     <div className="board-sidebar">
@@ -34,7 +50,7 @@ export function SideBar() {
           <h2 className="title">Your boards</h2>
           <div className="btn-actions">
             <button className="sort-by">...</button>
-            <button className="add-board">+</button>
+            <button className="add-board" onClick={onAddBoard}>+</button>
           </div>
         </div>
         {boards.map((board) => (

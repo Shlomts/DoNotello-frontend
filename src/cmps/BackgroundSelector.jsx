@@ -18,6 +18,7 @@ export function BackgroundSelector({onSelectBackground}) {
     'https://picsum.photos/seed/board5/400/200',
     'https://picsum.photos/seed/board6/400/200',
     'https://picsum.photos/seed/board7/400/200',
+    'https://picsum.photos/seed/board8/400/200',
   ]
 
   function handleSelect(index, url) {
@@ -47,11 +48,13 @@ export function BackgroundSelector({onSelectBackground}) {
   return (
     <div className="background-selector">
       {/* Display preview of selected image */}
-      {selectedImage && (
-        <div className="background-preview" style={{backgroundImage: `url(${selectedImage})`}}>
-          <img src="https://trello.com/assets/14cda5dc635d1f13bc48.svg" alt role="presentation" />
-        </div>
-      )}
+      <div className="background-preview-container">
+        {selectedImage && (
+          <div className="background-preview" style={{backgroundImage: `url(${selectedImage})`}}>
+            <img src="https://trello.com/assets/14cda5dc635d1f13bc48.svg" alt role="presentation" />
+          </div>
+        )}
+      </div>
 
       {/* Background image selection */}
       <div className="background-options">
@@ -65,21 +68,6 @@ export function BackgroundSelector({onSelectBackground}) {
             {/* {selected === index && <div className="checkmark">✓</div>} */}
           </div>
         ))}
-
-        {/* Dark box with ellipsis */}
-        <div className="background-item options-box" onClick={() => setShowOptions(!showOptions)}>
-          <BsThreeDots size={24} />
-        </div>
-        {/* Options box for URL input or image upload */}
-        {showOptions && (
-          <div className="options-menu">
-            <div className="url-input">
-              <input type="url" placeholder="Enter background image URL" value={customUrl} onChange={handleUrlChange} />
-              <button onClick={handleUrlSubmit}>Add URL</button>
-            </div>
-            <ImgUploader onUploaded={handleUpload} />
-          </div>
-        )}
       </div>
     </div>
   )

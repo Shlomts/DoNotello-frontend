@@ -1,23 +1,28 @@
 .background-selector {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   .background-preview {
-    height: 150px;
+    height: 120px;
     width: 200px;
     background-size: cover;
     background-position: center;
-    border: 1px solid #ddd;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
     font-weight: bold;
+    border-radius: 4px;
   }
 
   .background-options {
-    display: flex;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); // Four equal columns
+    grid-gap: 5px; // Space between grid items
+    width: fit-content;
+    margin: 0 auto;
+    padding-bottom: 4px;
 
     .background-item {
       width: 60px;
@@ -27,6 +32,8 @@
       cursor: pointer;
       border: 2px solid transparent;
       border-radius: 5px;
+      position: relative;
+
 
       &.selected {
         border-color: blue;
