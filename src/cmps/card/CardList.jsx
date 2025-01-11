@@ -15,7 +15,7 @@ export function CardList({ cards }) {
             <ul className="card-list">
                 {cards.map(card =>
                     <li
-                        key={card._id}>
+                        key={card.id}>
                         <CardPreview
                             card={card}
                         />

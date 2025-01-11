@@ -17,7 +17,7 @@ export function GroupList({ groups }) {
             <ul className="group-list">
                 {groups.map(group =>
                     <li
-                        key={group._id}>
+                        key={group.id}>
                         <GroupDetails
                             group={group}
                         />
