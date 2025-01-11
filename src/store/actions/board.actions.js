@@ -57,61 +57,63 @@ export async function updateBoard(board) {
         store.dispatch(getCmdUpdateBoard(savedBoard))
         return savedBoard
     } catch (err) {
-        console.log("Cannot save board", err)
+        console.log("Cannot update board", err)
         throw err
     }
 }
 
 export async function addGroupToBoard(board, groupToSave) {
+    board.groups.push(groupToSave)
+
     try {
-        const updatedGroups = [...board.groups, groupToSave]
-        const updatedBoard = { ...board, groups: updatedGroups }
-        await boardService.saveBoard(updatedBoard)
-        store.dispatch(getCmdUpdateBoard(updatedBoard))
+        await updateBoard(board)
     } catch (err) {
         console.log("Cannot add group", err)
         throw err
     }
 }
 
-export async function removeGroupFromBoard(board, groupId) {
+export async function addCardToGroup(board, group, cardToSave) {
+    group.cards.push(cardToSave)
+
     try {
-        const updatedGroups = board.groups.filter(group => group.id !== groupId)
-        const updatedBoard = { ...board, groups: updatedGroups }
-        await boardService.saveBoard(updatedBoard)
-        store.dispatch(getCmdUpdateBoard(updatedBoard))
+        await updateBoard(board)
+    } catch (err) {
+        console.log("Cannot add card", err)
+        throw err
+    }
+}
+
+export async function removeGroupFromBoard(board, groupId) {
+    const groupIdx = board.groups.findIndex(group => group.id === groupId)
+    if (groupIdx === -1) throw new Error('Group not found')
+
+    board.groups.splice(groupIdx, 1)
+
+    try {
+        await updateBoard(board)
     } catch (err) {
         console.log("Cannot remove group", err)
         throw err
     }
 }
 
-// export async function addGroupToBoard(board, group) {
-//     const groupToSave = { ...group, id: makeId(), cards: [] }
+export async function removeCardFromGroup(board, groupId, cardId) {
+    const group = board.groups.find(group => group.id === groupId)
+    if (!group) throw new Error('Group not found')
 
-//     board.groups.push(groupToSave)
+    const cardIdx = group.cards.findIndex(card => card.id === cardId)
+    if (cardIdx === -1) throw new Error('Card not found')
 
-//     try {
-//         await updateBoard(board)
-//         showSuccessMsg(`Board updated, new speed: ${groupToSave.title}`)
-//     } catch (err) {
-//         showErrorMsg("Cannot update board")
-//     }
-// }
-
-export async function addCardToGroup(board, group, card) {
-    const cardToSave = { ...card, id: makeId() }
-    group.cards.push(cardToSave)
+    group.cards.splice(cardIdx, 1)
 
     try {
         await updateBoard(board)
-        showSuccessMsg(`Group updated, new card: ${cardToSave.title}`)
     } catch (err) {
-        showErrorMsg("Cannot add card")
+        console.log("Cannot remove card", err)
+        throw err
     }
 }
-
-
 
 
 export async function addBoardMsg(boardId, txt) {

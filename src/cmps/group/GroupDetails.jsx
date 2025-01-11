@@ -11,18 +11,31 @@ import { addCardToGroup } from "../../store/actions/board.actions.js"
 
 export function GroupDetails({ board, group, onRemoveGroup }) {
     const [isAddingCard, setIsAddingCard] = useState(false)
-    const [cardName, setCardName] = useState(null)
+    const [cardName, setCardName] = useState("")
 
     function onSetCardName(ev) {
         const name = ev.target.value
         setCardName(name)
     }
 
-    async function onAddCard() {
-        const cardToSave = { title: cardName }
+    async function onRemoveCard(cardId) {
         try {
-            addCardToGroup(board, group, cardToSave)
+            await removeGroupFromBoard(board, group.id, cardId)
+            showSuccessMsg('Group removed')
+        } catch (err) {
+            showErrorMsg('Cannot remove group')
+        }
+    }
+
+    async function onAddCard() {
+        const cardToSave = boardService.getEmptyCard()
+        cardToSave.title = cardName
+
+        try {
+            await addCardToGroup(board, group, cardToSave)
             showSuccessMsg(`Board updated, new card: ${cardToSave.title}`)
+            setCardName("")
+            setIsAddingCard(false)
         } catch (err) {
             showErrorMsg("Cannot add card")
         }
@@ -57,23 +70,23 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
                             <textarea
                                 value={cardName}
                                 onChange={onSetCardName}
-                                placeholder="Enter"
+                                placeholder="Enter a title or paste link"
                                 rows={3}
                             />
                             <div className="add-card-actions">
-                                <span
+                                <button
                                     className="add-card-btn"
                                     onClick={() => {
                                         onAddCard()
                                     }}
                                 >
                                     Add card
-                                </span>
+                                </button>
                                 <button
                                     className="cancel-add-btn"
                                     onClick={() => {
                                         setIsAddingCard(false)
-                                        setCardName(null)
+                                        setCardName("")
                                     }}
                                 >
                                     <Close />
@@ -88,7 +101,7 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
                             }}
                         >
                             <Plus />
-                            Add another list
+                            Add a card
                         </button>
                     )}
                 </section>

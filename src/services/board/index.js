@@ -41,6 +41,13 @@ function getEmptyGroup() {
     }
 }
 
+function getEmptyCard() {
+    return {
+        id: makeId(),
+        title: "",
+    }
+}
+
 function getDefaultFilter() {
     return {
         txt: '',
@@ -51,7 +58,7 @@ function getDefaultFilter() {
 }
 
 const service = VITE_LOCAL === 'true' ? local : remote
-export const boardService = { getRamdonBoards, getEmptyBoard, getEmptyGroup, getDefaultFilter, ...service }
+export const boardService = { getRamdonBoards, getEmptyBoard, getEmptyGroup, getEmptyCard, getDefaultFilter, ...service }
 
 // Easy access to this service from the dev tools console
 // when using script - dev / dev:local

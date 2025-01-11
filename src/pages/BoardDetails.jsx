@@ -58,6 +58,7 @@ export function BoardDetails() {
             setGroupName("")
             setIsAddingGroup(false)
         } catch (err) {
+            console.error(err)
             showErrorMsg("Cannot add group")
         }
     }
@@ -119,7 +120,7 @@ export function BoardDetails() {
                                     className="cancel-add-btn"
                                     onClick={() => {
                                         setIsAddingGroup(false)
-                                        setGroupName(null)
+                                        setGroupName("")
                                     }}
                                 >
                                     <Close />

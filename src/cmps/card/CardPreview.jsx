@@ -1,15 +1,19 @@
-import { NavLink, Outlet } from "react-router-dom"
+import { Fragment } from "react"
+import { NavLink, Outlet, useParams } from "react-router-dom"
 
 export function CardPreview({ card }) {
+    const { boardId } = useParams()
+
     return (
-        <div className="card-preview">
-            <h3>{card.title}</h3>
-            <nav>
-                <NavLink to="card/:cardId">Card</NavLink>
-            </nav>
+        <Fragment>
+            <NavLink to={`/card/${card.id}`}>
+                <div className="card-preview">
+                    <h3>{card.title}</h3>
+                </div>
+            </NavLink>
             <section>
                 <Outlet />
             </section>
-        </div>
+        </Fragment>
     )
 }
