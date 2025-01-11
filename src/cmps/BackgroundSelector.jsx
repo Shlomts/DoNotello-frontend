@@ -18,6 +18,7 @@ export function BackgroundSelector({onSelectBackground}) {
     'https://picsum.photos/seed/board5/400/200',
     'https://picsum.photos/seed/board6/400/200',
     'https://picsum.photos/seed/board7/400/200',
+    'https://picsum.photos/seed/board8/400/200',
   ]
 
   function handleSelect(index, url) {

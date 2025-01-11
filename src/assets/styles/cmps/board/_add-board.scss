@@ -51,25 +51,27 @@
         text-overflow: ellipsis;
         white-space: nowrap;
 
-        button.close-btn {
-          grid-column: 3;
-          grid-row: 1;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 32px;
-          height: 32px;
-          border-radius: 8px;
-          color: #9fadbc;
-          background-color: transparent;
-          border: none;
-          cursor: pointer;
-        }
+      }
+      button.close-btn {
+        grid-column: 3;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        color: #9fadbc;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 1000;
       }
     }
     .modal-body {
       padding: 16px;
       padding-top: 0;
+      max-height: 595px;
       hr {
         background-color: #091e4224;
         height: 1px;

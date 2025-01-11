@@ -32,6 +32,7 @@ export function AppHeader() {
   }
 
   function onAddBoard(event) {
+
     onToggleModal(
       {
         cmp: AddBoard,
@@ -39,7 +40,6 @@ export function AppHeader() {
           onClose: onToggleModal,
         },
         trigger: 'header',
-        position:  { top: 48, left: 357 },
       },
       event
     )

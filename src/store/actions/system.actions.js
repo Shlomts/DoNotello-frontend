@@ -3,6 +3,8 @@ import {store} from '../store'
 
 export function onToggleModal(modalData = null, event = null) {
   if (event) {
+    console.log(event);
+    
     const { top, left, width, height } = event.target.getBoundingClientRect();
     modalData = {
       ...modalData,

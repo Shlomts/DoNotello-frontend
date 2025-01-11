@@ -25,11 +25,13 @@ export function DynaminModal() {
     zIndex: 1000,
   }
 
+  // Here i nned to update the style to aligh as i want 
+
   // Apply different styles based on trigger location
   if (trigger === 'header') {
     modalStyle = {
       ...modalStyle,
-      top: position.top || '48px', // Default top if not provided
+      top: position.top  + 20, // Default top if not provided
       left: position.left , // Default left if not provided
     }
   } else if (trigger === 'sidebar') {

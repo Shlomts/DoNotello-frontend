@@ -9,7 +9,7 @@ import {userService} from '../services/user'
 
 import {BoardList} from '../cmps/board/BoardList'
 import {AddBoard} from '../cmps/board/AddBoard'
-import { onToggleModal } from '../store/actions/system.actions'
+import {onToggleModal} from '../store/actions/system.actions'
 
 export function BoardIndex() {
   // const boards = useSelector((storeState) => storeState.boardModule.boards)
@@ -32,10 +32,9 @@ export function BoardIndex() {
           onClose: onToggleModal,
         },
         trigger: 'board-index',
-        position: { bottom: 0, left: 357 }
       },
       event
-    );
+    )
   }
 
   // Dont think we need here to update the boards //////////////////////////////
