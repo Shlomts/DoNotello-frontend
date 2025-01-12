@@ -57,7 +57,6 @@ async function remove(boardId) {
 }
 
 async function saveBoard(board) {
-    console.log(board)
     var savedBoard
     if (board._id) {
         const boardToSave = {
@@ -115,12 +114,11 @@ function saveCard(boardId, groupId, card, activity) {
     // TODO: find the task, and update
     const cardToUpdate = group.cards.find(cardToUpdate => cardToUpdate.id)
 
-    board.activities.unshift(activity)
+    // board.activities.unshift(activity)
     saveBoard(board)
     // return board
     // return task
 }
-
 
 // for DEV 
 

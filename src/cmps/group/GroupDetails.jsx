@@ -9,20 +9,33 @@ import {
 import { Close } from "../SvgContainer.jsx"
 import { addCardToGroup } from "../../store/actions/board.actions.js"
 
-export function GroupDetails({ board , group }) {
+export function GroupDetails({ board, group, onRemoveGroup }) {
     const [isAddingCard, setIsAddingCard] = useState(false)
-    const [cardName, setCardName] = useState(null)
+    const [cardName, setCardName] = useState("")
 
     function onSetCardName(ev) {
         const name = ev.target.value
         setCardName(name)
     }
 
-    async function onAddCard() {
-        const cardToSave = { title: cardName }
+    async function onRemoveCard(cardId) {
         try {
-            addCardToGroup(board, group, cardToSave)
+            await removeGroupFromBoard(board, group.id, cardId)
+            showSuccessMsg('Group removed')
+        } catch (err) {
+            showErrorMsg('Cannot remove group')
+        }
+    }
+
+    async function onAddCard() {
+        const cardToSave = boardService.getEmptyCard()
+        cardToSave.title = cardName
+
+        try {
+            await addCardToGroup(board, group, cardToSave)
             showSuccessMsg(`Board updated, new card: ${cardToSave.title}`)
+            setCardName("")
+            setIsAddingCard(false)
         } catch (err) {
             showErrorMsg("Cannot add card")
         }
@@ -34,45 +47,40 @@ export function GroupDetails({ board , group }) {
         <section className="group-details">
             <div className="group-header">
                 <h3>{group.title}</h3>
-                <span>X</span>
-                <span>#</span>
+                <button className="remove-group-btn"
+                    onClick={() => onRemoveGroup(group.id)}>
+                    <Close />
+                </button>
             </div>
             <div
-                className={`group-cards ${
-                    !group.cards || group.cards.length === 0 ? "empty" : ""
-                }`}
+                className={`group-cards ${!group.cards || group.cards.length === 0 ? "empty" : ""}`}
             >
                 <CardList cards={group.cards} />
             </div>
             <div className="group-footer">
-                {/* <span className="add-card-btn" onClick={() => onAddCard()}>
-                    <Plus />
-                    Add card
-                </span> */}
-
                 <section className="add-card">
                     {isAddingCard ? (
                         <div className="add-card-form">
                             <textarea
                                 value={cardName}
                                 onChange={onSetCardName}
-                                placeholder="Enter"
+                                placeholder="Enter a title or paste link"
                                 rows={3}
                             />
                             <div className="add-card-actions">
-                                <span
+                                <button
                                     className="add-card-btn"
                                     onClick={() => {
                                         onAddCard()
                                     }}
                                 >
                                     Add card
-                                </span>
+                                </button>
                                 <button
                                     className="cancel-add-btn"
                                     onClick={() => {
                                         setIsAddingCard(false)
-                                        setCardName(null)
+                                        setCardName("")
                                     }}
                                 >
                                     <Close />
@@ -87,7 +95,7 @@ export function GroupDetails({ board , group }) {
                             }}
                         >
                             <Plus />
-                            Add another list
+                            Add a card
                         </button>
                     )}
                 </section>

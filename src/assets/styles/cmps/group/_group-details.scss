@@ -8,7 +8,6 @@
     padding-block-end: rem(8px);
 
     width: rem(272px);
-    // gap: rem(8px);
 
     border-radius: rem(12px);
 
@@ -18,16 +17,33 @@
 
     .group-header {
         display: flex;
-        // justify-content: space-between;
+        justify-content: space-between;
         align-items: center;
-        padding-inline-start: rem(8px);
-        padding-block: rem(8px);
+        padding: rem(8px);
 
         h3 {
             padding: rem(6px) rem(8px) rem(6px) rem(12px);
-            font-size: 14px;
+            font-size: rem(16px);
             font-weight: 600;
             margin: 0;
+        }
+
+        .remove-group-btn {
+            display: flex;
+            align-items: center;
+            padding: rem(4px);
+
+            border-radius: rem(8px);
+
+            &:hover {
+                background-color: #282f27;
+            }
+        }
+
+        svg {
+            width: rem(22px);
+            height: rem(22px);
+
         }
     }
 
@@ -53,7 +69,7 @@
 
 
 
-        span {
+        .add-card {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -65,7 +81,7 @@
             font-size: 14px;
         }
 
-        svg{
+        svg {
             width: 16px;
             height: 16px;
         }

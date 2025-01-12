@@ -11,25 +11,27 @@ import {
     updateBoard,
     removeBoard,
     addBoardMsg,
-    addGroupToBoard
+    addGroupToBoard,
+    removeGroupFromBoard
 } from "../store/actions/board.actions"
 import { CardFilter } from "../cmps/card/CardFilter"
 import { GroupList } from "../cmps/group/GroupList"
 import { Plus, Close, Star, Unstar } from "../cmps/SvgContainer"
+import { boardService } from "../services/board"
 
 export function BoardDetails() {
     const { boardId } = useParams()
     const board = useSelector((storeState) => storeState.boardModule.board)
     const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter())
     const [isAddingGroup, setIsAddingGroup] = useState(false)
-    const [groupName, setGroupName] = useState(null)
+    const [groupName, setGroupName] = useState("")
 
     useEffect(() => {
         loadBoard(boardId)
     }, [boardId])
 
     function handleAddGroup() {
-        isAddingGroup ? false : true
+        setIsAddingGroup((prev) => !prev)
     }
 
     function onSetGroupName(ev) {
@@ -37,14 +39,27 @@ export function BoardDetails() {
         setGroupName(name)
     }
 
-    async function onAddGroup() {
-        // const groupToSave = {...board, speed}
-        const groupToSave = { title: groupName }
+    async function onRemoveGroup(groupId) {
         try {
-            addGroupToBoard(board, groupToSave)
-            showSuccessMsg(`Board updated, new list: ${groupToSave.title}`)
+            await removeGroupFromBoard(board, groupId)
+            showSuccessMsg('Group removed')
         } catch (err) {
-            showErrorMsg("Cannot add lisr")
+            showErrorMsg('Cannot remove group')
+        }
+    }
+
+    async function onAddGroup() {
+        const groupToSave = boardService.getEmptyGroup()
+        groupToSave.title = groupName
+
+        try {
+            await addGroupToBoard(board, groupToSave)
+            showSuccessMsg(`Board updated, new group: ${groupToSave.title}`)
+            setGroupName("")
+            setIsAddingGroup(false)
+        } catch (err) {
+            console.error(err)
+            showErrorMsg("Cannot add group")
         }
     }
 
@@ -78,7 +93,11 @@ export function BoardDetails() {
                 </section>
             </header>
             <main className="board-content">
-                <GroupList board={board} groups={board.groups} />
+                <GroupList
+                    board={board}
+                    groups={board.groups}
+                    onRemoveGroup={onRemoveGroup}
+                />
                 <section className="add-group">
                     {isAddingGroup ? (
                         <div className="add-group-form">
@@ -101,7 +120,7 @@ export function BoardDetails() {
                                     className="cancel-add-btn"
                                     onClick={() => {
                                         setIsAddingGroup(false)
-                                        setGroupName(null)
+                                        setGroupName("")
                                     }}
                                 >
                                     <Close />
