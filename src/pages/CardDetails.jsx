@@ -2,8 +2,12 @@ import { Fragment, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { useParams } from "react-router"
 import { useSelector } from "react-redux"
+import {
+    showSuccessMsg,
+    showErrorMsg,
+} from "../services/event-bus.service"
 
-import { loadCard } from "../store/actions/board.actions"
+import { loadCard, getGroupId, removeCardFromGroup, loadGroup } from "../store/actions/board.actions"
 import {
     Card,
     Description,
@@ -17,49 +21,42 @@ import {
 
 export function CardDetails() {
     const navigate = useNavigate()
-    const [card, setCard] = useState(null)
-    const board = useSelector((storeState) => storeState.boardModule.board)
     const params = useParams()
-
-    // const board = useSelector((storeState) => storeState.boardModule.board)
 
     const { boardId } = useParams()
     const { cardId } = useParams()
-    // const [card, setCard] = useState(null)
+
+    const board = useSelector((storeState) => storeState.boardModule.board)
+    const [group, setGroup] = useState(null)
+    const [card, setCard] = useState(null)
 
     useEffect(() => {
         getCard()
     }, [params.cardId])
 
     async function getCard() {
-            try {
-                const cardToSave = await loadCard(board, cardId)
-                setCard(cardToSave)
-            } catch (err) {
-                console.log("Having problmes loading card...", err)
-                throw err
-            }
+        try {
+            const cardToSet = await loadCard(board, cardId)
+            const groupToSet = await loadGroup(board, cardId)
+            setCard(cardToSet)
+            setGroup(groupToSet)
+        } catch (err) {
+            console.log("Having problmes loading card...", err)
+            throw err
+        }
     }
-    // function getCard() {
-    //     carService
-    //         .get(params.cardId)
-    //         .then(setCar)
-    //         .catch((err) => {
-    //             console.log("Problem getting car", err)
-    //             showErrorMsg("Problem getting car")
-    //             navigate("/car")
-    //         })
-    // }
 
-    // useEffect(async () => {
-    //     try {
-    //         const cardToSave = await loadCard(boardId, cardId)
-    //         setCard(cardToSave)
-    //     } catch (err) {
-    //         console.log("Having problmes loading card...", err)
-    //         throw err
-    //     }
-    // }, [cardId])
+    async function onRemoveCard() {
+        const groupId = await getGroupId(board, cardId)
+
+        try {
+            await removeCardFromGroup(board, groupId, cardId)
+            navigate(`/board/${boardId}`)
+            showSuccessMsg('Card removed')
+        } catch (err) {
+            showErrorMsg('Cannot remove card')
+        }
+    }
 
     if (!card) return <div>Loading...</div>
 
@@ -82,7 +79,7 @@ export function CardDetails() {
                 <header className="header">
                     <h3> {card.title}</h3>
                     <div>
-                        in list: <span>List Name</span>
+                        in list: <span>{group.title}</span>
                     </div>
                 </header>
                 <section className="opt-bar">
@@ -125,6 +122,20 @@ export function CardDetails() {
                         </li> */}
                     </ul>
                 </section>
+
+                <section className="actions">
+                    <thead>Actions</thead>
+                    <ul>
+                        <li className="opt-card" onClick={onRemoveCard}>
+                            <div className="icon">
+                                <Close />
+                                {/* <Delete /> */}
+                            </div>
+                            <div className="name">Delete</div>
+                        </li>
+                    </ul>
+                </section>
+
                 <div className="user-opt">
                     {/* <section className="notifications">
                         Notifications

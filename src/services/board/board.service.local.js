@@ -1,12 +1,10 @@
+import { storageService } from "../async-storage.service"
+import { saveToStorage, loadFromStorage } from "../util.service"
+import { makeId } from "../util.service"
+import { userService } from "../user"
 
-import { storageService } from '../async-storage.service'
-import { saveToStorage, loadFromStorage } from '../util.service'
-import { makeId } from '../util.service'
-import { userService } from '../user'
-
-const STORAGE_KEY = 'boardDB'
+const STORAGE_KEY = "boardDB"
 _createBoards()
-
 
 export const boardService = {
     query,
@@ -15,10 +13,10 @@ export const boardService = {
     remove,
     addBoardMsg,
     saveCard,
-    getCardById 
+    getCardById,
+    getGroup
 }
 window.cs = boardService
-
 
 async function query() {
     return await storageService.get(STORAGE_KEY)
@@ -36,11 +34,11 @@ async function query() {
 //         boards = boards.filter(board => board.speed >= minSpeed)
 //     }
 //     if(sortField === 'vendor' || sortField === 'owner'){
-//         boards.sort((board1, board2) => 
+//         boards.sort((board1, board2) =>
 //             board1[sortField].localeCompare(board2[sortField]) * +sortDir)
 //     }
 //     if(sortField === 'price' || sortField === 'speed'){
-//         boards.sort((board1, board2) => 
+//         boards.sort((board1, board2) =>
 //             (board1[sortField] - board2[sortField]) * +sortDir)
 //     }
 
@@ -98,7 +96,7 @@ async function addBoardMsg(boardId, txt) {
     const msg = {
         id: makeId(),
         by: userService.getLoggedinUser(),
-        txt
+        txt,
     }
     board.msgs.push(msg)
     await storageService.put(STORAGE_KEY, board)
@@ -108,12 +106,12 @@ async function addBoardMsg(boardId, txt) {
 
 function saveCard(boardId, groupId, card, activity) {
     const board = getById(boardId)
-    const group = board.groups.find(group => group.id === groupId)
+    const group = board.groups.find((group) => group.id === groupId)
 
     // PUT /api/board/b123/task/t678
 
     // TODO: find the task, and update
-    const cardToUpdate = group.cards.find(cardToUpdate => cardToUpdate.id)
+    const cardToUpdate = group.cards.find((cardToUpdate) => cardToUpdate.id)
 
     // board.activities.unshift(activity)
     saveBoard(board)
@@ -121,13 +119,10 @@ function saveCard(boardId, groupId, card, activity) {
     // return task
 }
 
- function getCardById(board , cardId) {
-
-    console.log("board in getCardById", board)
-
+function getCardById(board, cardId) {
     if (!board.groups || board.groups.length === 0) return "No cards available"
 
-    for (let i = 0; i < board.groups.length-1; i++) {
+    for (let i = 0; i < board.groups.length - 1; i++) {
         const card = _getCardInGroup(board.groups[i], cardId)
         if (card) return card
     }
@@ -141,14 +136,35 @@ function _getCardInGroup(group, cardId) {
     return card
 }
 
-// for DEV 
+function getGroup(board, cardId) {
+    if (!board.groups || board.groups.length === 0) return "No cards available"
+
+    for (let i = 0; i < board.groups.length - 1; i++) {
+        const group = _getGroupByCard(board.groups[i], cardId)
+        if (group) {
+            console.log("in getGroup group:", group)
+            return group
+        } 
+    }
+
+    return new Error("Cannot find group ")
+}
+
+function _getGroupByCard(group, cardId) {
+    const card = group.cards.find((card) => card.id === cardId)
+    if (!card) return
+    return group
+}
+
+
+// for DEV
 
 function _createBoards() {
     let boards = loadFromStorage(STORAGE_KEY)
 
     if (!boards || !boards.length) {
         boards = [
-            _createBoard('DoNotello - DEMO'),
+            _createBoard("DoNotello - DEMO"),
             // _createBoard('2'),
             // _createBoard('3'),
             // _createBoard('4'),
@@ -163,32 +179,22 @@ function _createBoard(title) {
     const board = _getEmptyBoard(title)
     board._id = makeId()
     board.groups = [
-        _createGroup('Backlog-server'),
-        _createGroup('Backlog-client',
-            [
-                _createCard('Add task details')
-            ]),
-        _createGroup('In development',
-            [
-                _createCard('API'),
-                _createCard('demo')
-            ]),
-        _createGroup('Done',
-            [
-                _createCard('Planning the cmps tree'),
-                _createCard('Vars'),
-                _createCard('snippet'),
-            ]),
-        _createGroup('QA',
-            [
-                _createCard('Two'),
-                _createCard('Cards')
-            ]),
-        _createGroup('Ready to production',
-            [
-                _createCard('Two'),
-                _createCard('Cards')
-            ]),
+        _createGroup("Backlog-server"),
+        _createGroup("Backlog-client", [_createCard("Add task details")]),
+        _createGroup("In development", [
+            _createCard("API"),
+            _createCard("demo"),
+        ]),
+        _createGroup("Done", [
+            _createCard("Planning the cmps tree"),
+            _createCard("Vars"),
+            _createCard("snippet"),
+        ]),
+        _createGroup("QA", [_createCard("Two"), _createCard("Cards")]),
+        _createGroup("Ready to production", [
+            _createCard("Two"),
+            _createCard("Cards"),
+        ]),
     ]
     return board
 }
@@ -199,7 +205,7 @@ function _createGroup(title, cards = [], isStarred = false) {
         title,
         cards,
         isStarred,
-        style: {}
+        style: {},
     }
 }
 
@@ -213,16 +219,16 @@ function _createCard(title) {
 function _getEmptyBoard(title) {
     return {
         title,
-        workspace:1,
+        workspace: 1,
         isStarred: false,
         archivedAt: null,
         createdBy: {},
         style: {
-            backgroundImage: ""
+            backgroundImage: "",
         },
         labels: [],
         members: [],
         groups: [],
-        activities: []
+        activities: [],
     }
 }

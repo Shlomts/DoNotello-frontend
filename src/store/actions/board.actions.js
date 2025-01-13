@@ -89,13 +89,36 @@ export async function loadCard(board, cardId) {
     try {
         const card = await boardService.getCardById(board, cardId)
         // store.dispatch(getCmdSetBoard(board))
-        console.log("card in loadCard", card)
         return card
     } catch (err) {
         console.log("Cannot load card", err)
         throw err
     }
 }
+
+export async function loadGroup(board, cardId) {
+    try {
+        const group = await boardService.getGroup(board, cardId)
+        // store.dispatch(getCmdSetBoard(board))
+        return group
+    } catch (err) {
+        console.log("Cannot load group", err)
+        throw err
+    }
+}
+
+export async function getGroupId(board, cardId) {
+    try {
+        const group = await boardService.getGroup(board, cardId)
+        // store.dispatch(getCmdSetBoard(board))
+        return group.id
+    } catch (err) {
+        console.log("Cannot load group", err)
+        throw err
+    }
+}
+
+
 
 export async function removeGroupFromBoard(board, groupId) {
     const groupIdx = board.groups.findIndex(group => group.id === groupId)
@@ -112,7 +135,9 @@ export async function removeGroupFromBoard(board, groupId) {
 }
 
 export async function removeCardFromGroup(board, groupId, cardId) {
+    console.log(board)
     const group = board.groups.find(group => group.id === groupId)
+    console.log("in remove group:", group)
     if (!group) throw new Error('Group not found')
 
     const cardIdx = group.cards.findIndex(card => card.id === cardId)
