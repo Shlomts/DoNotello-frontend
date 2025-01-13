@@ -1,6 +1,9 @@
 import { storageService } from '../async-storage.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
+const STORAGE_KEY = 'userDB'
+
+_createUsers
 
 export const userService = {
     login,
@@ -35,7 +38,7 @@ async function update({ _id, score }) {
     user.score = score
     await storageService.put('user', user)
 
-	// When admin updates other user's details, do not update loggedinUser
+    // When admin updates other user's details, do not update loggedinUser
     const loggedinUser = getLoggedinUser()
     if (loggedinUser._id === user._id) saveLoggedinUser(user)
 
@@ -66,15 +69,15 @@ function getLoggedinUser() {
 }
 
 function saveLoggedinUser(user) {
-	user = { 
-        _id: user._id, 
-        fullname: user.fullname, 
-        imgUrl: user.imgUrl, 
-        score: user.score, 
-        isAdmin: user.isAdmin 
+    user = {
+        _id: user._id,
+        fullname: user.fullname,
+        imgUrl: user.imgUrl,
+        score: user.score,
+        isAdmin: user.isAdmin
     }
-	sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
-	return user
+    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
+    return user
 }
 
 // To quickly create an admin user, uncomment the next line
@@ -90,4 +93,32 @@ async function _createAdmin() {
 
     const newUser = await storageService.post('user', userCred)
     console.log('newUser: ', newUser)
+}
+
+
+// for DEV 
+
+function _createUsers() {
+    let users = loadFromStorage(STORAGE_KEY)
+
+    if (!users || !users.length) {
+        users = [
+            _createUser('Chen Levavi', 'levavi.chen@gmail.com', '123', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/chen_fwdvsr.jpg'),
+            _createUser('Shlomit Horn', 'ss1234562@gmail.com', '456', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/shlomit_ggjyyr.png'),
+            _createUser('Keren Vasserman', 'kerenvasserman@gmail.com', '789', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/keren_vw7vmq.png'),
+            _createUser('Beyonce Knowles', 'beyonce@gmail.com', '000', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784864/beyonce_spjmuf.webp'),
+        ]
+        saveToStorage(STORAGE_KEY, users)
+    }
+}
+
+function _createUser(fullname, username, password, imgUrl) {
+    return {
+        id: makeId(),
+        fullname,
+        username,
+        password,
+        imgUrl,
+        mentions: []
+    }
 }

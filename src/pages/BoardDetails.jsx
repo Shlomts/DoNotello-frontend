@@ -14,6 +14,9 @@ import {
     addGroupToBoard,
     removeGroupFromBoard
 } from "../store/actions/board.actions"
+
+import {loadUsers} from "../store/actions/user.actions"
+
 import { CardFilter } from "../cmps/card/CardFilter"
 import { GroupList } from "../cmps/group/GroupList"
 import { Plus, Close, Star, Unstar } from "../cmps/SvgContainer"
@@ -21,6 +24,7 @@ import { boardService } from "../services/board"
 
 export function BoardDetails() {
     const { boardId } = useParams()
+    const users = useSelector((storeState) => storeState.userModule.user)
     const board = useSelector((storeState) => storeState.boardModule.board)
     const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter())
     const [isAddingGroup, setIsAddingGroup] = useState(false)
@@ -28,6 +32,7 @@ export function BoardDetails() {
 
     useEffect(() => {
         loadBoard(boardId)
+        loadUsers(users)
     }, [boardId])
 
     function handleAddGroup() {
