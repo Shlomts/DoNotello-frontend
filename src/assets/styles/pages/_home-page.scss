@@ -30,22 +30,19 @@
         font-size: 1.2em;
         color: rgb(23, 43, 77);
         padding: 0.5rem 1.5rem;
-
-
       }
       .logo {
         font-size: 2em;
         font-weight: bold;
         margin-inline-end: 2em;
         padding-left: 20px;
-        
       }
 
       .login-link {
         margin-inline-start: auto;
       }
 
-      .demo-btn {
+      .header-demo-btn {
         padding: 10px 20px;
         font-size: 1rem;
         color: white;
@@ -95,7 +92,7 @@
       }
     }
 
-    .demo-btn {
+    .body-demo-btn {
       padding: 10px 20px;
       font-size: 1rem;
       color: white;
@@ -104,6 +101,8 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      position: relative;
+      z-index: 100;
 
       &:hover {
         background-color: #0056b3;
