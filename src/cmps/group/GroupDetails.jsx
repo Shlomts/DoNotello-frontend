@@ -58,36 +58,37 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
                 <CardList cards={group.cards} />
             </div>
             <div className="group-footer">
-                <section className="add-card">
-                    {isAddingCard ? (
-                        <div className="add-card-form">
-                            <textarea
-                                value={cardName}
-                                onChange={onSetCardName}
-                                placeholder="Enter a title or paste link"
-                                rows={3}
-                            />
-                            <div className="add-card-actions">
-                                <button
-                                    className="add-card-btn"
-                                    onClick={() => {
-                                        onAddCard()
-                                    }}
-                                >
-                                    Add card
-                                </button>
-                                <button
-                                    className="cancel-add-btn"
-                                    onClick={() => {
-                                        setIsAddingCard(false)
-                                        setCardName("")
-                                    }}
-                                >
-                                    <Close />
-                                </button>
-                            </div>
+                {isAddingCard ? (
+                    <div className="add-card-form">
+                        <textarea
+                            value={cardName}
+                            onChange={onSetCardName}
+                            placeholder="Enter a title or paste link"
+                            rows={3}
+                            autoFocus
+                        />
+                        <div className="add-card-actions">
+                            <button
+                                className="save-card-btn"
+                                onClick={() => {
+                                    onAddCard()
+                                }}
+                            >
+                                Add card
+                            </button>
+                            <button
+                                className="cancel-add-btn"
+                                onClick={() => {
+                                    setIsAddingCard(false)
+                                    setCardName("")
+                                }}
+                            >
+                                <Close />
+                            </button>
                         </div>
-                    ) : (
+                    </div>
+                ) : (
+                    <div className="add-card">
                         <button
                             className="add-card-btn"
                             onClick={() => {
@@ -97,8 +98,8 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
                             <Plus />
                             Add a card
                         </button>
-                    )}
-                </section>
+                    </div>
+                )}
             </div>
         </section>
     )

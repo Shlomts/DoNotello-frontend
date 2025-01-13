@@ -12,7 +12,7 @@
     border-radius: rem(12px);
 
     background-color: #101204;
-    color: #b6c2cf;
+    color: $txt-clr;
 
 
     .group-header {
@@ -54,7 +54,6 @@
         flex-grow: 1;
 
         &.empty {
-            // height: rem(88px);
             align-items: center;
             justify-content: center;
         }
@@ -70,91 +69,106 @@
 
 
         .add-card {
-            display: flex;
-            align-items: center;
             gap: 8px;
-            padding: rem(6px) rem(12px) rem(6px) rem(8px);
-            width: rem(220px);
-            height: rem(32px);
             border-radius: rem(8px);
 
             font-size: 14px;
-        }
 
-        svg {
-            width: 16px;
-            height: 16px;
-        }
+            svg {
+                width: 16px;
+                height: 16px;
+            }
 
-        & span:hover {
-            background-color: #252a1e;
-            cursor: pointer;
+            & :hover {
+                background-color: #282f27;
+                cursor: pointer;
+            }
+
+            button {
+                display: flex;
+                align-items: center;
+
+                gap: 8px;
+                padding: rem(6px) rem(12px) rem(6px) rem(8px);
+                width: rem(220px);
+                height: rem(32px);
+                align-self: flex-start;
+
+                border-radius: rem(8px);
+
+                color: $txt-clr;
+            }
         }
     }
 
+    .add-card-form {
+        display: flex;
+        flex-direction: column;
+        gap: rem(8px);
+
+        textarea {
+            min-width: rem(256px);
+            min-height: rem(56px);
+            padding-inline: rem(12px);
+            padding-block: rem(8px);
+
+            border-radius: rem(8px);
+            border-color: transparent;
+
+            font-weight: 400;
+            font-size: 1em;
+
+            &::placeholder {
+                color: #8c9baa;
+            }
+        }
+
+        .add-card-actions {
+            display: flex;
+            align-items: center;
+            gap: rem(4px);
+
+        }
+
+        .save-card-btn {
+            padding-inline: rem(12px);
+            padding-block: rem(6px);
+
+            border-radius: rem(3px);
+
+            color: #1d2125;
+            background-color: #579dff;
+
+            font-weight: 500;
+            font-size: 1em;
+
+            &:hover {
+                background-color: #85b8ff;
+            }
+        }
+
+        .cancel-add-btn {
+            min-height: rem(32px);
+            min-width: rem(32px);
+
+            border-radius: rem(3px);
+
+            color: $txt-clr;
+            background-color: transparent;
+
+            svg {
+                width: rem(20px);
+                height: rem(20px);
+            }
+
+            &:hover {
+                background-color: #282f27;
+            }
+        }
+
+    }
+
+
+
 
 }
-
-
-// GRID //
-// .group-details {
-//     display: grid;
-//     grid-template-rows: minmax(32px, auto) 1fr minmax(32px, auto);
-//     padding: rem(8px);
-//     gap: rem(8px);
-
-//     // min-height: rem(88px);
-//     // width: rem(272px);
-
-//     border-radius: rem(12px);
-
-//     align-items: center;
-//     background-color: #101204;
-//     color: #b6c2cf;
-
-
-//     .group-header {
-//         display: flex;
-//         justify-content: space-between;
-//         padding-inline: 4px;
-
-//         h3,
-//         span {
-//             font-size: 14px;
-//             font-weight: 600;
-//         }
-//     }
-
-//     .group-cards {
-//         display: flex;
-//         flex-direction: column;
-//         // gap:rem(8px);
-//         overflow-y: auto;
-
-//         &.empty{
-//             height: 0;
-//             // gap: 0;
-//             align-items: center;
-//             justify-content: center;
-
-//         }
-//     }
-
-
-//     .group-footer {
-//         display: flex;
-//         align-items: center;
-
-//         width: rem(220px);
-//         height: rem(32px);
-
-//         border-radius: rem(8px);
-
-//         &:hover {
-//             background-color: #252a1e;
-//             cursor: pointer;
-//         }
-//     }
-
-
-// }

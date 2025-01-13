@@ -30,10 +30,6 @@ export function BoardDetails() {
         loadBoard(boardId)
     }, [boardId])
 
-    function handleAddGroup() {
-        setIsAddingGroup((prev) => !prev)
-    }
-
     function onSetGroupName(ev) {
         const name = ev.target.value
         setGroupName(name)
@@ -106,6 +102,7 @@ export function BoardDetails() {
                                 onChange={onSetGroupName}
                                 placeholder="Enter list name..."
                                 rows={1}
+                                autoFocus
                             />
                             <div className="add-group-actions">
                                 <button
