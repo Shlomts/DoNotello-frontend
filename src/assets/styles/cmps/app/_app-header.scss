@@ -26,7 +26,7 @@
       text-decoration: none;
       color: $app-text;
       height: 32px;
-      padding: 0 8px;
+      padding: 0 12px;
       border-radius: 3px;
 
       .logo-container {
@@ -47,9 +47,11 @@
 
       .board-link {
         margin-right: 16px;
+        height: 32px;
+        padding-inline: 18px;
 
-        a,
-        button {
+
+        a {
           color: $app-text;
           font-weight: bold;
           font-size: 14px;
@@ -58,9 +60,9 @@
           border: none;
           height: 32px;
           margin-right: 4px;
-          padding-inline: 10px;
           line-height: 32px;
           white-space: nowrap;
+          justify-items: center;
         }
         &:hover {
           background-color: #333c43;
@@ -74,13 +76,12 @@
         font-weight: 500;
         padding: 0;
 
-        button {
-          padding-inline: 16px;
+        button.create-btn {
+          padding-inline: 11px;
           height: 32px;
           background-color: #579dff;
           border-radius: 3px;
-          display: flex;
-
+          border: none;
           p {
             margin: 0;
             color: #1d2125;
@@ -102,8 +103,8 @@
     cursor: pointer;
 
     .user-avatar {
-      width: 32px;
-      height: 32px;
+      width: rem(25px);
+      height: rem(25px);
       border-radius: 50%;
       overflow: hidden;
       margin-right: 8px;
