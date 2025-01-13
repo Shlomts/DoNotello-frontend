@@ -1,9 +1,11 @@
 import { storageService } from '../async-storage.service'
+import { saveToStorage, loadFromStorage } from '../util.service'
+import { makeId } from '../util.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 const STORAGE_KEY = 'userDB'
 
-_createUsers
+_createUsers()
 
 export const userService = {
     login,
@@ -18,7 +20,7 @@ export const userService = {
 }
 
 async function getUsers() {
-    const users = await storageService.query('user')
+    const users = await storageService.query(STORAGE_KEY)
     return users.map(user => {
         delete user.password
         return user
@@ -103,22 +105,22 @@ function _createUsers() {
 
     if (!users || !users.length) {
         users = [
-            _createUser('Chen Levavi', 'levavi.chen@gmail.com', '123', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/chen_fwdvsr.jpg'),
-            _createUser('Shlomit Horn', 'ss1234562@gmail.com', '456', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/shlomit_ggjyyr.png'),
-            _createUser('Keren Vasserman', 'kerenvasserman@gmail.com', '789', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/keren_vw7vmq.png'),
-            _createUser('Beyonce Knowles', 'beyonce@gmail.com', '000', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784864/beyonce_spjmuf.webp'),
+            _createUser('Chen Levavi', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/chen_fwdvsr.jpg'),
+            _createUser('Shlomit Horn', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/shlomit_ggjyyr.png'),
+            _createUser('Keren Vasserman', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/keren_vw7vmq.png'),
+            _createUser('Beyonce Knowles', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784864/beyonce_spjmuf.webp'),
         ]
         saveToStorage(STORAGE_KEY, users)
     }
 }
 
-function _createUser(fullname, username, password, imgUrl) {
+function _createUser(fullname, imgUrl) {
     return {
         id: makeId(),
         fullname,
-        username,
-        password,
+        // username,
+        // password,
         imgUrl,
-        mentions: []
+        // mentions: []
     }
 }
