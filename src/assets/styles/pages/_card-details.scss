@@ -16,10 +16,9 @@
         "i    h    btn"
         ".    f    opt"
         "i1   t1   opt"
-        "i2   t2   opt"
-        "i3   t3   opt"
-        "i4   t4   opt"
-        ;
+        "i2   t2   act"
+        "i3   t3   act"
+        "i4   t4   act";
 
     grid-template-columns: auto 1fr auto;
     min-height: 600px;
@@ -44,7 +43,7 @@
         max-height: fit-content;
         top: 0;
         justify-self: right;
-        margin: -5px -5px 0 0 ;
+        margin: -5px -5px 0 0;
         padding: 0;
         background-color: transparent;
         color: #b6c2cf;
@@ -55,7 +54,7 @@
         background-color: transparent;
         color: #b6c2cf;
         align-items: flex-start;
-        padding: 0;   
+        padding: 0;
         display: block;
 
         h3 {
@@ -82,13 +81,20 @@
         }
     }
 
+    .actions {
+        grid-area: act;
+        thead {
+            font-size: 12px;
+            padding-bottom: 2px;
+        }
+    }
+
     .icon {
         max-block-size: 0.1em;
     }
 
     .name {
         padding-inline: 7px;
-
     }
     .opt-bar {
         grid-area: opt;

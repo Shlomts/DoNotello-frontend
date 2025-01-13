@@ -15,6 +15,7 @@ export const boardService = {
     remove,
     addBoardMsg,
     saveCard,
+    getCardById 
 }
 window.cs = boardService
 
@@ -118,6 +119,26 @@ function saveCard(boardId, groupId, card, activity) {
     saveBoard(board)
     // return board
     // return task
+}
+
+ function getCardById(board , cardId) {
+
+    console.log("board in getCardById", board)
+
+    if (!board.groups || board.groups.length === 0) return "No cards available"
+
+    for (let i = 0; i < board.groups.length-1; i++) {
+        const card = _getCardInGroup(board.groups[i], cardId)
+        if (card) return card
+    }
+
+    return new Error("Cannot find card: ", cardId)
+}
+
+function _getCardInGroup(group, cardId) {
+    const card = group.cards.find((card) => card.id === cardId)
+    if (!card) return
+    return card
 }
 
 // for DEV 

@@ -84,6 +84,19 @@ export async function addCardToGroup(board, group, cardToSave) {
     }
 }
 
+
+export async function loadCard(board, cardId) {
+    try {
+        const card = await boardService.getCardById(board, cardId)
+        // store.dispatch(getCmdSetBoard(board))
+        console.log("card in loadCard", card)
+        return card
+    } catch (err) {
+        console.log("Cannot load card", err)
+        throw err
+    }
+}
+
 export async function removeGroupFromBoard(board, groupId) {
     const groupIdx = board.groups.findIndex(group => group.id === groupId)
     if (groupIdx === -1) throw new Error('Group not found')
