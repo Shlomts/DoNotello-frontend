@@ -6,6 +6,7 @@ import {logout} from '../store/actions/user.actions'
 import {useState} from 'react'
 import {AddBoard} from './board/AddBoard'
 import {onToggleModal} from '../store/actions/system.actions'
+import { Members } from './svgContainer'
 
 export function AppHeader() {
   //   const user = useSelector((storeState) => storeState.userModule.user)
@@ -89,12 +90,7 @@ export function AppHeader() {
         {user && (
           <div className="user-info" onClick={toggleDropdown}>
             <div className="user-avatar">
-              {/* Random User SVG */}
-              <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="32" cy="32" r="30" stroke="white" strokeWidth="4" />
-                <circle cx="32" cy="24" r="10" fill="white" />
-                <rect x="16" y="40" width="32" height="16" rx="8" fill="white" />
-              </svg>
+             <Members />
             </div>
             {/* {isDropdownOpen && (
               <ul className="user-dropdown">
