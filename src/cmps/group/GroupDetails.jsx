@@ -18,15 +18,6 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
         setCardName(name)
     }
 
-    async function onRemoveCard(cardId) {
-        try {
-            await removeGroupFromBoard(board, group.id, cardId)
-            showSuccessMsg('Group removed')
-        } catch (err) {
-            showErrorMsg('Cannot remove group')
-        }
-    }
-
     async function onAddCard() {
         const cardToSave = boardService.getEmptyCard()
         cardToSave.title = cardName
