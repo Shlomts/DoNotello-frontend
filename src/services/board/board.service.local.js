@@ -152,7 +152,7 @@ function _createBoard(title, users) {
         _createGroup('In development',
             [
                 _createCard('API'),
-                _createCard('demo')
+                _createCard('demo', 'C101')
             ]),
         _createGroup('Done',
             [
@@ -184,10 +184,11 @@ function _createGroup(title, cards = [], isStarred = false) {
     }
 }
 
-function _createCard(title) {
+function _createCard(title, memberIds = []) {
     return {
         id: makeId(),
         title,
+        memberIds,
     }
 }
 

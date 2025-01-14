@@ -105,18 +105,18 @@ function _createUsers() {
 
     if (!users || !users.length) {
         users = [
-            _createUser('Chen Levavi', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/chen_fwdvsr.jpg'),
-            _createUser('Shlomit Horn', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/shlomit_ggjyyr.png'),
-            _createUser('Keren Vasserman', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/keren_vw7vmq.png'),
-            _createUser('Beyonce Knowles', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784864/beyonce_spjmuf.webp'),
+            _createUser('C101', 'Chen Levavi', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/chen_fwdvsr.jpg'),
+            _createUser('S101', 'Shlomit Horn', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/shlomit_ggjyyr.png'),
+            _createUser('K101', 'Keren Vasserman', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/keren_vw7vmq.png'),
+            _createUser('B101', 'Beyonce Knowles', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784864/beyonce_spjmuf.webp'),
         ]
         saveToStorage(STORAGE_KEY, users)
     }
 }
 
-function _createUser(fullname, imgUrl) {
+function _createUser(id, fullname, imgUrl) {
     return {
-        id: makeId(),
+        id,
         fullname,
         // username,
         // password,
