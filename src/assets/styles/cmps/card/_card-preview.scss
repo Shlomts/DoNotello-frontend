@@ -1,10 +1,11 @@
 .card-preview {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
-    padding: rem(6px) rem(12px) rem(6px) rem(12px);
-    gap: rem(8px);
-    max-height: rem(36px);
+    padding: rem(8px) rem(12px);
+    gap: rem(4px);
+    min-height: rem(24px);
     min-width: rem(256px);
 
 
@@ -17,13 +18,27 @@
         font-size: 14px;
         font-weight: 400;
         margin: 0;
+        line-height: rem(20px);
 
         color: $txt-clr;
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     }
 
-    a{
-        text-decoration: none; 
+    .member-avatars {
+        display: flex;
+        align-self: flex-end;
+        gap: rem(4px);
+    }
+
+    .card-member-img {
+        width: rem(23px);
+        height: rem(23px);
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    a {
+        text-decoration: none;
     }
 
 
@@ -35,5 +50,10 @@
 
         border: 2px solid #99c8ff;
         cursor: pointer;
+    }
+
+    .card-preview.expanded {
+        max-height: rem(100px);
+        padding: rem(10px) rem(12px);
     }
 }

@@ -55,7 +55,9 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
             <div
                 className={`group-cards ${!group.cards || group.cards.length === 0 ? "empty" : ""}`}
             >
-                <CardList cards={group.cards} />
+                <CardList
+                    cards={group.cards}
+                    board={board} />
             </div>
             <div className="group-footer">
                 {isAddingCard ? (

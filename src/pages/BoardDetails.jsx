@@ -14,13 +14,18 @@ import {
     addGroupToBoard,
     removeGroupFromBoard
 } from "../store/actions/board.actions"
+
+import { loadUsers } from "../store/actions/user.actions"
+
 import { CardFilter } from "../cmps/card/CardFilter"
 import { GroupList } from "../cmps/group/GroupList"
+import { MemberList } from "../cmps/member/MemberList"
 import { Plus, Close, Star, Unstar } from "../cmps/SvgContainer"
 import { boardService } from "../services/board"
 
 export function BoardDetails() {
     const { boardId } = useParams()
+    const users = useSelector((storeState) => storeState.userModule.users)
     const board = useSelector((storeState) => storeState.boardModule.board)
     const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter())
     const [isAddingGroup, setIsAddingGroup] = useState(false)
@@ -28,6 +33,7 @@ export function BoardDetails() {
 
     useEffect(() => {
         loadBoard(boardId)
+        loadUsers()
     }, [boardId])
 
     function onSetGroupName(ev) {
@@ -45,6 +51,7 @@ export function BoardDetails() {
     }
 
     async function onAddGroup() {
+        console.log(users)
         const groupToSave = boardService.getEmptyGroup()
         groupToSave.title = groupName
 
@@ -83,9 +90,10 @@ export function BoardDetails() {
                         customize
                     </div> */}
                 </section>
-
                 <section className="right-header">
-                    {/* <span>board-edit</span> */}
+                    <MemberList
+                        members={board.members}
+                    />
                 </section>
             </header>
             <main className="board-content">

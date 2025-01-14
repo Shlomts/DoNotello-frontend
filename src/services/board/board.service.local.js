@@ -122,12 +122,13 @@ function saveCard(boardId, groupId, card, activity) {
 
 // for DEV 
 
-function _createBoards() {
+async function _createBoards() {
     let boards = loadFromStorage(STORAGE_KEY)
+    const users = await userService.getUsers()
 
     if (!boards || !boards.length) {
         boards = [
-            _createBoard('DoNotello - DEMO'),
+            _createBoard('DoNotello - DEMO', users),
             // _createBoard('2'),
             // _createBoard('3'),
             // _createBoard('4'),
@@ -138,9 +139,10 @@ function _createBoards() {
     }
 }
 
-function _createBoard(title) {
+function _createBoard(title, users) {
     const board = _getEmptyBoard(title)
     board._id = makeId()
+    board.members = users
     board.groups = [
         _createGroup('Backlog-server'),
         _createGroup('Backlog-client',
@@ -150,7 +152,7 @@ function _createBoard(title) {
         _createGroup('In development',
             [
                 _createCard('API'),
-                _createCard('demo')
+                _createCard('demo', 'C101')
             ]),
         _createGroup('Done',
             [
@@ -182,17 +184,18 @@ function _createGroup(title, cards = [], isStarred = false) {
     }
 }
 
-function _createCard(title) {
+function _createCard(title, memberIds = []) {
     return {
         id: makeId(),
         title,
+        memberIds,
     }
 }
 
 function _getEmptyBoard(title) {
     return {
         title,
-        workspace:1,
+        workspace: 1,
         isStarred: false,
         archivedAt: null,
         createdBy: {},

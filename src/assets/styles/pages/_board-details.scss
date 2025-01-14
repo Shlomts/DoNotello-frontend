@@ -16,6 +16,17 @@
         background-color: aqua;
         color: white;
 
+        &>* {
+            display: flex;
+            align-items: center;
+        }
+
+        h3 {
+            font-size: rem(18px);
+            font-weight: bold;
+            margin: 0;
+        }
+
         .left-header {
             display: flex;
             align-items: center;

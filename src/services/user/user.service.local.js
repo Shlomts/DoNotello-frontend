@@ -1,6 +1,11 @@
 import { storageService } from '../async-storage.service'
+import { saveToStorage, loadFromStorage } from '../util.service'
+import { makeId } from '../util.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
+const STORAGE_KEY = 'userDB'
+
+_createUsers()
 
 export const userService = {
     login,
@@ -15,7 +20,7 @@ export const userService = {
 }
 
 async function getUsers() {
-    const users = await storageService.query('user')
+    const users = await storageService.query(STORAGE_KEY)
     return users.map(user => {
         delete user.password
         return user
@@ -35,7 +40,7 @@ async function update({ _id, score }) {
     user.score = score
     await storageService.put('user', user)
 
-	// When admin updates other user's details, do not update loggedinUser
+    // When admin updates other user's details, do not update loggedinUser
     const loggedinUser = getLoggedinUser()
     if (loggedinUser._id === user._id) saveLoggedinUser(user)
 
@@ -66,15 +71,15 @@ function getLoggedinUser() {
 }
 
 function saveLoggedinUser(user) {
-	user = { 
-        _id: user._id, 
-        fullname: user.fullname, 
-        imgUrl: user.imgUrl, 
-        score: user.score, 
-        isAdmin: user.isAdmin 
+    user = {
+        _id: user._id,
+        fullname: user.fullname,
+        imgUrl: user.imgUrl,
+        score: user.score,
+        isAdmin: user.isAdmin
     }
-	sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
-	return user
+    sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
+    return user
 }
 
 // To quickly create an admin user, uncomment the next line
@@ -90,4 +95,32 @@ async function _createAdmin() {
 
     const newUser = await storageService.post('user', userCred)
     console.log('newUser: ', newUser)
+}
+
+
+// for DEV 
+
+function _createUsers() {
+    let users = loadFromStorage(STORAGE_KEY)
+
+    if (!users || !users.length) {
+        users = [
+            _createUser('C101', 'Chen Levavi', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/chen_fwdvsr.jpg'),
+            _createUser('S101', 'Shlomit Horn', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/shlomit_ggjyyr.png'),
+            _createUser('K101', 'Keren Vasserman', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/keren_vw7vmq.png'),
+            _createUser('B101', 'Beyonce Knowles', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784864/beyonce_spjmuf.webp'),
+        ]
+        saveToStorage(STORAGE_KEY, users)
+    }
+}
+
+function _createUser(id, fullname, imgUrl) {
+    return {
+        id,
+        fullname,
+        // username,
+        // password,
+        imgUrl,
+        // mentions: []
+    }
 }
