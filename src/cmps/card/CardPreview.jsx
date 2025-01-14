@@ -3,7 +3,7 @@ import { NavLink, Outlet, useParams } from "react-router-dom"
 
 export function CardPreview({ card, members }) {
     const { boardId } = useParams()
-
+    if (!card || !members || members.length === 0) return
     const cardMembers = members.filter(member => card.memberIds.includes(member.id))
     const cardHasContent = card.memberIds.length > 0
 
