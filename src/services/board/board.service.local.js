@@ -142,7 +142,7 @@ function getGroup(board, cardId) {
     for (let i = 0; i < board.groups.length - 1; i++) {
         const group = _getGroupByCard(board.groups[i], cardId)
         if (group) {
-            console.log("in getGroup group:", group)
+            // console.log("in getGroup group:", group)
             return group
         } 
     }

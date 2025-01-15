@@ -47,6 +47,12 @@
         padding: 0;
         background-color: transparent;
         color: #b6c2cf;
+        border-radius: 3px;
+
+        &:hover {
+            background-color: rgb(69 80 90);
+        }
+
     }
 
     header {
