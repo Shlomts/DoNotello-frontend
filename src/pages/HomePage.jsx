@@ -17,7 +17,7 @@ export function HomePage() {
   }
 
   function TryDemo() {
-    navigate('/board/eHf7Mp')
+    navigate('/board')
   }
   return (
     <section className="home-page">

@@ -3,7 +3,7 @@ import {addBoard} from '../../store/actions/board.actions'
 import {showErrorMsg, showSuccessMsg} from '../../services/event-bus.service'
 import {BackgroundSelector} from '../BackgroundSelector'
 import {boardService} from '../../services/board'
-import {Close} from '../svgContainer'
+import {Close} from '../SvgContainer'
 //as i can see the cmp isnt keep the data when you close the tab
 // and refresh the inputs. also isnt in the qparams
 export function AddBoard({onClose}) {

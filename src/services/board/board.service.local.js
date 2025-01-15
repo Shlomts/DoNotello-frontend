@@ -19,8 +19,8 @@ export const boardService = {
 window.cs = boardService
 
 async function query() {
-  var boards = await storageService.query(STORAGE_KEY)
-  return boards
+    var boards = await storageService.query(STORAGE_KEY)
+    return boards
 }
 
 // async function query(filterBy = { txt: '', price: 0 }) {
@@ -48,69 +48,69 @@ async function query() {
 // }
 
 function getById(boardId) {
-  return storageService.get(STORAGE_KEY, boardId)
+    return storageService.get(STORAGE_KEY, boardId)
 }
 
 async function remove(boardId) {
-  // throw new Error('Nope')
-  await storageService.remove(STORAGE_KEY, boardId)
+    // throw new Error('Nope')
+    await storageService.remove(STORAGE_KEY, boardId)
 }
 
 async function saveBoard(board) {
-  console.log(board)
-  var savedBoard
-  if (board._id) {
-    const boardToSave = {
-      _id: board._id,
-      title: board.boardTitle,
-      workspace: board.workspace,
-      isStarred: board.isStarred,
-      archivedAt: board.archivedAt,
-      createdBy: board.createdBy,
-      style: board.backgroundUrl,
-      labels: board.labels,
-      members: board.members,
-      groups: board.groups,
+    console.log(board)
+    var savedBoard
+    if (board._id) {
+        const boardToSave = {
+            _id: board._id,
+            title: board.title,
+            workspace: board.workspace,
+            isStarred: board.isStarred,
+            archivedAt: board.archivedAt,
+            createdBy: board.createdBy,
+            style: { backgroundImage: board.style.backgroundImage },
+            labels: board.labels,
+            members: board.members,
+            groups: board.groups,
+        }
+        savedBoard = await storageService.put(STORAGE_KEY, boardToSave)
+    } else {
+        const boardToSave = {
+            _id: makeId(),
+            title: board.title,
+            workspace: board.workspace,
+            isStarred: board.isStarred || false,
+            archivedAt: board.archivedAt,
+            createdBy: userService.getLoggedinUser(),
+            style: { backgroundImage: board.style.backgroundImage },
+            labels: board.labels || [],
+            members: board.members || [],
+            groups: board.groups || [],
+        }
+        savedBoard = await storageService.post(STORAGE_KEY, boardToSave)
     }
-    savedBoard = await storageService.put(STORAGE_KEY, boardToSave)
-  } else {
-    const boardToSave = {
-      _id: makeId(),
-      title: board.boardTitle,
-      workspace: board.workspace,
-      isStarred: board.isStarred || false,
-      archivedAt: board.archivedAt,
-      createdBy: userService.getLoggedinUser(),
-      style: board.backgroundUrl,
-      labels: board.labels || [],
-      members: board.members || [],
-      groups: board.groups || [],
-    }
-    savedBoard = await storageService.post(STORAGE_KEY, boardToSave)
-  }
-  return savedBoard
+    return savedBoard
 }
 
 async function addBoardMsg(boardId, txt) {
-  // Later, this is all done by the backend
-  const board = await getById(boardId)
+    // Later, this is all done by the backend
+    const board = await getById(boardId)
 
-  const msg = {
-    id: makeId(),
-    by: userService.getLoggedinUser(),
-    txt,
-  }
-  board.msgs.push(msg)
-  await storageService.put(STORAGE_KEY, board)
+    const msg = {
+        id: makeId(),
+        by: userService.getLoggedinUser(),
+        txt,
+    }
+    board.msgs.push(msg)
+    await storageService.put(STORAGE_KEY, board)
 
-  return msg
+    return msg
 }
 
 function saveCard(boardId, groupId, card, activity) {
     const board = getById(boardId)
     const group = board.groups.find((group) => group.id === groupId)
 
-  // PUT /api/board/b123/task/t678
+    // PUT /api/board/b123/task/t678
 
     // TODO: find the task, and update
     const cardToUpdate = group.cards.find((cardToUpdate) => cardToUpdate.id)
@@ -146,7 +146,7 @@ function getGroup(board, cardId) {
         if (group) {
             console.log("in getGroup group:", group)
             return group
-        } 
+        }
     }
 
     return new Error("Cannot find group ")

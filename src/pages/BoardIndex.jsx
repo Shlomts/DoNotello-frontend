@@ -10,7 +10,7 @@ import {userService} from '../services/user'
 import {BoardList} from '../cmps/board/BoardList'
 import {AddBoard} from '../cmps/board/AddBoard'
 import {onToggleModal} from '../store/actions/system.actions'
-import {Members} from '../cmps/svgContainer'
+import {Members} from '../cmps/SvgContainer'
 
 export function BoardIndex() {
   const boards = useSelector((storeState) => storeState.boardModule.boards)

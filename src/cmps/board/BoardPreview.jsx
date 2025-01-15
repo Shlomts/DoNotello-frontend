@@ -1,5 +1,5 @@
 import {Link, useNavigate} from 'react-router-dom'
-import {Star, Unstar} from '../svgContainer'
+import {Star, Unstar} from '../SvgContainer'
 import {useDispatch} from 'react-redux'
 import {toggleBoardStar} from '../../store/actions/board.actions'
 
