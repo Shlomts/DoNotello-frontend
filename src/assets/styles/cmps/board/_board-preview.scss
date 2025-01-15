@@ -4,18 +4,14 @@
   border-radius: rem(3px);
   background: linear-gradient(#006644, #00875a);
   padding: 4px 8px;
-  position: relative;
+  // position: relative;
   cursor: pointer;
-
-  &:hover .star-btn-container {
-    opacity: 1;
-  }
 
   .board-prew-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    position: relative;
+    // position: relative;
     height: rem(80px);
     background-color: transparent;
 
@@ -45,17 +41,35 @@
 
       .star-btn-container {
         opacity: 0; // Hidden by default
-        transition: opacity 0.3s ease;
+        transform: translateZ(0);
+        transition: opacity 0.3s ease, width 0.3s ease, transform 0.15s ease, margin 0.3s ease;
+        font-size: 14px;
+        height: 18px;
+        line-height: 18px;
+        
 
         .star-btn {
           background: transparent;
           border: none;
           cursor: pointer;
+          color: #fff;
+          display: block;
+          z-index: 10;
         }
       }
     }
+
+    &:hover .star-btn-container {
+      opacity: 1;
+    }
   }
-  &.isStarred .star-btn-container {
-    opacity: 1; // Always show the star button when isStarred class is present
+}
+
+.board-preview-card.isStarred .board-prew-container .star-btn-container {
+  opacity: 1 !important;
+  width: 24px !important;
+  transform: none !important;
+  .star-icon {
+    color: #e2b203;
   }
 }
