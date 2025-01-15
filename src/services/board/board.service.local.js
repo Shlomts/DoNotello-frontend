@@ -186,15 +186,25 @@ function _createBoard(title, users) {
     board.members = users
     board.style.backgroundImage = demoBG
     board.groups = [
-        _createGroup('Backlog-server'),
+        _createGroup('Backlog-server',
+            [
+                _createCard('Set up server',['C101','S101','K101','B101']),
+                _createCard('Add npm libs',['S101','K101']),
+                _createCard('Authentication',['S101']),
+                _createCard('Data validation'),
+                _createCard('Services'),
+                _createCard('Sockets'),
+            ]),
         _createGroup('Backlog-client',
             [
-                _createCard('Add task details')
+                _createCard('Add card details',['C101']),
+                _createCard('Icons'),
+                _createCard('Implement Sass'['C101','S101','K101','B101']),
             ]),
         _createGroup('In development',
             [
                 _createCard('API'),
-                _createCard('demo', 'C101')
+                _createCard('Members', ['C101','S101'])
             ]),
         _createGroup('Done',
             [
@@ -204,14 +214,17 @@ function _createBoard(title, users) {
             ]),
         _createGroup('QA',
             [
-                _createCard('Two'),
-                _createCard('Cards')
+                _createCard('Unit testing'),
+                _createCard('Code refactoring for performance'),
+                _createCard('Build basic template'),
+                _createCard('Check data'),
+                _createCard('Check QA')
             ]),
         _createGroup('Ready to production',
             [
-                _createCard('Two'),
-                _createCard('Cards')
-            ]),
+                _createCard('BoardDetails'),
+                _createCard('SideBar')
+            ]),
     ]
     return board
 }
