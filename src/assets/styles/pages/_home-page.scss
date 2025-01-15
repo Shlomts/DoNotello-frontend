@@ -5,6 +5,7 @@
   justify-content: space-between;
   position: absolute;
   top: 0;
+  left: 0;
   background: url(https://images.ctfassets.net/rz1oowkt5gyp/6bFuTiN5YQ78rFkHb3aJlo/b608362…/white-wave-mobile.svg)
       center bottom -0.5px / 100% 24% no-repeat scroll padding-box border-box,
     linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto no-repeat scroll padding-box border-box
@@ -43,7 +44,8 @@
       }
 
       .header-demo-btn {
-        padding: 10px 20px;
+        padding: 10px 15px;
+        margin: 5px;
         font-size: 1rem;
         color: white;
         background-color: #007bff;

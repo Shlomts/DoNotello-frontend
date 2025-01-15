@@ -62,6 +62,7 @@ export function HomePage() {
           </svg>
         </div>
       </div>
+      {/* later add here react-slick slick-carousel */}
     </section>
   )
 }
