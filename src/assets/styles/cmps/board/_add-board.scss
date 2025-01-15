@@ -14,6 +14,7 @@
   }
 
   .add-board-modal {
+    box-shadow: rgb(57, 66, 74) 0px 0px 0px 1px, rgba(3, 4, 4, 0.36);
     box-sizing: border-box;
     width: 304px;
     background-color: #282e33;
@@ -22,7 +23,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
-    box-shadow: rgb(57, 66, 74) 0px 0px 0px 1px, rgba(3, 4, 4, 0.36);
+    min-height: 550px;
 
     header.modal-header {
       display: grid;
@@ -69,13 +70,6 @@
       padding: 16px;
       padding-top: 0;
       max-height: 595px;
-      // hr {
-      //   background-color: #091e4224;
-      //   height: 1px;
-      //   margin: 14px 0;
-      //   padding: 0;
-      //   width: 100%;
-      // }
 
       .title-input-container .title {
         padding-top: 10px;
@@ -89,7 +83,7 @@
 
       .title-input-container,
       .workspace-input-container {
-        margin-bottom: 12px;
+        margin-bottom: 16px;
 
         .title {
           display: block;
@@ -105,6 +99,9 @@
           border: 0.7px solid rgb(182, 194, 207);
           border-radius: 4px;
           font-size: 14px;
+
+          // appearance: inherit;
+
           &.invalid {
             border-color: #e74c3c;
             &:focus {

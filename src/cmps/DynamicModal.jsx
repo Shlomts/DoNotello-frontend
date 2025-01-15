@@ -24,14 +24,12 @@ export function DynaminModal() {
     zIndex: 1000,
   }
 
-  // Here i nned to update the style to aligh as i want
-
   // Apply different styles based on trigger location
   if (trigger === 'header') {
     modalStyle = {
       ...modalStyle,
-      top: position.top + 40, // Default top if not provided
-      left: position.left + 50, // Default left if not provided
+      top: position.top + 35,
+      left: position.left + 45,
     }
   } else if (trigger === 'sidebar') {
     modalStyle = {
@@ -42,13 +40,12 @@ export function DynaminModal() {
   } else if (trigger === 'board-index') {
     modalStyle = {
       ...modalStyle,
-      top: position.top + 115,
+      top: position.top - 63,
       left: position.left - 70,
     }
   }
   const overlayClass =
     trigger && trigger !== 'board-index' && trigger !== 'sidebar' && trigger !== 'header' ? 'centered' : ''
-  console.log(position)
 
   if (!modalData) return <></>
   return (

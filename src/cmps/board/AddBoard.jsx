@@ -9,19 +9,25 @@ import {Close} from '../svgContainer'
 export function AddBoard({onClose}) {
   const [boardTitle, setBoardTitle] = useState('')
   const [workspace, setWorkspace] = useState('DoNotello Workspace')
-  const [backgroundUrl, setBackgroundUrl] = useState('')
+  const [backgroundUrl, setBackgroundUrl] = useState('https://picsum.photos/seed/board1/400/200')
   const [isTitleInvalid, setIsTitleInvalid] = useState(true) // New state for title validation
 
   function handleSelectBackground(url) {
     setBackgroundUrl(url)
   }
 
-  async function saveBoard() {
+  async function saveBoard(ev) {
+    ev.preventDefault()
+    console.log('start to save')
+    console.log(boardTitle)
+    console.log(backgroundUrl)
+
     const boardToSave = boardService.getEmptyBoard()
     boardToSave.title = boardTitle
     boardToSave.workspace = workspace
     boardToSave.style.backgroundImage = backgroundUrl
-    console.log(boardToSave)
+
+    console.log('Board to save before sending:', boardToSave)
 
     try {
       await addBoard(boardToSave)
@@ -29,6 +35,7 @@ export function AddBoard({onClose}) {
     } catch (err) {
       showErrorMsg('Cannot add board')
     }
+    console.log('Board to save after saving:', boardToSave)
   }
 
   return (
@@ -41,7 +48,6 @@ export function AddBoard({onClose}) {
           </button>
         </header>
         <div className="modal-body">
-          {/* <hr></hr> */}
           <BackgroundSelector onSelectBackground={handleSelectBackground} />
 
           <form onSubmit={saveBoard}>
