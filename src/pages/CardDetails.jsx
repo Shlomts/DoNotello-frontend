@@ -2,12 +2,15 @@ import { Fragment, useEffect, useState } from "react"
 import { useNavigate } from "react-router"
 import { useParams } from "react-router"
 import { useSelector } from "react-redux"
-import {
-    showSuccessMsg,
-    showErrorMsg,
-} from "../services/event-bus.service"
+import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
 
-import { loadCard, getGroupId, removeCardFromGroup, loadGroup } from "../store/actions/board.actions"
+import {
+    loadCard,
+    getGroupId,
+    removeCardFromGroup,
+    loadGroup,
+    updateCard
+} from "../store/actions/board.actions"
 import {
     Card,
     Description,
@@ -30,9 +33,17 @@ export function CardDetails() {
     const [group, setGroup] = useState(null)
     const [card, setCard] = useState(null)
 
+    const [descriptionInput, setDescriptionInput] = useState(
+        card?.description || ""
+    )
+
     useEffect(() => {
         getCard()
     }, [params.cardId])
+    
+    useEffect(() => {
+       setDescriptionInput(card?.description || '')
+    }, [card])
 
     async function getCard() {
         try {
@@ -52,10 +63,23 @@ export function CardDetails() {
         try {
             await removeCardFromGroup(board, groupId, cardId)
             navigate(`/board/${boardId}`)
-            showSuccessMsg('Card removed')
+            showSuccessMsg("Card removed")
         } catch (err) {
-            showErrorMsg('Cannot remove card')
+            showErrorMsg("Cannot remove card")
         }
+    }
+
+    function onChangeDescription(ev) {
+        setDescriptionInput(ev.target.value)
+    }
+
+    function onAddDescription() {
+        setCard((card) => {
+            card.description = descriptionInput
+            return card
+        })
+        console.log("??")
+        updateCard(board, group, card)
     }
 
     if (!card) return <div>Loading...</div>
@@ -177,9 +201,58 @@ export function CardDetails() {
                 <section className="description">
                     <h4 className="title">Description</h4>
                     <div className="input">
-                        <textarea type="text"></textarea>
+                        <textarea
+                            value={descriptionInput}
+                            onChange={onChangeDescription}
+                            placeholder="Enter a description or paste link"
+                            rows={3}
+                            autoFocus
+                        />
+                        <button className="save" onClick={onAddDescription}>
+                            Save
+                        </button>
+                        {/* <button onClick={onAddDescription}>Cancel</button> */}
                     </div>
                 </section>
+
+                {/* 
+                            <div className="group-footer">
+                                {isAddingCard ? (
+
+                                        <div className="add-card-actions">
+                                            <button
+                                                className="save-card-btn"
+                                                onClick={() => {
+                                                    onAddCard()
+                                                }}
+                                            >
+                                                Add card
+                                            </button>
+                                            <button
+                                                className="cancel-add-btn"
+                                                onClick={() => {
+                                                    setIsAddingCard(false)
+                                                    setCardName("")
+                                                }}
+                                            >
+                                                <Close />
+                                            </button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="add-card">
+                                        <button
+                                            className="add-card-btn"
+                                            onClick={() => {
+                                                setIsAddingCard(true)
+                                            }}
+                                        >
+                                            <Plus />
+                                            Add a card
+                                        </button>
+                                    </div>
+                                )}
+                            </div> */}
 
                 {/* <div className="activity icon">📰</div>
                 <section className="activity">
