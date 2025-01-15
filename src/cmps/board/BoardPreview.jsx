@@ -46,10 +46,22 @@ export function BoardPreview({board, onRemoveBoard, onUpdateBoard}) {
                   {getStarIcon(board.isStarred)}
                 </span>
               </div>
-            </button>
+            </header>
+            <div className="space"></div>
+          </Link>
+          <div className="board-preview-action">
+            <div className="star-btn-container">
+              <button className="star-btn">
+                <div className="star-container">
+                  <span className="star-icon" onClick={(ev) => handleStarToggle(ev, board._id)}>
+                    {getStarIcon(board.isStarred)}
+                  </span>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </div>
   )
 }

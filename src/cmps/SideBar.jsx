@@ -6,7 +6,7 @@ import {Boards, EllipsisIcon, Members, Plus, Star, Unstar} from './SvgContainer'
 import {useDispatch, useSelector} from 'react-redux'
 import {removeBoard, toggleBoardStar} from '../store/actions/board.actions'
 import {useNavigate} from 'react-router'
-import { LeaveBoardModal } from './LeaveBoardModal'
+import {LeaveBoardModal} from './LeaveBoardModal'
 
 export function SideBar() {
   const boards = useSelector((storeState) => storeState.boardModule.boards)
@@ -31,16 +31,15 @@ export function SideBar() {
       setSelectedBoard(null)
     }
   }
-  
+
   function openLeaveModal(board) {
     setSelectedBoard(board) // Pass the full board object
     setIsModalOpen(true)
   }
-  
+
   function closeLeaveModal() {
     setIsModalOpen(false)
   }
-
 
   function onAddBoard(event) {
     onToggleModal(
@@ -60,7 +59,7 @@ export function SideBar() {
   }
 
   function getStarIcon(isStarred) {
-    return isStarred ? <Unstar /> : <Star  />
+    return isStarred ? <Unstar /> : <Star />
   }
 
   return (
@@ -76,7 +75,6 @@ export function SideBar() {
 
       <ul className="sidebar-links">
         <li className="main-board">
-
           {/* CR */}
           <Link to="/board">
             <div>
@@ -123,11 +121,11 @@ export function SideBar() {
       </ul>
 
       {isModalOpen && selectedBoard && (
-     <LeaveBoardModal
-     onClose={closeLeaveModal}
-     onLeave={() => onRemoveBoard(selectedBoard._id)}
-     boardTitle={selectedBoard.title}
-   />
+        <LeaveBoardModal
+          onClose={closeLeaveModal}
+          onLeave={() => onRemoveBoard(selectedBoard._id)}
+          boardTitle={selectedBoard.title}
+        />
       )}
     </div>
   )

@@ -3,9 +3,12 @@
   height: rem(96px);
   border-radius: rem(3px);
   background: linear-gradient(#006644, #00875a);
+  background-repeat: no-repeat;
+  background-size: cover;
   padding: 4px 8px;
   // position: relative;
   cursor: pointer;
+
 
   .board-prew-container {
     display: flex;
@@ -46,7 +49,6 @@
         font-size: 14px;
         height: 18px;
         line-height: 18px;
-        
 
         .star-btn {
           background: transparent;
