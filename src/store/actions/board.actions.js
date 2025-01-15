@@ -92,6 +92,18 @@ export async function addCardToGroup(board, group, cardToSave) {
     }
 }
 
+export async function updateCard(board, group, cardToSave) {
+    const cardToCut = group.cards.findIndex(currCard => cardToSave.id === currCard.id) 
+    group.cards.splice(cardToCut, 1,cardToSave)
+
+    try {
+        await updateBoard(board)
+    } catch (err) {
+        console.log("Cannot add card", err)
+        throw err
+    }
+}
+
 
 export async function loadCard(board, cardId) {
     try {

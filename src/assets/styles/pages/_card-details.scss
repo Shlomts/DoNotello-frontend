@@ -16,7 +16,7 @@
         "i    h    btn"
         ".    f    opt"
         "i1   t1   opt"
-        "i2   t2   act"
+        ".    t2   act"
         "i3   t3   act"
         "i4   t4   act";
 
@@ -55,8 +55,7 @@
 
     }
 
-    header {
-        grid-area: h;
+    .header {
         background-color: transparent;
         color: #b6c2cf;
         align-items: flex-start;
@@ -64,13 +63,26 @@
         display: block;
 
         h3 {
+            grid-area: h;
             display: block;
             margin: 0;
             padding: 0;
+            font-weight: 500;
         }
         div {
             display: block;
             padding: 5px 0;
+        }
+
+        &.icon {
+            grid-area: i;
+
+            svg {
+                width: auto;
+                height: auto;
+                line-height: 14px;
+                vertical-align: text-top;
+            }
         }
     }
 
@@ -95,9 +107,9 @@
         }
     }
 
-    .icon {
-        max-block-size: 0.1em;
-    }
+    // .icon {
+    //     max-block-size: 0.1em;
+    // }
 
     .name {
         padding-inline: 7px;
@@ -116,8 +128,52 @@
 
     .description {
         grid-area: t1;
+
         &.icon {
             grid-area: i1;
+            vertical-align: auto;
+
+            svg {
+                width: auto;
+                height: auto;
+                line-height: 14px;
+                vertical-align: text-top;
+            }
+        }
+
+        h4 {
+            font-size: 16px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding-inline: rem(12px);
+            padding-block: rem(8px);
+
+            border-radius: rem(8px);
+            border-color: transparent;
+
+            font-weight: 400;
+            font-size: 1em;
+
+            &::placeholder {
+                color: #8c9baa;
+            }
+        }
+
+        .save {
+            margin-top: 10px;
+            padding-inline: 11px;
+            line-height: 2rem;
+            background-color: #579dff;
+            color: #22272b;
+            font-weight: 30px;
+            border-radius: 3px;
+            border: none;
+            &:hover {
+                background-color: #85b8ff;
+            }
         }
     }
 
