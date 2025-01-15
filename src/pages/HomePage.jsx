@@ -1,21 +1,40 @@
-import React from 'react'
-import {Link, NavLink} from 'react-router-dom'
+import {useEffect, useState} from 'react'
+import {Link, NavLink, useNavigate} from 'react-router-dom'
 
 export function HomePage() {
+  const [isImgLoaded, setIsImgLoaded] = useState(false)
+  const imgUrl = 'https://merllo-0m15.onrender.com/assets/TrelloUICollage_4x.193e8069.webp'
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const img = new Image()
+    img.src = imgUrl
+    img.onload = () => setIsImgLoaded(true)
+  }, [])
+
+  if (!isImgLoaded) {
+    return <div className="loader">Loading...</div>
+  }
+
+  function TryDemo() {
+    navigate('/board/eHf7Mp')
+  }
   return (
     <section className="home-page">
-        <header className="home-app-header full">
-          <nav>
-            <NavLink to="/" className="logo">
-              DoNote~llo
-            </NavLink>
+      <header className="home-app-header full">
+        <nav>
+          <NavLink to="/" className="logo">
+            DoNotello
+          </NavLink>
 
-            <NavLink to="login" className="login-link">
-              Log in
-            </NavLink>
+          <NavLink to="login" className="login-link">
+            Log in
+          </NavLink>
 
-            <button className="demo-btn">Try Our Demo!</button>
-          </nav>
+          <button className="header-demo-btn" onClick={TryDemo}>
+            Try Our Demo!
+          </button>
+        </nav>
       </header>
       <div className="space"></div>
       <div className="content">
@@ -23,11 +42,13 @@ export function HomePage() {
           <h1>DoNotello brings all your tasks, teammates, and tools together</h1>
           <p>Keep everything in the same place—even if your team isn’t.</p>
           {/* here need to link to demo board */}
-          <button className="demo-btn">Try Our Demo!</button>
+          <button className="body-demo-btn" onClick={TryDemo}>
+            Try Our Demo!
+          </button>
         </div>
 
-        <div className="image-section">
-          <img src="https://merllo-0m15.onrender.com/assets/TrelloUICollage_4x.193e8069.webp" alt="Merllo UI Preview" />
+        <div className="Img-section">
+          <img src={imgUrl} alt="DoNotello UI Preview" />{' '}
         </div>
 
         <div className="space"></div>
@@ -41,6 +62,7 @@ export function HomePage() {
           </svg>
         </div>
       </div>
+      {/* later add here react-slick slick-carousel */}
     </section>
   )
 }

@@ -1,0 +1,186 @@
+.modal-overlay-remove {
+  position: fixed;
+  inset: 500.364px auto auto 128.182px;
+  width: 304px;
+  z-index: 9999; // Ensure the modal is above everything
+
+  .modal-content {
+    background-color: $app-form-bgc;
+    border-radius: 8px;
+    width: 360px;
+    max-height: 719.017px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease;
+    z-index: 10000; // Ensure the modal is above everything
+
+    .modal-title-remove {
+      display: grid;
+      position: relative;
+      grid-template-columns: 32px 1fr 32px;
+      align-items: center;
+      padding: 4px 8px;
+      text-align: center;
+
+      h2 {
+        display: block;
+        position: relative;
+        grid-column: 1 / span 3;
+        grid-row: 1;
+        height: 40px;
+        margin: 0;
+        padding: 0 32px;
+        overflow: hidden;
+        color: $app-sidebar-dark-txt;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.003em;
+        line-height: 40px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .close-btn {
+        grid-column: 3;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        color: #b6c2cf;
+        background: none;
+        border: none;
+        cursor: pointer;
+        svg {
+          width: 20px;
+          height: 20px;
+          fill: #666;
+          transition: fill 0.2s;
+        }
+      }
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 8px;
+      background-color: transparent;
+      margin-inline: 0;
+
+      .btn {
+        border-radius: 4px;
+        border: none;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 8px 12px;
+        background-color: transparent;
+        color: #b6c2cf;
+        span {
+          margin: 0;
+          font-size: 14px;
+
+          .arrow-icon {
+            display: flex;
+            padding: 5px;
+          }
+        }
+        &:hover {
+          background-color: $app-sidebar-dark-hover;
+          // width: 100%;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .comfirm {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+    background-color: transparent;
+    margin-inline: 0;
+    z-index: 99999;
+
+    .modal-title-remove {
+      display: grid;
+      position: relative;
+      grid-template-columns: 32px 1fr 32px;
+      align-items: center;
+      padding: 4px 8px;
+      text-align: center;
+      h2 {
+        display: block;
+        position: relative;
+        grid-column: 1 / span 3;
+        grid-row: 1;
+        height: 40px;
+        margin: 0;
+        padding: 0 32px;
+        overflow: hidden;
+        color: $app-sidebar-dark-txt;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.003em;
+        line-height: 40px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .close-btn {
+        grid-column: 3;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        color: #b6c2cf;
+        background: none;
+        border: none;
+        cursor: pointer;
+        svg {
+          width: 20px;
+          height: 20px;
+          fill: #666;
+          transition: fill 0.2s;
+        }
+      }
+    }
+    .board-body {
+      max-height: 719.017px;
+      padding: 0 12px 12px 12px;
+      color: #b6c2cf;
+      p {
+        margin: 0 0 8px;
+        margin-bottom: 16px;
+      }
+
+      .close-board-confirm {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 12px;
+        border-radius: 3px;
+        border: none;
+        box-shadow: none;
+        transition-property: background-color, border-color, box-shadow;
+        transition-duration: 85ms;
+        transition-timing-function: ease;
+        background-color: #f87168;
+        color: #1d2125;
+        font-weight: 500;
+
+        &:hover {
+          background-color: #fd9891;
+        }
+        &:active {
+          background-color: #FFD5D2;
+        }
+      }
+    }
+  }
+}

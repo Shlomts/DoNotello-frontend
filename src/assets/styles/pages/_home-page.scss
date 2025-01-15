@@ -5,6 +5,7 @@
   justify-content: space-between;
   position: absolute;
   top: 0;
+  left: 0;
   background: url(https://images.ctfassets.net/rz1oowkt5gyp/6bFuTiN5YQ78rFkHb3aJlo/b608362…/white-wave-mobile.svg)
       center bottom -0.5px / 100% 24% no-repeat scroll padding-box border-box,
     linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto no-repeat scroll padding-box border-box
@@ -30,23 +31,21 @@
         font-size: 1.2em;
         color: rgb(23, 43, 77);
         padding: 0.5rem 1.5rem;
-
-
       }
       .logo {
         font-size: 2em;
         font-weight: bold;
         margin-inline-end: 2em;
         padding-left: 20px;
-        
       }
 
       .login-link {
         margin-inline-start: auto;
       }
 
-      .demo-btn {
-        padding: 10px 20px;
+      .header-demo-btn {
+        padding: 10px 15px;
+        margin: 5px;
         font-size: 1rem;
         color: white;
         background-color: #007bff;
@@ -95,7 +94,7 @@
       }
     }
 
-    .demo-btn {
+    .body-demo-btn {
       padding: 10px 20px;
       font-size: 1rem;
       color: white;
@@ -104,6 +103,8 @@
       border-radius: 5px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      position: relative;
+      z-index: 100;
 
       &:hover {
         background-color: #0056b3;

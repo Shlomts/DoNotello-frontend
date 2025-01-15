@@ -1,16 +1,19 @@
 .board-list-container {
-  //   height: 150px;
+  height: 150px;
 
   .board-list {
     .list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(23%, 1fr));
-      column-gap: 2%;
-      row-gap: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
 
       li {
         display: block;
         background-color: transparent;
+        //need here help to deside what look better !!!!!!!!
+        margin: 0 2% 2% 0;
+        // margin: 0 16.2px 16.2px 0;
+        // padding: 0;
       }
     }
   }
@@ -31,7 +34,7 @@
     font-weight: 400;
     align-items: center;
     justify-content: center;
-    
+
     p {
       margin: 0;
     }
@@ -39,5 +42,11 @@
     &:hover {
       background-color: #333c43;
     }
+  }
+}
+
+.boards-container-stared-list {
+  .add-board {
+    display: none;
   }
 }

@@ -4,7 +4,7 @@ import {ImgUploader} from './ImgUploader'
 
 export function BackgroundSelector({onSelectBackground}) {
   const [selected, setSelected] = useState(null)
-  const [selectedImage, setSelectedImage] = useState('')
+  const [selectedImage, setSelectedImage] = useState('https://picsum.photos/seed/board1/400/200') // Set the default image URL
 
   const [showOptions, setShowOptions] = useState(false) // Toggle options box visibility
   const [customUrl, setCustomUrl] = useState('')

@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
 
-import {loadBoards, addBoard, updateBoard, removeBoard, addBoardMsg} from '../store/actions/board.actions'
+import {loadBoards, updateBoard, removeBoard, addBoardMsg} from '../store/actions/board.actions'
 
 import {showSuccessMsg, showErrorMsg} from '../services/event-bus.service'
 import {boardService} from '../services/board'
@@ -10,10 +10,16 @@ import {userService} from '../services/user'
 import {BoardList} from '../cmps/board/BoardList'
 import {AddBoard} from '../cmps/board/AddBoard'
 import {onToggleModal} from '../store/actions/system.actions'
+import {Members} from '../cmps/svgContainer'
 
 export function BoardIndex() {
-  // const boards = useSelector((storeState) => storeState.boardModule.boards)
-  const boards = boardService.getRamdonBoards()
+  const boards = useSelector((storeState) => storeState.boardModule.boards)
+
+  useEffect(() => {
+    loadBoards()
+  }, [])
+
+  const starredBoards = boards.filter((board) => board.isStarred)
 
   async function onRemoveBoard(boardId) {
     try {
@@ -55,26 +61,28 @@ export function BoardIndex() {
     <main className="board-index">
       <header className="workspace-header">
         <div className="logo-container">
-        <div className="workspace-logo-container">
-          <div className="workspace-logo">D</div>
-        </div>{' '}
-        <div className="title">
-          <h2>Donotello WorkSpace</h2>
-          <span className="workspace-subtitle">
-            Permium 🔒 <span className="workspace-privacy">Private</span>{' '}
-          </span>
-        </div>
+          <div className="workspace-logo-container">
+            <div className="workspace-logo">D</div>
+          </div>{' '}
+          <div className="title">
+            <h2>Donotello WorkSpace</h2>
+            <span className="workspace-subtitle">
+              Permium 🔒 <span className="workspace-privacy">Private</span>{' '}
+            </span>
+          </div>
         </div>
       </header>
       <div className="saparete-boards"></div>
       <section className="all-boards">
         <section className="boards-container-stared-list">
           <div className="boards-page-board-heder">
-            <div className="one-p-icon"></div>
+            <div className="one-p-icon">
+              <Members />
+            </div>
             <h3>Starred boards</h3>
           </div>
           <BoardList
-            boards={boards}
+            boards={starredBoards}
             onRemoveBoard={onRemoveBoard}
             onUpdateBoard={onUpdateBoard}
             onAddBoard={onAddBoard}
@@ -82,8 +90,10 @@ export function BoardIndex() {
         </section>
         <section className="boards-container1">
           <div className="boards-page-board-heder">
-            <div className="one-p-icon"></div>
-            <h3>Your Boards</h3>
+            <div className="two-p-icon">
+              <Members />
+            </div>
+            <h3>All boards in this Workspace</h3>
           </div>
           <BoardList
             boards={boards}
@@ -92,7 +102,7 @@ export function BoardIndex() {
             onAddBoard={onAddBoard}
           />
         </section>
-        <section className="boards-container2 ">
+        {/* <section className="boards-container2 ">
           <div className="boards-page-board-heder">
             <div className="all-p-icon"></div>
             <h3>All boards in this Workspace</h3>
@@ -103,7 +113,7 @@ export function BoardIndex() {
             onUpdateBoard={onUpdateBoard}
             onAddBoard={onAddBoard}
           />
-        </section>
+        </section> */}
       </section>
     </main>
   )

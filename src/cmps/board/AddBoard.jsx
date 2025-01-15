@@ -2,41 +2,40 @@ import {useState} from 'react'
 import {addBoard} from '../../store/actions/board.actions'
 import {showErrorMsg, showSuccessMsg} from '../../services/event-bus.service'
 import {BackgroundSelector} from '../BackgroundSelector'
+import {boardService} from '../../services/board'
+import {Close} from '../svgContainer'
 //as i can see the cmp isnt keep the data when you close the tab
 // and refresh the inputs. also isnt in the qparams
 export function AddBoard({onClose}) {
   const [boardTitle, setBoardTitle] = useState('')
-  const [isTitleInvalid, setIsTitleInvalid] = useState(false) // Track invalid state
   const [workspace, setWorkspace] = useState('DoNotello Workspace')
-  const [backgroundUrl, setBackgroundUrl] = useState('') // New state for background URL
+  const [backgroundUrl, setBackgroundUrl] = useState('https://picsum.photos/seed/board1/400/200')
+  const [isTitleInvalid, setIsTitleInvalid] = useState(true) // New state for title validation
 
   function handleSelectBackground(url) {
     setBackgroundUrl(url)
   }
 
-  function handleSave() {
-    if (!boardTitle) {
-      setIsTitleInvalid(true) // Mark the input as invalid
-      return
-    }
-    console.log({boardTitle, workspace, backgroundUrl})
+  async function saveBoard(ev) {
+    ev.preventDefault()
+    console.log('start to save')
+    console.log(boardTitle)
+    console.log(backgroundUrl)
 
-    savedBoard({boardTitle, workspace, backgroundUrl})
-    onClose()
-  }
+    const boardToSave = boardService.getEmptyBoard()
+    boardToSave.title = boardTitle
+    boardToSave.workspace = workspace
+    boardToSave.style.backgroundImage = backgroundUrl
 
-  function handleTitleChange(e) {
-    setBoardTitle(e.target.value)
-    if (e.target.value) setIsTitleInvalid(false) // Reset invalid state when input is valid
-  }
+    console.log('Board to save before sending:', boardToSave)
 
-  async function savedBoard( board) {
     try {
-      const savedBoard = await addBoard(board)
-      showSuccessMsg(`Board added (id: ${savedBoard._id})`)
+      await addBoard(boardToSave)
+      showSuccessMsg(`Board with title added: ${boardToSave.title}`)
     } catch (err) {
       showErrorMsg('Cannot add board')
     }
+    console.log('Board to save after saving:', boardToSave)
   }
 
   return (
@@ -45,14 +44,13 @@ export function AddBoard({onClose}) {
         <header className="modal-header">
           <h2 className="title">Create Board</h2>
           <button className="close-btn" onClick={onClose}>
-            X
+            <Close />
           </button>
         </header>
         <div className="modal-body">
-          <hr></hr>
           <BackgroundSelector onSelectBackground={handleSelectBackground} />
 
-          <form onSubmit={handleSave}>
+          <form onSubmit={saveBoard}>
             <div className="title-input-container">
               <label className="title">Board Title</label>
               <input
@@ -60,7 +58,11 @@ export function AddBoard({onClose}) {
                 type="text"
                 placeholder="Enter board title"
                 value={boardTitle}
-                onChange={handleTitleChange}
+                onChange={(e) => {
+                  const newTitle = e.target.value
+                  setBoardTitle(newTitle)
+                  setIsTitleInvalid(newTitle.trim() === '') // Set invalid to true if the title is empty
+                }}
                 autoFocus
               />
               {isTitleInvalid && <span className="error-msg">👋 Board title is required</span>}
@@ -68,7 +70,7 @@ export function AddBoard({onClose}) {
 
             <div className="workspace-input-container">
               <label className="title">Workspace</label>
-              <select className="select" value={workspace} onChange={(e) => setWorkspace(e.target.value)}>
+              <select className="select" value={workspace} onChange={setWorkspace}>
                 <option className="option">DoNotello Workspace</option>
                 {/* Add more workspaces if needed */}
               </select>
