@@ -1,6 +1,6 @@
 .board-sidebar {
-  min-width: 236px;
-  max-width: 236px;
+  min-width: 240px;
+  max-width: 250px;
   max-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -114,9 +114,10 @@
 
     h2 {
       margin: 0;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
       color: $app-sidebar-dark-txt;
+      padding-inline-start: 12px;
     }
 
     .boards-btn-actions {

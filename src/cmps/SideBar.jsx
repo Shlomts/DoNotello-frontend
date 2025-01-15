@@ -17,7 +17,7 @@ export function SideBar() {
   const [selectedBoard, setSelectedBoard] = useState(null)
 
   function NavToHome() {
-    navigate('/')
+    navigate('/board')
   }
 
   async function onRemoveBoard(boardId) {
@@ -76,6 +76,8 @@ export function SideBar() {
 
       <ul className="sidebar-links">
         <li className="main-board">
+
+          {/* CR */}
           <Link to="/board">
             <div>
               <Boards />
@@ -105,7 +107,7 @@ export function SideBar() {
         {boards.map((board) => (
           <li key={board._id} className="boards-list">
             <Link to={`/board/${board._id}`}>
-              <div className="Secound-p" style={{backgroundImage: `url(${board.style})`}}></div>
+              <div  style={{backgroundImage: `url(${board.style})`}}></div>
               <span>{board.title}</span>
             </Link>
             <div className="btn-actions">
