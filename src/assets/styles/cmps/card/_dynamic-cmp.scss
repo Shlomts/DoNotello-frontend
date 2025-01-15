@@ -1,0 +1,56 @@
+.dynamic {
+    display: grid;
+    position: fixed;
+    border-radius: 3px;
+    width: 304px;
+    height: 500px;
+    background-color: #282e33;
+    z-index: 1001;
+    top: 25%;
+    left: 62%;
+    padding: 20px;
+
+    grid-template-areas:
+        "title  btn"
+        "srch   srch"
+        "cm     cm"
+        "bm     bm";
+
+    grid-template-columns: 50% 50%;
+
+    h4 {
+        // text-align: center;
+        position: relative;
+        left: 20%;
+        justify-self: end;
+
+        font-size: 14px;
+        grid-area: title;
+        // line-height: 14px;
+    }
+
+    button {
+        grid-area: btn;
+        background-color: transparent;
+        color: #b6c2cf;
+        justify-self: end;
+        border-radius: 3px;
+        margin: 2px;
+        padding: 4px;
+        max-height: max-content;
+        line-height: 80%;
+
+        // max-width: fit-content;
+
+        &:hover {
+            background-color: rgb(69 80 90);
+        }
+    }
+
+    .card-member-img {
+        width: rem(23px);
+        height: rem(23px);
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
