@@ -157,7 +157,7 @@ export function CardDetails() {
                             </div>
                             <div className="name">Labels</div>
                         </li>
-                        {/* <li className="opt-card">
+                        <li className="opt-card">
                             <div className="icon">
                                 <Checklist />
                             </div>
@@ -168,15 +168,15 @@ export function CardDetails() {
                                 <Dates />
                             </div>
                             <div className="name">Dates</div>
-                        </li> */}
-                        {/* <li className="opt-card">
+                        </li>
+                        <li className="opt-card">
                             <div>📎</div>
                             <div>Attachment</div>
                         </li>
                         <li className="opt-card">
                             <div>📌</div>
                             <div>Location</div>
-                        </li> */}
+                        </li>
                     </ul>
                 </section>
 
@@ -211,7 +211,7 @@ export function CardDetails() {
                             <span className="btn txt">Watch</span>
                         </div>
                     </section> */}
-                    <section>
+                    {/* <section>
                         Members
                         <div className="members">
                             <span className="btn avatar">😁</span>
@@ -225,7 +225,7 @@ export function CardDetails() {
                             <span className="btn avatar">label</span>
                             <span className="btn txt">+</span>
                         </div>
-                    </section>
+                    </section> */}
                 </div>
 
                 <div className="description icon">
