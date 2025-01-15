@@ -26,6 +26,7 @@ export function AddBoard({onClose}) {
     boardToSave.title = boardTitle
     boardToSave.workspace = workspace
     boardToSave.style.backgroundImage = backgroundUrl
+    console.log(boardToSave.style.backgroundImage)
 
     console.log('Board to save before sending:', boardToSave)
 

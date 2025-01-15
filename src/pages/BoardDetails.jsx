@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import demoBG from "../../public/imgs/demoBG.jpg"
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
 import {
@@ -69,7 +70,9 @@ export function BoardDetails() {
     if (!board) return <div>Loading...</div>
 
     return (
-        <section className="board-details">
+        <section className="board-details"
+            style={{ backgroundImage: `url(${demoBG})` }}
+        >
             <header>
                 <section className="left-header">
                     <h3>{board.title}</h3>

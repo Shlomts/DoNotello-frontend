@@ -26,7 +26,7 @@ export function BoardPreview({board, onRemoveBoard, onUpdateBoard}) {
   return (
     <article
       className={`board-preview-card ${board.isStarred ? 'isStarred' : ''}`}
-      style={{backgroundImage: `url(${board.style})`}}
+      style={{backgroundImage: `url(${board.style.backgroundImage})`}}
     >
       {' '}
       <div className="board-prew-container ">

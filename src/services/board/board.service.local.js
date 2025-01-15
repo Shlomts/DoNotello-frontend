@@ -2,6 +2,8 @@ import { storageService } from "../async-storage.service"
 import { saveToStorage, loadFromStorage } from "../util.service"
 import { makeId } from "../util.service"
 import { userService } from "../user"
+import demoBG from "../../../public/imgs/demoBG.jpg"
+
 
 const STORAGE_KEY = "boardDB"
 _createBoards()
@@ -182,6 +184,7 @@ function _createBoard(title, users) {
     const board = _getEmptyBoard(title)
     board._id = makeId()
     board.members = users
+    board.style.backgroundImage = demoBG
     board.groups = [
         _createGroup('Backlog-server'),
         _createGroup('Backlog-client',

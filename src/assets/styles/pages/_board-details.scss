@@ -1,9 +1,15 @@
 .board-details {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    background-color: rgb(59, 91, 81);
+    height: 95vh;
+    padding-bottom: rem(10px);
 
+    overflow: hidden;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    
 
     header {
         display: flex;
@@ -13,7 +19,8 @@
         height: rem(56px);
         padding-inline: rem(12px);
 
-        background-color: aqua;
+        backdrop-filter: blur(6px);
+        background-color: rgba(0, 0, 0, 0.404);
         color: white;
 
         &>* {

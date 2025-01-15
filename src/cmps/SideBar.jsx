@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {AddBoard} from './board/AddBoard'
 import {onToggleModal} from '../store/actions/system.actions'
-import {Boards, EllipsisIcon, Members, Plus, Star, Unstar} from './svgContainer'
+import {Boards, EllipsisIcon, Members, Plus, Star, Unstar} from './SvgContainer'
 import {useDispatch, useSelector} from 'react-redux'
 import {removeBoard, toggleBoardStar} from '../store/actions/board.actions'
 import {useNavigate} from 'react-router'
@@ -107,7 +107,7 @@ export function SideBar() {
         {boards.map((board) => (
           <li key={board._id} className="boards-list">
             <Link to={`/board/${board._id}`}>
-              <div  style={{backgroundImage: `url(${board.style})`}}></div>
+              <div  style={{backgroundImage: `url(${board.style.backgroundImage})`}}></div>
               <span>{board.title}</span>
             </Link>
             <div className="btn-actions">
