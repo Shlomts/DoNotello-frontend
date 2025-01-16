@@ -28,6 +28,7 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
             setCardName("")
             setIsAddingCard(false)
         } catch (err) {
+            console.error(err)
             showErrorMsg("Cannot add card")
         }
     }
@@ -57,7 +58,6 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
                             value={cardName}
                             onChange={onSetCardName}
                             placeholder="Enter a title or paste link"
-                            rows={3}
                             autoFocus
                         />
                         <div className="add-card-actions">

@@ -82,12 +82,17 @@ export async function addGroupToBoard(board, groupToSave) {
 }
 
 export async function addCardToGroup(board, group, cardToSave) {
+  console.log(board)
+  console.log(group)
+  console.log(cardToSave)
+
     group.cards.push(cardToSave)
 
     try {
         await updateBoard(board)
     } catch (err) {
         console.log("Cannot add card", err)
+        console.error(err)
         throw err
     }
 }

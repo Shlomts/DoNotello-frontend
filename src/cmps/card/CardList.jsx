@@ -2,7 +2,7 @@ import { CardPreview } from './CardPreview'
 
 
 export function CardList({ cards, board }) {
-    if (!cards || !cards.length === 0) return <div>No cards to show</div>
+    if (!cards || !cards.length === 0) return ''
 
     return (
         <section>

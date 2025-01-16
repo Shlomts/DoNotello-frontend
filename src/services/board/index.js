@@ -38,7 +38,7 @@ function getEmptyGroup() {
     return {
         id: makeId(),
         title: "",
-        card: []
+        cards: []
     }
 }
 

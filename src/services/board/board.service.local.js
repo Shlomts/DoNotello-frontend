@@ -199,7 +199,7 @@ function _createBoard(title, users) {
             [
                 _createCard('Add card details',['C101']),
                 _createCard('Icons'),
-                _createCard('Implement Sass'['C101','S101','K101','B101']),
+                _createCard('Implement Sass',['C101','S101','K101','B101']),
             ]),
         _createGroup('In development',
             [
