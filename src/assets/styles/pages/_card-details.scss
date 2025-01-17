@@ -7,18 +7,19 @@
     top: 0;
     bottom: 0;
     right: 0;
-    background-color: rgba(7, 7, 13, 0.11);
+    background-color: hsla(0, 0%, 4%, 0.05);
 }
 
 .card-details {
     display: grid;
     grid-template-areas:
-        "i    h    btn"
-        ".    f    opt"
-        "i1   t1   opt"
-        ".    t2   act"
-        "i3   t3   act"
-        "i4   t4   act";
+        "i    h         btn"
+        ".    usropt    opt"
+        "des   des      opt"
+        "des   des      opt"
+        "des   des      act"
+        "i3   t3        act"
+        "i4   t4        act";
 
     grid-template-columns: auto 1fr auto;
     min-height: 600px;
@@ -34,7 +35,8 @@
     max-width: 768px;
     width: 100%;
     padding: 20px;
-    gap: 8px;
+    gap: 15px;
+    // row-gap: 30px;
 
     button {
         grid-area: btn;
@@ -52,7 +54,6 @@
         &:hover {
             background-color: rgb(69 80 90);
         }
-
     }
 
     .header {
@@ -107,9 +108,9 @@
         }
     }
 
-    // .icon {
-    //     max-block-size: 0.1em;
-    // }
+    .icon {
+        max-block-size: 0.1em;
+    }
 
     .name {
         padding-inline: 7px;
@@ -123,35 +124,55 @@
     }
 
     .user-opt {
-        grid-area: f;
+        grid-area: usropt;
     }
 
     .description {
-        grid-area: t1;
+        display: grid;
+        grid-area: des;
+
+        grid-template-areas:
+            "di  desh       "
+            ".   txt        "
+            ".   desbtns    ";
+
+        grid-template-columns: auto 1fr;
+        grid-template-rows: min-content;
+
+        gap: 15px;
+        row-gap: 8px;
 
         &.icon {
-            grid-area: i1;
-            vertical-align: auto;
+            display: block;
+            grid-area: di;
 
             svg {
-                width: auto;
+                width: fit-content;
                 height: auto;
                 line-height: 14px;
-                vertical-align: text-top;
+                vertical-align: super;
             }
         }
 
         h4 {
+            grid-area: desh;
             font-size: 16px;
+            // margin-bottom: 0;
+            padding-top: 2px;
+        }
+
+        .grdatxt {
+            grid-area: txt;
         }
 
         textarea {
+            align-self: baseline;
             width: 100%;
             min-height: 100px;
-            padding-inline: rem(12px);
-            padding-block: rem(8px);
+            padding: inline 11px;
+            padding-top: 8px;
 
-            border-radius: rem(8px);
+            border-radius: 3px;
             border-color: transparent;
 
             font-weight: 400;
@@ -162,23 +183,25 @@
             }
         }
 
-        .save {
-            margin-top: 10px;
-            padding-inline: 11px;
-            line-height: 2rem;
-            background-color: #579dff;
-            color: #22272b;
-            font-weight: 30px;
-            border-radius: 3px;
-            border: none;
-            &:hover {
-                background-color: #85b8ff;
+        .desbtns {
+            grid-area: desbtns;
+            .save {
+                margin-top: 10px;
+                padding-inline: 11px;
+                line-height: 2rem;
+                background-color: #579dff;
+                color: #22272b;
+                font-weight: 30px;
+                border-radius: 3px;
+                border: none;
+                &:hover {
+                    background-color: #85b8ff;
+                }
             }
         }
     }
 
     // .activity {
-    //     grid-area: t2;
     //     &.icon {
     //         grid-area: i2;
     //     }
@@ -186,19 +209,15 @@
 
     // .user {
     //     &.avatar {
-    //         grid-area: i3;
     //     }
     // }
 
     // .input {
-    //     grid-area: t3;
     // }
 
     // .avatar {
-    //     grid-area: i4;
     // }
 
     // .comments {
-    //     grid-area: t4;
     // }
 }

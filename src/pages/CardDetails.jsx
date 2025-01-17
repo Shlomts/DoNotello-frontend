@@ -9,7 +9,7 @@ import {
     getGroupId,
     removeCardFromGroup,
     loadGroup,
-    updateCard
+    updateCard,
 } from "../store/actions/board.actions"
 import {
     Card,
@@ -36,6 +36,8 @@ export function CardDetails() {
     const [isShowModal, setIsShowModal] = useState(false)
     const [boardMembers, setBoardMembers] = useState(board.members)
     const [cardMembers, setCardMembers] = useState(null)
+
+    const [isEditMode, setIsEditMode] = useState(false)
     const [descriptionInput, setDescriptionInput] = useState(
         card?.description || ""
     )
@@ -43,9 +45,9 @@ export function CardDetails() {
     useEffect(() => {
         getCard()
     }, [params.cardId])
-    
+
     useEffect(() => {
-       setDescriptionInput(card?.description || '')
+        setDescriptionInput(card?.description || "")
     }, [card])
 
     async function getCard() {
@@ -91,6 +93,7 @@ export function CardDetails() {
         })
         console.log("??")
         updateCard(board, group, card)
+        setIsEditMode(false)
     }
 
     if (!card) return <div>Loading...</div>
@@ -211,14 +214,14 @@ export function CardDetails() {
                             <span className="btn txt">Watch</span>
                         </div>
                     </section> */}
-                    {/* <section>
+                    <section>
                         Members
                         <div className="members">
                             <span className="btn avatar">😁</span>
                             <span className="btn txt">+</span>
                         </div>
                     </section>
-                    <section className="labels">
+                    {/* <section className="labels">
                         <h4>Labels</h4>
 
                         <div className="labels">
@@ -228,64 +231,59 @@ export function CardDetails() {
                     </section> */}
                 </div>
 
-                <div className="description icon">
-                    <Description />
-                </div>
                 <section className="description">
-                    <h4 className="title">Description</h4>
-                    <div className="input">
+                    <div className="description icon">
+                        <Description />
+                    </div>
+                    <h4 className="title">
+                        Description
+                        {descriptionInput && (
+                            <button
+                                onClick={() => setIsEditMode(true)}
+                                className="edit-des"
+                            >
+                                Edit
+                            </button>
+                        )}
+                    </h4>
+                    {isEditMode ? (
                         <textarea
+                            className="grdatxt"
                             value={descriptionInput}
                             onChange={onChangeDescription}
-                            placeholder="Enter a description or paste link"
+                            placeholder="Add a more detailed description..."
                             rows={3}
                             autoFocus
                         />
-                        <button className="save" onClick={onAddDescription}>
-                            Save
-                        </button>
-                        {/* <button onClick={onAddDescription}>Cancel</button> */}
-                    </div>
+                    ) : descriptionInput ? (
+                        <div
+                            className="grdatxt"
+                            onClick={() => setIsEditMode(true)}
+                        >
+                            {descriptionInput}
+                        </div>
+                    ) : (
+                        <div
+                            className="no-des-plchldr grdatxt"
+                            onClick={() => setIsEditMode(true)}
+                        >
+                            Add a more detailed description...
+                        </div>
+                    )}
+
+                    {isEditMode && (
+                        <div className="desbtns">
+                            <button className="save" onClick={onAddDescription}>
+                                Save
+                            </button>
+                            {/* <button className="cancel" onClick={() => setIsEditMode(false)}>
+                                Cancel
+                            </button> */}
+                        </div>
+                    )}
+
+                    {/* <button onClick={onAddDescription}>Cancel</button> */}
                 </section>
-
-                {/* 
-                            <div className="group-footer">
-                                {isAddingCard ? (
-
-                                        <div className="add-card-actions">
-                                            <button
-                                                className="save-card-btn"
-                                                onClick={() => {
-                                                    onAddCard()
-                                                }}
-                                            >
-                                                Add card
-                                            </button>
-                                            <button
-                                                className="cancel-add-btn"
-                                                onClick={() => {
-                                                    setIsAddingCard(false)
-                                                    setCardName("")
-                                                }}
-                                            >
-                                                <Close />
-                                            </button>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div className="add-card">
-                                        <button
-                                            className="add-card-btn"
-                                            onClick={() => {
-                                                setIsAddingCard(true)
-                                            }}
-                                        >
-                                            <Plus />
-                                            Add a card
-                                        </button>
-                                    </div>
-                                )}
-                            </div> */}
 
                 {/* <div className="activity icon">📰</div>
                 <section className="activity">
