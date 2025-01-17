@@ -24,19 +24,19 @@
       display: flex;
       align-items: center;
       text-decoration: none;
-      color: $app-text;
-      height: 32px;
-      padding: 0 12px;
-      border-radius: 3px;
+      width: rem(185px);
+      height: rem(31px);
+      padding: 8px 0;
 
       .logo-container {
-        display: flex;
-        align-items: center;
-
-        .logo-text {
-          font-size: 20px;
-          font-weight: bold;
-        }
+        position: relative;
+        top: -5px;
+        width: 100%;
+        padding: 0;
+      }
+      &:hover {
+        background-color: #333c43;
+        border-radius: 3px;
       }
     }
 
@@ -49,7 +49,6 @@
         margin-right: 16px;
         height: 32px;
         padding-inline: 18px;
-
 
         a {
           color: $app-text;
@@ -103,15 +102,29 @@
     cursor: pointer;
 
     .user-avatar {
-      width: rem(25px);
-      height: rem(25px);
+      width: rem(30px);
+      height: rem(30px);
       border-radius: 50%;
       overflow: hidden;
-      margin-right: 8px;
+      border: 1px solid;
+      padding: 4px;
 
       svg {
         width: 100%;
         height: 100%;
+      }
+
+      &:hover {
+        background-color: #333c43;
+
+        border-radius: 50%;
+        border: none;
+        display: block;
+        position: relative;
+        width: rem(30px);
+        height: rem(30px);
+        padding: 4px;
+        outline: 0;
       }
     }
   }
