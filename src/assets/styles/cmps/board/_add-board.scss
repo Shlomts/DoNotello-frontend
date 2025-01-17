@@ -24,6 +24,7 @@
     font-weight: 400;
     line-height: 20px;
     min-height: 550px;
+    max-height: 550px;
 
     header.modal-header {
       display: grid;
@@ -100,8 +101,6 @@
           border-radius: 4px;
           font-size: 14px;
 
-          // appearance: inherit;
-
           &.invalid {
             border-color: #e74c3c;
             &:focus {
@@ -115,9 +114,13 @@
         }
 
         .error-msg {
-          color: #e74c3c;
           font-size: 12px;
           margin-top: 4px;
+          display: flex;
+          align-items: center;
+        }
+        .error-msg-hidden {
+          padding: 10px;
           display: flex;
           align-items: center;
         }
@@ -126,7 +129,7 @@
       .save-btn {
         margin: 16px 0 0;
         width: 100%;
-        padding: 10px;
+        padding: 12px;
         background-color: #579dff;
         color: #1d2125;
         border: none;

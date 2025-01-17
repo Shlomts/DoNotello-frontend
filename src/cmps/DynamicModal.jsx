@@ -40,7 +40,7 @@ export function DynaminModal() {
   } else if (trigger === 'board-index') {
     modalStyle = {
       ...modalStyle,
-      top: position.top - 63,
+      top: 280,
       left: position.left - 70,
     }
   }

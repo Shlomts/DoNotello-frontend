@@ -14,11 +14,6 @@ export function AppHeader() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const logoUrl = '/imgs/Logo.png'
 
-  useEffect(() => {
-    const logo = new Image()
-    logo.src = logoUrl
-    logo.onload = () => setIsImgLoaded(true)
-  }, [])
 
   const user = {
     fullname: 'User Usery',
