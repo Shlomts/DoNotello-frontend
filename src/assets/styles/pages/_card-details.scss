@@ -88,6 +88,12 @@
 		div {
 			display: block;
 			padding: 5px 0;
+
+			.group-title {
+                text-transform: uppercase;
+                font-size: 12px;
+                font-weight: 700;
+			}
 		}
 
 		&.icon {
@@ -185,21 +191,21 @@
 			min-height: 274px;
 
 			background-color: #22272b;
-			border: 1px solid #8c9baa; 
+			border: 1px solid #8c9baa;
 			border-radius: 3px;
 
-			padding-inline: 20px ;
+			padding-inline: 20px;
 			padding-top: 8px;
 			margin-top: 8px;
 
 			font-weight: 400;
 			font-size: 1em;
 
-			resize: none; 
-			overflow: hidden; 
+			resize: none;
+			overflow: hidden;
 
 			&:focus {
-				outline: none; 
+				outline: none;
 				border: 2px solid #579dff;
 			}
 

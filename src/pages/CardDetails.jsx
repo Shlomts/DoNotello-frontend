@@ -143,7 +143,7 @@ export function CardDetails() {
 				<header className='header'>
 					<h3> {card.title}</h3>
 					<div>
-						in list: <span>{group.title}</span>
+						in list <span className='group-title'>{group.title}</span>
 					</div>
 				</header>
 				<section className='opt-bar'>
