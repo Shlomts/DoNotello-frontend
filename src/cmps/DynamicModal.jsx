@@ -17,6 +17,11 @@ export function DynaminModal() {
   const {trigger, position} = modalData // Only destructure trigger for now
   const Cmp = modalData.cmp
 
+  // if (!position) {
+  //   console.error('Modal position is undefined');
+  //   return null; // Return early or handle the error accordingly
+  // }
+
   // Default modal styles
   let modalStyle = {
     position: 'fixed',
@@ -31,21 +36,33 @@ export function DynaminModal() {
       top: position.top + 35,
       left: position.left + 45,
     }
-  } else if (trigger === 'sidebar') {
+  } else if (trigger === 'sidebar-add-board') {
     modalStyle = {
       ...modalStyle,
       top: position.top,
       left: position.left + 25,
     }
+  } else if (trigger === 'sidebar-leave-modal') {
+    modalStyle = {
+      ...modalStyle,
+      top:position.top -255,
+      left: 215,
+    }
   } else if (trigger === 'board-index') {
     modalStyle = {
       ...modalStyle,
-      top: position.top - 63,
+      top: 280,
       left: position.left - 70,
     }
   }
   const overlayClass =
-    trigger && trigger !== 'board-index' && trigger !== 'sidebar' && trigger !== 'header' ? 'centered' : ''
+    trigger &&
+    trigger !== 'board-index' &&
+    trigger !== 'sidebar-add-board' &&
+    trigger !== 'sidebar-add-board' &&
+    trigger !== 'header'
+      ? 'centered'
+      : ''
 
   if (!modalData) return <></>
   return (

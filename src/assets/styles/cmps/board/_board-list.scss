@@ -1,25 +1,24 @@
 .board-list-container {
-  height: 150px;
+  min-height: 150px;
 
   .board-list {
+    margin-bottom: 30px;
     .list {
       display: flex;
       flex-wrap: wrap;
-      flex-direction: row;
+      justify-content: flex-start;
+      margin-right: 0;
+      min-width: 1024px;
 
       li {
         display: block;
         background-color: transparent;
-        //need here help to deside what look better !!!!!!!!
-        margin: 0 2% 2% 0;
-        // margin: 0 16.2px 16.2px 0;
-        // padding: 0;
+        margin: 0 16.212px 16.212px 0;
       }
     }
   }
   .add-board {
-    padding: 8px 12px;
-    width: rem(191px);
+    width: rem(174.6px);
     height: rem(96px);
     display: flex;
     border: none;

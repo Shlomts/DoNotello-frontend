@@ -11,14 +11,14 @@ export function BackgroundSelector({onSelectBackground}) {
 
   // Sample image URLs (replace with actual Unsplash URLs)
   const images = [
-    'https://picsum.photos/seed/board1/400/200',
-    'https://picsum.photos/seed/board12/400/200',
-    'https://picsum.photos/seed/board3/400/200',
-    'https://picsum.photos/seed/board4/400/200',
-    'https://picsum.photos/seed/board5/400/200',
-    'https://picsum.photos/seed/board9/400/200',
-    'https://picsum.photos/seed/board7/400/200',
-    'https://picsum.photos/seed/board10/400/200',
+    '/imgs/board1.jpg',
+    '/imgs/board2.jpg',
+    '/imgs/board3.jpg',
+    '/imgs/board4.jpg',
+    '/imgs/board5.jpg',
+    '/imgs/board6.jpg',
+    '/imgs/board7.jpg',
+    '/imgs/board8.jpg',
   ]
 
   function handleSelect(index, url) {

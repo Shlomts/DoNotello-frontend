@@ -1,8 +1,4 @@
 .modal-overlay-remove {
-  position: fixed;
-  inset: 500.364px auto auto 128.182px;
-  width: 304px;
-  z-index: 9999; // Ensure the modal is above everything
 
   .modal-content {
     background-color: $app-form-bgc;
@@ -51,7 +47,9 @@
         color: #b6c2cf;
         background: none;
         border: none;
+        z-index: 110000;
         cursor: pointer;
+  
         svg {
           width: 20px;
           height: 20px;

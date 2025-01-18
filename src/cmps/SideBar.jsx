@@ -1,20 +1,26 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {AddBoard} from './board/AddBoard'
 import {onToggleModal} from '../store/actions/system.actions'
 import {Boards, EllipsisIcon, Members, Plus, Star, Unstar} from './SvgContainer'
 import {useDispatch, useSelector} from 'react-redux'
-import {removeBoard, toggleBoardStar} from '../store/actions/board.actions'
+import {loadBoards, removeBoard, toggleBoardStar} from '../store/actions/board.actions'
 import {useNavigate} from 'react-router'
 import {LeaveBoardModal} from './LeaveBoardModal'
+import {showErrorMsg, showSuccessMsg} from '../services/event-bus.service'
 
 export function SideBar() {
   const boards = useSelector((storeState) => storeState.boardModule.boards)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedBoard, setSelectedBoard] = useState(null)
+  const [isCollapsed, setIsCollapsed] = useState(false)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedBoard, setSelectedBoard] = useState(null)
+  useEffect(() => {
+    loadBoards()
+  }, [])
 
   function NavToHome() {
     navigate('/board')
@@ -22,7 +28,7 @@ export function SideBar() {
 
   async function onRemoveBoard(boardId) {
     try {
-      await dispatch(removeBoard(boardId)) // Dispatch the action to remove the board
+      dispatch(removeBoard(boardId))
       showSuccessMsg('Board removed')
     } catch (err) {
       showErrorMsg('Cannot remove board')
@@ -32,15 +38,6 @@ export function SideBar() {
     }
   }
 
-  function openLeaveModal(board) {
-    setSelectedBoard(board) // Pass the full board object
-    setIsModalOpen(true)
-  }
-
-  function closeLeaveModal() {
-    setIsModalOpen(false)
-  }
-
   function onAddBoard(event) {
     onToggleModal(
       {
@@ -48,7 +45,23 @@ export function SideBar() {
         props: {
           onClose: onToggleModal,
         },
-        trigger: 'sidebar', // Pass trigger location
+        trigger: 'sidebar-add-board', // Pass trigger location
+      },
+      event
+    )
+  }
+
+  function openLeaveModal(board, event) {
+    onToggleModal(
+      {
+        cmp: LeaveBoardModal,
+        props: {
+          boardTitle: board.title,
+          onClose: onToggleModal, // Close modal
+          onLeave: () => onRemoveBoard(board._id), // Pass callback instead of executing immediately
+        },
+        trigger: 'sidebar-leave-modal',
+        position: {top: 0, left: 0},
       },
       event
     )
@@ -61,9 +74,9 @@ export function SideBar() {
   function getStarIcon(isStarred) {
     return isStarred ? <Unstar /> : <Star />
   }
-
+  // ${isCollapsed ? 'collapsed' : ''}
   return (
-    <div className="board-sidebar">
+    <div className={`board-sidebar `}>
       <header className="sidebar-header">
         <div className="sidebar-logo" onClick={NavToHome}>
           <span className="sidebarlogo">D</span>
@@ -71,11 +84,13 @@ export function SideBar() {
         <p className="logo-link" onClick={NavToHome}>
           Donotello Workspace
         </p>
+        {/* <button className="toggle-btn" onClick={() => setIsCollapsed(!isCollapsed)}>
+          {isCollapsed ? <RightArrow /> : <LeftArrow />}
+        </button> */}
       </header>
 
       <ul className="sidebar-links">
         <li className="main-board">
-          {/* CR */}
           <Link to="/board">
             <div>
               <Boards />
@@ -105,28 +120,20 @@ export function SideBar() {
         {boards.map((board) => (
           <li key={board._id} className="boards-list">
             <Link to={`/board/${board._id}`}>
-              <div  style={{backgroundImage: `url(${board.style.backgroundImage})`}}></div>
+              <div style={{backgroundImage: `url(${board.style.backgroundImage})`}}></div>
               <span>{board.title}</span>
             </Link>
             <div className="btn-actions">
               <button className="sort-by" onClick={() => openLeaveModal(board)}>
                 <EllipsisIcon />
               </button>
-              <button className="star-board" onClick={() => handleStarToggle(board._id)}>
+              <button className={board.isStarred ? 'starred' : ''} onClick={() => handleStarToggle(board._id)}>
                 {getStarIcon(board.isStarred)}
               </button>
             </div>
           </li>
         ))}
       </ul>
-
-      {isModalOpen && selectedBoard && (
-        <LeaveBoardModal
-          onClose={closeLeaveModal}
-          onLeave={() => onRemoveBoard(selectedBoard._id)}
-          boardTitle={selectedBoard.title}
-        />
-      )}
     </div>
   )
 }

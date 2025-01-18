@@ -10,7 +10,7 @@ import {userService} from '../services/user'
 import {BoardList} from '../cmps/board/BoardList'
 import {AddBoard} from '../cmps/board/AddBoard'
 import {onToggleModal} from '../store/actions/system.actions'
-import {Members} from '../cmps/SvgContainer'
+import {Lock, Members} from '../cmps/SvgContainer'
 
 export function BoardIndex() {
   const boards = useSelector((storeState) => storeState.boardModule.boards)
@@ -59,50 +59,54 @@ export function BoardIndex() {
 
   return (
     <main className="board-index">
-      <header className="workspace-header">
-        <div className="logo-container">
-          <div className="workspace-logo-container">
-            <div className="workspace-logo">D</div>
-          </div>{' '}
-          <div className="title">
-            <h2>Donotello WorkSpace</h2>
-            <span className="workspace-subtitle">
-              Permium 🔒 <span className="workspace-privacy">Private</span>{' '}
-            </span>
-          </div>
-        </div>
-      </header>
-      <div className="saparete-boards"></div>
-      <section className="all-boards">
-        <section className="boards-container-stared-list">
-          <div className="boards-page-board-heder">
-            <div className="one-p-icon">
-              <Members />
+      <div className="board-conainer">
+        <div className="workspace-content">
+          <header className="workspace-header">
+            <div className="logo-container">
+              <div className="workspace-logo-container">
+                <div className="workspace-logo">D</div>
+              </div>{' '}
+              <div className="title">
+                <h2>Donotello WorkSpace</h2>
+                <span className="workspace-subtitle">
+               <Lock/> <span className="workspace-privacy">Private</span>{' '}
+                </span>
+              </div>
             </div>
-            <h3>Starred boards</h3>
-          </div>
-          <BoardList
-            boards={starredBoards}
-            onRemoveBoard={onRemoveBoard}
-            onUpdateBoard={onUpdateBoard}
-            onAddBoard={onAddBoard}
-          />
-        </section>
-        <section className="boards-container1">
-          <div className="boards-page-board-heder">
-            <div className="two-p-icon">
-              <Members />
-            </div>
-            <h3>All boards in this Workspace</h3>
-          </div>
-          <BoardList
-            boards={boards}
-            onRemoveBoard={onRemoveBoard}
-            onUpdateBoard={onUpdateBoard}
-            onAddBoard={onAddBoard}
-          />
-        </section>
-        {/* <section className="boards-container2 ">
+          </header>
+          <div className="saparete-boards"></div>
+          <section className="all-boards">
+            {starredBoards.length > 0 && (
+              <section className="boards-container-stared-list">
+                <div className="boards-page-board-heder">
+                  <div className="one-p-icon">
+                    <Members />
+                  </div>
+                  <h3>Starred boards</h3>
+                </div>
+                <BoardList
+                  boards={starredBoards}
+                  onRemoveBoard={onRemoveBoard}
+                  onUpdateBoard={onUpdateBoard}
+                  onAddBoard={onAddBoard}
+                />
+              </section>
+            )}
+            <section className="boards-container1">
+              <div className="boards-page-board-heder">
+                <div className="one-p-icon">
+                  <Members />
+                </div>
+                <h3>All boards in this Workspace</h3>
+              </div>
+              <BoardList
+                boards={boards}
+                onRemoveBoard={onRemoveBoard}
+                onUpdateBoard={onUpdateBoard}
+                onAddBoard={onAddBoard}
+              />
+            </section>
+            {/* <section className="boards-container2 ">
           <div className="boards-page-board-heder">
             <div className="all-p-icon"></div>
             <h3>All boards in this Workspace</h3>
@@ -114,7 +118,9 @@ export function BoardIndex() {
             onAddBoard={onAddBoard}
           />
         </section> */}
-      </section>
+          </section>
+        </div>
+      </div>
     </main>
   )
 }

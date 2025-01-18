@@ -1,37 +1,51 @@
 .board-preview-card {
-  width: rem(191px);
+  width: rem(190px);
   height: rem(96px);
   border-radius: rem(3px);
-  background: linear-gradient(#006644, #00875a);
+  background: $app-workspace-logo-color;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 4px 8px;
-  // position: relative;
+  padding: 8px;
   cursor: pointer;
+  position: relative;
+  
+  
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0); // Initially transparent
+    transition: background-color 0.3s ease;
+  }
 
+  &:hover::after {
+    background: rgba(0, 0, 0, 0.2); // Darken on hover
+  }
 
   .board-prew-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    // position: relative;
     height: rem(80px);
+    padding: 0;
     background-color: transparent;
 
     .board-preview-title {
       display: inline-block;
       flex: 0 0 auto;
-      font-size: rem(16px);
+      font-size: 16px;
       font-weight: 700;
-      max-height: rem(40px);
+      max-height: 40px;
+      overflow: hidden;
+      width: 100%;
+      word-wrap: break-word;
+      line-height: 20px;
+
       .title {
-        overflow: hidden;
-        width: 100%;
-        word-break: break-word;
-        font-size: 16px;
-        font-weight: 700;
-        color: #fff;
-        line-height: 20px;
+        color: #ffffff;
       }
     }
 
@@ -40,14 +54,14 @@
       align-items: baseline;
       justify-content: flex-end;
       width: 100%;
-      height: 10px;
+      height: 20px;
 
       .star-btn-container {
         opacity: 0; // Hidden by default
         transform: translateZ(0);
         transition: opacity 0.3s ease, width 0.3s ease, transform 0.15s ease, margin 0.3s ease;
         font-size: 14px;
-        height: 18px;
+        height: 14px;
         line-height: 18px;
 
         .star-btn {
@@ -56,6 +70,8 @@
           cursor: pointer;
           color: #fff;
           display: block;
+          position: relative;
+
           z-index: 10;
         }
       }

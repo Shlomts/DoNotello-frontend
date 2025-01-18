@@ -4,7 +4,7 @@ import {showErrorMsg, showSuccessMsg} from '../../services/event-bus.service'
 import {BackgroundSelector} from '../BackgroundSelector'
 import {boardService} from '../../services/board'
 import {Close} from '../SvgContainer'
-import { onToggleModal } from '../../store/actions/system.actions'
+import {onToggleModal} from '../../store/actions/system.actions'
 //as i can see the cmp isnt keep the data when you close the tab
 // and refresh the inputs. also isnt in the qparams
 export function AddBoard({onClose}) {
@@ -36,11 +36,10 @@ export function AddBoard({onClose}) {
       showSuccessMsg(`Board with title added: ${boardToSave.title}`)
     } catch (err) {
       showErrorMsg('Cannot add board')
-    }finally{
+    } finally {
       onToggleModal(null)
     }
     console.log('Board to save after saving:', boardToSave)
-
   }
 
   return (
@@ -70,7 +69,7 @@ export function AddBoard({onClose}) {
                 }}
                 autoFocus
               />
-              {isTitleInvalid && <span className="error-msg">👋 Board title is required</span>}
+              {isTitleInvalid ? <span className="error-msg">👋 Board title is required</span> : <span className='error-msg-hidden'></span>}
             </div>
 
             <div className="workspace-input-container">
