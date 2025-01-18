@@ -1,223 +1,273 @@
 .backdrop {
-    z-index: 999;
-    position: fixed;
-    width: auto;
-    height: auto;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    background-color: hsla(0, 0%, 4%, 0.05);
+	z-index: 999;
+	position: fixed;
+	width: auto;
+	height: auto;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background-color: hsla(0, 0%, 4%, 0.05);
 }
 
 .card-details {
-    display: grid;
-    grid-template-areas:
-        "i    h         btn"
-        ".    usropt    opt"
-        "des   des      opt"
-        "des   des      opt"
-        "des   des      act"
-        "i3   t3        act"
-        "i4   t4        act";
+	display: grid;
+	grid-template-areas:
+		'i    h         btn'
+		'.    usropt    opt'
+		'des   des      opt'
+		'des   des      opt'
+		'des   des      act'
+		'i3   t3        act'
+		'i4   t4        act';
 
-    grid-template-columns: auto 1fr auto;
-    min-height: 600px;
-    border-radius: 12px;
-    border-color: transparent;
-    background-color: #323940;
-    color: #b6c2cf;
-    position: absolute;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    margin-top: 45px;
-    max-width: 768px;
-    width: 100%;
-    padding: 20px;
-    gap: 15px;
-    // row-gap: 30px;
+	grid-template-columns: auto 1fr auto;
+	min-height: 600px;
+	border-radius: 12px;
+	border-color: transparent;
+	background-color: #323940;
+	color: #b6c2cf;
+	position: absolute;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	margin-top: 45px;
+	max-width: 768px;
+	width: 100%;
+	padding: 20px;
+	gap: 15px;
+	// row-gap: 30px;
 
-    button {
-        grid-area: btn;
-        display: block;
-        max-width: fit-content;
-        max-height: fit-content;
-        top: 0;
-        justify-self: right;
-        margin: -5px -5px 0 0;
-        padding: 0;
-        background-color: transparent;
-        color: #b6c2cf;
-        border-radius: 3px;
+	button {
+		background-color: transparent;
+		color: #b6c2cf;
+		font-weight: 600;
 
-        &:hover {
-            background-color: rgb(69 80 90);
-        }
-    }
+		&:hover {
+			background-color: rgb(69 80 90);
+		}
+	}
 
-    .header {
-        background-color: transparent;
-        color: #b6c2cf;
-        align-items: flex-start;
-        padding: 0;
-        display: block;
+	.close {
+		display: block;
+		grid-area: btn;
+		max-height: max-content;
+		top: 0;
+		justify-self: right;
+		margin: -5px -5px 0 0;
+		border-radius: 50%;
+	}
 
-        h3 {
-            grid-area: h;
-            display: block;
-            margin: 0;
-            padding: 0;
-            font-weight: 500;
-        }
-        div {
-            display: block;
-            padding: 5px 0;
-        }
+	.title {
+		display: flex;
+		justify-content: space-between;
+	}
 
-        &.icon {
-            grid-area: i;
+	.edit-des {
+		position: relative;
+		background-color: #3b444c;
+		font-size: 14px;
+		padding: 7px 11px;
+		border-radius: 4px;
+	}
 
-            svg {
-                width: auto;
-                height: auto;
-                line-height: 14px;
-                vertical-align: text-top;
-            }
-        }
-    }
+	.header {
+		background-color: transparent;
+		color: #b6c2cf;
+		align-items: flex-start;
+		padding: 0;
+		display: block;
 
-    .opt-card {
-        display: flex;
-        background-color: #3b444c;
-        width: 170px;
-        padding: 6px 12px;
-        margin-bottom: 8px;
-        border-radius: 3px;
+		h3 {
+			grid-area: h;
+			display: block;
+			margin: 0;
+			padding: 0;
+			font-weight: 500;
+		}
+		div {
+			display: block;
+			padding: 5px 0;
+		}
 
-        &:hover {
-            background-color: rgb(69 80 90);
-        }
-    }
+		&.icon {
+			grid-area: i;
 
-    .actions {
-        grid-area: act;
-        thead {
-            font-size: 12px;
-            padding-bottom: 2px;
-        }
-    }
+			svg {
+				width: auto;
+				height: auto;
+				line-height: 14px;
+				vertical-align: text-top;
+			}
+		}
+	}
 
-    .icon {
-        max-block-size: 0.1em;
-    }
+	.opt-card {
+		display: flex;
+		background-color: #3b444c;
+		width: 170px;
+		padding: 6px 12px;
+		margin-bottom: 8px;
+		border-radius: 3px;
+		font-weight: 600;
 
-    .name {
-        padding-inline: 7px;
-    }
-    .opt-bar {
-        grid-area: opt;
+		&:hover {
+			background-color: rgb(69 80 90);
+		}
+	}
 
-        span {
-            margin: 1em;
-        }
-    }
+	.actions {
+		grid-area: act;
+		thead {
+			font-size: 12px;
+			padding-bottom: 2px;
+		}
+	}
 
-    .user-opt {
-        grid-area: usropt;
-    }
+	.icon {
+		max-block-size: 0.1em;
+	}
 
-    .description {
-        display: grid;
-        grid-area: des;
+	.name {
+		padding-inline: 7px;
+	}
+	.opt-bar {
+		grid-area: opt;
 
-        grid-template-areas:
-            "di  desh       "
-            ".   txt        "
-            ".   desbtns    ";
+		span {
+			margin: 1em;
+		}
+	}
 
-        grid-template-columns: auto 1fr;
-        grid-template-rows: min-content;
+	.user-opt {
+		grid-area: usropt;
+	}
 
-        gap: 15px;
-        row-gap: 8px;
+	.description {
+		display: grid;
+		grid-area: des;
 
-        &.icon {
-            display: block;
-            grid-area: di;
+		grid-template-areas:
+			'di  desh       '
+			'.   txt        '
+			'.   desbtns    ';
 
-            svg {
-                width: fit-content;
-                height: auto;
-                line-height: 14px;
-                vertical-align: super;
-            }
-        }
+		grid-template-columns: auto 1fr;
+		grid-template-rows: min-content;
 
-        h4 {
-            grid-area: desh;
-            font-size: 16px;
-            // margin-bottom: 0;
-            padding-top: 2px;
-        }
+		gap: 11px;
+		row-gap: 0;
 
-        .grdatxt {
-            grid-area: txt;
-        }
+		&.icon {
+			display: block;
+			grid-area: di;
 
-        textarea {
-            align-self: baseline;
-            width: 100%;
-            min-height: 100px;
-            padding: inline 11px;
-            padding-top: 8px;
+			svg {
+				width: fit-content;
+				height: auto;
+			}
+		}
 
-            border-radius: 3px;
-            border-color: transparent;
+		h4 {
+			grid-area: desh;
+			font-size: 16px;
+			// margin-bottom: 0;
+			padding-top: 2px;
+		}
 
-            font-weight: 400;
-            font-size: 1em;
+		.grdatxt {
+			grid-area: txt;
+		}
 
-            &::placeholder {
-                color: #8c9baa;
-            }
-        }
+		textarea {
+			align-self: baseline;
+			width: 100%;
+			min-height: 274px;
 
-        .desbtns {
-            grid-area: desbtns;
-            .save {
-                margin-top: 10px;
-                padding-inline: 11px;
-                line-height: 2rem;
-                background-color: #579dff;
-                color: #22272b;
-                font-weight: 30px;
-                border-radius: 3px;
-                border: none;
-                &:hover {
-                    background-color: #85b8ff;
-                }
-            }
-        }
-    }
+			background-color: #22272b;
+			border: 1px solid #8c9baa; 
+			border-radius: 3px;
 
-    // .activity {
-    //     &.icon {
-    //         grid-area: i2;
-    //     }
-    // }
+			padding-inline: 20px ;
+			padding-top: 8px;
+			margin-top: 8px;
 
-    // .user {
-    //     &.avatar {
-    //     }
-    // }
+			font-weight: 400;
+			font-size: 1em;
 
-    // .input {
-    // }
+			resize: none; 
+			overflow: hidden; 
 
-    // .avatar {
-    // }
+			&:focus {
+				outline: none; 
+				border: 2px solid #579dff;
+			}
 
-    // .comments {
-    // }
+			&::placeholder {
+				color: #8c9baa;
+			}
+		}
+
+		// textarea {
+		//     align-self: baseline;
+		//     width: 100%;
+		//     // min-height: 100px;
+		//     padding: inline 11px;
+		//     padding-top: 8px;
+		//     margin-top: 8px;
+
+		//     border-radius: 3px;
+		//     border-color: transparent;
+
+		//     font-weight: 400;
+		//     font-size: 1em;
+
+		//     &::placeholder {
+		//         color: #8c9baa;
+		//     }
+		// }
+
+		.desbtns {
+			grid-area: desbtns;
+
+			button {
+				line-height: 2rem;
+				margin-top: 10px;
+				padding-inline: 12px;
+				font-weight: 30px;
+				border-radius: 3px;
+				border: none;
+				margin-inline-end: 8px;
+			}
+
+			.save {
+				background-color: #579dff;
+				color: #22272b;
+
+				&:hover {
+					background-color: #85b8ff;
+				}
+			}
+		}
+	}
+
+	// .activity {
+	//     &.icon {
+	//         grid-area: i2;
+	//     }
+	// }
+
+	// .user {
+	//     &.avatar {
+	//     }
+	// }
+
+	// .input {
+	// }
+
+	// .avatar {
+	// }
+
+	// .comments {
+	// }
 }
