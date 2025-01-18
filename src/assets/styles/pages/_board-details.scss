@@ -39,7 +39,7 @@
             align-items: center;
             gap: rem(4px);
 
-            &> {
+            &>* {
                 border-radius: rem(3px);
                 display: flex;
                 align-items: center;

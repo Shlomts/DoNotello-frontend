@@ -22,12 +22,13 @@ import {SideBar} from './cmps/SideBar.jsx'
 import {DynaminModal} from './cmps/DynamicModal.jsx'
 
 export function RootCmp() {
+  
   return (
     <div className="main-container">
       <AppHeader />
       <div className="content-layout">
         {/* need to render the sidebar in the board details */}
-        {/* <SideBar /> */}
+        <SideBar />
 
         <UserMsg />
         <DynaminModal />
@@ -41,6 +42,7 @@ export function RootCmp() {
             </Route>
             <Route path="board" element={<BoardIndex />} />
             <Route path="board/:boardId" element={<BoardDetails />}>
+
               <Route path="card/:cardId" element={<CardDetails />} />
             </Route>
             <Route path="user/:id" element={<UserDetails />} />
