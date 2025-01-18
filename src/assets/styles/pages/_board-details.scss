@@ -9,7 +9,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    
+
 
     header {
         display: flex;
@@ -39,8 +39,10 @@
             align-items: center;
             gap: rem(4px);
 
-            &>* {
+            &> {
                 border-radius: rem(3px);
+                display: flex;
+                align-items: center;
             }
 
             h3 {
@@ -58,8 +60,10 @@
                 padding: rem(8px);
             }
 
-            &>*:hover {
-                background-color: rgba(25, 38, 60, 0.08);
+            &>:hover {
+                border-radius: rem(3px);
+                background-color: rgba(255, 255, 255, 0.20);
+                cursor: pointer;
             }
         }
     }

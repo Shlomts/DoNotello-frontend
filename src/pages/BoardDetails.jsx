@@ -31,6 +31,9 @@ export function BoardDetails() {
     const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter())
     const [isAddingGroup, setIsAddingGroup] = useState(false)
     const [groupName, setGroupName] = useState("")
+    const [isEditingBoardName, setIsEditingBoardName] = useState(false)
+    const [boardTitle, setBoardTitle] = useState(board?.title)
+
 
     useEffect(() => {
         loadBoard(boardId)
@@ -40,6 +43,23 @@ export function BoardDetails() {
     function onSetGroupName(ev) {
         const name = ev.target.value
         setGroupName(name)
+    }
+
+    function onSetBoardTitle(ev) {
+        const name = ev.target.value
+        setBoardTitle(name)
+    }
+
+    async function onUpdateBoardName(ev) {
+
+        try {
+            const updatedBoard = { ...board, title: boardTitle }
+            await updateBoard(updatedBoard)
+            showSuccessMsg('Board updated')
+            setIsEditingBoardName(false)
+        } catch (err) {
+            showErrorMsg('Cannot update board')
+        }
     }
 
     async function onSetStar() {
@@ -62,7 +82,6 @@ export function BoardDetails() {
     }
 
     async function onAddGroup() {
-        console.log(users)
         const groupToSave = boardService.getEmptyGroup()
         groupToSave.title = groupName
 
@@ -70,10 +89,16 @@ export function BoardDetails() {
             await addGroupToBoard(board, groupToSave)
             showSuccessMsg(`Board updated, new group: ${groupToSave.title}`)
             setGroupName("")
-            setIsAddingGroup(false)
+            // setIsAddingGroup(false)
         } catch (err) {
             console.error(err)
             showErrorMsg("Cannot add group")
+        }
+    }
+
+    function onKeyDown(ev) {
+        if (ev.key === 'Enter') {
+            onUpdateBoardName()
         }
     }
 
@@ -85,7 +110,19 @@ export function BoardDetails() {
         >
             <header>
                 <section className="left-header">
-                    <h3>{board.title}</h3>
+                    {isEditingBoardName ? (
+                        <input
+                            type="text"
+                            value={boardTitle}
+                            onChange={onSetBoardTitle}
+                            onBlur={onUpdateBoardName}
+                            onKeyDown={onKeyDown}
+                            autoFocus
+                        />
+                    ) : (
+                        <h3 onClick={() => setIsEditingBoardName(true)}>{board.title}</h3>
+                    )}
+
                     <div className="isStarred"
                         onClick={onSetStar}>
                         {board.isStarred ? <Unstar /> : <Star />}
