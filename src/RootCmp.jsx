@@ -26,8 +26,8 @@ export function RootCmp() {
     <div className="main-container">
       <AppHeader />
       <div className="content-layout">
-        {/* need to hide the sidebar in homepage */}
-        <SideBar />
+        {/* need to render the sidebar in the board details */}
+        {/* <SideBar /> */}
 
         <UserMsg />
         <DynaminModal />
