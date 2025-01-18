@@ -1,14 +1,14 @@
 .board-sidebar {
-  min-width: 240px;
-  max-width: 250px;
+  min-width: 260px;
+  // max-width: 250px;
   max-height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: $app-sidebar-dark;
   color: $app-text-inverse;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  position: sticky;
-  top: 40px;
+  // position: sticky;
+  // top: 40px;
   border-right: 1px solid #414548;
   transition: width 0.3s ease;
   overflow: hidden;
@@ -55,7 +55,7 @@
     gap: rem(8px);
     padding: 12px 12px;
     // margin-bottom: rem(12px);
-    min-height: 40px;
+    min-height: 56px;
     border-bottom: 1px solid #414548;
 
     .sidebar-logo {
@@ -265,9 +265,9 @@
           z-index: 5;
         }
       }
-      & button.starred {
-        // display: flex ;
-      }
+      // & button.starred {
+      //   display: flex ;
+      // }
     }
 
     &:hover .btn-actions {

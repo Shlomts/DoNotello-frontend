@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import demoBG from "../../public/imgs/demoBG.jpg"
+import {SideBar} from "../cmps/SideBar"
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
 import {
@@ -112,29 +113,31 @@ export function BoardDetails() {
     if (!board) return <div>Loading...</div>
 
     return (
-        <section className="board-details"
-            style={{ backgroundImage: `url(${demoBG})` }}
-        >
-            <header>
-                <section className="left-header">
-                    {isEditingBoardName ? (
-                        <input
-                            type="text"
-                            value={boardTitle}
-                            onChange={onSetBoardTitle}
-                            onBlur={(ev) => updateBoardName(ev.target.value)}
-                            onKeyDown={onKeyDown}
-                            autoFocus
-                        />
-                    ) : (
-                        <h3 onClick={() => setIsEditingBoardName(true)}>{boardTitle}</h3>
-                    )}
+        <section className="board-page">
+            <SideBar />
+            <section className="board-details"
+                style={{ backgroundImage: `url(${demoBG})` }}
+            >
+                <header>
+                    <section className="left-header">
+                        {isEditingBoardName ? (
+                            <input
+                                type="text"
+                                value={boardTitle}
+                                onChange={onSetBoardTitle}
+                                onBlur={(ev) => updateBoardName(ev.target.value)}
+                                onKeyDown={onKeyDown}
+                                autoFocus
+                            />
+                        ) : (
+                            <h3 onClick={() => setIsEditingBoardName(true)}>{boardTitle}</h3>
+                        )}
 
-                    <div className="isStarred"
-                        onClick={onSetStar}>
-                        {board.isStarred ? <Unstar /> : <Star />}
-                    </div>
-                    {/* <div className="change-icon">
+                        <div className="isStarred"
+                            onClick={onSetStar}>
+                            {board.isStarred ? <Unstar /> : <Star />}
+                        </div>
+                        {/* <div className="change-icon">
                         change
                     </div>
                     <div className="table-icon">
@@ -143,62 +146,63 @@ export function BoardDetails() {
                     <div className="customize-icon">
                         customize
                     </div> */}
-                </section>
-                <section className="right-header">
-                    <MemberList
-                        members={board.members}
+                    </section>
+                    <section className="right-header">
+                        <MemberList
+                            members={board.members}
+                        />
+                    </section>
+                </header>
+                <main className="board-content">
+                    <GroupList
+                        board={board}
+                        groups={board.groups}
+                        onRemoveGroup={onRemoveGroup}
                     />
-                </section>
-            </header>
-            <main className="board-content">
-                <GroupList
-                    board={board}
-                    groups={board.groups}
-                    onRemoveGroup={onRemoveGroup}
-                />
-                <section className="add-group">
-                    {isAddingGroup ? (
-                        <div className="add-group-form">
-                            <textarea
-                                value={groupName}
-                                onChange={onSetGroupName}
-                                placeholder="Enter list name..."
-                                rows={1}
-                                autoFocus
-                            />
-                            <div className="add-group-actions">
-                                <button
-                                    className="save-group-btn"
-                                    onClick={() => {
-                                        onAddGroup()
-                                    }}
-                                >
-                                    Add list
-                                </button>
-                                <button
-                                    className="cancel-add-btn"
-                                    onClick={() => {
-                                        setIsAddingGroup(false)
-                                        setGroupName("")
-                                    }}
-                                >
-                                    <Close />
-                                </button>
+                    <section className="add-group">
+                        {isAddingGroup ? (
+                            <div className="add-group-form">
+                                <textarea
+                                    value={groupName}
+                                    onChange={onSetGroupName}
+                                    placeholder="Enter list name..."
+                                    rows={1}
+                                    autoFocus
+                                />
+                                <div className="add-group-actions">
+                                    <button
+                                        className="save-group-btn"
+                                        onClick={() => {
+                                            onAddGroup()
+                                        }}
+                                    >
+                                        Add list
+                                    </button>
+                                    <button
+                                        className="cancel-add-btn"
+                                        onClick={() => {
+                                            setIsAddingGroup(false)
+                                            setGroupName("")
+                                        }}
+                                    >
+                                        <Close />
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    ) : (
-                        <button
-                            className="add-group-btn"
-                            onClick={() => {
-                                setIsAddingGroup(true)
-                            }}
-                        >
-                            <Plus />
-                            Add another list
-                        </button>
-                    )}
-                </section>
-            </main>
+                        ) : (
+                            <button
+                                className="add-group-btn"
+                                onClick={() => {
+                                    setIsAddingGroup(true)
+                                }}
+                            >
+                                <Plus />
+                                Add another list
+                            </button>
+                        )}
+                    </section>
+                </main>
+            </section>
         </section>
     )
 }
