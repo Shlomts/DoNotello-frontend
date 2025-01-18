@@ -42,6 +42,16 @@ export function BoardDetails() {
         setGroupName(name)
     }
 
+    async function onSetStar() {
+        try {
+            const updatedBoard = { ...board, isStarred: !board.isStarred }
+            await updateBoard(updatedBoard)
+            showSuccessMsg('Board updated')
+        } catch (err) {
+            showErrorMsg('Cannot update board')
+        }
+    }
+
     async function onRemoveGroup(groupId) {
         try {
             await removeGroupFromBoard(board, groupId)
@@ -76,12 +86,9 @@ export function BoardDetails() {
             <header>
                 <section className="left-header">
                     <h3>{board.title}</h3>
-                    <div className="isStarred">
-                        {board.isStarred ?
-                            <Unstar />
-                            :
-                            <Star />
-                        }
+                    <div className="isStarred"
+                        onClick={onSetStar}>
+                        {board.isStarred ? <Unstar /> : <Star />}
                     </div>
                     {/* <div className="change-icon">
                         change
