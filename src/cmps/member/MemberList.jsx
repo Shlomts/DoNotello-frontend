@@ -9,11 +9,6 @@ export function MemberList({ members }) {
                             {member.imgUrl && 
                             <img src={member.imgUrl} alt={member.fullname} />}
                         </span>
-                        {/* <GroupDetails
-                            board={board}
-                            group={group}
-                            onRemoveGroup={onRemoveGroup}
-                        /> */}
                     </li>
                 ))}
             </ul>

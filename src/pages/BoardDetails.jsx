@@ -32,13 +32,19 @@ export function BoardDetails() {
     const [isAddingGroup, setIsAddingGroup] = useState(false)
     const [groupName, setGroupName] = useState("")
     const [isEditingBoardName, setIsEditingBoardName] = useState(false)
-    const [boardTitle, setBoardTitle] = useState(board?.title)
-
+    const [boardTitle, setBoardTitle] = useState(board?.title || '')
 
     useEffect(() => {
         loadBoard(boardId)
         loadUsers()
     }, [boardId])
+
+    useEffect(() => {
+        if (board) {
+            setBoardTitle(board.title)
+        }
+    }, [board])
+
 
     function onSetGroupName(ev) {
         const name = ev.target.value
@@ -46,11 +52,12 @@ export function BoardDetails() {
     }
 
     function onSetBoardTitle(ev) {
-        const name = ev.target.value
-        setBoardTitle(name)
+        const newBoardTitle = ev.target.value
+        setBoardTitle(newBoardTitle)
     }
 
-    async function onUpdateBoardName(ev) {
+    async function updateBoardName(boardTitle) {
+        if (board.title === '') return
 
         try {
             const updatedBoard = { ...board, title: boardTitle }
@@ -98,7 +105,7 @@ export function BoardDetails() {
 
     function onKeyDown(ev) {
         if (ev.key === 'Enter') {
-            onUpdateBoardName()
+            updateBoardName(ev.target.value)
         }
     }
 
@@ -115,12 +122,12 @@ export function BoardDetails() {
                             type="text"
                             value={boardTitle}
                             onChange={onSetBoardTitle}
-                            onBlur={onUpdateBoardName}
+                            onBlur={(ev) => updateBoardName(ev.target.value)}
                             onKeyDown={onKeyDown}
                             autoFocus
                         />
                     ) : (
-                        <h3 onClick={() => setIsEditingBoardName(true)}>{board.title}</h3>
+                        <h3 onClick={() => setIsEditingBoardName(true)}>{boardTitle}</h3>
                     )}
 
                     <div className="isStarred"

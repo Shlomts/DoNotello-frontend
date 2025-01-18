@@ -45,6 +45,24 @@
                 align-items: center;
             }
 
+            input {
+                margin: 0;
+                padding-inline: rem(10px);
+                line-height: rem(32px);
+                font-size: rem(18px);
+                font-weight: bold;
+                color: white;
+                width: 100%;
+            }
+
+            input:focus {
+                background-color: #2c2f38;
+
+                border: 1px solid #99c8ff;
+                border-radius: rem(3px);
+                outline: none;
+            }
+
             h3 {
                 margin: 0;
                 padding-inline: rem(10px);
@@ -65,6 +83,11 @@
                 background-color: rgba(255, 255, 255, 0.20);
                 cursor: pointer;
             }
+        }
+
+        .right-header {
+            display: flex;
+            align-items: center;
         }
     }
 
