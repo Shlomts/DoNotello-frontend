@@ -10,13 +10,51 @@
   position: sticky;
   top: 40px;
   border-right: 1px solid #414548;
+  transition: width 0.3s ease;
+  overflow: hidden;
+
+  &.collapsed {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    border-radius: 0;
+    max-width: 50px;
+    transform: translate3d(-85%, 0, 0);
+    z-index: 15;
+    transition: transform 100ms ease-in;
+
+    .sidebar-header {
+      border: none;
+
+      .toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 5px;
+        right: 0;
+        width: 24px;
+        height: 24px;
+        margin: 15px 0 0 16px;
+        border: 1px solid hsla(218, 54%, 19.6%, 0.16);
+        background-color: hsla(206, 13.7%, 10%, 0.9);
+        border-radius: 50%;
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+      }
+    }
+  }
 
   .sidebar-header {
     display: flex;
     align-items: center;
     gap: rem(8px);
-    padding: rem(12px);
-    margin-bottom: rem(12px);
+    padding: 12px 12px;
+    // margin-bottom: rem(12px);
     min-height: 40px;
     border-bottom: 1px solid #414548;
 
@@ -44,19 +82,38 @@
     .logo-link {
       color: $app-sidebar-dark-txt;
       display: inline;
-      margin-bottom: 0;
+      margin: 0;
+      margin-left: 4px;
+
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
+    }
+
+    .toggle-btn {
+      color: #dbddde;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
     }
   }
 
   .sidebar-links {
     list-style: none;
     height: 800px;
+    margin-top: 6px;
+    padding-block: 2px;
 
     li {
-
       a {
         display: flex;
         align-items: center;
@@ -72,6 +129,7 @@
           width: 24px;
           height: 20px;
           // padding-right: 16px;
+
           margin-right: 8px;
           background-color: transparent;
           border-radius: 4px;
@@ -112,13 +170,15 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 0 6px;
+    margin-top: 8px;
+    padding-block: 4px;
+    padding-inline-start: 12px;
     justify-content: space-between;
 
     h2 {
       margin: 0;
       font-size: 14px;
-      font-weight: bold;
+      font-weight: 600;
       color: $app-sidebar-dark-txt;
       padding-inline-start: 12px;
     }
@@ -136,16 +196,31 @@
         font-size: 14px;
         cursor: pointer;
 
+        &.add-board {
+          padding: 0 4px 4px;
+          margin-inline: 6px;
+          svg {
+            width: 16px;
+            height: 16px;
+
+            color: $app-sidebar-dark-txt;
+          }
+        }
+
         &.sort-by {
           opacity: 0;
           pointer-events: none;
           transition: opacity 0.2s ease-in-out;
+          &:hover {
+            opacity: 1;
+            background-color: #a6c5e229;
+            border-radius: 3px;
+            z-index: 15;
+          }
         }
-
         &:hover {
           background-color: $app-sidebar-dark-hover;
           border-radius: 3px;
-          opacity: 1;
         }
       }
     }
@@ -179,19 +254,19 @@
 
     .btn-actions {
       display: none;
-      gap: 8px;
-
       button {
         background: none;
         border: none;
         color: $app-sidebar-dark-txt;
         font-size: 14px;
-
-        &:hover {
-          background-color: $app-sidebar-dark-hover;
-          width: 100%;
-          cursor: pointer;
+        &.sort-by:hover {
+          background-color: #a6c5e229;
+          border-radius: 3px;
+          z-index: 5;
         }
+      }
+      & button.starred {
+        // display: flex ;
       }
     }
 

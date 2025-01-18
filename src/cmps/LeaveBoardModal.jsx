@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {Close, RightArrow} from './svgContainer'
+import {Close, RightArrow} from './SvgContainer'
 
 export function LeaveBoardModal({onClose, onLeave, boardTitle}) {
   const [isConfirming, setIsConfirming] = useState(false)
@@ -8,19 +8,16 @@ export function LeaveBoardModal({onClose, onLeave, boardTitle}) {
     setIsConfirming(true) // Show confirmation message
   }
 
-  function handleClose() {
-    console.log('Closing modal')
-    onClose()
-  }
+ 
 
   return (
     <section className="modal-overlay-remove">
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-content" >
         {!isConfirming ? (
           <>
             <header className="modal-title-remove">
               <h2 className="board-name">{boardTitle}</h2>
-              <button onClick={handleClose} className="close-btn">
+              <button onClick={onClose} className="close-btn">
                 <Close />
               </button>
             </header>
