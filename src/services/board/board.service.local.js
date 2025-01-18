@@ -235,8 +235,8 @@ function _createBoard(title, users) {
                 _createCard('Add npm libs', ['S101', 'K101']),
                 _createCard('Authentication', ['S101']),
                 _createCard('Data validation'),
-                _createCard('Services',['l107']),
-                _createCard('Sockets',[],['l108']),
+                _createCard('Services'),
+                _createCard('Sockets',[],['l101','l102','l103','l104','l105','l106','l107','l108']),
             ]),
         _createGroup('Backlog-client',
             [

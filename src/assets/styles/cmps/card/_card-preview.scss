@@ -18,6 +18,8 @@
 
     .card-labels {
         display: flex;
+        flex-wrap: wrap;
+        gap: rem(4px);
     }
 
     .card-label {
