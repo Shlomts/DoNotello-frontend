@@ -12,7 +12,7 @@ export function CardList({ cards, board }) {
                         key={card.id}>
                         <CardPreview
                             card={card}
-                            members={board.members}
+                            board={board}
                         />
                     </li>
                 )}

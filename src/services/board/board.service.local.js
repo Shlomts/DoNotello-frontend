@@ -185,26 +185,69 @@ function _createBoard(title, users) {
     board._id = makeId()
     board.members = users
     board.style.backgroundImage = demoBG
+    board.labels =
+        [
+            {
+                id: 'l101',
+                title: 'Feature',
+                color: '#533f03',
+            },
+            {
+                id: 'l102',
+                title: 'Bug',
+                color: '#e1b205',
+            },
+            {
+                id: 'l103',
+                title: 'Refactor',
+                color: '#a64700',
+            },
+            {
+                id: 'l104',
+                title: 'Important',
+                color: '#ae2e24',
+            },
+            {
+                id: 'l105',
+                title: 'SOS',
+                color: '#f87168',
+            },
+            {
+                id: 'l106',
+                title: 'Ideas',
+                color: '#0055cc',
+            },
+            {
+                id: 'l107',
+                title: 'Not urgent',
+                color: '#4d6b1f',
+            },
+            {
+                id: 'l108',
+                title: 'Design',
+                color: '#50253f',
+            },
+        ]
     board.groups = [
         _createGroup('Backlog-server',
             [
-                _createCard('Set up server',['C101','S101','K101','B101']),
-                _createCard('Add npm libs',['S101','K101']),
-                _createCard('Authentication',['S101']),
+                _createCard('Set up server', ['C101', 'S101', 'K101', 'B101'],),
+                _createCard('Add npm libs', ['S101', 'K101']),
+                _createCard('Authentication', ['S101']),
                 _createCard('Data validation'),
-                _createCard('Services'),
-                _createCard('Sockets'),
+                _createCard('Services',['l107']),
+                _createCard('Sockets',[],['l108']),
             ]),
         _createGroup('Backlog-client',
             [
-                _createCard('Add card details',['C101']),
+                _createCard('Add card details', ['C101']),
                 _createCard('Icons'),
-                _createCard('Implement Sass',['C101','S101','K101','B101']),
+                _createCard('Implement Sass', ['C101', 'S101', 'K101', 'B101']),
             ]),
         _createGroup('In development',
             [
                 _createCard('API'),
-                _createCard('Members', ['C101','S101'])
+                _createCard('Members', ['C101', 'S101'])
             ]),
         _createGroup('Done',
             [
@@ -224,7 +267,7 @@ function _createBoard(title, users) {
             [
                 _createCard('BoardDetails'),
                 _createCard('SideBar')
-            ]),
+            ]),
     ]
     return board
 }
@@ -239,11 +282,12 @@ function _createGroup(title, cards = [], isStarred = false) {
     }
 }
 
-function _createCard(title, memberIds = []) {
+function _createCard(title, memberIds = [], labelIds = []) {
     return {
         id: makeId(),
         title,
         memberIds,
+        labelIds,
     }
 }
 

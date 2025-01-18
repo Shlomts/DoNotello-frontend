@@ -47,7 +47,8 @@ function getEmptyCard() {
         id: makeId(),
         title: "",
         memberIds: [],
-        description: ""
+        description: "",
+        labelIds:[],
     }
 }
 

@@ -1,30 +1,25 @@
 import { Fragment } from "react"
 import { NavLink, Outlet, useParams } from "react-router-dom"
 
-export function CardPreview({ card, members }) {
+import { CardLabels } from "../group/miniCmps/CardLabels.jsx"
+import { CardMembers } from "../group/miniCmps/CardMembers.jsx"
+
+export function CardPreview({ card, board }) {
     const { boardId } = useParams()
-    if (!card || !members || members.length === 0) return
-    const cardMembers = members.filter(member => card.memberIds.includes(member.id))
+
+    if (!card || !board.members || board.members.length === 0 || !board.labels || board.labels.length === 0) return
+
+    const cardMembers = board.members.filter(member => card.memberIds.includes(member.id))
+    const cardLabels = board.labels.filter(label => card.labelIds.includes(label.id))
     const cardHasContent = card.memberIds.length > 0
 
     return (
         <Fragment>
             <NavLink to={`/board/${boardId}/card/${card.id}`}>
                 <div className={`card-preview ${cardHasContent ? 'expanded' : ''}`}>
+                    <CardLabels labels={cardLabels} />
                     <h3>{card.title}</h3>
-                    {cardMembers.length > 0 && (
-                        <div className="member-avatars">
-                            {cardMembers.map(member => (
-                                <img
-                                    key={member.id}
-                                    src={member.imgUrl}
-                                    alt={member.fullname}
-                                    title={member.fullname}
-                                    className="card-member-img"
-                                />
-                            ))}
-                        </div>
-                    )}
+                    <CardMembers members={cardMembers} />
                 </div>
             </NavLink>
             <section>
