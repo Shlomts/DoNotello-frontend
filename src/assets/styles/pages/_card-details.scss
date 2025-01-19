@@ -24,21 +24,25 @@
 
 	grid-template-columns: auto 1fr auto;
 	grid-template-rows:56px 56px auto  ;
+
 	min-height: 600px;
 	border-radius: 12px;
 	border-color: transparent;
 	background-color: #323940;
 	color: #b6c2cf;
+
 	position: absolute;
 	z-index: 1000;
+
 	top: 0;
 	left: 0;
-	margin-top: 45px;
-	max-width: 768px;
+	margin-top: 48px;
+	max-width: 770px;
+
 	width: 100%;
 	height: 845px;
 	padding: 20px;
-	gap: 15px;
+	gap: 12px;
 	overflow: auto;
 	// row-gap: 30px;
 
@@ -60,6 +64,10 @@
 		justify-self: right;
 		margin: -5px -5px 0 0;
 		border-radius: 50%;
+		// font-size: 22px;
+		width: 24px;
+		height: 24px;
+		padding: 0;
 	}
 
 	.title {
@@ -84,10 +92,11 @@
 
 		h3 {
 			grid-area: h;
-			display: block;
-			margin: 0;
-			padding: 0;
+			// display: block;
+			// margin: 0;
+			padding-top: 1px;
 			font-weight: 500;
+			font-size: 21px;
 		}
 		div {
 			display: block;
@@ -102,10 +111,12 @@
 
 		&.icon {
 			grid-area: i;
-
+			display: block;
 			svg {
-				width: auto;
-				height: auto;
+				// width: 30px;
+				
+				// height: auto;
+				font-size: 24px;
 				line-height: 14px;
 				vertical-align: text-top;
 			}
@@ -173,8 +184,9 @@
 			grid-area: di;
 
 			svg {
-				width: fit-content;
-				height: auto;
+				// width: fit-cont
+				font-size: 24px;
+
 			}
 		}
 
@@ -219,10 +231,6 @@
 			&::placeholder {
 				color: #8c9baa;
 			}
-		}
-
-		.des-input {
-			padding: 0;
 		}
 
 		.no-des-plchldr {
