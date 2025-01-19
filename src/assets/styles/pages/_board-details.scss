@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     height: 95vh;
+    width: 100vw;
     padding-bottom: rem(10px);
 
     overflow: hidden;
@@ -132,7 +133,7 @@
             gap: rem(8px);
             padding: rem(8px);
 
-            margin-inline-end: rem(12px);
+            // margin-inline-end: rem(12px);
             min-height: rem(88px);
             min-width: rem(272px);
 
