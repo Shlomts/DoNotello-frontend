@@ -268,7 +268,7 @@ export function CardDetails() {
 						/>
 					) : descriptionInput ? (
 						<div
-							className='grdatxt'
+							className='des-input grdatxt'
 							onClick={() => setIsEditMode(true)}
                             dangerouslySetInnerHTML={{
                                 __html: descriptionInput.replace(/\n/g, '<br>'),

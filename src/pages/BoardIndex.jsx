@@ -67,7 +67,7 @@ export function BoardIndex() {
                 <div className="workspace-logo">D</div>
               </div>{' '}
               <div className="title">
-                <h2>Donotello WorkSpace</h2>
+                <h2>DoNotello WorkSpace</h2>
                 <span className="workspace-subtitle">
                <Lock/> <span className="workspace-privacy">Private</span>{' '}
                 </span>

@@ -82,7 +82,7 @@ export function SideBar() {
           <span className="sidebarlogo">D</span>
         </div>{' '}
         <p className="logo-link" onClick={NavToHome}>
-          Donotello Workspace
+          DoNotello Workspace
         </p>
         {/* <button className="toggle-btn" onClick={() => setIsCollapsed(!isCollapsed)}>
           {isCollapsed ? <RightArrow /> : <LeftArrow />}
