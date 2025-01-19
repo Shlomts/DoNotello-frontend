@@ -18,10 +18,12 @@
 		'des   des      opt'
 		'des   des      opt'
 		'des   des      act'
-		'i3   t3        act'
-		'i4   t4        act';
+		'.   .        act'
+		'.   .        act'
+		'.   .        act';
 
 	grid-template-columns: auto 1fr auto;
+	grid-template-rows:56px 56px auto  ;
 	min-height: 600px;
 	border-radius: 12px;
 	border-color: transparent;
@@ -34,8 +36,10 @@
 	margin-top: 45px;
 	max-width: 768px;
 	width: 100%;
+	height: 845px;
 	padding: 20px;
 	gap: 15px;
+	overflow: auto;
 	// row-gap: 30px;
 
 	button {
@@ -162,7 +166,7 @@
 		grid-template-rows: min-content;
 
 		gap: 11px;
-		row-gap: 0;
+		row-gap: 12px;
 
 		&.icon {
 			display: block;
@@ -177,32 +181,35 @@
 		h4 {
 			grid-area: desh;
 			font-size: 16px;
-			// margin-bottom: 0;
+			margin-bottom: 0;
 			padding-top: 2px;
+			// line-height: 20px;
 		}
 
 		.grdatxt {
 			grid-area: txt;
+			margin-top: 8px;
+			align-self: baseline;
+			width: 100%;
+			border-radius: 3px;
+
 		}
 
 		textarea {
-			align-self: baseline;
-			width: 100%;
 			min-height: 274px;
 
 			background-color: #22272b;
 			border: 1px solid #8c9baa;
-			border-radius: 3px;
 
 			padding-inline: 20px;
 			padding-top: 8px;
-			margin-top: 8px;
 
 			font-weight: 400;
 			font-size: 1em;
 
 			resize: none;
-			overflow: hidden;
+			overflow: auto;
+			// scrollbar-color: black;  // Y NOT WORKKKK
 
 			&:focus {
 				outline: none;
@@ -214,24 +221,23 @@
 			}
 		}
 
-		// textarea {
-		//     align-self: baseline;
-		//     width: 100%;
-		//     // min-height: 100px;
-		//     padding: inline 11px;
-		//     padding-top: 8px;
-		//     margin-top: 8px;
+		.des-input {
+			padding: 0;
+		}
 
-		//     border-radius: 3px;
-		//     border-color: transparent;
+		.no-des-plchldr {
 
-		//     font-weight: 400;
-		//     font-size: 1em;
+			padding: 8px 12px 32px ;
+			height: 60px ;
+			background-color: #3b444c;
+			font-weight:  500;
+			cursor: pointer;
 
-		//     &::placeholder {
-		//         color: #8c9baa;
-		//     }
-		// }
+			&:hover {
+				background-color: rgb(69 80 90);
+			}
+
+		}
 
 		.desbtns {
 			grid-area: desbtns;
