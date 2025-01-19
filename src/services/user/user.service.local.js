@@ -109,6 +109,8 @@ function _createUsers() {
             _createUser('S101', 'Shlomit Horn', 'shlomit.horn@example.com', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/shlomit_ggjyyr.png'),
             _createUser('K101', 'Keren Vasserman', 'keren.vasserman@example.com', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784587/keren_vw7vmq.png'),
             _createUser('B101', 'Beyonce Knowles', 'beyonce.knowles@example.com', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1736784864/beyonce_spjmuf.webp'),
+            _createUser('BA101', 'Batel Katiei', 'Batel.Katiei@example.com', 'https://res.cloudinary.com/dtyqjifzy/image/upload/v1737323551/batel_nxojap.jpg'),
+            _createUser('L101', 'Lord Vold', 'lord.vold@example.com',),
         ]
         saveToStorage(STORAGE_KEY, users)
     }
