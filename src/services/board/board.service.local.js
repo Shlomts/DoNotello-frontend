@@ -236,7 +236,7 @@ function _createBoard(title, users) {
                 _createCard('Authentication', ['S101']),
                 _createCard('Data validation'),
                 _createCard('Services'),
-                _createCard('Sockets',[],['l101','l102','l103','l104','l105','l106','l107','l108']),
+                _createCard('Sockets', [], ['l101', 'l102', 'l103', 'l104', 'l105', 'l106', 'l107', 'l108']),
             ]),
         _createGroup('Backlog-client',
             [
@@ -266,7 +266,7 @@ function _createBoard(title, users) {
         _createGroup('Ready to production',
             [
                 _createCard('BoardDetails'),
-                _createCard('SideBar')
+                _createCard('SideBar',['C101'],['l101'],'this card is amazing')
             ]),
     ]
     return board
@@ -282,12 +282,13 @@ function _createGroup(title, cards = [], isStarred = false) {
     }
 }
 
-function _createCard(title, memberIds = [], labelIds = []) {
+function _createCard(title, memberIds = [], labelIds = [], description = '') {
     return {
         id: makeId(),
         title,
         memberIds,
         labelIds,
+        description,
     }
 }
 
@@ -299,7 +300,7 @@ function _getEmptyBoard(title) {
         archivedAt: null,
         createdBy: {},
         style: {
-            backgroundImage: "",
+            backgroundImage: '',
         },
         labels: [],
         members: [],

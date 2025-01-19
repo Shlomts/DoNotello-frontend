@@ -3,6 +3,7 @@ import { NavLink, Outlet, useParams } from "react-router-dom"
 
 import { CardLabels } from "../group/miniCmps/CardLabels.jsx"
 import { CardMembers } from "../group/miniCmps/CardMembers.jsx"
+import { CardIcons } from "../group/miniCmps/CardIcons.jsx"
 
 export function CardPreview({ card, board }) {
     const { boardId } = useParams()
@@ -19,7 +20,10 @@ export function CardPreview({ card, board }) {
                 <div className={`card-preview ${cardHasContent ? 'expanded' : ''}`}>
                     <CardLabels labels={cardLabels} />
                     <h3>{card.title}</h3>
+                    <section className="bottom-card-preview">
+                    <CardIcons card={card} />
                     <CardMembers members={cardMembers} />
+                    </section>
                 </div>
             </NavLink>
             <section>

@@ -25,7 +25,7 @@ function getEmptyBoard() {
         archivedAt: null,
         createdBy: {},
         style: {
-            backgroundImage: ""
+            backgroundImage: ''
         },
         labels: [],
         members: [],
@@ -37,7 +37,7 @@ function getEmptyBoard() {
 function getEmptyGroup() {
     return {
         id: makeId(),
-        title: "",
+        title: '',
         cards: []
     }
 }
@@ -45,10 +45,10 @@ function getEmptyGroup() {
 function getEmptyCard() {
     return {
         id: makeId(),
-        title: "",
+        title: '',
         memberIds: [],
-        description: "",
-        labelIds:[],
+        description: '',
+        labelIds: [],
     }
 }
 
@@ -62,7 +62,7 @@ function getDefaultFilter() {
 }
 
 const service = VITE_LOCAL === 'true' ? local : remote
-export const boardService = {  getEmptyBoard, getEmptyGroup, getEmptyCard, getDefaultFilter, ...service }
+export const boardService = { getEmptyBoard, getEmptyGroup, getEmptyCard, getDefaultFilter, ...service }
 
 // Easy access to this service from the dev tools console
 // when using script - dev / dev:local

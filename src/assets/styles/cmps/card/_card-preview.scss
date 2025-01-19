@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    padding: rem(8px) rem(10px);
+    padding: rem(6px) rem(6px) rem(2px) rem(6px);
     gap: rem(4px);
     min-height: rem(24px);
     min-width: rem(256px);
@@ -52,16 +52,23 @@
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     }
 
+    .bottom-card-preview {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
     .member-avatars {
         display: flex;
-        align-self: flex-end;
+        margin-left: auto;
         gap: rem(4px);
     }
 
     .card-member-img-container {
         position: relative;
-        width: rem(23px);
-        height: rem(23px);
+        width: rem(24px);
+        height: rem(24px);
         border-radius: 50%;
         overflow: visible;
     }
@@ -105,18 +112,17 @@
     }
 
     .card-preview.expanded {
-        max-height: rem(100px);
-        padding: rem(10px) rem(12px);
+        // max-height: rem(100px);
+        // padding: rem(10px) rem(12px);
     }
 
-    .member-details-popup{
+    .member-details-popup {
         position: absolute;
         top: 100%;
         left: 100%;
         width: rem(200px);
         z-index: 9999;
-    
+
         background-color: #99c8ff;
     }
 }
-
