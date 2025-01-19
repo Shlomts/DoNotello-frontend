@@ -8,7 +8,7 @@
       flex-wrap: wrap;
       justify-content: flex-start;
       margin-right: 0;
-      min-width: 1024px;
+      min-width: 825px;
 
       li {
         display: block;
@@ -18,8 +18,10 @@
     }
   }
   .add-board {
-    width: rem(174.6px);
+    width: rem(190px);
     height: rem(96px);
+    margin: 0 16.212px 16.212px 0;
+
     display: flex;
     border: none;
     border-radius: rem(3px);

@@ -37,7 +37,7 @@
       display: inline-block;
       flex: 0 0 auto;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 650;
       max-height: 40px;
       overflow: hidden;
       width: 100%;
@@ -63,6 +63,7 @@
         font-size: 14px;
         height: 14px;
         line-height: 18px;
+        z-index: 100;
 
         .star-btn {
           background: transparent;
@@ -72,7 +73,6 @@
           display: block;
           position: relative;
 
-          z-index: 10;
         }
       }
     }

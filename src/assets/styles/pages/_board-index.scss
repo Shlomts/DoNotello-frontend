@@ -1,6 +1,7 @@
 .board-index {
   height: calc(100vh - 48px);
   overflow-y: auto;
+  overflow-x: hidden;
   scrollbar-color: #7b7b7b transparent;
 
   .board-conainer {

@@ -5,6 +5,7 @@ import {BackgroundSelector} from '../BackgroundSelector'
 import {boardService} from '../../services/board'
 import {Close} from '../SvgContainer'
 import {onToggleModal} from '../../store/actions/system.actions'
+import {useNavigate} from 'react-router'
 //as i can see the cmp isnt keep the data when you close the tab
 // and refresh the inputs. also isnt in the qparams
 export function AddBoard({onClose}) {
@@ -12,34 +13,33 @@ export function AddBoard({onClose}) {
   const [workspace, setWorkspace] = useState('DoNotello Workspace')
   const [backgroundUrl, setBackgroundUrl] = useState('https://picsum.photos/seed/board1/400/200')
   const [isTitleInvalid, setIsTitleInvalid] = useState(true) // New state for title validation
-
+  const navigate = useNavigate()
   function handleSelectBackground(url) {
     setBackgroundUrl(url)
   }
 
   async function saveBoard(ev) {
     ev.preventDefault()
-    console.log('start to save')
-    console.log(boardTitle)
-    console.log(backgroundUrl)
 
     const boardToSave = boardService.getEmptyBoard()
     boardToSave.title = boardTitle
     boardToSave.workspace = workspace
     boardToSave.style.backgroundImage = backgroundUrl
-    console.log(boardToSave.style.backgroundImage)
-
-    console.log('Board to save before sending:', boardToSave)
 
     try {
-      await addBoard(boardToSave)
-      showSuccessMsg(`Board with title added: ${boardToSave.title}`)
+      const savedBoard = await addBoard(boardToSave)
+
+      if (savedBoard && savedBoard._id) {
+        showSuccessMsg(`Board with title added: ${boardToSave.title}`)
+        navigate(`/board/${savedBoard._id}`)
+      } else {
+        console.error('Board ID is missing', savedBoard)
+      }
     } catch (err) {
       showErrorMsg('Cannot add board')
     } finally {
       onToggleModal(null)
     }
-    console.log('Board to save after saving:', boardToSave)
   }
 
   return (
@@ -65,11 +65,15 @@ export function AddBoard({onClose}) {
                 onChange={(e) => {
                   const newTitle = e.target.value
                   setBoardTitle(newTitle)
-                  setIsTitleInvalid(newTitle.trim() === '') // Set invalid to true if the title is empty
+                  setIsTitleInvalid(newTitle.trim() === '') 
                 }}
                 autoFocus
               />
-              {isTitleInvalid ? <span className="error-msg">👋 Board title is required</span> : <span className='error-msg-hidden'></span>}
+              {isTitleInvalid ? (
+                <span className="error-msg">👋 Board title is required</span>
+              ) : (
+                <span className="error-msg-hidden"></span>
+              )}
             </div>
 
             <div className="workspace-input-container">

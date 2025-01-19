@@ -51,9 +51,8 @@ export function DynaminModal() {
   } else if (trigger === 'board-index') {
     modalStyle = {
       ...modalStyle,
-      top: 280,
-      left: position.left - 70,
-    }
+      top:  225.8,
+      left: 550    }
   }
   const overlayClass =
     trigger &&
