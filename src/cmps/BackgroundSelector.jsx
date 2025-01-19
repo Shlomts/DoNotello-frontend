@@ -23,27 +23,27 @@ export function BackgroundSelector({onSelectBackground}) {
 
   function handleSelect(index, url) {
     setSelected(index)
-    setSelectedImage(url) // Update the selected image preview
-    onSelectBackground(url) // Notify parent component about the selected background
-  }
-
-  function handleUrlChange(ev) {
-    setCustomUrl(ev.target.value)
-  }
-
-  function handleUrlSubmit() {
-    if (customUrl) {
-      setSelectedImage(customUrl)
-      onSelectBackground(customUrl)
-      setShowOptions(false) // Close options box after submission
-    }
-  }
-
-  function handleUpload(url) {
     setSelectedImage(url)
     onSelectBackground(url)
-    setShowOptions(false) // Close options box after upload
   }
+
+  // function handleUrlChange(ev) {
+  //   setCustomUrl(ev.target.value)
+  // }
+
+  // function handleUrlSubmit() {
+  //   if (customUrl) {
+  //     setSelectedImage(customUrl)
+  //     onSelectBackground(customUrl)
+  //     setShowOptions(false)
+  //   }
+  // }
+
+  // function handleUpload(url) {
+  //   setSelectedImage(url)
+  //   onSelectBackground(url)
+  //   setShowOptions(false)
+  // }
 
   return (
     <div className="background-selector">
@@ -51,7 +51,7 @@ export function BackgroundSelector({onSelectBackground}) {
       <div className="background-preview-container">
         {selectedImage && (
           <div className="background-preview" style={{backgroundImage: `url(${selectedImage})`}}>
-            <img src="https://trello.com/assets/14cda5dc635d1f13bc48.svg" alt role="presentation" />
+            <img src="https://trello.com/assets/14cda5dc635d1f13bc48.svg" alt="decorative" role="presentation" />
           </div>
         )}
       </div>
