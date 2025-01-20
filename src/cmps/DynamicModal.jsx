@@ -51,12 +51,12 @@ export function DynaminModal() {
       left: 215,
     }
   } else if (trigger === 'board-index') {
-    const offset = 145
+    // const offset = 145
 
     modalStyle = {
       ...modalStyle,
-      top: position.top - offset,
-      left: position.left,
+      top: 225,
+      left : 400,
     }
   }
   const overlayClass =

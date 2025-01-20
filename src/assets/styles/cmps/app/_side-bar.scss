@@ -10,7 +10,7 @@
   // position: sticky;
   // top: 40px;
   border-right: 1px solid #414548;
-  transition: width 0.3s ease;
+  transition: min-width  100ms ease-in-out;
   overflow: hidden;
 
   svg {
@@ -73,6 +73,10 @@
       svg {
         width: 1rem;
         height: 1rem;
+      }
+      &:hover {
+        background-color: $app-sidebar-dark-hover;
+        border-radius: 3px;
       }
     }
   }
@@ -222,14 +226,17 @@
 
     .btn-actions {
       display: flex;
+      margin-right: 6.5px;
       button {
         display: none;
         background: none;
         border: none;
         color: $app-sidebar-dark-txt;
         font-size: 12px;
+        padding: 2px;
         &.sort-by:hover {
           background-color: #a6c5e229;
+          padding: 2px;
           border-radius: 3px;
           z-index: 5;
         }
@@ -248,7 +255,7 @@
     min-width: 16px;
     width: 16px;
     overflow: hidden;
-    transition: width 0.3s ease-in-out;
+
 
     .sidebar-header {
       justify-content: center;
@@ -272,13 +279,11 @@
         cursor: pointer;
         z-index: 10;
 
-      
-          svg {
-            color: $app-text;
-            width: 16px;
-            height: 16px;
-          }
-        
+        svg {
+          color: $app-text;
+          width: 16px;
+          height: 16px;
+        }
       }
     }
     .sidebar-links {

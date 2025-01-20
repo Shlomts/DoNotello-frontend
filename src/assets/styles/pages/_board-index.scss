@@ -2,8 +2,30 @@
   height: calc(100vh - 48px);
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-color: #7b7b7b transparent;
+  scrollbar-color: #7b7b7b #424242;
+  scrollbar-width: auto;
 
+  &::-webkit-scrollbar {
+    width: 10px; /* Slim width */
+
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #2c333a; /* Transparent track */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #2c333a;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;     }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #7b7b7b; /* Slightly darker grey on hover */
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background-color: #a1a1a1; 
+  }
   .board-conainer {
     align-items: flex-start;
     display: flex;
@@ -122,27 +144,8 @@
       }
     }
 
-    &::-webkit-scrollbar {
-      width: 10px; /* Slim width */
-
-    }
-  
-    &::-webkit-scrollbar-track {
-      background-color: #2c333a; /* Transparent track */
-    }
-  
-    &::-webkit-scrollbar-thumb {
-      background-color: #7b7b7b; /* Light grey thumb color */
-    }
-  
-    &::-webkit-scrollbar-thumb:hover {
-      background-color: #7b7b7b; /* Slightly darker grey on hover */
-    }
-  
-    &::-webkit-scrollbar-thumb:active {
-      background-color: #7b7b7b; /* Darker grey on active state */
-    }
   }
+
 
 }
 

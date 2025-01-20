@@ -87,7 +87,7 @@ export function SideBar() {
           DoNotello Workspace
         </p>
         <button className="toggle-btn" onClick={() => setIsCollapsed(!isCollapsed)}>
-          {isCollapsed ? <LeftArrow /> : <RightArrow />}
+          {isCollapsed ? <RightArrow /> : <LeftArrow />}
         </button>
       </header>
 
