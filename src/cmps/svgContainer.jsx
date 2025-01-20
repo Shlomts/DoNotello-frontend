@@ -744,8 +744,10 @@ export function LeftArrow() {
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="presentation">
       <path
         fill="currentColor"
-        fillRule="evenodd"
+        fill-rule="evenodd"
         d="M15.293 19.707a1 1 0 0 0 0-1.414L9.707 12l5.586-5.586a1 1 0 0 0-1.414-1.414l-7 7a1 1 0 0 0 0 1.414l7 7a1 1 0 0 0 1.414 0z"
+        stroke="currentColor"
+        strokeWidth="1"
       />
     </svg>
   )
@@ -756,8 +758,10 @@ export function RightArrow() {
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="presentation">
       <path
         fill="currentColor"
-        fillRule="evenodd"
+        fill-rule="evenodd"
         d="M8.707 19.707a1 1 0 0 1 0-1.414L14.293 12 8.707 6.414a1 1 0 0 1 1.414-1.414l7 7a1 1 0 0 1 0 1.414l-7 7a1 1 0 0 1-1.414 0z"
+        stroke="currentColor"
+        strokeWidth="2"
       />
     </svg>
   )
@@ -897,14 +901,8 @@ export function EllipsisIcon() {
 export function Lock() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" role="presentation">
-      <rect
-        x="6" y="10" width="12" height="10" 
-        stroke="currentColor" strokeWidth="2" fill="none" rx="2"
-      />
-      <path
-        d="M8 10V7a4 4 0 1 1 8 0v3"
-        stroke="currentColor" strokeWidth="2" fill="none"
-      />
+      <rect x="6" y="10" width="12" height="10" stroke="currentColor" strokeWidth="2" fill="none" rx="2" />
+      <path d="M8 10V7a4 4 0 1 1 8 0v3" stroke="currentColor" strokeWidth="2" fill="none" />
       <circle cx="12" cy="15" r="1" stroke="currentColor" strokeWidth="2" fill="none" />
     </svg>
   )

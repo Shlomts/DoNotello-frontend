@@ -38,7 +38,7 @@ export function HomePage() {
           </NavLink>
 
           <button className="header-demo-btn" onClick={TryDemo}>
-            Get DoNotello for free
+            Get Started now
           </button>
         </nav>
       </header>

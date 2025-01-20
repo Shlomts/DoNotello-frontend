@@ -13,40 +13,9 @@
   transition: width 0.3s ease;
   overflow: hidden;
 
-  &.collapsed {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    border-width: 0;
-    border-radius: 0;
-    max-width: 50px;
-    transform: translate3d(-85%, 0, 0);
-    z-index: 15;
-    transition: transform 100ms ease-in;
-
-    .sidebar-header {
-      border: none;
-
-      .toggle-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: fixed;
-        top: 5px;
-        right: 0;
-        width: 24px;
-        height: 24px;
-        margin: 15px 0 0 16px;
-        border: 1px solid hsla(218, 54%, 19.6%, 0.16);
-        background-color: hsla(206, 13.7%, 10%, 0.9);
-        border-radius: 50%;
-        -webkit-backdrop-filter: blur(16px);
-        backdrop-filter: blur(16px);
-      }
-    }
+  svg {
+    width: 1rem;
+    height: 1rem;
   }
 
   .sidebar-header {
@@ -96,13 +65,14 @@
       border: none;
       cursor: pointer;
       padding: 10px;
+      margin-left: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
-
+      font-weight: 500;
       svg {
-        width: 16px;
-        height: 16px;
+        width: 1rem;
+        height: 1rem;
       }
     }
   }
@@ -186,7 +156,7 @@
     .boards-btn-actions {
       position: relative;
       display: inline-flex;
-      gap: 8px;
+      // gap: 4px;
       z-index: 10;
 
       button {
@@ -195,6 +165,7 @@
         color: $app-text-inverse;
         font-size: 14px;
         cursor: pointer;
+        pointer-events: auto;
 
         &.add-board {
           padding: 0 4px 4px;
@@ -209,13 +180,15 @@
 
         &.sort-by {
           opacity: 0;
-          pointer-events: none;
           transition: opacity 0.2s ease-in-out;
+
           &:hover {
-            opacity: 1;
+            // when filter be active add this line!!
+            // opacity: 1;
             background-color: #a6c5e229;
             border-radius: 3px;
             z-index: 15;
+            cursor: default;
           }
         }
         &:hover {
@@ -241,11 +214,6 @@
       text-decoration: none;
       color: $app-sidebar-dark-txt;
 
-      .board-preview {
-        width: 24px;
-        height: 24px;
-      }
-
       span {
         font-size: 14px;
         font-weight: 500;
@@ -253,25 +221,72 @@
     }
 
     .btn-actions {
-      display: none;
+      display: flex;
       button {
+        display: none;
         background: none;
         border: none;
         color: $app-sidebar-dark-txt;
-        font-size: 14px;
+        font-size: 12px;
         &.sort-by:hover {
           background-color: #a6c5e229;
           border-radius: 3px;
           z-index: 5;
         }
       }
-      // & button.starred {
-      //   display: flex ;
-      // }
+
+      button.starred {
+        display: flex !important;
+      }
+    }
+    &:hover button {
+      display: flex !important;
+    }
+  }
+
+  &.collapsed {
+    min-width: 16px;
+    width: 16px;
+    overflow: hidden;
+    transition: width 0.3s ease-in-out;
+
+    .sidebar-header {
+      justify-content: center;
+      border: none;
+
+      .sidebar-logo,
+      .logo-link {
+        display: none;
+      }
+
+      .toggle-btn {
+        display: flex;
+        position: fixed;
+        width: 24px;
+        height: 24px;
+        margin: 3px 0 0 6px;
+        padding: 4px;
+        background-color: $app-sidebar-dark;
+        border: 0.6px solid hsla(211, 18%, 68%, 0.16);
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+
+      
+          svg {
+            color: $app-text;
+            width: 16px;
+            height: 16px;
+          }
+        
+      }
+    }
+    .sidebar-links {
+      display: none;
     }
 
-    &:hover .btn-actions {
-      display: flex;
+    .boards-action {
+      display: none;
     }
   }
 }
