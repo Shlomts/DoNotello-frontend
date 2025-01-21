@@ -53,8 +53,6 @@ export function MemberPicker({
 								className='card-member-img'
 							/>
 							<div>{member.fullname}</div>
-
-							<Close />
 						</li>
 					))}
 				</ul>
