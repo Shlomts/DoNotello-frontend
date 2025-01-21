@@ -22,9 +22,9 @@ export function CardPreview({ card, board }) {
                     <CardMembers members={cardMembers} />
                 </div>
             </NavLink>
-            <section>
+            {/* <section> */}
                 <Outlet />
-            </section>
+            {/* </section> */}
         </Fragment>
     )
 }

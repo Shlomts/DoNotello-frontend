@@ -110,8 +110,7 @@ export function CardDetails() {
 	if (!card) return <div>Loading...</div>
 
 	return (
-		<Fragment>
-			<div className='backdrop'> </div>
+		<section className='card-details-outlet'>
 			{isShowModal && (
 				<div className='dynamic'>
 					<DynamicCmp
@@ -127,7 +126,7 @@ export function CardDetails() {
 				</div>
 			)}
 
-			<dialog open className='card-details'>
+			<div open className='card-details'>
 				<button
 					className='close'
 					onClick={ev => {
@@ -143,69 +142,57 @@ export function CardDetails() {
 				<header className='header'>
 					<h3> {card.title}</h3>
 					<div>
-						in list <span className='group-title'>{group.title}</span>
+						in list{' '}
+						<span className='group-title'>{group.title}</span>
 					</div>
 				</header>
 				<section className='opt-bar'>
-					<ul>
-						{/* <li className="opt-card">
-                            <div>➕</div>
-                            <div>Join</div>
-                        </li> */}
-						<li className='opt-card'>
-							<div className='icon'>
-								<Members />
-							</div>
-							<div
-								className='name'
+					<section className='opt'>
+						<ul>
+							<li
+								className='opt-card'
 								onClick={ev => {
 									setIsShowModal(true)
 									onSetMembers
 								}}
 							>
-								Members
-							</div>
-						</li>
-						<li className='opt-card'>
-							<div className='icon'>
+								<Members />
+								<div className='name'>Members</div>
+							</li>
+							<li className='opt-card'>
 								<Labels />
-							</div>
-							<div className='name'>Labels</div>
-						</li>
-						<li className='opt-card'>
-							<div className='icon'>
+								<div className='name'>Labels</div>
+							</li>
+							<li className='opt-card'>
 								<Checklist />
-							</div>
-							<div className='name'>Checklist</div>
-						</li>
-						<li className='opt-card'>
-							<div className='icon'>
+								<div className='name'>Checklist</div>
+							</li>
+							<li className='opt-card'>
 								<Dates />
-							</div>
-							<div className='name'>Dates</div>
-						</li>
-						<li className='opt-card'>
-							<div>📎</div>
-							<div>Attachment</div>
-						</li>
-						<li className='opt-card'>
-							<div>📌</div>
-							<div>Location</div>
-						</li>
-					</ul>
-				</section>
-
-				<section className='actions'>
-					<thead>Actions</thead>
-					<ul>
-						<li className='opt-card' onClick={onRemoveCard}>
-							<div className='icon'>
-								<Close />
-								{/* <Delete /> */}
-							</div>
-							<div className='name'>Delete</div>
-						</li>
-					</ul>
+								<div className='name'>Dates</div>
+							</li>
+							{/* <li className='opt-card'>
+								<div>📎</div>
+								<div>Attachment</div>
+							</li>
+							<li className='opt-card'>
+								<div>📌</div>
+								<div>Location</div>
+							</li> */}
+						</ul>
+					</section>
+					<section className='actions'>
+						<thead>Actions</thead>
+						<ul>
+							<li className='opt-card' onClick={onRemoveCard}>
+								<div className='icon'>
+									<Close />
+									{/* <Delete /> */}
+								</div>
+								<div className='name'>Delete</div>
+							</li>
+						</ul>
+					</section>
 				</section>
 
 				<div className='user-opt'>
@@ -259,22 +246,40 @@ export function CardDetails() {
 						)}
 					</h4>
 					{isEditMode ? (
-						<textarea
-							className='grdatxt'
-							value={desInEdit}
-							onChange={onChangeDescription}
-							placeholder='Add a more detailed description...'
-							autoFocus
-						/>
+						<Fragment>
+							<textarea
+								className='grdatxt'
+								value={desInEdit}
+								onChange={onChangeDescription}
+								placeholder='Add a more detailed description...'
+								autoFocus
+							/>
+							<div className='desbtns'>
+								<button
+									className='save'
+									onClick={onSaveDescription}
+								>
+									Save
+								</button>
+								<button
+									className='cancel'
+									onClick={() => {
+										setIsEditMode(false)
+										setDesInEdit(descriptionInput)
+									}}
+								>
+									Cancel
+								</button>
+							</div>
+						</Fragment>
 					) : descriptionInput ? (
 						<div
 							className='des-input grdatxt'
 							onClick={() => setIsEditMode(true)}
-                            dangerouslySetInnerHTML={{
-                                __html: descriptionInput.replace(/\n/g, '<br>'),
-                              }}
-						>
-						</div>
+							dangerouslySetInnerHTML={{
+								__html: descriptionInput.replace(/\n/g, '<br>'),
+							}}
+						></div>
 					) : (
 						<div
 							className='no-des-plchldr grdatxt'
@@ -284,7 +289,7 @@ export function CardDetails() {
 						</div>
 					)}
 
-					{isEditMode && (
+					{/* {isEditMode && (
 						<div className='desbtns'>
 							<button
 								className='save'
@@ -302,9 +307,7 @@ export function CardDetails() {
 								Cancel
 							</button>
 						</div>
-					)}
-
-					{/* <button onClick={onAddDescription}>Cancel</button> */}
+					)} */}
 				</section>
 
 				{/* <div className="activity icon">📰</div>
@@ -322,8 +325,8 @@ export function CardDetails() {
                 </div>
                 <span className="avatar">😢</span>
                 <div className="comments">NOOOOOO</div> */}
-			</dialog>
-		</Fragment>
+			</div>
+		</section>
 	)
 }
 
