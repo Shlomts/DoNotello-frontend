@@ -55,6 +55,8 @@
 @import 'cmps/card/card-preview';
 @import 'cmps/card/card-list';
 @import 'cmps/card/dynamic-cmp';
+@import 'cmps/card/member-picker'; // via DynamicCmp
+
 
 // Member
 @import 'cmps/member/member-list'

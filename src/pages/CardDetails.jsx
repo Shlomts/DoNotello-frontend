@@ -22,6 +22,8 @@ import {
 	Delete,
 } from '../cmps/SvgContainer'
 
+import { MemberPicker } from '../cmps/card/opt-bar/MemberPicker'
+
 export function CardDetails() {
 	const navigate = useNavigate()
 	const params = useParams()
@@ -399,54 +401,3 @@ function DynamicCmp({ cmp, onCloseModal }) {
 //     showErrorMsg('Cannot update task')
 //     }
 //     }
-
-function MemberPicker({ info, onCloseModal, onAddCardMember, onUpdate }) {
-	console.log('ingo', info)
-
-	return (
-		<Fragment>
-			<h4>{info.title}</h4>
-
-			<button className='icon' onClick={onCloseModal}>
-				<Close />
-			</button>
-
-			{/* <section className="card-members">
-                <thead>Card members</thead>
-                <ul>
-                    <li className="member" onClick={onAddCardMember}>
-                        <div className="icon">
-                            <Close />
-                        </div>
-                        <div className="name">Delete</div>
-                    </li>
-                </ul>
-            </section> */}
-			<section className='board-members'>
-				<thead>Board members</thead>
-				<ul>
-					{info.boardMembers.map(member => (
-						<li key={member.id} className='members-list'>
-							<img
-								src={member.imgUrl}
-								alt={member.fullname}
-								title={member.fullname}
-								className='card-member-img'
-							/>
-							<div>{member.fullname}</div>
-							<div>
-								<Close />
-							</div>
-						</li>
-					))}
-					{/* <li className="opt-card" onClick={onRemoveCard}>
-                        <div className="icon">
-                            <Close />
-                        </div>
-                        <div className="name">Delete</div>
-                    </li> */}
-				</ul>
-			</section>
-		</Fragment>
-	)
-}
