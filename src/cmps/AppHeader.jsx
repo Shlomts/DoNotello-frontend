@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router'
 import {useSelector} from 'react-redux'
 import {showErrorMsg, showSuccessMsg} from '../services/event-bus.service'
 import {logout} from '../store/actions/user.actions'
-import {useEffect, useState} from 'react'
+import { useState} from 'react'
 import {AddBoard} from './board/AddBoard'
 import {onToggleModal} from '../store/actions/system.actions'
 import {Members} from './SvgContainer'
@@ -76,12 +76,7 @@ export function AppHeader() {
                 <li className="account">
                   <h2>Account</h2>
                   <div className="user-container">
-                    <div className="user-avatar">
-                      <svg width="32" height="32" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="32" cy="32" r="30" stroke="white" strokeWidth="4" />
-                        <circle cx="32" cy="24" r="10" fill="white" />
-                        <rect x="16" y="40" width="32" height="16" rx="8" fill="white" />
-                      </svg>
+                    <Member />
                     </div>
                     <div className="user-info">
                       <p className="user-name">{user.fullname}</p>

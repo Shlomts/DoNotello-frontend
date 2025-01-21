@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 import {useSelector} from 'react-redux'
 
 import {loadBoards, updateBoard, removeBoard, addBoardMsg} from '../store/actions/board.actions'
@@ -10,7 +10,7 @@ import {userService} from '../services/user'
 import {BoardList} from '../cmps/board/BoardList'
 import {AddBoard} from '../cmps/board/AddBoard'
 import {onToggleModal} from '../store/actions/system.actions'
-import {Lock, Members} from '../cmps/SvgContainer'
+import {DownTriangle, Lock, Members, UpTriangle} from '../cmps/SvgContainer'
 
 export function BoardIndex() {
   const boards = useSelector((storeState) => storeState.boardModule.boards)
@@ -69,7 +69,7 @@ export function BoardIndex() {
               <div className="title">
                 <h2>DoNotello WorkSpace</h2>
                 <span className="workspace-subtitle">
-               <Lock/> <span className="workspace-privacy">Private</span>{' '}
+                  <Lock /> <span className="workspace-privacy">Private</span>{' '}
                 </span>
               </div>
             </div>
@@ -120,6 +120,10 @@ export function BoardIndex() {
         </section> */}
           </section>
         </div>
+      </div>
+      <div className="svg-scroolbar">
+        <UpTriangle className="up"/> 
+        <DownTriangle className="down"/>
       </div>
     </main>
   )
