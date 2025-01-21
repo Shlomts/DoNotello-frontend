@@ -26,9 +26,9 @@ export function CardPreview({ card, board }) {
                     </section>
                 </div>
             </NavLink>
-            <section>
+            {/* <section> */}
                 <Outlet />
-            </section>
+            {/* </section> */}
         </Fragment>
     )
 }
