@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import demoBG from "../../public/imgs/demoBG.jpg"
-import {SideBar} from "../cmps/SideBar"
+import { SideBar } from "../cmps/SideBar"
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
 import {
@@ -158,6 +158,7 @@ export function BoardDetails() {
                         board={board}
                         groups={board.groups}
                         onRemoveGroup={onRemoveGroup}
+
                     />
                     <section className="add-group">
                         {isAddingGroup ? (

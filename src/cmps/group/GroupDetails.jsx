@@ -49,7 +49,9 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
             >
                 <CardList
                     cards={group.cards}
-                    board={board} />
+                    board={board}
+                    group={group}
+                />
             </div>
             <div className="group-footer">
                 {isAddingCard ? (
