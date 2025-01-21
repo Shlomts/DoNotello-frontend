@@ -5,7 +5,7 @@ import {onToggleModal} from '../store/actions/system.actions'
 import {Boards, EllipsisIcon, LeftArrow, Members, Plus, RightArrow, Star, Unstar} from './SvgContainer'
 import {useDispatch, useSelector} from 'react-redux'
 import {loadBoards, removeBoard, toggleBoardStar} from '../store/actions/board.actions'
-import {useNavigate} from 'react-router'
+import {useNavigate, useParams} from 'react-router'
 import {LeaveBoardModal} from './LeaveBoardModal'
 import {showErrorMsg, showSuccessMsg} from '../services/event-bus.service'
 
@@ -15,6 +15,8 @@ export function SideBar() {
   const [selectedBoard, setSelectedBoard] = useState(null)
   const [isCollapsed, setIsCollapsed] = useState(false)
 
+  const { boardId } = useParams() 
+  
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -120,7 +122,7 @@ export function SideBar() {
           </div>
         </div>
         {boards.map((board) => (
-          <li key={board._id} className="boards-list">
+          <li key={board._id} className={`boards-list ${boardId ? 'active' : ''}`}>
             <Link to={`/board/${board._id}`}>
               <div style={{backgroundImage: `url(${board.style.backgroundImage})`}}></div>
               <span>{board.title}</span>

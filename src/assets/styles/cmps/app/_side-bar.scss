@@ -129,14 +129,7 @@
           cursor: pointer;
         }
       }
-      &.active {
-        background-color: $app-sidebar-dark-hover;
-        width: 100%;
-
-        p {
-          color: $app-sidebar-dark-active-txt;
-        }
-      }
+ 
     }
   }
 
@@ -248,6 +241,14 @@
     }
     &:hover button {
       display: flex !important;
+    }
+    &.active {
+      background-color: $app-sidebar-dark-hover;
+      width: 100%;
+
+      p {
+        color: $app-sidebar-dark-active-txt;
+      }
     }
   }
 
