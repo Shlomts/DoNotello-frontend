@@ -7,24 +7,26 @@ import { useState} from 'react'
 import {AddBoard} from './board/AddBoard'
 import {onToggleModal} from '../store/actions/system.actions'
 import {Members} from './SvgContainer'
+import { googleLogout } from '@react-oauth/google'
 
 export function AppHeader() {
-  //   const user = useSelector((storeState) => storeState.userModule.user)
+    const user = useSelector((storeState) => storeState.userModule.user)
   const navigate = useNavigate()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const logoUrl = '/imgs/Logo.png'
 
 
-  const user = {
-    fullname: 'User Usery',
-    email: 'user@gmail.com',
-  }
+  // const user = {
+  //   fullname: 'User Usery',
+  //   email: 'user@gmail.com',
+  // }
   async function onLogout() {
     try {
       await logout()
       //   can make login page so itll go there
-      navigate('/')
-      showSuccessMsg(`Bye now`)
+      googleLogout()
+      navigate('/login')
+      showSuccessMsg(`Login out`)
     } catch (err) {
       showErrorMsg('Cannot logout')
     }
@@ -52,7 +54,7 @@ export function AppHeader() {
       <nav>
         <NavLink to="/" className="logo">
           <div className="logo-container">
-            <img src={logoUrl} alt="DoNotello Logo" />{' '}
+            <img src={logoUrl} alt="DoNotello Logo" />
           </div>
         </NavLink>
         <div className="nav-actions action">
@@ -71,18 +73,18 @@ export function AppHeader() {
             <div className="user-avatar">
               <Members />
             </div>
-            {/* {isDropdownOpen && (
+            {isDropdownOpen && (
               <ul className="user-dropdown">
                 <li className="account">
                   <h2>Account</h2>
                   <div className="user-container">
-                    <Member />
+                    <Members />
                     </div>
                     <div className="user-info">
                       <p className="user-name">{user.fullname}</p>
                       <p className="user-email">{user.email}</p>
                     </div>
-                  </div>{' '}
+                
                 </li>
                 <li>
                   <Link to={`user/${user._id}`}>Profile and visibility</Link>
@@ -94,7 +96,7 @@ export function AppHeader() {
                   <p onClick={onLogout}>Log out</p>
                 </li>
               </ul>
-            )} */}
+            )}
           </div>
         )}
       </nav>

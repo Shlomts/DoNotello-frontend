@@ -1,47 +1,102 @@
-.login-form,
-.signup-form {
-	display: grid;
-	width: min(80%, 300px);
-	margin: auto;
+.login-page {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  inset: 0;
+  height: 100vh;
+  width: 100vw;
 
-	padding: 1em;
-	background-color: $clr4;
-}
+  .login-container {
+    display: flex;
+    flex: 1 1 auto;
+    .login-content {
+      min-width: 0;
+      position: relative;
+      z-index: 100;
+      flex: 1 1 auto;
 
-.signup-form {
-	input {
-		width: 100%;
-	}
-
-    .admin-toggle {
+      .page-imgs {
         display: flex;
-        align-items: center;
-        justify-self: start;
+        flex-direction: column;
+        position: absolute;
+        width: 100%;
+        z-index: -1;
+        background-color: rgb(250, 251, 252);
+        background-repeat: no-repeat;
 
-        span {
-            font-size: .8em;
+        .right-login {
+          width: 159px;
+          height: 150px;
+          position: fixed;
+          background-repeat: no-repeat;
+          background-position: right bottom;
         }
+        .left-login {
+          width: 159px;
+          height: 150px;
+          position: fixed;
+          background-repeat: no-repeat;
+          background-position: left bottom;
+        }
+      }
+
+      .login-form-container {
+        min-height: calc(100vh - 100px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 50px 0;
+
+        .main-login-form {
+          display: flex;
+          flex-direction: column;
+          margin: 0 auto;
+          width: 400px;
+          padding: 32px 40px;
+          background-color: rgb(255, 255, 255);
+          border-radius: 3px;
+          color: #44546f;
+          box-shadow: rgb(0, 0, 0, 0.1) 0 0 10px;
+
+          .form-header {
+            display: flex;
+            flex-direction: column;
+            -webkit-box-align: center;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 16px;
+            span.logo {
+              display: inline-block;
+              position: relative;
+              line-height: 1;
+              user-select: none;
+              white-space: normal;
+              height: 40px;
+              img {
+                width: 175.5px;
+                height: 40px;
+              }
+            }
+            .sub-title {
+              display: flex;
+              flex-direction: column;
+              padding-top: 24px;
+              -webkit-box-align: center;
+              align-items: center;
+              h5 {
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 20px;
+                color: rgb(23, 43, 77);
+              }
+            }
+          }
+
+		  .form-login-container{
+			
+		  }
+        }
+      }
     }
-}
-
-.login-page nav {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	gap: 2em;
-
-	margin-block: 100px 0.5em;
-
-	a {
-		font-size: 0.8em;
-		color: $clr4;
-
-		&:hover {
-			color: $clr1;
-		}
-	}
-	a.active {
-		text-decoration: underline;
-		color: $clr2;
-	}
+  }
 }
