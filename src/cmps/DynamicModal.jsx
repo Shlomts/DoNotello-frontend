@@ -55,7 +55,7 @@ export function DynaminModal() {
 
     modalStyle = {
       ...modalStyle,
-      top: 225,
+      top: 150,
       left : 400,
     }
   }
