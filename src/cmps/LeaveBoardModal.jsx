@@ -8,7 +8,10 @@ export function LeaveBoardModal({onClose, onLeave, boardTitle}) {
     setIsConfirming(true) // Show confirmation message
   }
 
- 
+  async function handleConfirmLeave() {
+    await onLeave()
+    onClose()
+  }
 
   return (
     <section className="modal-overlay-remove">
@@ -42,7 +45,7 @@ export function LeaveBoardModal({onClose, onLeave, boardTitle}) {
               <div className="board-body">
                 <p>You will be remove this board.</p>
 
-                <button onClick={onLeave} className="close-board-confirm">
+                <button onClick={handleConfirmLeave} className="close-board-confirm">
                   Close
                 </button>
               </div>

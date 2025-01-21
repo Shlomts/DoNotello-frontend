@@ -1,26 +1,28 @@
 import {useSelector} from 'react-redux'
+import {useEffect, useRef, useState} from 'react'
+
 import {onToggleModal} from '../store/actions/system.actions'
 
 export function DynaminModal() {
   const modalData = useSelector((storeState) => storeState.systemModule.modalData)
+  const modalRef = useRef(null)
+  const [modalHeight, setModalHeight] = useState(null)
+
+  useEffect(() => {
+    if (modalRef.current) {
+      setModalHeight(modalRef.current.clientHeight)
+    }
+  }, [modalData])
 
   function onCloseModal() {
     onToggleModal(null)
   }
 
-  function onCloseModal() {
-    onToggleModal(null) // Clear modal data to close
-  }
+  if (!modalData) return null
+  console.log(modalData, 'modal data')
 
-  if (!modalData) return null // Guard clause to return early if modalData is null or undefined
-
-  const {trigger, position} = modalData // Only destructure trigger for now
+  const {trigger, position} = modalData
   const Cmp = modalData.cmp
-
-  // if (!position) {
-  //   console.error('Modal position is undefined');
-  //   return null; // Return early or handle the error accordingly
-  // }
 
   // Default modal styles
   let modalStyle = {
@@ -45,14 +47,17 @@ export function DynaminModal() {
   } else if (trigger === 'sidebar-leave-modal') {
     modalStyle = {
       ...modalStyle,
-      top:position.top -255,
+      top: position.top - 255,
       left: 215,
     }
   } else if (trigger === 'board-index') {
+    // const offset = 145
+
     modalStyle = {
       ...modalStyle,
-      top:  225.8,
-      left: 550    }
+      top: 150,
+      left : 400,
+    }
   }
   const overlayClass =
     trigger &&
@@ -63,9 +68,11 @@ export function DynaminModal() {
       ? 'centered'
       : ''
 
+  
+
   if (!modalData) return <></>
   return (
-    <div className={`modal-overlay ${overlayClass}`} style={modalStyle}>
+    <div className={`modal-overlay ${overlayClass}`} style={modalStyle} ref={modalRef}>
       <section className="content">{Cmp && <Cmp {...modalData.props} onClose={onCloseModal} />}</section>
     </div>
   )

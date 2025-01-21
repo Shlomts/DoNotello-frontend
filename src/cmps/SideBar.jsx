@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {AddBoard} from './board/AddBoard'
 import {onToggleModal} from '../store/actions/system.actions'
-import {Boards, EllipsisIcon, Members, Plus, Star, Unstar} from './SvgContainer'
+import {Boards, EllipsisIcon, LeftArrow, Members, Plus, RightArrow, Star, Unstar} from './SvgContainer'
 import {useDispatch, useSelector} from 'react-redux'
 import {loadBoards, removeBoard, toggleBoardStar} from '../store/actions/board.actions'
 import {useNavigate} from 'react-router'
@@ -74,9 +74,11 @@ export function SideBar() {
   function getStarIcon(isStarred) {
     return isStarred ? <Unstar /> : <Star />
   }
-  // ${isCollapsed ? 'collapsed' : ''}
   return (
-    <div className={`board-sidebar `}>
+    <div
+      className={`board-sidebar   ${isCollapsed ? 'collapsed' : ''}
+`}
+    >
       <header className="sidebar-header">
         <div className="sidebar-logo" onClick={NavToHome}>
           <span className="sidebarlogo">D</span>
@@ -84,9 +86,9 @@ export function SideBar() {
         <p className="logo-link" onClick={NavToHome}>
           DoNotello Workspace
         </p>
-        {/* <button className="toggle-btn" onClick={() => setIsCollapsed(!isCollapsed)}>
+        <button className="toggle-btn" onClick={() => setIsCollapsed(!isCollapsed)}>
           {isCollapsed ? <RightArrow /> : <LeftArrow />}
-        </button> */}
+        </button>
       </header>
 
       <ul className="sidebar-links">
@@ -127,7 +129,7 @@ export function SideBar() {
               <button className="sort-by" onClick={() => openLeaveModal(board)}>
                 <EllipsisIcon />
               </button>
-              <button className={board.isStarred ? 'starred' : ''} onClick={() => handleStarToggle(board._id)}>
+              <button className={board.isStarred ? 'starred' : 'onstar'} onClick={() => handleStarToggle(board._id)}>
                 {getStarIcon(board.isStarred)}
               </button>
             </div>
