@@ -102,14 +102,13 @@
     cursor: pointer;
 
     .user-avatar {
-      width: rem(30px);
-      height: rem(30px);
+      width: rem(35px);
+      height: rem(35px);
       border-radius: 50%;
       overflow: hidden;
-      border: 1px solid;
+      // border: 1px solid;
       padding: 4px;
-
-      svg {
+      img {
         width: 100%;
         height: 100%;
       }
@@ -121,8 +120,8 @@
         border: none;
         display: block;
         position: relative;
-        width: rem(30px);
-        height: rem(30px);
+        width: rem(35px);
+        height: rem(35px);
         padding: 4px;
         outline: 0;
       }

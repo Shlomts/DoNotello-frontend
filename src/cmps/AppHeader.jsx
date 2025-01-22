@@ -71,7 +71,7 @@ export function AppHeader() {
         {user && (
           <div className="user-info" onClick={toggleDropdown}>
             <div className="user-avatar">
-              <Members />
+             <img src={user.imgUrl} alt="" />
             </div>
             {isDropdownOpen && (
               <ul className="user-dropdown">
