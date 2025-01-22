@@ -15,31 +15,6 @@
       z-index: 100;
       flex: 1 1 auto;
 
-      .page-imgs {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        width: 100%;
-        z-index: -1;
-        background-color: rgb(250, 251, 252);
-        background-repeat: no-repeat;
-
-        .right-login {
-          width: 159px;
-          height: 150px;
-          position: fixed;
-          background-repeat: no-repeat;
-          background-position: right bottom;
-        }
-        .left-login {
-          width: 159px;
-          height: 150px;
-          position: fixed;
-          background-repeat: no-repeat;
-          background-position: left bottom;
-        }
-      }
-
       .login-form-container {
         min-height: calc(100vh - 100px);
         display: flex;
@@ -57,46 +32,110 @@
           border-radius: 3px;
           color: #44546f;
           box-shadow: rgb(0, 0, 0, 0.1) 0 0 10px;
-
-          .form-header {
-            display: flex;
-            flex-direction: column;
-            -webkit-box-align: center;
-            align-items: center;
-            text-align: center;
-            margin-bottom: 16px;
-            span.logo {
-              display: inline-block;
-              position: relative;
-              line-height: 1;
-              user-select: none;
-              white-space: normal;
-              height: 40px;
-              img {
-                width: 175.5px;
-                height: 40px;
-              }
-            }
-            .sub-title {
-              display: flex;
-              flex-direction: column;
-              padding-top: 24px;
-              -webkit-box-align: center;
-              align-items: center;
-              h5 {
-                font-weight: 600;
-                font-size: 16px;
-                line-height: 20px;
-                color: rgb(23, 43, 77);
-              }
-            }
-          }
-
-		  .form-login-container{
-			
-		  }
         }
       }
     }
   }
+}
+
+.form-header {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 16px;
+
+  span.logo {
+    display: inline-block;
+    position: relative;
+    line-height: 1;
+    user-select: none;
+    white-space: normal;
+    height: 40px;
+    img {
+      width: 175.5px;
+      height: 40px;
+    }
+  }
+
+  .sub-title {
+    display: flex;
+    flex-direction: column;
+    padding-top: 24px;
+    -webkit-box-align: center;
+    align-items: center;
+    h5 {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 20px;
+      color: rgb(23, 43, 77);
+    }
+  }
+}
+
+.page-imgs {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  background-color: rgb(250, 251, 252);
+  background-repeat: no-repeat;
+
+  .right-login {
+    width: 159px;
+    height: 150px;
+    position: fixed;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+  }
+  .left-login {
+    width: 159px;
+    height: 150px;
+    position: fixed;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+  }
+}
+
+.form-login-container {
+  padding: 0;
+  margin: 0;
+
+  .login-form-input-container {
+    margin: 0;
+
+    .input-cntainer {
+      margin-top: -8px;
+      transform-origin: 50% 0px;
+      transition-property: visibility, height, margin-top, opacity, transform;
+      transition-duration: 0s, 0.2s, 0.2s, 0.2s;
+      transition-timing-function: ease-in-out;
+
+     
+      input {
+        -webkit-box-align: center;
+        align-items: center;
+        background-color: #fafbfc;
+        color: #091e42;
+        cursor: text;
+        border-radius: 3px;
+        border: 1px solid #7a869a;
+        border-style: solid;
+        display: flex;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        overflow: hidden;
+        transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        overflow-wrap: break-word;
+        vertical-align: top;
+        pointer-events: auto;
+      }
+    }
+  }
+}
+
+.emil-container{
+        
 }

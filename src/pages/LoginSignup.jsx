@@ -3,6 +3,7 @@ import {jwtDecode} from 'jwt-decode'
 import {useEffect} from 'react'
 import {Outlet, useNavigate} from 'react-router'
 import {Login} from './Login'
+import {signup} from '../store/actions/user.actions'
 
 export function LoginSignup() {
   const logoUrl = '/imgs/Logo.png'
@@ -34,10 +35,23 @@ export function LoginSignup() {
 
                 <div className="continue-with">
                   <GoogleLogin
-                    onSuccess={(CredentialResponse) => {
-                      const decodedToken = jwtDecode(CredentialResponse.credential)
-                      console.log(decodedToken) // Check the full decoded JWT structure
-                      navigate('/board')
+                    onSuccess={async (CredentialResponse) => {
+                      try {
+                        const decodedToken = jwtDecode(CredentialResponse.credential)
+                        // console.log(decodedToken)
+
+                        const userData = {
+                          // _id: decodedToken.sub, // Google's unique user ID
+                          fullname: decodedToken.name,
+                          username: decodedToken.email,
+                          imgUrl: decodedToken.picture,
+                        }
+
+                        await signup(userData)
+                        navigate('/board')
+                      } catch (err) {
+                        console.error('Signup failed', err)
+                      }
                     }}
                     onError={() => console.log('Faild login')}
                   />
