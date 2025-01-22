@@ -1,5 +1,5 @@
 import { DragDropContext } from "react-beautiful-dnd"
-import { updateBoard } from "../store/actions/board.actions"
+import { updateBoardOptimistic } from "../store/actions/board.actions"
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
 
 export function DragDropHandler({ children, board }) {
@@ -18,7 +18,7 @@ export function DragDropHandler({ children, board }) {
             newGroups.splice(destination.index, 0, removedGroup)
 
             try {
-                await updateBoard({ ...board, groups: newGroups })
+                await updateBoardOptimistic({ ...board, groups: newGroups })
                 showSuccessMsg("Group moved")
             } catch (err) {
                 showErrorMsg("Move groups failed")
@@ -52,7 +52,7 @@ export function DragDropHandler({ children, board }) {
         }
 
         try {
-            await updateBoard({ ...board, groups: newGroups })
+            await updateBoardOptimistic({ ...board, groups: newGroups })
             showSuccessMsg("Card moved")
         } catch (err) {
             showErrorMsg("Card move failed")

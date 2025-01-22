@@ -98,7 +98,6 @@ export function BoardDetails() {
             await addGroupToBoard(board, groupToSave)
             showSuccessMsg(`Board updated, new group: ${groupToSave.title}`)
             setGroupName("")
-            // setIsAddingGroup(false)
         } catch (err) {
             console.error(err)
             showErrorMsg("Cannot add group")
@@ -164,13 +163,19 @@ export function BoardDetails() {
                     </DragDropHandler>
                     <section className="add-group">
                         {isAddingGroup ? (
-                            <div className="add-group-form">
+                            <div className="add-group-form" >
                                 <textarea
                                     value={groupName}
                                     onChange={onSetGroupName}
                                     placeholder="Enter list name..."
                                     rows={1}
                                     autoFocus
+                                    onKeyDown={ev => {
+                                        if (ev.key === 'Enter') {
+                                            ev.preventDefault()
+                                            onAddGroup()
+                                        }
+                                    }}
                                 />
                                 <div className="add-group-actions">
                                     <button

@@ -26,7 +26,7 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
             await addCardToGroup(board, group, cardToSave)
             showSuccessMsg(`Board updated, new card: ${cardToSave.title}`)
             setCardName("")
-            setIsAddingCard(false)
+            // setIsAddingCard(false)
         } catch (err) {
             console.error(err)
             showErrorMsg("Cannot add card")
@@ -61,6 +61,12 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
                             onChange={onSetCardName}
                             placeholder="Enter a title or paste link"
                             autoFocus
+                            onKeyDown={ev => {
+                                if (ev.key === 'Enter') {
+                                    ev.preventDefault()
+                                    onAddCard()
+                                }
+                            }}
                         />
                         <div className="add-card-actions">
                             <button

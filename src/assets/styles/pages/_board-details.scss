@@ -156,7 +156,9 @@
             display: flex;
             align-self: center;
             width: rem(256px);
-            max-height: rem(32px);
+            // max-height: rem(32px);
+            overflow: hidden;
+            height: auto;
 
             padding-inline: rem(6px);
             padding-block: rem(3px);
