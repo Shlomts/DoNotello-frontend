@@ -122,7 +122,7 @@ export function SideBar() {
           </div>
         </div>
         {boards.map((board) => (
-          <li key={board._id} className={`boards-list ${boardId ? 'active' : ''}`}>
+          <li key={board._id} className={`boards-list ${board._id === boardId  ? 'active' : ''}`}>
             <Link to={`/board/${board._id}`}>
               <div style={{backgroundImage: `url(${board.style.backgroundImage})`}}></div>
               <span>{board.title}</span>
