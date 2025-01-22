@@ -34,7 +34,7 @@
 		width: 100%;
 		height: 845px;
 		padding: 18px;
-		gap: 12px;
+		gap: 10px;
 		overflow: auto;
 		// row-gap: 30px;
 
@@ -84,19 +84,23 @@
 
 			h3 {
 				grid-area: h;
-				padding-top: 4px;
+				padding-top: 2px;
 				font-weight: 500;
-				font-size: 21px;
+				font-size: 20.5px;
 			}
 			div {
 				display: block;
-				padding: 5px 0;
-
+				padding: 7px 1px;
+				
 				.group-title {
 					text-transform: uppercase;
 					font-size: 12px;
 					font-weight: 700;
 				}
+			}
+
+			svg {
+				color: #9fadbc;
 			}
 			
 		}
@@ -131,7 +135,7 @@
 		}
 
 		.icon {
-			max-block-size: 0.1em;
+			padding: 2px 2px;
 		}
 
 
