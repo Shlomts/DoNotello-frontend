@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import demoBG from "../../public/imgs/demoBG.jpg"
+import { DragDropHandler } from "../cmps/DragDropHandler"
 import { SideBar } from "../cmps/SideBar"
 
 import { showSuccessMsg, showErrorMsg } from "../services/event-bus.service"
@@ -154,12 +155,13 @@ export function BoardDetails() {
                     </section>
                 </header>
                 <main className="board-content">
-                    <GroupList
-                        board={board}
-                        groups={board.groups}
-                        onRemoveGroup={onRemoveGroup}
-
-                    />
+                    <DragDropHandler board={board}>
+                        <GroupList
+                            board={board}
+                            groups={board.groups}
+                            onRemoveGroup={onRemoveGroup}
+                        />
+                    </DragDropHandler>
                     <section className="add-group">
                         {isAddingGroup ? (
                             <div className="add-group-form">

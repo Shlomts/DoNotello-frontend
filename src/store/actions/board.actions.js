@@ -82,6 +82,7 @@ export async function addGroupToBoard(board, groupToSave) {
 }
 
 export async function addCardToGroup(board, group, cardToSave) {
+
     group.cards.push(cardToSave)
 
     try {
