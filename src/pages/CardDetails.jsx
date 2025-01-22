@@ -339,14 +339,15 @@ function DynamicCmp({ cmp, onCloseModal }) {
 				<MemberPicker
 					info={cmp.info}
 					onCloseModal={onCloseModal}
-					// onUpdate={(data) => {
-					//     updateCmpInfo(
-					//         cmp,
-					//         "selectedMemberIds",
-					//         data,
-					//         `Changed members`
-					//     )
-					// }}
+					onUpdate={(data) => {
+					    updateCmpInfo(
+					        cmp,
+							'memberIds',
+					        "selectedMemberIds",
+					        data,
+					        `Changed members`
+					    )
+					}}
 				/>
 			)
 
@@ -384,20 +385,23 @@ function DynamicCmp({ cmp, onCloseModal }) {
 	}
 }
 
-// async function updateCmpInfo(cmp, cmpInfoPropName, data, activityTitle) {
-//     const taskPropName = cmp.info.propName
-//     console.log(`Updating: ${taskPropName} to: `, data)
-//     // Update cmps in local state
-//     const updatedCmp = structuredClone(cmp)
-//     updatedCmp.info[cmpInfoPropName] = data
-//     setCmps(cmps.map(currCmp => (currCmp.info.propName !== cmp.info.propName ) ? currCmp : updatedCmp))
-//     // Update the task
-//     const updatedTask = structuredClone(task)
-//     updatedTask[taskPropName] = data
-//     try {
-//     await updateTask(boardId, groupId, updatedTask, activityTitle)
-//     showSuccessMsg(`Task updated`)
-//     } catch (err) {
-//     showErrorMsg('Cannot update task')
-//     }
-//     }
+async function updateCmpInfo(cmp, propName,  cmpInfoPropName, data, activityTitle) {
+    const taskPropName = cmp.info.propName
+
+    console.log(`Updating: ${taskPropName} to: `, data)
+
+    // console.log(`data.target: ${taskPropName} to: `, data.target.value)
+    // Update cmps in local state
+    // const updatedCmp = structuredClone(cmp)
+    // updatedCmp.info[cmpInfoPropName] = data
+    // setCmps(cmps.map(currCmp => (currCmp.info.propName !== cmp.info.propName ) ? currCmp : updatedCmp))
+    // // Update the task
+    // const updatedTask = structuredClone(task)
+    // updatedTask[taskPropName] = data
+    // try {
+    // await updateTask(boardId, groupId, updatedTask, activityTitle)
+    // showSuccessMsg(`Task updated`)
+    // } catch (err) {
+    // showErrorMsg('Cannot update task')
+    // }
+    }

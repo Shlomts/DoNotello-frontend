@@ -3,10 +3,10 @@ import { Close } from '../../SvgContainer'
 export function MemberPicker({
 	info,
 	onCloseModal,
-	onAddCardMember,
 	onUpdate,
 }) {
 	console.log('ingo', info)
+	console.log('cmp', info)
 
 	return (
 		<section className='member-picker'>
@@ -28,7 +28,7 @@ export function MemberPicker({
 				<thead>Card members</thead>
 				<ul>
 					{info.boardMembers.map(member => (
-						<li key={member.id} className='member'>
+						<li key={member.id} className='member' onClick={onUpdate}>
 							<img
 								src={member.imgUrl}
 								alt={member.fullname}
