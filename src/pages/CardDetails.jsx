@@ -39,6 +39,9 @@ export function CardDetails() {
 	const [boardMembers, setBoardMembers] = useState(board.members)
 	const [cardMembers, setCardMembers] = useState(null)
 
+	const [cardTitle, setCardTitle] = useState(card?.title || '')
+	const [isEditCardTitle, setIsEditCardTitle] = useState(false)
+
 	const [descriptionInput, setDescriptionInput] = useState(
 		card?.description || ''
 	)
@@ -52,6 +55,7 @@ export function CardDetails() {
 	useEffect(() => {
 		setDescriptionInput(card?.description || '')
 		setDesInEdit(card?.description || '')
+		setIsEditCardTitle(card?.title || '')
 	}, [card])
 
 	async function getCard() {
@@ -94,6 +98,24 @@ export function CardDetails() {
 	// 		editTextarea.style.height = `${textarea.scrollHeight}px`
 	// 	}
 	// }
+
+	function onSaveCardTitle(name) {
+		if (name === '') return
+
+		setCard(card => {
+			card.title = name
+			return card
+		})
+
+		updateCard (board, group, card)
+		setIsEditCardTitle(false)
+	}
+
+	function onKeyDown(ev) {
+        if (ev.key === 'Enter') {
+            onSaveCardTitle()
+        }
+    }
 
 	function onChangeDescription(ev) {
 		setDesInEdit(ev.target.value)
@@ -142,7 +164,20 @@ export function CardDetails() {
 					<Card />
 				</div>
 				<header className='header'>
-					<h3> {card.title}</h3>
+					{isEditCardTitle ? (
+						<input
+							type='text'
+							value={cardTitle}
+							onChange={ev => setCardTitle(ev.target.value)}
+							onBlur={ev => onSaveCardTitle(ev.target.value)}
+							onKeyDown={onKeyDown}
+							autoFocus
+						/>
+					) : (
+						<h3 onClick={() => setIsEditCardTitle(true)}>
+							{card.title}
+						</h3>
+					)}
 					<div>
 						in list{' '}
 						<span className='group-title'>{group.title}</span>

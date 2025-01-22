@@ -88,6 +88,19 @@
 				font-weight: 500;
 				font-size: 21px;
 			}
+
+			input {
+                margin: 0;
+                padding-inline: rem(10px);
+                line-height: rem(32px);
+                font-size: rem(18px);
+                font-weight: bold;
+                color: white;
+                background-color: transparent;
+                border: none;
+                width: 100%;
+            }
+
 			div {
 				display: block;
 				padding: 5px 0;
