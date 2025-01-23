@@ -1,22 +1,22 @@
-import {useEffect, useState} from 'react'
-import {Link} from 'react-router-dom'
-import {AddBoard} from './board/AddBoard'
-import {onToggleModal} from '../store/actions/system.actions'
-import {Boards, EllipsisIcon, LeftArrow, Members, Plus, RightArrow, Star, Unstar} from './SvgContainer'
-import {useDispatch, useSelector} from 'react-redux'
-import {loadBoards, removeBoard, toggleBoardStar} from '../store/actions/board.actions'
-import {useNavigate, useParams} from 'react-router'
-import {LeaveBoardModal} from './LeaveBoardModal'
-import {showErrorMsg, showSuccessMsg} from '../services/event-bus.service'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { AddBoard } from './board/AddBoard'
+import { onToggleModal } from '../store/actions/system.actions'
+import { Boards, EllipsisIcon, LeftArrow, Members, Plus, RightArrow, Star, Unstar } from './SvgContainer'
+import { useDispatch, useSelector } from 'react-redux'
+import { loadBoards, removeBoard, toggleBoardStar } from '../store/actions/board.actions'
+import { useNavigate, useParams } from 'react-router'
+import { LeaveBoardModal } from './LeaveBoardModal'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
-export function SideBar() {
+export function SideBar({ board, onSetStar }) {
   const boards = useSelector((storeState) => storeState.boardModule.boards)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedBoard, setSelectedBoard] = useState(null)
   const [isCollapsed, setIsCollapsed] = useState(false)
 
-  const { boardId } = useParams() 
-  
+  const { boardId } = useParams()
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -63,19 +63,12 @@ export function SideBar() {
           onLeave: () => onRemoveBoard(board._id), // Pass callback instead of executing immediately
         },
         trigger: 'sidebar-leave-modal',
-        position: {top: 0, left: 0},
+        position: { top: 0, left: 0 },
       },
       event
     )
   }
 
-  function handleStarToggle(boardId) {
-    dispatch(toggleBoardStar(boardId))
-  }
-
-  function getStarIcon(isStarred) {
-    return isStarred ? <Unstar /> : <Star />
-  }
   return (
     <div
       className={`board-sidebar   ${isCollapsed ? 'collapsed' : ''}
@@ -122,18 +115,19 @@ export function SideBar() {
           </div>
         </div>
         {boards.map((board) => (
-          <li key={board._id} className={`boards-list ${board._id === boardId  ? 'active' : ''}`}>
+          <li key={board._id} className={`boards-list ${board._id === boardId ? 'active' : ''}`}>
             <Link to={`/board/${board._id}`}>
-              <div style={{backgroundImage: `url(${board.style.backgroundImage})`}}></div>
+              <div style={{ backgroundImage: `url(${board.style.backgroundImage})` }}></div>
               <span>{board.title}</span>
             </Link>
             <div className="btn-actions">
               <button className="sort-by" onClick={() => openLeaveModal(board)}>
                 <EllipsisIcon />
               </button>
-              <button className={board.isStarred ? 'starred' : 'onstar'} onClick={() => handleStarToggle(board._id)}>
-                {getStarIcon(board.isStarred)}
-              </button>
+              <div className="isStarred"
+                onClick={() => onSetStar(board)}>
+                {board.isStarred ? <Unstar /> : <Star />}
+              </div>
             </div>
           </li>
         ))}

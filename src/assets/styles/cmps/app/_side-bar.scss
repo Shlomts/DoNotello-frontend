@@ -10,7 +10,7 @@
   // position: sticky;
   // top: 40px;
   border-right: 1px solid #414548;
-  transition: min-width  100ms ease-in-out;
+  transition: min-width 100ms ease-in-out;
   overflow: hidden;
 
   svg {
@@ -48,6 +48,7 @@
         color: black;
       }
     }
+
     .logo-link {
       color: $app-sidebar-dark-txt;
       display: inline;
@@ -70,10 +71,12 @@
       align-items: center;
       justify-content: center;
       font-weight: 500;
+
       svg {
         width: 1rem;
         height: 1rem;
       }
+
       &:hover {
         background-color: $app-sidebar-dark-hover;
         border-radius: 3px;
@@ -99,6 +102,7 @@
         color: $app-sidebar-dark-txt;
         line-height: 20px;
         font-weight: 400;
+
         div {
           width: 24px;
           height: 20px;
@@ -115,21 +119,24 @@
           justify-content: center;
           background-repeat: no-repeat;
           background-size: cover;
+
           svg {
             width: 16px;
             height: 100%;
           }
         }
+
         p {
           margin: 0;
         }
+
         &:hover {
           background-color: $app-sidebar-dark-hover;
           width: 100%;
           cursor: pointer;
         }
       }
- 
+
     }
   }
 
@@ -153,6 +160,7 @@
     .boards-btn-actions {
       position: relative;
       display: inline-flex;
+      align-items: center;
       // gap: 4px;
       z-index: 10;
 
@@ -167,6 +175,7 @@
         &.add-board {
           padding: 0 4px 4px;
           margin-inline: 6px;
+
           svg {
             width: 16px;
             height: 16px;
@@ -188,6 +197,7 @@
             cursor: default;
           }
         }
+
         &:hover {
           background-color: $app-sidebar-dark-hover;
           border-radius: 3px;
@@ -204,6 +214,7 @@
     &:hover {
       background-color: $app-sidebar-dark-hover;
     }
+
     .board-card {
       display: flex;
       align-items: center;
@@ -219,7 +230,8 @@
 
     .btn-actions {
       display: flex;
-      margin-right: 6.5px;
+      margin-right: 8px;
+
       button {
         display: none;
         background: none;
@@ -227,6 +239,7 @@
         color: $app-sidebar-dark-txt;
         font-size: 12px;
         padding: 2px;
+
         &.sort-by:hover {
           background-color: #a6c5e229;
           padding: 2px;
@@ -234,14 +247,12 @@
           z-index: 5;
         }
       }
-
-      button.starred {
-        display: flex !important;
-      }
     }
+
     &:hover button {
       display: flex !important;
     }
+
     &.active {
       background-color: $app-sidebar-dark-hover;
       width: 100%;
@@ -287,6 +298,7 @@
         }
       }
     }
+
     .sidebar-links {
       display: none;
     }

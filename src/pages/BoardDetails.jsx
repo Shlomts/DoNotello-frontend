@@ -47,7 +47,6 @@ export function BoardDetails() {
         }
     }, [board])
 
-
     function onSetGroupName(ev) {
         const name = ev.target.value
         setGroupName(name)
@@ -71,7 +70,7 @@ export function BoardDetails() {
         }
     }
 
-    async function onSetStar() {
+    async function onSetStar(board) {
         try {
             const updatedBoard = { ...board, isStarred: !board.isStarred }
             await updateBoard(updatedBoard)
@@ -114,7 +113,10 @@ export function BoardDetails() {
 
     return (
         <section className="board-page">
-            <SideBar />
+            <SideBar
+                board={board}
+                onSetStar={onSetStar}
+            />
             <section className="board-details"
                 style={{ backgroundImage: `url(${demoBG})` }}
             >
@@ -134,7 +136,7 @@ export function BoardDetails() {
                         )}
 
                         <div className="isStarred"
-                            onClick={onSetStar}>
+                            onClick={() => onSetStar(board)}>
                             {board.isStarred ? <Unstar /> : <Star />}
                         </div>
                         {/* <div className="change-icon">
