@@ -7,15 +7,14 @@ html {
 }
 
 body {
-  // max-width: 1024px;
-  margin: 0 auto;
+  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
     sans-serif;
   font-size: 14px;
   // @include theme($theme-current);
   background-color: $app-root-dark-color;
   overflow-y: hidden;
-  overflow-x: hidden;
+  // overflow-x: hidden;
 }
 
 h1,
@@ -59,12 +58,12 @@ input {
 // }
 
 button {
-	border: 0;
-	background-color: transparent;
-	color: whitesmoke;
-	// padding: 5px 10px;
-	// margin: 5px;
-	cursor: pointer;
+  border: 0;
+  background-color: transparent;
+  color: whitesmoke;
+  // padding: 5px 10px;
+  // margin: 5px;
+  cursor: pointer;
 }
 
 .btn {
@@ -103,5 +102,3 @@ button {
     }
   }
 }
-
-

@@ -3,13 +3,16 @@
   flex-direction: column;
   
   .content-layout {
-    min-height: calc(100vh - 7rem);
     display: flex;
-    flex: 1; // Takes up the remaining space below the header
+    height: calc(100vh - 7rem);
+    flex: 1 1 auto; // Takes up the remaining space below the header
+    min-height: 0;
 
     main {
-      flex: 2 400px; // Fills the remaining space next to the sidebar
+      flex: 1 1 0; // Fills the remaining space next to the sidebar
       min-width: 500px;
+      display: flex;
+      flex-direction: column;
     }
   }
 }

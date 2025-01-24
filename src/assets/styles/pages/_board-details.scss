@@ -1,16 +1,14 @@
 .board-details {
-    display: flex;
-    flex-direction: column;
-    height: 95vh;
-    width: 100vw;
-    padding-bottom: rem(10px);
+    // display: flex;
+    // flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
 
-    overflow: hidden;
-
+    overflow-x: auto;
+    overflow-y: hidden;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-
 
     header {
         display: flex;
@@ -94,11 +92,30 @@
         }
     }
 
-    main {
+    .board-content {
         display: flex;
         flex-grow: 1;
-        overflow-x: auto;
+        height: 86vh;
         align-items: flex-start;
+        margin-block-end: 8px;
+
+        overflow-x: auto;
+        // overflow-y: hidden;
+
+
+        &::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #6d7c9a;
+            border-radius: 10px;
+        }
+
+
+        &::-webkit-scrollbar-track {
+            background: #00000026;
+        }
 
         .add-group {
             display: flex;
@@ -130,11 +147,11 @@
                 svg {
                     width: rem(16px);
                     height: rem(16px);
-        
+
                 }
             }
 
-                 
+
         }
 
         .add-group-form {
@@ -143,7 +160,6 @@
             gap: rem(8px);
             padding: rem(8px);
 
-            // margin-inline-end: rem(12px);
             min-height: rem(88px);
             min-width: rem(272px);
 

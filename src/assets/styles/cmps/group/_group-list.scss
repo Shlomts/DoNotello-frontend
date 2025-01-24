@@ -1,10 +1,12 @@
-.group-list{
+.group-list {
     display: flex;
     padding-inline: rem(6px);
     margin-block-start: rem(12px);
-    // min-height:100vh;
+    scroll-margin: 8px;
 
-    li{
+    li {
         padding-inline: rem(6px);
+        // max-height: rem(629px);
+
     }
 }

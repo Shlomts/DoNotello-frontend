@@ -6,8 +6,8 @@
     justify-content: space-between;
     align-items: stretch;
     padding-block-end: rem(8px);
-
     width: rem(272px);
+    max-height: rem(660px);
 
     border-radius: rem(12px);
 
@@ -49,13 +49,26 @@
 
     .group-cards {
         display: flex;
+        flex-grow: 1;
+        min-height: 0;
         flex-direction: column;
         overflow-y: auto;
-        flex-grow: 1;
+        scrollbar-gutter: stable;
 
         &.empty {
             align-items: center;
             justify-content: center;
+        }
+
+        &::-webkit-scrollbar {
+            background-color: #091e420f;
+            width: 8px;
+            height: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #323b36;
+            border-radius: 5px;
         }
     }
 
@@ -167,8 +180,4 @@
         }
 
     }
-
-
-
-
 }
