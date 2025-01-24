@@ -55,7 +55,7 @@ export function CardDetails() {
 	useEffect(() => {
 		setDescriptionInput(card?.description || '')
 		setDesInEdit(card?.description || '')
-		setIsEditCardTitle(card?.title || '')
+		setCardTitle(card?.title || '')
 	}, [card])
 
 	async function getCard() {
@@ -100,7 +100,7 @@ export function CardDetails() {
 	// }
 
 	function onSaveCardTitle(name) {
-		if (name === '') return
+		if (name === '' || name === undefined) return
 
 		setCard(card => {
 			card.title = name
@@ -113,7 +113,7 @@ export function CardDetails() {
 
 	function onKeyDown(ev) {
         if (ev.key === 'Enter') {
-            onSaveCardTitle()
+            onSaveCardTitle(ev.target.value)
         }
     }
 
@@ -179,7 +179,7 @@ export function CardDetails() {
 						</h3>
 					)}
 					<div>
-						in list{' '}
+						in list &nbsp;
 						<span className='group-title'>{group.title}</span>
 					</div>
 				</header>
