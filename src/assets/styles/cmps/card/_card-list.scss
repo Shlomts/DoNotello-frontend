@@ -1,9 +1,26 @@
-.card-list{
+.card-list {
     display: flex;
     flex-direction: column;
     gap: rem(8px);
 
-    li{
+    &.dragging-over {
+        border-radius: rem(8px);
+    }
+
+    li {
         padding-inline: rem(8px);
+    }
+
+    .draggable-container {
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.2s ease;
+
+        &.isDragging {
+            background-color: transparent;
+            opacity: 0.8;
+            z-index: 10;
+            border-radius: rem(8px);
+        }
     }
 }

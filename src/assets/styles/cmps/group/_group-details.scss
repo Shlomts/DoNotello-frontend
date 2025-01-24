@@ -14,7 +14,6 @@
     background-color: #101204;
     color: $txt-clr;
 
-
     .group-header {
         display: flex;
         justify-content: space-between;
@@ -49,9 +48,10 @@
 
     .group-cards {
         display: flex;
-        flex-grow: 1;
-        min-height: 0;
         flex-direction: column;
+        flex-grow: 0;
+        min-height: 0;
+        // max-height: calc(100% - rem(48px));
         overflow-y: auto;
         scrollbar-gutter: stable;
 
