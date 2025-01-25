@@ -20,7 +20,10 @@ export function CardPreview({ card, cardMembers, cardLabels }) {
                 state={{ cardMembers, cardLabels }}
             >
                 <div className={`card-preview ${cardHasContent ? 'expanded' : ''}`}>
-                    <CardLabels labels={cardLabels} />
+                    <CardLabels
+                        labels={cardLabels}
+                        className='card-preview-labels'
+                    />
                     <h3>{card.title}</h3>
                     <section className="bottom-card-preview">
                         <CardIcons card={card} />

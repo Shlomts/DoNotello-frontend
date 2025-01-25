@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Plus } from "../../SvgContainer"
 
-export function CardLabels({ labels, showTitles = false, onLableCick, onPlusIcon }) {
+export function CardLabels({ labels, className, showTitles = false, onLableCick, onPlusIcon }) {
     const [showLabelTitle, setShowLabelTitle] = useState(showTitles)
 
     function handleClickLabel(ev, label) {
@@ -16,7 +16,7 @@ export function CardLabels({ labels, showTitles = false, onLableCick, onPlusIcon
     if (!labels || labels.length === 0) return null
 
     return (
-        <div className="card-labels">
+        <div className={`card-labels ${className}`}>
             {labels.map(label => (
                 <span
                     key={label.id}
@@ -28,15 +28,17 @@ export function CardLabels({ labels, showTitles = false, onLableCick, onPlusIcon
                     {showLabelTitle && (<span className="label-title">{label.title}</span>)}
                 </span>
             ))}
-            <span
-                className='add-labels-icon'
-                onClick={(ev) => {
-                    ev.preventDefault()
-                    if (onPlusIcon) onPlusIcon()
-                }}>
-                <Plus />
-            </span>
-
+            {className === "card-details-labels" && (
+                <span
+                    className="add-labels-icon"
+                    onClick={(ev) => {
+                        ev.preventDefault()
+                        if (onPlusIcon) onPlusIcon()
+                    }}
+                >
+                    <Plus />
+                </span>
+            )}
         </div>
     )
 }

@@ -53,6 +53,14 @@
         // padding: rem(10px) rem(12px);
     }
 
+    .card-labels .card-label {
+        transition: filter ease;
+
+        &:hover {
+            filter: brightness(-1)
+        }
+    }
+
     .member-details-popup {
         position: absolute;
         top: 100%;

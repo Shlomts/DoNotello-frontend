@@ -243,7 +243,10 @@ export function CardDetails() {
 								</div>
 							</section>
 						) : (
-							<span className='add-member-icon'><Plus /></span>
+							<section className='members-empty'>
+								<h4>Members</h4>
+								<span className='add-member-icon'><Plus /></span>
+							</section>
 						)
 					}
 
@@ -256,12 +259,11 @@ export function CardDetails() {
 									showTitles
 									onLableCick={onEditLabel}
 									onPlusIcon={onEditLabel}
+									className='card-details-labels'
 								/>
 							</div>
 						</section>
 					)}
-
-
 				</div>
 
 				<section className='description'>
