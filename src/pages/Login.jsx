@@ -4,15 +4,17 @@ import {useNavigate} from 'react-router'
 import {userService} from '../services/user'
 import {login, loadUsers} from '../store/actions/user.actions'
 import {useSelector} from 'react-redux'
+import {EditMail} from '../cmps/SvgContainer'
 
 export function Login() {
   // const [users, setUsers] = useState([])
   const users = useSelector((storeState) => storeState.userModule.users)
 
-  const [credentials, setCredentials] = useState({username: '', password: '', fullname: ''})
+  const [credentials, setCredentials] = useState({email: '', password: '', fullname: ''})
   const [userExists, setUserExists] = useState(false)
   const [isEditingEmail, setIsEditingEmail] = useState(true)
   const [isEmailValid, setIsEmailValid] = useState(true)
+  const [isEmailConfirmed, setIsEmailConfirmed] = useState(false);
 
   const navigate = useNavigate()
   // console.log(users)
@@ -31,16 +33,22 @@ export function Login() {
   async function onLogin(ev = null) {
     if (ev) ev.preventDefault()
 
-    // Dont forget to add this after tsting
-    // || !credentials.password
-    if (!credentials.email || !isEmailValid) return
-    await login(credentials)
-    navigate('/board')
+
+      if (!isEmailConfirmed) {
+        // Validate email before confirming
+        if (!credentials.email || !isEmailValid) return;
+        setIsEmailConfirmed(true);
+        setIsEditingEmail(false);
+      } else {
+        // Handle login with confirmed email
+        if (!credentials.password) return; // Ensure password is filled
+        await login(credentials);
+        navigate('/board');
+      }
   }
 
   function handleChange(ev) {
     const {name, value} = ev.target
-    setCredentials((prev) => ({...prev, [name]: value}))
 
     if (name === 'email') {
       const isValid = /\S+@\S+\.\S+/.test(value)
@@ -49,32 +57,39 @@ export function Login() {
       setUserExists(isValid && value !== '')
     }
     // setCredentials({ ...credentials, [field]: value })
+    setCredentials((prev) => ({...prev, [name]: value}))
   }
 
   return (
     <form className="login-form-input-container" onSubmit={onLogin}>
-      <div className="input-container">
-        <div className="emil-container">
-          {userExists && !isEditingEmail ? (
-            <span className="user-mail" onClick={() => setIsEditingEmail(false)}>
+    <div className="input-container">
+      <div className="email-container">
+        {isEmailConfirmed && !isEditingEmail ? (
+          <div className="email-content">
+            <span className="user-mail" onClick={() => setIsEditingEmail(true)}>
               {credentials.email}
             </span>
-          ) : (
-            <input
-              className={!isEmailValid ? 'invalid email-input' : 'email-input'}
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={credentials.email || ''}
-              onChange={handleChange}
-              onBlur={() => userExists && setIsEditingEmail(true)} // Switch to span on blur
-              required
-            />
-          )}
-          {!isEmailValid && <span className="error-message">Enter a valid email address</span>}
-        </div>
+            <span className="edit-icon" onClick={() => setIsEditingEmail(true)}>
+              <EditMail style={{ color: 'rgb(66, 82, 110)' }} />
+            </span>
+          </div>
+        ) : (
+          <input
+            className={!isEmailValid ? 'invalid email-input' : 'email-input'}
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={credentials.email || ''}
+            onChange={handleChange}
+            onBlur={() => userExists && setIsEditingEmail(false)} // Switch to span on blur
+            required
+            autoComplete="on"
+          />
+        )}
+        {!isEmailValid && <span className="error-message">Enter a valid email address</span>}
       </div>
-      {userExists && (
+
+      {isEmailConfirmed && (
         <div className="user-password">
           <input
             className="password-input"
@@ -86,8 +101,11 @@ export function Login() {
             required
           />
         </div>
-      )}{' '}
-      <button className="login-btn">{userExists ? 'Log in' : 'Continue'}</button>
-    </form>
+      )}
+    </div>
+    <button className="login-btn">
+      <span>{isEmailConfirmed ? 'Log in' : 'Continue'}</span>
+    </button>
+  </form>
   )
 }
