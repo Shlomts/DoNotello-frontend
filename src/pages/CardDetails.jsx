@@ -59,11 +59,6 @@ export function CardDetails() {
 		setDesInEdit(card?.description || '')
 	}, [card])
 
-	// useEffect(() => {
-	// 	setDescriptionInput(card?.description || '')
-	// 	setDesInEdit(card?.description || '')
-	// }, [currDynamic])
-
 	async function getCard() {
 		try {
 			const cardToSet = await loadCard(board, cardId)
@@ -164,9 +159,9 @@ export function CardDetails() {
 			{isShowModal && currDynamic && dataRef.current && (
 				<DynamicCmp
 					Cmp={currDynamic}
-					title={'Members'}
+					title={dataRef?.current?.title}
 					onCloseModal={onCloseModal}
-					data={dataRef.current}
+					data={(dataRef?.current?.data)}
 					onUpdateCmp={onUpdateDynamicInfo}
 
 					// onUpdateCmpInfo(cmp, cmpInfoPropName, data, activityTitle)
@@ -208,14 +203,12 @@ export function CardDetails() {
 							<li
 								className='opt-card'
 								onClick={ev => {
-									console.log('clickin memrs', currDynamic, isShowModal, dataRef)
-									dataRef.current = { boardMembers: boardMembers }
-									console.log('after dataref', currDynamic, isShowModal, dataRef)
+									dataRef.current = {
+										title:'Members',
+										data: { boardMembers: boardMembers }
+									}
 									setCurrDynamic(prevDynamic => prevDynamic = MemberPicker)
-									console.log('after setdynamic', currDynamic, isShowModal, dataRef)
 									setIsShowModal(true)
-									console.log('after showmodal', currDynamic, isShowModal, dataRef)
-
 									// onSetMembers
 								}}
 							>
