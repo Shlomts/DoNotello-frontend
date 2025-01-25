@@ -1,46 +1,6 @@
 .member-picker {
-	header {
-		display: grid;
-		grid-template-columns: 32px 1fr 32px;
-		grid-template-rows: max-content;
-
-		padding: 0;
-		text-align: center;
-
-		background-color: inherit;
-		color: inherit;
-
-		h4 {
-			display: block;
-			grid-column: 1 / span 3;
-			grid-row: 1;
-
-			margin: 0;
-			font-size: 14px;
-		}
-
-		button {
-			grid-column: 3;
-			grid-row: 1;
-			display: flex;
-
-			border-radius: 8px;
-			color: inherit;
-			padding: 8px;
-
-            justify-self: end;
-
-            svg {
-                height: 16px;
-                width: 16px;
-            }
-
-			&:hover {
-				background-color: rgb(69 80 90);
-			}
-		}
-	}
-
+	width: 100%;
+	
     .search {
         box-sizing: border-box;
         border: none;

@@ -1,22 +1,13 @@
 import { Close } from '../../SvgContainer'
 
-export function MemberPicker({
-	info,
-	onCloseModal,
-	onUpdate,
-}) {
-	console.log('ingo', info)
-	console.log('cmp', info)
+export function MemberPicker(params) {
+	console.log("mmbrpicker renderd", params)
+	const { info, onUpdate } = params
+	// console.log('ingo', info)
+	// console.log('cmp', info)
 
 	return (
 		<section className='member-picker'>
-			<header>
-				<h4>{info.title}</h4>
-
-				<button onClick={onCloseModal}>
-					<Close />
-				</button>
-			</header>
 
 			<input
 				type='text'
@@ -28,7 +19,11 @@ export function MemberPicker({
 				<thead>Card members</thead>
 				<ul>
 					{info.boardMembers.map(member => (
-						<li key={member.id} className='member' onClick={onUpdate}>
+						<li
+							key={member.id}
+							className='member'
+							onClick={onUpdate}
+						>
 							<img
 								src={member.imgUrl}
 								alt={member.fullname}

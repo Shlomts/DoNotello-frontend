@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useState, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import { useParams } from 'react-router'
 import { useSelector } from 'react-redux'
@@ -22,6 +22,7 @@ import {
 	Delete,
 } from '../cmps/SvgContainer'
 
+import { DynamicCmp } from '../cmps/card/opt-bar/DynamicCmp'
 import { MemberPicker } from '../cmps/card/opt-bar/MemberPicker'
 
 export function CardDetails() {
@@ -35,24 +36,33 @@ export function CardDetails() {
 	const [group, setGroup] = useState(null)
 	const [card, setCard] = useState(null)
 
-	const [isShowModal, setIsShowModal] = useState(false)
-	const [boardMembers, setBoardMembers] = useState(board.members)
-	const [cardMembers, setCardMembers] = useState(null)
-
 	const [descriptionInput, setDescriptionInput] = useState(
 		card?.description || ''
 	)
 	const [isEditMode, setIsEditMode] = useState(false)
 	const [desInEdit, setDesInEdit] = useState(descriptionInput)
 
+	const [isShowModal, setIsShowModal] = useState(false)
+	const [currDynamic, setCurrDynamic] = useState(null)
+	const dataRef = useRef(null)
+
+	const [boardMembers, setBoardMembers] = useState(board.members)
+	const [cardMembers, setCardMembers] = useState(null)
+
 	useEffect(() => {
 		getCard()
+		console.log('im in useeffect')
 	}, [params.cardId])
 
 	useEffect(() => {
 		setDescriptionInput(card?.description || '')
 		setDesInEdit(card?.description || '')
 	}, [card])
+
+	// useEffect(() => {
+	// 	setDescriptionInput(card?.description || '')
+	// 	setDesInEdit(card?.description || '')
+	// }, [currDynamic])
 
 	async function getCard() {
 		try {
@@ -80,8 +90,46 @@ export function CardDetails() {
 	}
 
 	function onCloseModal() {
+		setCurrDynamic(null)
+		dataRef.current = null
 		setIsShowModal(false)
 	}
+
+	async function onUpdateDynamicInfo(
+		cmp,
+		cmpInfoPropName,
+		data,
+		activityTitle
+	) {
+		console.log('im in updateCmpInfo')
+	}
+
+	// async function updateCmpInfo(cmp, cmpInfoPropName, data, activityTitle) {
+	// 	const taskPropName = cmp.info.propName
+
+	// 	console.log(`Updating: ${taskPropName} to: `, data)
+
+	// 	console.log(`data.target: ${taskPropName} to: `, data.target.value)
+	// 	// Update cmps in local state
+	// 	const updatedCmp = structuredClone(cmp)
+	// 	updatedCmp.info[cmpInfoPropName] = data
+	// 	setCmps(
+	// 		cmps.map(currCmp =>
+	// 			currCmp.info.propName !== cmp.info.propName
+	// 				? currCmp
+	// 				: updatedCmp
+	// 		)
+	// 	)
+	// 	// Update the task
+	// 	const updatedTask = structuredClone(task)
+	// 	updatedTask[taskPropName] = data
+	// 	try {
+	// 		await updateTask(boardId, groupId, updatedTask, activityTitle)
+	// 		showSuccessMsg(`Task updated`)
+	// 	} catch (err) {
+	// 		showErrorMsg('Cannot update task')
+	// 	}
+	// }
 
 	function onSetMembers() {
 		console.log('boardMembers', boardMembers)
@@ -113,19 +161,25 @@ export function CardDetails() {
 
 	return (
 		<section className='card-details-outlet'>
-			{isShowModal && (
-				<div className='dynamic'>
-					<DynamicCmp
-						cmp={{
-							type: 'MemberPicker',
-							info: {
-								title: 'Members',
-								boardMembers: boardMembers,
-							},
-						}}
-						onCloseModal={onCloseModal}
-					/>
-				</div>
+			{isShowModal && currDynamic && dataRef.current && (
+				<DynamicCmp
+					Cmp={currDynamic}
+					title={'Members'}
+					onCloseModal={onCloseModal}
+					data={dataRef.current}
+					onUpdateCmp={onUpdateDynamicInfo}
+
+					// onUpdateCmpInfo(cmp, cmpInfoPropName, data, activityTitle)
+
+					// cmp={{
+					// 	type: 'MemberPicker',
+					// 	info: {
+					// 		title: 'Members',
+					// 		boardMembers: boardMembers,
+					// 	},
+					// }}
+					// onCloseModal={onCloseModal}
+				/>
 			)}
 
 			<div open className='card-details'>
@@ -154,8 +208,15 @@ export function CardDetails() {
 							<li
 								className='opt-card'
 								onClick={ev => {
+									console.log('clickin memrs', currDynamic, isShowModal, dataRef)
+									dataRef.current = { boardMembers: boardMembers }
+									console.log('after dataref', currDynamic, isShowModal, dataRef)
+									setCurrDynamic(prevDynamic => prevDynamic = MemberPicker)
+									console.log('after setdynamic', currDynamic, isShowModal, dataRef)
 									setIsShowModal(true)
-									onSetMembers
+									console.log('after showmodal', currDynamic, isShowModal, dataRef)
+
+									// onSetMembers
 								}}
 							>
 								<Members />
@@ -187,10 +248,7 @@ export function CardDetails() {
 						<thead>Actions</thead>
 						<ul>
 							<li className='opt-card' onClick={onRemoveCard}>
-								<div className='icon'>
-									<Close />
-									{/* <Delete /> */}
-								</div>
+								<Close />
 								<div className='name'>Delete</div>
 							</li>
 						</ul>
@@ -331,77 +389,3 @@ export function CardDetails() {
 		</section>
 	)
 }
-
-function DynamicCmp({ cmp, onCloseModal }) {
-	switch (cmp.type) {
-		case 'MemberPicker':
-			return (
-				<MemberPicker
-					info={cmp.info}
-					onCloseModal={onCloseModal}
-					onUpdate={(data) => {
-					    updateCmpInfo(
-					        cmp,
-							'memberIds',
-					        "selectedMemberIds",
-					        data,
-					        `Changed members`
-					    )
-					}}
-				/>
-			)
-
-		// case "StatusPicker":
-		//     return (
-		//         <StatusPicker
-		//             info={cmp.info}
-		//             onUpdate={(data) => {
-		//                 updateCmpInfo(
-		//                     cmp,
-		//                     "selectedStatus",
-		//                     data,
-		//                     `Changed Status to ${data}`
-		//                 )
-		//             }}
-		//         />
-		//     )
-		// case "DatePicker":
-		//     return (
-		//         <DatePicker
-		//             info={cmp.info}
-		//             onUpdate={(data) => {
-		//                 updateCmpInfo(
-		//                     cmp,
-		//                     "selectedDate",
-		//                     data,
-		//                     `Changed due date to ${data}`
-		//                 )
-		//             }}
-		//         />
-		//     )
-
-		default:
-			return <p>UNKNOWN {cmp.type}</p>
-	}
-}
-
-async function updateCmpInfo(cmp, propName,  cmpInfoPropName, data, activityTitle) {
-    const taskPropName = cmp.info.propName
-
-    console.log(`Updating: ${taskPropName} to: `, data)
-
-    // console.log(`data.target: ${taskPropName} to: `, data.target.value)
-    // Update cmps in local state
-    // const updatedCmp = structuredClone(cmp)
-    // updatedCmp.info[cmpInfoPropName] = data
-    // setCmps(cmps.map(currCmp => (currCmp.info.propName !== cmp.info.propName ) ? currCmp : updatedCmp))
-    // // Update the task
-    // const updatedTask = structuredClone(task)
-    // updatedTask[taskPropName] = data
-    // try {
-    // await updateTask(boardId, groupId, updatedTask, activityTitle)
-    // showSuccessMsg(`Task updated`)
-    // } catch (err) {
-    // showErrorMsg('Cannot update task')
-    // }
-    }
