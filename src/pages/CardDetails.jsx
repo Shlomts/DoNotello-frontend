@@ -47,17 +47,18 @@ export function CardDetails() {
 	const dataRef = useRef(null)
 
 	const [boardMembers, setBoardMembers] = useState(board.members)
-	const [cardMembers, setCardMembers] = useState(null)
+	const [cardMembers, setCardMembers] = useState(card?.memberIds || [])
 
 	useEffect(() => {
 		getCard()
-		console.log('im in useeffect')
 	}, [params.cardId])
 
 	useEffect(() => {
 		setDescriptionInput(card?.description || '')
 		setDesInEdit(card?.description || '')
+		setCardMembers(card?.memberIds || [])
 	}, [card])
+
 
 	async function getCard() {
 		try {
@@ -66,6 +67,7 @@ export function CardDetails() {
 			setCard(cardToSet)
 			setGroup(groupToSet)
 			// onSetMembers()
+			console.log('card:', card)
 		} catch (err) {
 			console.log('Having problmes loading card...', err)
 			throw err
@@ -90,44 +92,32 @@ export function CardDetails() {
 		setIsShowModal(false)
 	}
 
-	async function onUpdateDynamicInfo(
-		cmp,
-		cmpInfoPropName,
-		data,
-		activityTitle
-	) {
-		console.log('im in updateCmpInfo')
+	async function onUpdateDynamicInfo(data) {
+		switch (currDynamic) {
+			case MemberPicker:
+				onSetMembers(data)
+				break
+			default:
+				;<div>UNKNOWM</div>
+				break
+		}
 	}
 
-	// async function updateCmpInfo(cmp, cmpInfoPropName, data, activityTitle) {
-	// 	const taskPropName = cmp.info.propName
+	function onSetMembers(id) {
+		const updatedCardMembers = [...cardMembers]
+		const index = updatedCardMembers.indexOf(id)
 
-	// 	console.log(`Updating: ${taskPropName} to: `, data)
-
-	// 	console.log(`data.target: ${taskPropName} to: `, data.target.value)
-	// 	// Update cmps in local state
-	// 	const updatedCmp = structuredClone(cmp)
-	// 	updatedCmp.info[cmpInfoPropName] = data
-	// 	setCmps(
-	// 		cmps.map(currCmp =>
-	// 			currCmp.info.propName !== cmp.info.propName
-	// 				? currCmp
-	// 				: updatedCmp
-	// 		)
-	// 	)
-	// 	// Update the task
-	// 	const updatedTask = structuredClone(task)
-	// 	updatedTask[taskPropName] = data
-	// 	try {
-	// 		await updateTask(boardId, groupId, updatedTask, activityTitle)
-	// 		showSuccessMsg(`Task updated`)
-	// 	} catch (err) {
-	// 		showErrorMsg('Cannot update task')
-	// 	}
-	// }
-
-	function onSetMembers() {
-		console.log('boardMembers', boardMembers)
+		if (index !== -1) {
+			updatedCardMembers.splice(index, 1)
+		} else {
+			updatedCardMembers.push(id)
+		}
+		setCardMembers(updatedCardMembers)
+		setCard(card => {
+			card.memberIds = updatedCardMembers
+			return card
+		})
+		updateCard(board, group, card)
 	}
 
 	// function handleInput() {
@@ -159,21 +149,10 @@ export function CardDetails() {
 			{isShowModal && currDynamic && dataRef.current && (
 				<DynamicCmp
 					Cmp={currDynamic}
-					title={dataRef?.current?.title}
+					title={dataRef.current.title}
 					onCloseModal={onCloseModal}
-					data={(dataRef?.current?.data)}
+					data={dataRef.current.data}
 					onUpdateCmp={onUpdateDynamicInfo}
-
-					// onUpdateCmpInfo(cmp, cmpInfoPropName, data, activityTitle)
-
-					// cmp={{
-					// 	type: 'MemberPicker',
-					// 	info: {
-					// 		title: 'Members',
-					// 		boardMembers: boardMembers,
-					// 	},
-					// }}
-					// onCloseModal={onCloseModal}
 				/>
 			)}
 
@@ -193,7 +172,7 @@ export function CardDetails() {
 				<header className='header'>
 					<h3> {card.title}</h3>
 					<div>
-						in list{' '}
+						in list &nbsp;
 						<span className='group-title'>{group.title}</span>
 					</div>
 				</header>
@@ -204,12 +183,17 @@ export function CardDetails() {
 								className='opt-card'
 								onClick={ev => {
 									dataRef.current = {
-										title:'Members',
-										data: { boardMembers: boardMembers }
+										title: 'Members',
+										data: {
+											boardMembers: boardMembers,
+											cardMembers: cardMembers,
+										},
 									}
-									setCurrDynamic(prevDynamic => prevDynamic = MemberPicker)
+									setCurrDynamic(
+										prevDynamic =>
+											(prevDynamic = MemberPicker)
+									)
 									setIsShowModal(true)
-									// onSetMembers
 								}}
 							>
 								<Members />

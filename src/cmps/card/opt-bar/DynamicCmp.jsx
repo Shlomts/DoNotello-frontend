@@ -3,8 +3,6 @@ import { Close } from '../../SvgContainer'
 import { MemberPicker } from './MemberPicker'
 
 export function DynamicCmp({ Cmp, title, onCloseModal, data, onUpdateCmp }) {
-	console.log('title', Cmp)	
-	console.log('data', data)
 	return (
 		<div className='dynamic'>
 			<section className='dynamic-header'>
@@ -17,8 +15,9 @@ export function DynamicCmp({ Cmp, title, onCloseModal, data, onUpdateCmp }) {
 				<Cmp
 					info={data}
 					onUpdate={data => {
-						onUpdateCmp(
-							console.log('data:', data)
+						onUpdateCmp(data
+							// console.log('this:', data.this)
+							// console.log('data:', data)
 							// cmp,
 							// 'memberIds',
 							// 'selectedMemberIds',
