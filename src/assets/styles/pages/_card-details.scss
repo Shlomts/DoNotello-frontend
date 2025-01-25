@@ -88,10 +88,11 @@
 				font-weight: 500;
 				font-size: 20.5px;
 			}
+
 			div {
 				display: block;
 				padding: 7px 1px;
-				
+
 				.group-title {
 					text-transform: uppercase;
 					font-size: 12px;
@@ -102,7 +103,7 @@
 			svg {
 				color: #9fadbc;
 			}
-			
+
 		}
 
 		.opt-card {
@@ -128,6 +129,7 @@
 
 		.actions {
 			grid-area: act;
+
 			thead {
 				font-size: 12px;
 				padding-bottom: 2px;
@@ -149,7 +151,7 @@
 
 		.actions {
 			ul {
-				margin-top: 4px ;
+				margin-top: 4px;
 			}
 		}
 
@@ -261,6 +263,63 @@
 				}
 			}
 		}
+
+		.members-container {
+			display: flex;
+			align-items: center;
+			gap: rem(4px);
+
+			.card-members {
+				margin: 0;
+			}
+
+			.card-members .card-member-img-container {
+				width: rem(32px);
+				height: rem(32px);
+			}
+
+			.add-member-icon {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: rem(32px);
+				height: rem(32px);
+				border-radius: 50%;
+				background-color: #3a444c;
+
+				svg {
+					width: 16px;
+					height: 16px;
+					color: #b6c2cf;
+				}
+
+				&:hover {
+					background-color: #A6C5E229;
+					cursor: pointer;
+				}
+			}
+		}
+
+		.labels-container {
+			display: flex;
+			align-items: center;
+
+			.card-label{
+				display: flex;
+				align-items: center;
+				gap: rem(4px);
+				height: rem(32px);
+
+				.label-title {
+					color: white;
+					font-weight: 500;
+					font-size: rem(14px);
+				}
+			}
+		}
+
+
+
 
 		// .activity {
 		//     &.icon {

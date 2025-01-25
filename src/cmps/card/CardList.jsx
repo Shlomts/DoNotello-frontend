@@ -8,29 +8,30 @@ export function CardList({ cards, board, group }) {
 
     return (
         // <DragDropHandler board={board}>
-            <Droppable droppableId={group.id} direction='vertical' type='card'>
-                {(provided) => (
-                    <ul className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
-                        {cards.map((card, index) => (
-                            <Draggable key={card.id} draggableId={card.id} index={index} type='card'>
-                                {(provided) => (
-                                    <li
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                    >
-                                        <CardPreview
-                                            card={card}
-                                            board={board}
-                                        />
-                                    </li>
-                                )}
-                            </Draggable>
-                        ))}
-                        {provided.placeholder}
-                    </ul>
-                )}
-            </Droppable>
+        <Droppable droppableId={group.id} direction='vertical' type='card'>
+            {(provided) => (
+                <ul className="card-list" {...provided.droppableProps} ref={provided.innerRef}>
+                    {cards.map((card, index) => (
+                        <Draggable key={card.id} draggableId={card.id} index={index} type='card'>
+                            {(provided) => (
+                                <li
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                >
+                                    <CardPreview
+                                        card={card}
+                                        cardMembers={board.members.filter(member => card.memberIds.includes(member.id))}
+                                        cardLabels={board.labels.filter(label => card.labelIds.includes(label.id))}
+                                    />
+                                </li>
+                            )}
+                        </Draggable>
+                    ))}
+                    {provided.placeholder}
+                </ul>
+            )}
+        </Droppable>
         // </DragDropHandler>
     )
 }

@@ -1,5 +1,5 @@
 
-export function MemberList({ members }) {
+export function BoardMembers({ members }) {
 
     function getInitials(fullname) {
         return fullname.split(' ').map(name => name[0].toUpperCase()).join('')
@@ -10,7 +10,7 @@ export function MemberList({ members }) {
 
     return (
         <section>
-            <ul className="member-list">
+            <ul className="board-members">
                 {membersToDisplay.map((member) => (
                     <li key={member.id} className="member-stacking">
                         <span className="member-img">

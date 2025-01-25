@@ -12,11 +12,9 @@ import {
 } from '../reducers/board.reducer'
 
 export async function loadBoards() {
-  // console.log('hi');
   
   try {
     const boards = await boardService.query()
-    console.log("Loaded boards:", boards)    
     store.dispatch(getCmdSetBoards(boards))
   } catch (err) {
     console.log('Cannot load boards', err)
@@ -46,10 +44,7 @@ export async function removeBoard(boardId) {
 
 export async function addBoard(board) {
   try {
-    // console.log('Adding board:', board);
-
     const savedBoard = await boardService.saveBoard(board)
-    // console.log('Saved board:', savedBoard);
 
     store.dispatch(getCmdAddBoard(savedBoard))
     return savedBoard

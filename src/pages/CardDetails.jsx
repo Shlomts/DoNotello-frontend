@@ -1,6 +1,5 @@
 import { Fragment, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 
@@ -20,9 +19,13 @@ import {
 	Dates,
 	Close,
 	Delete,
+	Plus,
 } from '../cmps/SvgContainer'
 
 import { MemberPicker } from '../cmps/card/opt-bar/MemberPicker'
+import { CardMembers } from '../cmps/group/miniCmps/CardMembers'
+import { CardLabels } from '../cmps/group/miniCmps/CardLabels'
+import { boardService } from '../services/board'
 
 export function CardDetails() {
 	const navigate = useNavigate()
@@ -34,10 +37,12 @@ export function CardDetails() {
 	const board = useSelector(storeState => storeState.boardModule.board)
 	const [group, setGroup] = useState(null)
 	const [card, setCard] = useState(null)
+	const [cardMembers, setCardMembers] = useState([])
+	const [cardLabels, setCardLabels] = useState([])
+
 
 	const [isShowModal, setIsShowModal] = useState(false)
 	const [boardMembers, setBoardMembers] = useState(board.members)
-	const [cardMembers, setCardMembers] = useState(null)
 
 	const [descriptionInput, setDescriptionInput] = useState(
 		card?.description || ''
@@ -61,6 +66,12 @@ export function CardDetails() {
 			setCard(cardToSet)
 			setGroup(groupToSet)
 			// onSetMembers()
+			if (cardToSet) {
+				const cardMembers = boardService.getCardMembers(board, cardToSet)
+				const cardLabels = boardService.getCardLabels(board, cardToSet)
+				setCardMembers(cardMembers)
+				setCardLabels(cardLabels)
+			}
 		} catch (err) {
 			console.log('Having problmes loading card...', err)
 			throw err
@@ -108,6 +119,11 @@ export function CardDetails() {
 		updateCard(board, group, card)
 		setIsEditMode(false)
 	}
+
+	function onEditLabel(label) {
+		console.log('Edit label', label)
+	}
+
 
 	if (!card) return <div>Loading...</div>
 
@@ -215,21 +231,37 @@ export function CardDetails() {
                             <span className="btn txt">Watch</span>
                         </div>
                     </section> */}
-					<section>
-						Members
-						<div className='members'>
-							<span className='btn avatar'>😁</span>
-							<span className='btn txt'>+</span>
-						</div>
-					</section>
-					{/* <section className="labels">
-                        <h4>Labels</h4>
+					{cardMembers.length > 0 ?
+						(
+							<section className='members'>
+								<h4>Members</h4>
+								<div className='members-container'>
+									<CardMembers
+										members={cardMembers}
+									/>
+									<span className='add-member-icon'><Plus /></span>
+								</div>
+							</section>
+						) : (
+							<span className='add-member-icon'><Plus /></span>
+						)
+					}
 
-                        <div className="labels">
-                            <span className="btn avatar">label</span>
-                            <span className="btn txt">+</span>
-                        </div>
-                    </section> */}
+					{cardLabels.length > 0 && (
+						<section className='labels'>
+							<h4>Labels</h4>
+							<div className='labels-container'>
+								<CardLabels
+									labels={cardLabels}
+									showTitles
+									onLableCick={onEditLabel}
+									onPlusIcon={onEditLabel}
+								/>
+							</div>
+						</section>
+					)}
+
+
 				</div>
 
 				<section className='description'>
@@ -339,14 +371,14 @@ function DynamicCmp({ cmp, onCloseModal }) {
 				<MemberPicker
 					info={cmp.info}
 					onCloseModal={onCloseModal}
-					// onUpdate={(data) => {
-					//     updateCmpInfo(
-					//         cmp,
-					//         "selectedMemberIds",
-					//         data,
-					//         `Changed members`
-					//     )
-					// }}
+				// onUpdate={(data) => {
+				//     updateCmpInfo(
+				//         cmp,
+				//         "selectedMemberIds",
+				//         data,
+				//         `Changed members`
+				//     )
+				// }}
 				/>
 			)
 

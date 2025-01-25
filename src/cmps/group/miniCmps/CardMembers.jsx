@@ -3,24 +3,24 @@ import { useState } from "react"
 export function CardMembers({ members }) {
     const [selectedMember, setSelectedMember] = useState(null)
 
-    function toggleMemberPopup(ev, member) {
-        ev.preventDefault()
-        ev.stopPropagation()
+    // function toggleMemberPopup(ev, member) {
+    //     ev.preventDefault()
+    //     ev.stopPropagation()
 
-        setSelectedMember(prevMember =>
-            prevMember && prevMember.id === member.id ? null : member
-        )
-    }
+    //     setSelectedMember(prevMember =>
+    //         prevMember && prevMember.id === member.id ? null : member
+    //     )
+    // }
 
     if (!members || members.length === 0) return null
 
     return (
-        <div className="member-avatars">
+        <div className="card-members">
             {members.map(member => (
                 <div
                     key={member.id}
                     className="card-member-img-container"
-                    onClick={(ev) => toggleMemberPopup(ev, member)}
+                // onClick={(ev) => toggleMemberPopup(ev, member)}
                 >
                     <img
                         src={member.imgUrl}

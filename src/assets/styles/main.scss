@@ -56,10 +56,14 @@
 @import 'cmps/card/card-list';
 @import 'cmps/card/dynamic-cmp';
 @import 'cmps/card/member-picker'; // via DynamicCmp
+@import 'cmps/card/card-members';
+@import 'cmps/card/card-labels';
+
+
 
 
 // Member
-@import 'cmps/member/member-list'
+@import 'cmps/member/board-members';
 
 
 // // Review
