@@ -1,6 +1,5 @@
 
 import { CardPreview } from './CardPreview'
-import { DragDropHandler } from '../DragDropHandler'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 
 export function CardList({ cards, board, group }) {

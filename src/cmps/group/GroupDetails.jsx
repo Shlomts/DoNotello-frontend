@@ -11,7 +11,7 @@ import { addCardToGroup } from "../../store/actions/board.actions.js"
 
 export function GroupDetails({ board, group, onRemoveGroup }) {
     const [isAddingCard, setIsAddingCard] = useState(false)
-    const [cardName, setCardName] = useState("")
+    const [cardName, setCardName] = useState('')
 
     function onSetCardName(ev) {
         const name = ev.target.value
@@ -20,13 +20,16 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
 
     async function onAddCard() {
         const cardToSave = boardService.getEmptyCard()
+        if (cardName === '') {
+            setIsAddingCard(false)
+            return
+        }
         cardToSave.title = cardName
 
         try {
             await addCardToGroup(board, group, cardToSave)
             showSuccessMsg(`Board updated, new card: ${cardToSave.title}`)
-            setCardName("")
-            // setIsAddingCard(false)
+            setCardName('')
         } catch (err) {
             console.error(err)
             showErrorMsg("Cannot add card")
@@ -81,7 +84,7 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
                                 className="cancel-add-btn"
                                 onClick={() => {
                                     setIsAddingCard(false)
-                                    setCardName("")
+                                    setCardName('')
                                 }}
                             >
                                 <Close />

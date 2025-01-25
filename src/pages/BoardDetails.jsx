@@ -91,7 +91,9 @@ export function BoardDetails() {
 
     async function onAddGroup() {
         const groupToSave = boardService.getEmptyGroup()
+        if (groupName === '') return
         groupToSave.title = groupName
+
 
         try {
             await addGroupToBoard(board, groupToSave)
