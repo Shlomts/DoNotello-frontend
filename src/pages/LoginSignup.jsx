@@ -16,6 +16,10 @@ export function LoginSignup() {
   const loginWithGoogle = useGoogleLogin({
     onSuccess: async (response) => {
       try {
+        if (!response?.credential) {
+          throw new Error('Invalid token')
+        }
+
         const decodedToken = jwtDecode(response.credential)
         console.log(decodedToken)
 
@@ -30,10 +34,11 @@ export function LoginSignup() {
         navigate('/board')
       } catch (err) {
         console.error('Signup failed', err)
+        alert('Google login failed. Please try again.')
       }
     },
-    onError: () => {
-      console.log('Failed login')
+    onError: (err) => {
+      console.log('Failed login', err)
     },
     useOneTap: true,
   })
@@ -59,7 +64,7 @@ export function LoginSignup() {
                 </div>
                 <div className="form-login-container">{isLogin ? <Login /> : <Signup />}</div>
 
-                <div className="continue-with">
+                {/* <div className="continue-with">
                   <div className="with-google">
                     <button onClick={loginWithGoogle} className="google-btn">
                       <span className="google-icon">
@@ -68,7 +73,7 @@ export function LoginSignup() {
                       <span className="buttonText">Google</span>
                     </button>
                   </div>
-                </div>
+                </div> */}
 
                 <div className="create-account">
                   <p onClick={handleToggleForm}>{isLogin ? 'Create an account' : 'Already have an account? Log in'}</p>
@@ -81,7 +86,7 @@ export function LoginSignup() {
                     rel="noreferrer noopener"
                     className="css-1y8hiba"
                   >
-                  Privacy Policy
+                    Privacy Policy
                   </a>
                   and
                   <a

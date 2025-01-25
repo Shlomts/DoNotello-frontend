@@ -34,7 +34,7 @@ export function Login() {
 
     if (!isEmailConfirmed) {
       // Validate email before confirming
-      if (!credentials.email || !isEmailValid) return
+      if (!credentials.username || !isEmailValid) return
       setIsEmailConfirmed(true)
       setIsEditingEmail(false)
     } else {
@@ -48,7 +48,7 @@ export function Login() {
   function handleChange(ev) {
     const {name, value} = ev.target
 
-    if (name === 'email') {
+    if (name === 'username') {
       const isValid = /\S+@\S+\.\S+/.test(value)
       setIsEmailValid(isValid || value === '')
       // const userFound = users.some((user) => user.email === value )
@@ -65,7 +65,7 @@ export function Login() {
           {isEmailConfirmed && !isEditingEmail ? (
             <div className="email-content">
               <span className="user-mail" onClick={() => setIsEditingEmail(true)}>
-                {credentials.email}
+                {credentials.username}
               </span>
               <span className="edit-icon" onClick={() => setIsEditingEmail(true)}>
                 <EditMail style={{color: 'rgb(66, 82, 110)'}} />
@@ -75,9 +75,9 @@ export function Login() {
             <input
               className={!isEmailValid ? 'invalid email-input' : 'email-input'}
               type="email"
-              name="email"
+              name="username"
               placeholder="Enter your email"
-              value={credentials.email || ''}
+              value={credentials.username || ''}
               onChange={handleChange}
               onBlur={() => userExists && setIsEditingEmail(false)} // Switch to span on blur
               required

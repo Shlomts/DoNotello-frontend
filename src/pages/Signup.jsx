@@ -20,7 +20,7 @@ export function Signup() {
     const type = ev.target.type
 
     const {name, value} = ev.target
-    if (name === 'email') {
+    if (name === 'username') {
       const isValid = /\S+@\S+\.\S+/.test(value)
       setIsEmailValid(isValid || value === '')
     }
