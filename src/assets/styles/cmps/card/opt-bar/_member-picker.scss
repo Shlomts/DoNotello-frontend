@@ -19,6 +19,32 @@
         margin-bottom: 0;
     }
 
+    .search {
+        min-height: 274px;
+
+        background-color: #22272b;
+        border: 1px solid #8c9baa;
+
+        padding-inline: 20px;
+        padding-top: 8px;
+
+        font-weight: 400;
+        font-size: 1em;
+
+        resize: none;
+        overflow: auto;
+        // scrollbar-color: black;  // Y NOT WORKKKK
+
+        &:focus {
+            outline: none;
+            border: 2px solid #579dff;
+        }
+
+        &::placeholder {
+            color: #8c9baa;
+        }
+    }
+
     .members-list {
         margin-top: 15px;
 
