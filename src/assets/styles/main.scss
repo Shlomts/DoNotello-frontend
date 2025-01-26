@@ -54,13 +54,13 @@
 @import 'cmps/card/card-icons';
 @import 'cmps/card/card-preview';
 @import 'cmps/card/card-list';
-@import 'cmps/card/dynamic-cmp';
-@import 'cmps/card/member-picker'; // via DynamicCmp
+
 @import 'cmps/card/card-members';
 @import 'cmps/card/card-labels';
 
-
-
+// >>opt-bar
+@import 'cmps/card/opt-bar/dynamic-cmp';
+@import 'cmps/card/opt-bar/member-picker';
 
 // Member
 @import 'cmps/member/board-members';
