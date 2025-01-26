@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import demoBG from "../../public/imgs/demoBG.jpg"
 import { DragDropHandler } from "../cmps/DragDropHandler"
 import { SideBar } from "../cmps/SideBar"
 
@@ -120,7 +119,7 @@ export function BoardDetails() {
                 onSetStar={onSetStar}
             />
             <section className="board-details"
-                style={{ backgroundImage: `url(${demoBG})` }}
+                style={{ backgroundImage: `url(${board.style.backgroundImage})` }}
             >
                 <header>
                     <section className="left-header">
@@ -218,53 +217,3 @@ export function BoardDetails() {
         </section>
     )
 }
-
-// export function BoardDetails() {
-//     const { boardId } = useParams()
-//     const board = useSelector((storeState) => storeState.boardModule.board)
-//     const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter())
-
-//     useEffect(() => {
-//         loadBoard(boardId)
-//     }, [boardId])
-
-//     // useEffect(() => {
-//     //     loadBoards(filterBy)
-//     // }, [filterBy])
-
-//     async function onAddBoardMsg(boardId) {
-//         try {
-//             await addBoardMsg(
-//                 boardId,
-//                 "bla bla " + parseInt(Math.random() * 10)
-//             )
-//             showSuccessMsg(`Board msg added`)
-//         } catch (err) {
-//             showErrorMsg("Cannot add board msg")
-//         }
-//     }
-
-//     return (
-//         <section className="board-details">
-//             <CardFilter filterBy={filterBy} setFilterBy={setFilterBy} />
-//             <GroupList />
-
-//             <Link to="/board">Back to list</Link>
-//             <h1>Board Details</h1>
-//             {board && (
-//                 <div>
-//                     <h3>{board.vendor}</h3>
-//                     <h4>${board.price}</h4>
-//                     <pre> {JSON.stringify(board, null, 2)} </pre>
-//                 </div>
-//             )}
-//             <button
-//                 onClick={() => {
-//                     onAddBoardMsg(board._id)
-//                 }}
-//             >
-//                 Add board msg
-//             </button>
-//         </section>
-//     )
-// }

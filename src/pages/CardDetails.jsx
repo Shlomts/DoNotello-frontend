@@ -66,6 +66,7 @@ export function CardDetails() {
 		setDesInEdit(card?.description || '')
 		setCardTitle(card?.title || '')
 		setCardMembers(card?.memberIds || [])
+		console.log('card in use effect:', card)
 	}, [card])
 
 
@@ -77,9 +78,7 @@ export function CardDetails() {
 			setGroup(groupToSet)
 			// onSetMembers()
 			if (cardToSet) {
-				const cardMembers = boardService.getCardMembers(board, cardToSet)
 				const cardLabels = boardService.getCardLabels(board, cardToSet)
-				setCardMembers(cardMembers)
 				setCardLabels(cardLabels)
 			}
 		} catch (err) {
@@ -112,7 +111,7 @@ export function CardDetails() {
 				onSetMembers(data)
 				break
 			default:
-				;<div>UNKNOWM</div>
+				; <div>UNKNOWM</div>
 				break
 		}
 	}
@@ -150,15 +149,15 @@ export function CardDetails() {
 			return card
 		})
 
-		updateCard (board, group, card)
+		updateCard(board, group, card)
 		setIsEditCardTitle(false)
 	}
 
 	function onKeyDown(ev) {
-        if (ev.key === 'Enter') {
-            onSaveCardTitle(ev.target.value)
-        }
-    }
+		if (ev.key === 'Enter') {
+			onSaveCardTitle(ev.target.value)
+		}
+	}
 
 	function onChangeDescription(ev) {
 		setDesInEdit(ev.target.value)
@@ -306,7 +305,7 @@ export function CardDetails() {
 								<h4>Members</h4>
 								<div className='members-container'>
 									<CardMembers
-										members={cardMembers}
+										members={boardService.getCardMembers(board, card)}
 									/>
 									<span className='add-member-icon'><Plus /></span>
 								</div>

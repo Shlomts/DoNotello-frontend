@@ -11,7 +11,7 @@ export function CardList({ cards, board, group }) {
                 ...style,
                 transform: `${style?.transform || ""} rotate(5deg)`,
                 transition: "transform 0.2 ease",
-                zIndex: 10,
+                // zIndex: 10,
             }
         }
 
@@ -43,6 +43,8 @@ export function CardList({ cards, board, group }) {
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
+                                    style={getStyle(provided.draggableProps.style, snapshot)}
+                                    className={`draggable-container ${snapshot.isDragging ? "isDragging" : ""}`}
                                 >
                                     <CardPreview
                                         card={card}
