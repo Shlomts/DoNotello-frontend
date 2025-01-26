@@ -12,9 +12,9 @@ TOGGLE_BOARD_STAR,
 } from '../reducers/board.reducer'
 
 export async function loadBoards() {
+  
   try {
     const boards = await boardService.query()
-    console.log("Loaded boards:", boards)
     store.dispatch(getCmdSetBoards(boards))
   } catch (err) {
     console.log('Cannot load boards', err)
@@ -45,6 +45,7 @@ export async function removeBoard(boardId) {
 export async function addBoard(board) {
   try {
     const savedBoard = await boardService.saveBoard(board)
+
     store.dispatch(getCmdAddBoard(savedBoard))
     return savedBoard
   } catch (err) {

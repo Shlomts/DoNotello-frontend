@@ -16,7 +16,9 @@ export const boardService = {
     addBoardMsg,
     saveCard,
     getCardById,
-    getGroup
+    getGroup,
+    getCardMembers,
+    getCardLabels,
 }
 window.cs = boardService
 
@@ -136,6 +138,7 @@ function getCardById(board, cardId) {
 
 function _getCardInGroup(group, cardId) {
     const card = group.cards.find((card) => card.id === cardId)
+
     if (!card) return
     return card
 }
@@ -158,6 +161,14 @@ function _getGroupByCard(group, cardId) {
     const card = group.cards.find((card) => card.id === cardId)
     if (!card) return
     return group
+}
+
+function getCardMembers(board, card) {
+    return board.members.filter(member => card.memberIds.includes(member.id))
+}
+
+function getCardLabels(board, card) {
+    return board.labels.filter(label => card.labelIds.includes(label.id))
 }
 
 
@@ -266,7 +277,7 @@ function _createBoard(title, users) {
         _createGroup('Ready to production',
             [
                 _createCard('BoardDetails'),
-                _createCard('SideBar',['C101'],['l101'],'this card is amazing')
+                _createCard('SideBar', ['C101'], ['l101'], 'this card is amazing')
             ]),
     ]
     return board

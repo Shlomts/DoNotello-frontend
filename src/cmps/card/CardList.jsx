@@ -43,13 +43,11 @@ export function CardList({ cards, board, group }) {
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
-                                    style={getStyle(provided.draggableProps.style, snapshot)}
-                                    className={`draggable-container ${snapshot.isDragging ? "isDragging" : ""}`}
-
                                 >
                                     <CardPreview
                                         card={card}
-                                        board={board}
+                                        cardMembers={board.members.filter(member => card.memberIds.includes(member.id))}
+                                        cardLabels={board.labels.filter(label => card.labelIds.includes(label.id))}
                                     />
                                 </li>
                             )}

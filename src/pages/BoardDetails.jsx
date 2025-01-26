@@ -22,7 +22,7 @@ import { loadUsers } from "../store/actions/user.actions"
 
 import { CardFilter } from "../cmps/card/CardFilter"
 import { GroupList } from "../cmps/group/GroupList"
-import { MemberList } from "../cmps/member/MemberList"
+import { BoardMembers } from "../cmps/member/BoardMembers"
 import { Plus, Close, Star, Unstar } from "../cmps/SvgContainer"
 import { boardService } from "../services/board"
 
@@ -42,7 +42,7 @@ export function BoardDetails() {
     }, [boardId])
 
     useEffect(() => {
-        if (board) {
+        if (board && board.title !== boardTitle) {
             setBoardTitle(board.title)
         }
     }, [board])
@@ -152,7 +152,7 @@ export function BoardDetails() {
                     </div> */}
                     </section>
                     <section className="right-header">
-                        <MemberList
+                        <BoardMembers
                             members={board.members}
                         />
                     </section>
