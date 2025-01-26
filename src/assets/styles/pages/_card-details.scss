@@ -89,6 +89,24 @@
 				font-size: 20.5px;
 			}
 
+			input {
+                margin: 0;
+                padding-inline: rem(10px);
+                line-height: rem(32px);
+                font-size: rem(18px);
+                font-weight: bold;
+                color: #b6c2cf;
+                background-color: transparent;
+				border: 1px solid #8c9baa;
+                width: 100%;
+
+				
+				&:focus {
+					outline: none;
+					border: 2px solid #579dff;
+				}
+            }
+
 			div {
 				display: block;
 				padding: 7px 1px;
