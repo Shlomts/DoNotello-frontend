@@ -1,10 +1,20 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Close } from '../../SvgContainer'
+import { use } from 'react'
 
 export function MemberPicker({ info, onUpdate }) {
 	if (!info || !info.boardMembers) return
 
 	const [boardMembersList, setBoardMembersList] = useState(addIsInCard())
+	const [srchPrm, setSrchPrm] = useState('')
+
+	useEffect(() => {
+		setBoardMembersList(
+			addIsInCard().filter(member =>
+				member.fullname.toUpperCase().includes(srchPrm.toUpperCase())
+			)
+		)
+	}, [srchPrm])
 
 	function addIsInCard() {
 		const newBoardMembers = info.boardMembers.map(member => ({
@@ -32,6 +42,10 @@ export function MemberPicker({ info, onUpdate }) {
 		onUpdate(id)
 	}
 
+	function onSearchMember(ev) {
+		const prm = ev.target.value
+		setSrchPrm(prm)
+	}
 
 	// FOR LATER >> implement search
 
@@ -45,7 +59,9 @@ export function MemberPicker({ info, onUpdate }) {
 			<input
 				type='text'
 				className='search'
+				value={srchPrm}
 				placeholder='Search members'
+				onChange={ev => onSearchMember(ev)}
 			/>
 			{getMembersInCard().length > 0 && (
 				<section className='members-list'>
@@ -65,7 +81,9 @@ export function MemberPicker({ info, onUpdate }) {
 									title={member.fullname}
 									className='card-member-img'
 								/>
-								<div className='card-member-name'>{member.fullname}</div>
+								<div className='card-member-name'>
+									{member.fullname}
+								</div>
 								<Close />
 							</li>
 						))}
@@ -90,7 +108,9 @@ export function MemberPicker({ info, onUpdate }) {
 									title={member.fullname}
 									className='card-member-img'
 								/>
-								<div className='card-member-name'>{member.fullname}</div>
+								<div className='card-member-name'>
+									{member.fullname}
+								</div>
 							</li>
 						))}
 					</ul>
