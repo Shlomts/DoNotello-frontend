@@ -1,0 +1,137 @@
+.board-menu {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    bottom: 0;
+    width: 339px;
+    z-index: 5;
+    background:$app-sidebar-dark;
+    box-shadow: 0 8px 12px #091e4226, 0 0 1px #091e424f;
+    transform: translateX(339px);
+    transition: transform 0.1s ease-in, width 0.1s ease-in;
+    color: $app-text;
+  
+    &.open {
+      transform: translateX(0);
+    }
+  
+    .board-container {
+      display: flex;
+      flex-direction: column;
+      max-height: 100%;
+    }
+  
+    .menu-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 56px;
+      padding: 0 12px;
+      overflow: hidden;
+      flex: 0 0;
+  
+      h3 {
+        flex: 1;
+        margin: 18px 32px;
+        font-weight: 500;
+        line-height: 20px;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+  
+      .close-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        border-radius: 8px;
+        background: transparent;
+        font-size: 20px;
+        cursor: pointer;
+      }
+  
+      .back-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+      }
+    }
+  
+    hr {
+      background-color: #091e4224;
+      border: 0;
+      height: 1px;
+      margin: -1px 0 0;
+      padding: 0;
+      width: 100%;
+    }
+  
+    .panel-container {
+      flex: 1 auto;
+      width: 100%;
+      min-height: 0;
+      padding: 12px 12px 8px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      -webkit-transform: translate3d(0, 0, 0);
+      scrollbar-color: #091e4224 #091e420f;
+      scrollbar-width: thin;
+    }
+  
+    .board-menu-panel {
+      animation: fadeIn 0.1s ease-in forwards;
+  
+      ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+  
+        li {
+          margin-bottom: 4px;
+          cursor: pointer;
+        }
+      }
+    }
+  
+    .selector {
+      text-align: left;
+      justify-content: flex-start;
+      width: 100%;
+      border-radius: 8px;
+      background-color: #00000000;
+      color: #172b4d;
+      font-weight: 400;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      display: inline-flex;
+      box-sizing: border-box;
+      align-items: center;
+      padding: 6px 12px;
+      text-decoration: none;
+      white-space: normal;
+      cursor: pointer;
+      border: none;
+      box-shadow: none;
+      transition: background-color 85ms ease, border-color 85ms ease, box-shadow 85ms ease;
+    }
+  }
+  
+  // Animation for transitioning panels
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
