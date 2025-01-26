@@ -1,0 +1,86 @@
+.signup-form-input-container {
+    margin: 0;
+  
+    .input-container {
+      transform-origin: 50% 0px;
+      transition: visibility 0s, height 0.2s ease-in-out, margin-top 0.2s ease-in-out, opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+      margin-bottom: 8px;
+  
+      input {
+        align-items: center;
+        background-color: #fafbfc;
+        color: #091e42;
+        cursor: text;
+        border-radius: 3px;
+        border: 1px solid #7A869A;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+        transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        width: 320px;
+        height: 40px;
+        margin: 10px 0;
+  
+        &:-webkit-autofill {
+          background-color: transparent !important;
+          box-shadow: 0 0 0px 1000px #fafbfc inset !important; // Match input background color
+          -webkit-box-shadow: 0 0 0px 1000px #fafbfc inset !important;
+          color: #091e42 !important; // Ensure text color stays correct
+        }
+      }
+  
+      input:focus {
+        background-color: #e8f0fe;
+        border-color: #2684ff;
+        box-shadow: inset 0 0 0 1px #2684ff;
+        outline: none;
+      }
+    }
+  
+    .signup-btn {
+      -webkit-box-align: baseline;
+      align-items: baseline;
+      border-width: 0px;
+      border-radius: 3px;
+      box-sizing: border-box;
+      display: inline-flex;
+      font-size: inherit;
+      font-style: normal;
+      font-family: inherit;
+      font-weight: 500;
+      max-width: 100%;
+      position: relative;
+      text-align: center;
+      text-decoration: none;
+      transition: background 0.1s ease-out, box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38);
+      white-space: nowrap;
+      cursor: pointer;
+      padding: 0px 10px;
+      vertical-align: middle;
+      width: 100%;
+      -webkit-box-pack: center;
+      justify-content: center;
+      color: #ffffff !important;
+      height: 40px !important;
+      line-height: 40px !important;
+      background-color: #0c66e4;
+      margin-top: 16px;
+      
+      &:hover {
+        background: #0052cc;
+      }
+  
+      span {
+        opacity: 1;
+        transition: opacity 0.3s;
+        margin: 0px 2px;
+        -webkit-box-flex: 1;
+        flex-grow: 1;
+        flex-shrink: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+  
