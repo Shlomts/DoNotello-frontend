@@ -24,6 +24,7 @@ import {
 
 import { DynamicCmp } from '../cmps/card/opt-bar/DynamicCmp'
 import { MemberPicker } from '../cmps/card/opt-bar/MemberPicker'
+import { LabelPicker } from '../cmps/card/opt-bar/LabelPicker'
 import { CardMembers } from '../cmps/group/miniCmps/CardMembers'
 import { CardLabels } from '../cmps/group/miniCmps/CardLabels'
 import { boardService } from '../services/board'
@@ -57,6 +58,8 @@ export function CardDetails() {
 	const [boardMembers, setBoardMembers] = useState(board.members)
 	const [cardMembers, setCardMembers] = useState(card?.memberIds || [])
 
+	const [cardLabelIds, setCardLabelIds] = useState(card?.memberIds || [])
+
 	useEffect(() => {
 		getCard()
 	}, [params.cardId])
@@ -69,7 +72,6 @@ export function CardDetails() {
 		console.log('card in use effect:', card)
 	}, [card])
 
-
 	async function getCard() {
 		try {
 			const cardToSet = await loadCard(board, cardId)
@@ -78,6 +80,10 @@ export function CardDetails() {
 			setGroup(groupToSet)
 			// onSetMembers()
 			if (cardToSet) {
+				const cardMembers = boardService.getCardMembers(
+					board,
+					cardToSet
+				)
 				const cardLabels = boardService.getCardLabels(board, cardToSet)
 				setCardLabels(cardLabels)
 			}
@@ -98,48 +104,6 @@ export function CardDetails() {
 			showErrorMsg('Cannot remove card')
 		}
 	}
-
-	function onCloseModal() {
-		setCurrDynamic(null)
-		dataRef.current = null
-		setIsShowModal(false)
-	}
-
-	async function onUpdateDynamicInfo(data) {
-		switch (currDynamic) {
-			case MemberPicker:
-				onSetMembers(data)
-				break
-			default:
-				; <div>UNKNOWM</div>
-				break
-		}
-	}
-
-	function onSetMembers(id) {
-		const updatedCardMembers = [...cardMembers]
-		const index = updatedCardMembers.indexOf(id)
-
-		if (index !== -1) {
-			updatedCardMembers.splice(index, 1)
-		} else {
-			updatedCardMembers.push(id)
-		}
-		setCardMembers(updatedCardMembers)
-		setCard(card => {
-			card.memberIds = updatedCardMembers
-			return card
-		})
-		updateCard(board, group, card)
-	}
-
-	// function handleInput() {
-	// 	const editTextarea = textareaRef.current
-	// 	if (editTextarea) {
-	// 		editTextarea.style.height = 'auto'
-	// 		editTextarea.style.height = `${textarea.scrollHeight}px`
-	// 	}
-	// }
 
 	function onSaveCardTitle(name) {
 		if (name === '' || name === undefined) return
@@ -173,10 +137,70 @@ export function CardDetails() {
 		setIsEditMode(false)
 	}
 
-	function onEditLabel(label) {
-		console.log('Edit label', label)
+	function onCloseModal() {
+		setCurrDynamic(null)
+		dataRef.current = null
+		setIsShowModal(false)
 	}
 
+	async function onUpdateDynamicInfo(data) {
+		switch (currDynamic) {
+			case MemberPicker:
+				onSetMembers(data)
+				break
+			case LabelPicker:
+				onSetLabels(data)
+				break
+			default:
+				; <div>UNKNOWM</div>
+				break
+		}
+	}
+
+	function onSetMembers(id) {
+		const updatedCardMembers = [...cardMembers]
+		const index = updatedCardMembers.indexOf(id)
+
+		if (index !== -1) {
+			updatedCardMembers.splice(index, 1)
+		} else {
+			updatedCardMembers.push(id)
+		}
+		setCardMembers(updatedCardMembers)
+		setCard(card => {
+			card.memberIds = updatedCardMembers
+			return card
+		})
+		updateCard(board, group, card)
+	}
+
+	function onSetLabels(id) {
+		console.log('onsetlabels: ', id)
+		const updatedCardLabels = [...cardLabelIds]
+		console.log('updatedCardLabels', updatedCardLabels)
+		const index = updatedCardLabels.indexOf(id)
+		console.log('index', index)
+
+		if (index !== -1) {
+			updatedCardLabels.splice(index, 1)
+		} else {
+			updatedCardLabels.push(id)
+		}
+		setCardLabelIds(updatedCardLabels)
+		setCard(card => {
+			card.labelIds = updatedCardLabels
+			return card
+		})
+		updateCard(board, group, card)
+	}
+
+	// function handleInput() {
+	// 	const editTextarea = textareaRef.current
+	// 	if (editTextarea) {
+	// 		editTextarea.style.height = 'auto'
+	// 		editTextarea.style.height = `${textarea.scrollHeight}px`
+	// 	}
+	// }
 
 	if (!card) return <div>Loading...</div>
 
@@ -248,7 +272,23 @@ export function CardDetails() {
 								<Members />
 								<div className='name'>Members</div>
 							</li>
-							<li className='opt-card'>
+							<li
+								className='opt-card'
+								onClick={ev => {
+									dataRef.current = {
+										title: 'Labels',
+										data: {
+											boardLabels: board.labels,
+											cardLabels: card.labelIds,
+										},
+									}
+									setCurrDynamic(
+										prevDynamic =>
+											(prevDynamic = LabelPicker)
+									)
+									setIsShowModal(true)
+								}}
+							>
 								<Labels />
 								<div className='name'>Labels</div>
 							</li>
@@ -325,8 +365,8 @@ export function CardDetails() {
 								<CardLabels
 									labels={cardLabels}
 									showTitles
-									onLableCick={onEditLabel}
-									onPlusIcon={onEditLabel}
+									onLableCick={onSetLabels}
+									onPlusIcon={onSetLabels}
 									className='card-details-labels'
 								/>
 							</div>
