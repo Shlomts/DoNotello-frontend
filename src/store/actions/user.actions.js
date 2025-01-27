@@ -11,7 +11,7 @@ export async function loadUsers() {
         store.dispatch({ type: LOADING_START })
         const users = await userService.getUsers()
         console.log(users);
-        
+
         store.dispatch({ type: SET_USERS, users })
     } catch (err) {
         console.log('UserActions: err in loadUsers', err)
@@ -45,8 +45,8 @@ export async function login(credentials) {
 }
 
 export async function signup(credentials) {
-    console.log(credentials,'singup in action');
-    
+    console.log('singup in action', credentials);
+
     try {
         const user = await userService.signup(credentials)
         store.dispatch({

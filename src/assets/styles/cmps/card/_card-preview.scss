@@ -13,7 +13,7 @@
     border: 2px solid transparent;
 
     background-color: #22272b;
-    overflow: hidden;
+    // overflow: hidden;
     position: relative;
 
     h3 {
@@ -59,15 +59,5 @@
         &:hover {
             filter: brightness(-1)
         }
-    }
-
-    .member-details-popup {
-        position: absolute;
-        top: 100%;
-        left: 100%;
-        width: rem(200px);
-        z-index: 9999;
-
-        background-color: #99c8ff;
     }
 }

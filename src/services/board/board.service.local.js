@@ -2,7 +2,6 @@ import { storageService } from "../async-storage.service"
 import { saveToStorage, loadFromStorage } from "../util.service"
 import { makeId } from "../util.service"
 import { userService } from "../user"
-import demoBG from "../../../public/imgs/demoBG.jpg"
 
 
 const STORAGE_KEY = "boardDB"
@@ -128,7 +127,7 @@ function saveCard(boardId, groupId, card, activity) {
 function getCardById(board, cardId) {
     if (!board.groups || board.groups.length === 0) return "No cards available"
 
-    for (let i = 0; i < board.groups.length - 1; i++) {
+    for (let i = 0; i < board.groups.length; i++) {
         const card = _getCardInGroup(board.groups[i], cardId)
         if (card) return card
     }
@@ -180,7 +179,7 @@ async function _createBoards() {
 
     if (!boards || !boards.length) {
         boards = [
-            _createBoard('DoNotello - DEMO', users),
+            _createBoard('DoNotello - DEMO', users, '/imgs/board7.jpg'),
             // _createBoard('2'),
             // _createBoard('3'),
             // _createBoard('4'),
@@ -191,11 +190,11 @@ async function _createBoards() {
     }
 }
 
-function _createBoard(title, users) {
+function _createBoard(title, users, backgroundImageUrl) {
     const board = _getEmptyBoard(title)
     board._id = makeId()
     board.members = users
-    board.style.backgroundImage = demoBG
+    board.style.backgroundImage = backgroundImageUrl
     board.labels =
         [
             {

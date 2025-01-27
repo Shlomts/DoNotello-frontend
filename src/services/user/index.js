@@ -7,7 +7,6 @@ import { userService as remote } from './user.service.remote'
 
 function getEmptyUser() {
     return {
-        id: makeId(),
         fullname: '',
         username: '',
         password: '',
