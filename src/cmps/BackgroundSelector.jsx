@@ -1,12 +1,12 @@
 import {useState} from 'react'
-import {BsThreeDots} from 'react-icons/bs' // Optional icon for "..."
+import {BsThreeDots} from 'react-icons/bs'
 import {ImgUploader} from './ImgUploader'
 
 export function BackgroundSelector({onSelectBackground}) {
   const [selected, setSelected] = useState(null)
-  const [selectedImage, setSelectedImage] = useState('https://picsum.photos/seed/board1/400/200') // Set the default image URL
+  const [selectedImage, setSelectedImage] = useState('/imgs/board1.jpg') 
 
-  const [showOptions, setShowOptions] = useState(false) // Toggle options box visibility
+  const [showOptions, setShowOptions] = useState(false) 
   const [customUrl, setCustomUrl] = useState('')
 
   // Sample image URLs (replace with actual Unsplash URLs)
