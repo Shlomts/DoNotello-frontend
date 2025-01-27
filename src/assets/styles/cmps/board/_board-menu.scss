@@ -1,77 +1,97 @@
 .board-menu {
-    position: absolute;
-    top: 48px;
-    right: 0;
-    bottom: 0;
-    width: 339px;
-    z-index: 5;
-    background:$app-sidebar-dark;
-    box-shadow: 0 8px 12px #091e4226, 0 0 1px #091e424f;
-    transform: translateX(339px);
-    transition: transform 0.1s ease-in, width 0.1s ease-in;
-    color: $app-text;
-  
-    &.open {
-      transform: translateX(0);
-    }
-  
-    .board-container {
-      display: flex;
-      flex-direction: column;
-      max-height: 100%;
-    }
-  
+  position: absolute;
+  top: 48px;
+  right: 0;
+  bottom: 0;
+  width: 339px;
+  z-index: 5;
+  background: $app-sidebar-dark;
+  box-shadow: 0 8px 12px #091e4226, 0 0 1px #091e424f;
+  transform: translateX(339px);
+  transition: transform 0.1s ease-in, width 0.1s ease-in;
+  color: $app-text;
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  .board-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    max-height: 100%;
+
     .menu-header {
       position: relative;
-      display: flex;
-      align-items: center;
+      flex: 0 0;
+      width: 100%;
       height: 56px;
       padding: 0 12px;
       overflow: hidden;
-      flex: 0 0;
-  
-      h3 {
-        flex: 1;
-        margin: 18px 32px;
-        font-weight: 500;
-        line-height: 20px;
-        text-align: center;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-  
-      .close-btn {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        width: 32px;
-        height: 32px;
-        padding: 0;
-        border-radius: 8px;
-        background: transparent;
-        font-size: 20px;
-        cursor: pointer;
-      }
-  
-      .back-btn {
-        background: transparent;
-        border: none;
-        cursor: pointer;
+      .header-container {
         display: flex;
         align-items: center;
+
+        h3 {
+          flex: 1;
+          margin: 18px 32px;
+          overflow: hidden;
+          font-weight: 500;
+          line-height: 20px;
+          text-align: center;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-size: 16px;
+          color: $app-title;
+        }
+
+        button {
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          width: 32px;
+          height: 32px;
+          padding: 0;
+          border-radius: 8px;
+          background: transparent;
+          font-size: 20px;
+          cursor: pointer;
+          color: $app-title;
+
+          &:hover {
+            background-color: $app-sidebar-dark-hover;
+            cursor: pointer;
+          }
+          span {
+            display: inline-block;
+            line-height: 1;
+            svg {
+              width: 20px;
+              height: 20px;
+            }
+          }
+        }
+
+        .back-btn {
+          right: unset;
+          left: 12px;
+          svg {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+      hr {
+        background-color: #091e4224;
+        border: 0;
+        height: 1px;
+        margin: -1px 0 0;
+        padding: 0;
+        width: 100%;
       }
     }
-  
-    hr {
-      background-color: #091e4224;
-      border: 0;
-      height: 1px;
-      margin: -1px 0 0;
-      padding: 0;
-      width: 100%;
-    }
-  
+
     .panel-container {
       flex: 1 auto;
       width: 100%;
@@ -83,55 +103,108 @@
       scrollbar-color: #091e4224 #091e420f;
       scrollbar-width: thin;
     }
-  
+
     .board-menu-panel {
       animation: fadeIn 0.1s ease-in forwards;
-  
+
       ul {
         padding: 0;
         margin: 0;
         list-style: none;
-  
+
         li {
           margin-bottom: 4px;
           cursor: pointer;
+          height: 32px;
+          line-height: 20px;
+
+          button {
+            display: flex;
+            text-align: left;
+            justify-content: flex-start;
+            width: 100%;
+            height: 32px;
+            border-radius: 8px;
+            padding: 6px 12px;
+
+            &:hover {
+              background-color: $app-sidebar-dark-hover;
+              cursor: pointer;
+            }
+            div {
+              width: 20px;
+              height: 20px;
+
+              margin-right: 8px;
+              background-color: transparent;
+              border-radius: 3px;
+              display: flex;
+              position: relative;
+              flex-direction: row;
+              flex-shrink: 0;
+              align-items: center;
+              justify-content: center;
+              background-repeat: no-repeat;
+              background-size: cover;
+              background-position: 50%;
+            }
+            p {
+              margin-left: 3px;
+            }
+          }
         }
       }
     }
-  
+
     .selector {
-      text-align: left;
-      justify-content: flex-start;
-      width: 100%;
-      border-radius: 8px;
-      background-color: #00000000;
-      color: #172b4d;
-      font-weight: 400;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
-      font-size: 14px;
-      line-height: 20px;
-      display: inline-flex;
-      box-sizing: border-box;
-      align-items: center;
-      padding: 6px 12px;
-      text-decoration: none;
-      white-space: normal;
-      cursor: pointer;
-      border: none;
-      box-shadow: none;
+      display: flex;
+      flex-flow: column;
+      height: calc(100vh - 140px);
+      overflow: hidden;
       transition: background-color 85ms ease, border-color 85ms ease, box-shadow 85ms ease;
+      .container {
+        flex-shrink: 0;
+        padding: 0;
+        padding-bottom: 12px;
+        display: grid;
+        row-gap: 5px;
+        grid-template-columns: 1fr 1fr;
+        .img-container {
+          position: relative;
+          box-sizing: border-box;
+          height: 96px;
+          overflow: hidden;
+          border-radius: 8px;
+          color: #626f86;
+          width: 145px;
+          cursor: pointer;
+          button {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 72px;
+            background-color: unset;
+            img {
+              width: 145px;
+              height: 96px;
+              object-fit: cover;
+              border-radius: 4px;
+            }
+          }
+        }
+      }
     }
   }
-  
-  // Animation for transitioning panels
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+}
+
+// Animation for transitioning panels
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

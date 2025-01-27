@@ -22,6 +22,9 @@ export function BoardMenu({handleBackgroundChange}) {
     '/imgs/board6.jpg',
     '/imgs/board7.jpg',
     '/imgs/board8.jpg',
+    '/imgs/coffeMag.jpg',
+    '/imgs/cityFizza.jpg',
+    '/imgs/citySunset.jpg',
   ]
 
   async function handleBackgroundChange(newImageUrl) {
@@ -53,7 +56,9 @@ export function BoardMenu({handleBackgroundChange}) {
             <h3 className="title">{menuView === 'main' ? 'Menu' : 'Photos from Unsplash'}</h3>
 
             <button className="close-btn" onClick={() => setIsOpen(false)}>
-              <Close />
+              <span>
+                <Close />
+              </span>
             </button>
           </div>
           <hr />
@@ -63,15 +68,24 @@ export function BoardMenu({handleBackgroundChange}) {
           <div className="board-menu-panel">
             {menuView === 'main' ? (
               <ul>
-                <li onClick={() => setMenuView('background')}>Change Background</li>
+                <li>
+                  <button onClick={() => setMenuView('background')}>
+                    <div style={{backgroundImage: `url(${board.style.backgroundImage})`}}></div>
+                    <p>Change Background</p>
+                  </button>
+                </li>
               </ul>
             ) : (
               <div className="selector">
-                {images.map((img, index) => (
-                  <button key={index} className="background-option" onClick={() => handleBackgroundChange(img)}>
-                    <img src={img} alt={`Background ${index + 1}`} />
-                  </button>
-                ))}
+                <div className="container">
+                  {images.map((img, index) => (
+                    <div className="img-container">
+                      <button key={index} className="background-option" onClick={() => handleBackgroundChange(img)}>
+                        <img src={img} alt={`Background ${index + 1}`} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
