@@ -51,3 +51,13 @@ export function loadFromStorage(key) {
     const data = localStorage.getItem(key)
     return (data) ? JSON.parse(data) : undefined
 }
+
+export function getPopupPosition(element) {
+    if (!element) return { top: 0, left: 0 }
+
+    const rect = element.getBoundingClientRect()
+    return {
+        top: rect.bottom + window.scrollY,
+        left: rect.left + window.scrollX
+    }
+}
