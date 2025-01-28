@@ -27,7 +27,6 @@ import { MemberPicker } from '../cmps/card/opt-bar/MemberPicker'
 import { LabelPicker } from '../cmps/card/opt-bar/LabelPicker'
 import { CardMembers } from '../cmps/group/miniCmps/CardMembers'
 import { CardLabels } from '../cmps/group/miniCmps/CardLabels'
-import { boardService } from '../services/board'
 
 export function CardDetails() {
 	const navigate = useNavigate()
@@ -39,8 +38,6 @@ export function CardDetails() {
 	const board = useSelector(storeState => storeState.boardModule.board)
 	const [group, setGroup] = useState(null)
 	const [card, setCard] = useState(null)
-	// const [cardMembers, setCardMembers] = useState([])
-	const [cardLabels, setCardLabels] = useState([])
 
 	const [cardTitle, setCardTitle] = useState(card?.title || '')
 	const [isEditCardTitle, setIsEditCardTitle] = useState(false)
@@ -57,8 +54,7 @@ export function CardDetails() {
 
 	const [boardMembers, setBoardMembers] = useState(board.members)
 	const [cardMembers, setCardMembers] = useState(card?.memberIds || [])
-
-	const [cardLabelIds, setCardLabelIds] = useState(card?.memberIds || [])
+	const [cardLabels, setCardLabels] = useState(card?.memberIds || [])
 
 	useEffect(() => {
 		getCard()
@@ -69,7 +65,7 @@ export function CardDetails() {
 		setDesInEdit(card?.description || '')
 		setCardTitle(card?.title || '')
 		setCardMembers(card?.memberIds || [])
-		console.log('card in use effect:', card)
+		setCardLabels(card?.labelIds || [])
 	}, [card])
 
 	async function getCard() {
@@ -78,15 +74,6 @@ export function CardDetails() {
 			const groupToSet = await loadGroup(board, cardId)
 			setCard(cardToSet)
 			setGroup(groupToSet)
-			// onSetMembers()
-			if (cardToSet) {
-				const cardMembers = boardService.getCardMembers(
-					board,
-					cardToSet
-				)
-				const cardLabels = boardService.getCardLabels(board, cardToSet)
-				setCardLabels(cardLabels)
-			}
 		} catch (err) {
 			console.log('Having problmes loading card...', err)
 			throw err
@@ -152,7 +139,7 @@ export function CardDetails() {
 				onSetLabels(data)
 				break
 			default:
-				; <div>UNKNOWM</div>
+				;<div>UNKNOWM</div>
 				break
 		}
 	}
@@ -176,7 +163,7 @@ export function CardDetails() {
 
 	function onSetLabels(id) {
 		console.log('onsetlabels: ', id)
-		const updatedCardLabels = [...cardLabelIds]
+		const updatedCardLabels = [...cardLabels]
 		console.log('updatedCardLabels', updatedCardLabels)
 		const index = updatedCardLabels.indexOf(id)
 		console.log('index', index)
@@ -186,7 +173,7 @@ export function CardDetails() {
 		} else {
 			updatedCardLabels.push(id)
 		}
-		setCardLabelIds(updatedCardLabels)
+		setCardLabels(updatedCardLabels)
 		setCard(card => {
 			card.labelIds = updatedCardLabels
 			return card
@@ -339,31 +326,39 @@ export function CardDetails() {
                             <span className="btn txt">Watch</span>
                         </div>
                     </section> */}
-					{cardMembers.length > 0 ?
-						(
-							<section className='members'>
-								<h4>Members</h4>
-								<div className='members-container'>
-									<CardMembers
-										members={boardService.getCardMembers(board, card)}
-									/>
-									<span className='add-member-icon'><Plus /></span>
-								</div>
-							</section>
-						) : (
-							<section className='members-empty'>
-								<h4>Members</h4>
-								<span className='add-member-icon'><Plus /></span>
-							</section>
-						)
-					}
+					{cardMembers.length > 0 ? (
+						<section className='members'>
+							<h4>Members</h4>
+							<div className='members-container'>
+								<CardMembers
+									members={board.members.filter(member =>
+										card.memberIds.includes(member.id)
+									)}
+									// members={boardService.getCardMembers(
+									// 	board,
+									// 	card
+									// )}
+								/>
+								<span className='add-member-icon'>
+									<Plus />
+								</span>
+							</div>
+						</section>
+					) : (
+						<section className='members-empty'>
+							<h4>Members</h4>
+							<span className='add-member-icon'>
+								<Plus />
+							</span>
+						</section>
+					)}
 
 					{cardLabels.length > 0 && (
 						<section className='labels'>
 							<h4>Labels</h4>
 							<div className='labels-container'>
 								<CardLabels
-									labels={cardLabels}
+									labels={board.labels.filter(label => card.labelIds.includes(label.id))}
 									showTitles
 									onLableCick={onSetLabels}
 									onPlusIcon={onSetLabels}

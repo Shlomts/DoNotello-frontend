@@ -16,8 +16,8 @@ export const boardService = {
     saveCard,
     getCardById,
     getGroup,
-    getCardMembers,
-    getCardLabels,
+    // getCardMembers,
+    // getCardLabels,
 }
 window.cs = boardService
 
@@ -162,13 +162,13 @@ function _getGroupByCard(group, cardId) {
     return group
 }
 
-function getCardMembers(board, card) {
-    return board.members.filter(member => card.memberIds.includes(member.id))
-}
+// function getCardMembers(board, card) {
+//     return board.members.filter(member => card.memberIds.includes(member.id))
+// }
 
-function getCardLabels(board, card) {
-    return board.labels.filter(label => card.labelIds.includes(label.id))
-}
+// function getCardLabels(board, card) {
+//     return board.labels.filter(label => card.labelIds.includes(label.id))
+// }
 
 
 // for DEV
