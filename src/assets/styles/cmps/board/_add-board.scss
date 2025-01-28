@@ -23,7 +23,7 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
-    min-height: 550px;
+    min-height: 450px;
     max-height: 550px;
 
     header.modal-header {
@@ -70,7 +70,34 @@
     .modal-body {
       padding: 16px;
       padding-top: 0;
-      max-height: 595px;
+      max-height: 465px;
+      overflow-y: auto;
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background-color: #424242;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #686868;
+        transition: background-color 0.3s ease;
+        border: 1px solid #424242;
+        position: relative;
+        z-index: 10000;
+        border-radius: 6px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: #7b7b7b !important;
+      }
+
+      &::-webkit-scrollbar-thumb:active {
+        background-color: #bbb7b7;
+      }
+
 
       .title-input-container .title {
         padding-top: 10px;

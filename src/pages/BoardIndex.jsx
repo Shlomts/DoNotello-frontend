@@ -15,6 +15,7 @@ import {DownTriangle, Lock, Members, UpTriangle} from '../cmps/SvgContainer'
 export function BoardIndex() {
   const boards = useSelector((storeState) => storeState.boardModule.boards)
 
+
   useEffect(() => {
     loadBoards()
   }, [])

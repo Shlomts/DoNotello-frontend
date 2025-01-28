@@ -24,8 +24,8 @@
       display: flex;
       align-items: center;
       text-decoration: none;
-      width: rem(185px);
-      height: rem(31px);
+      width: rem(165px);
+            height: rem(31px);
       padding: 8px 0;
 
       .logo-container {
@@ -48,7 +48,7 @@
       .board-link {
         margin-right: 16px;
         height: 32px;
-        padding-inline: 18px;
+        padding-inline: 12px;
 
         a {
           color: $app-text;
@@ -102,28 +102,30 @@
     cursor: pointer;
 
     .user-avatar {
-      width: rem(35px);
-      height: rem(35px);
-      border-radius: 50%;
+      width: rem(32px);
+      height: rem(32px);
+      // border-radius: 50%;
       overflow: hidden;
       // border: 1px solid;
       padding: 4px;
+
       img {
-        width: 100%;
-        height: 100%;
+        height: 24px;
+        width: 24px;
+        line-height: 24px;
+        border-radius: 50%;
       }
 
       &:hover {
         background-color: #333c43;
-
-        border-radius: 50%;
+        outline: 0;
+        border-radius: 3px;
         border: none;
         display: block;
         position: relative;
-        width: rem(35px);
-        height: rem(35px);
-        padding: 4px;
-        outline: 0;
+        width: rem(32px);
+        height: rem(32px);
+
       }
     }
   }

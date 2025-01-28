@@ -1,7 +1,7 @@
 import {Link, useNavigate} from 'react-router-dom'
 import {Star, Unstar} from '../SvgContainer'
 import {useDispatch} from 'react-redux'
-import {toggleBoardStar} from '../../store/actions/board.actions'
+import {updateBoard} from '../../store/actions/board.actions'
 
 export function BoardPreview({board, onRemoveBoard, onUpdateBoard}) {
   const dispatch = useDispatch()
@@ -10,9 +10,15 @@ export function BoardPreview({board, onRemoveBoard, onUpdateBoard}) {
     return <p>Board not available</p>
   }
 
-  function handleStarToggle(ev, boardId) {
-    ev.stopPropagation()
-    dispatch(toggleBoardStar(boardId))
+  async function onSetStar(ev) {
+    try {
+      ev.stopPropagation()
+      const updatedBoard = {...board, isStarred: !board.isStarred}
+      await updateBoard(updatedBoard)
+      showSuccessMsg('Board updated')
+    } catch (err) {
+      showErrorMsg('Cannot update board')
+    }
   }
 
   function getStarIcon(isStarred) {
@@ -24,32 +30,29 @@ export function BoardPreview({board, onRemoveBoard, onUpdateBoard}) {
   }
 
   return (
-  
-      <article
-        className={`board-preview-card ${board.isStarred ? 'isStarred' : ''}`}
-        style={{backgroundImage: `url(${board.style.backgroundImage})`}}
-       onClick={handleNavigate}>
-        {' '}
-        <div className="board-prew-container ">
-          {/* <Link to={`/board/${board._id}`}> */}
-            <header className="board-preview-title">
-              <div className="title">{board.title}</div>
-            </header>
-            <div className="space"></div>
-          {/* </Link> */}
-          <div className="board-preview-action">
-            <div className="star-btn-container">
-              <button className="star-btn">
-                <div className="star-container">
-                  <span className="star-icon" onClick={(ev) => handleStarToggle(ev, board._id)}>
-                    {getStarIcon(board.isStarred)}
-                  </span>
-                </div>
-              </button>
-            </div>
+    <article
+      className={`board-preview-card ${board.isStarred ? 'isStarred' : ''}`}
+      style={{backgroundImage: `url(${board.style.backgroundImage})`}}
+      onClick={handleNavigate}
+    >
+      {' '}
+      <div className="board-prew-container ">
+        <header className="board-preview-title">
+          <div className="title">{board.title}</div>
+        </header>
+        <div className="space"></div>
+        <div className="board-preview-action">
+          <div className="star-btn-container">
+            <button className="star-btn">
+              <div className="star-container">
+                <span className="star-icon" onClick={(ev) => onSetStar(ev)}>
+                  {getStarIcon(board.isStarred)}
+                </span>
+              </div>
+            </button>
           </div>
         </div>
-      </article>
-  
+      </div>
+    </article>
   )
 }

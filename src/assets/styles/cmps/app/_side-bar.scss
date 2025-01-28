@@ -10,7 +10,7 @@
   // position: sticky;
   // top: 40px;
   border-right: 1px solid #414548;
-  transition: min-width 100ms ease-in-out;
+  transition: min-width 100ms ease-in-out, max-width 100ms ease-in-out; 
   overflow: hidden;
 
   svg {

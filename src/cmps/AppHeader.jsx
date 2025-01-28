@@ -14,12 +14,9 @@ export function AppHeader() {
   const navigate = useNavigate()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const logoUrl = '/imgs/Logo.png'
+console.log(user);
 
 
-  // const user = {
-  //   fullname: 'User Usery',
-  //   email: 'user@gmail.com',
-  // }
   async function onLogout() {
     try {
       await logout()
