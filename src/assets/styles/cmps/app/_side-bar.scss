@@ -10,7 +10,7 @@
   // position: sticky;
   // top: 40px;
   border-right: 1px solid #414548;
-  transition: min-width 100ms ease-in-out, max-width 100ms ease-in-out; 
+  transition: min-width 100ms ease-in-out, max-width 100ms ease-in-out;
   overflow: hidden;
 
   svg {
@@ -61,12 +61,11 @@
     }
 
     .toggle-btn {
-      color: #dbddde;
+      color: #ffffff;
       background: none;
       border: none;
-      cursor: pointer;
-      padding: 10px;
-      margin-left: 7px;
+      padding: 6px;
+      margin-left: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -136,7 +135,6 @@
           cursor: pointer;
         }
       }
-
     }
   }
 
@@ -205,6 +203,13 @@
       }
     }
   }
+  button.star-icon svg {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  button.star-icon:hover svg {
+    transform: scale(1.2);
+  }
 
   .boards-list {
     display: flex;
@@ -252,6 +257,10 @@
     &:hover button {
       display: flex !important;
     }
+    button.isStarred {
+      display: flex !important;
+      // also need to add hover effect
+    }
 
     &.active {
       background-color: $app-sidebar-dark-hover;
@@ -267,7 +276,6 @@
     min-width: 16px;
     width: 16px;
     overflow: hidden;
-
 
     .sidebar-header {
       justify-content: center;

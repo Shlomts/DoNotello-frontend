@@ -14,6 +14,7 @@ export function SideBar({board, onSetStar}) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedBoard, setSelectedBoard] = useState(null)
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const [hoveredBoard, setHoveredBoard] = useState(null)
 
   const {boardId} = useParams()
 
@@ -68,19 +69,28 @@ export function SideBar({board, onSetStar}) {
       event
     )
   }
-  async function onSetStar(ev, board) {
-    ev.stopPropagation()
-    ev.preventDefault()
-    try {
-      const updatedBoard = {...board, isStarred: !board.isStarred}
-      console.log(updatedBoard)
+  // async function onSetStar(ev, board) {
+  //   ev.stopPropagation()
+  //   ev.preventDefault()
+  //   try {
+  //     const updatedBoard = {...board, isStarred: !board.isStarred}
+  //     console.log(updatedBoard)
 
-      await updateBoard(updatedBoard)
-      showSuccessMsg('Board updated')
-    } catch (err) {
-      showErrorMsg('Cannot update board')
-    }
+  //     await updateBoard(updatedBoard)
+  //     showSuccessMsg('Board updated')
+  //   } catch (err) {
+  //     showErrorMsg('Cannot update board')
+  //   }
+  // }
+
+  function sortBoards(boards) {
+    return [...boards].sort((a, b) => {
+      if (a.isStarred && !b.isStarred) return -1
+      if (!a.isStarred && b.isStarred) return 1
+      return 0
+    })
   }
+  const sortedBoards = sortBoards(boards)
 
   return (
     <div
@@ -127,7 +137,7 @@ export function SideBar({board, onSetStar}) {
             </button>
           </div>
         </div>
-        {boards.map((board) => (
+        {sortedBoards.map((board) => (
           <li key={board._id} className={`boards-list ${board._id === boardId ? 'active' : ''}`}>
             <Link to={`/board/${board._id}`}>
               <div style={{backgroundImage: `url(${board.style.backgroundImage})`}}></div>
@@ -137,8 +147,17 @@ export function SideBar({board, onSetStar}) {
               <button className="sort-by" onClick={() => openLeaveModal(board)}>
                 <EllipsisIcon />
               </button>
-              <button className={board.isStarred ? 'starred' : 'onstar'} onClick={(ev) => onSetStar(ev, board)}>
-                {board.isStarred ? <Unstar /> : <Star />}
+              <button
+                className={board.isStarred ? 'star-icon isStarred' : 'star-icon onstar'}
+                onClick={(ev) => {
+                  ev.stopPropagation()
+                  ev.preventDefault()
+                  onSetStar(board)
+                }}
+                onMouseEnter={() => setHoveredBoard(board._id)}
+                onMouseLeave={() => setHoveredBoard(null)}
+              >
+                {board.isStarred ? hoveredBoard === board._id ? <Star /> : <Unstar /> : <Star />}
               </button>
             </div>
           </li>
