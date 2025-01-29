@@ -9,16 +9,19 @@ export function BackgroundSelector({onSelectBackground}) {
   const [showOptions, setShowOptions] = useState(false) 
   const [customUrl, setCustomUrl] = useState('')
 
-  // Sample image URLs (replace with actual Unsplash URLs)
   const images = [
-    '/imgs/board1.jpg',
-    '/imgs/board2.jpg',
-    '/imgs/board3.jpg',
-    '/imgs/board4.jpg',
-    '/imgs/board5.jpg',
-    '/imgs/board6.jpg',
-    '/imgs/board7.jpg',
-    '/imgs/board8.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1738062039/coffeMag_vezhli.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1738062049/cityFizza_kml6re.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1738062046/citySunset_nsfwyh.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1734955438/samples/balloons.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1734955440/samples/cup-on-a-table.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1734955432/samples/landscapes/beach-boat.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1734955432/samples/landscapes/architecture-signs.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1734955433/samples/landscapes/nature-mountains.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1734955432/samples/landscapes/girl-urban-view.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1734955429/sample.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1734955441/cld-sample-4.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1734955440/samples/coffee.jpg',
   ]
 
   function handleSelect(index, url) {

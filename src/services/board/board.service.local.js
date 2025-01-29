@@ -60,38 +60,39 @@ async function remove(boardId) {
 }
 
 async function saveBoard(board) {
-    console.log(board)
-    var savedBoard
-    if (board._id) {
-        const boardToSave = {
-            _id: board._id,
-            title: board.title,
-            workspace: board.workspace,
-            isStarred: board.isStarred,
-            archivedAt: board.archivedAt,
-            createdBy: board.createdBy,
-            style: { backgroundImage: board.style.backgroundImage },
-            labels: board.labels,
-            members: board.members,
-            groups: board.groups,
-        }
-        savedBoard = await storageService.put(STORAGE_KEY, boardToSave)
-    } else {
-        const boardToSave = {
-            _id: makeId(),
-            title: board.title,
-            workspace: board.workspace,
-            isStarred: board.isStarred || false,
-            archivedAt: board.archivedAt,
-            createdBy: userService.getLoggedinUser(),
-            style: { backgroundImage: board.style.backgroundImage },
-            labels: board.labels || [],
-            members: board.members || [],
-            groups: board.groups || [],
-        }
-        savedBoard = await storageService.post(STORAGE_KEY, boardToSave)
+  var savedBoard
+  if (board._id) {
+    const boardToSave = {
+      _id: board._id,
+      title: board.title,
+      workspace: board.workspace,
+      isStarred: board.isStarred,
+      archivedAt: board.archivedAt,
+      createdBy: board.createdBy,
+      style: {backgroundImage: board.style.backgroundImage},
+      labels: board.labels,
+      members: board.members,
+      groups: board.groups,
+      description: board.description,
     }
-    return savedBoard
+    savedBoard = await storageService.put(STORAGE_KEY, boardToSave)
+  } else {
+    const boardToSave = {
+      _id: makeId(),
+      title: board.title,
+      workspace: board.workspace,
+      isStarred: board.isStarred || false,
+      archivedAt: board.archivedAt,
+      createdBy: userService.getLoggedinUser(),
+      style: {backgroundImage: board.style.backgroundImage},
+      labels: board.labels || [],
+      members: board.members || [],
+      groups: board.groups || [],
+      description: board.description || '',
+    }
+    savedBoard = await storageService.post(STORAGE_KEY, boardToSave)
+  }
+  return savedBoard
 }
 
 async function addBoardMsg(boardId, txt) {

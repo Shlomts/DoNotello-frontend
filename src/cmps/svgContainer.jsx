@@ -926,7 +926,7 @@ export function DownTriangle() {
   )
 }
 
-export function EditMail({ fill = "#808080"}) {
+export function EditMail({fill = '#808080'}) {
   return (
     <svg
       width="24"
@@ -944,7 +944,7 @@ export function EditMail({ fill = "#808080"}) {
         d="M7.82034 14.4893L9.94134 16.6103L18.4303 8.12131L16.3093 6.00031H16.3073L7.82034 14.4893ZM17.7233 4.58531L19.8443 6.70731C20.6253 7.48831 20.6253 8.7543 19.8443 9.53531L10.0873 19.2933L5.13734 14.3433L14.8943 4.58531C15.2853 4.19531 15.7973 4.00031 16.3093 4.00031C16.8203 4.00031 17.3323 4.19531 17.7233 4.58531ZM5.20094 20.4097C4.49794 20.5537 3.87694 19.9327 4.02094 19.2297L4.80094 15.4207L9.00994 19.6297L5.20094 20.4097Z"
       />
     </svg>
-  );
+  )
 }
 
 export function GoogleIcon() {
@@ -954,7 +954,7 @@ export function GoogleIcon() {
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 48 48"
       xmlnsXlink="http://www.w3.org/1999/xlink"
-      style={{ display: 'block', width: '20px', height: '20px' }}
+      style={{display: 'block', width: '20px', height: '20px'}}
     >
       <path
         fill="#EA4335"
@@ -974,8 +974,21 @@ export function GoogleIcon() {
       />
       <path fill="none" d="M0 0h48v48H0z" />
     </svg>
-  );
+  )
 }
+
+export function InfoIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" stroke="#b6c2cf" strokeWidth="2" />
+
+      <circle cx="12" cy="7" r="1.5" fill="#b6c2cf" />
+
+      <line x1="12" y1="10" x2="12" y2="16" stroke="#b6c2cf" strokeWidth="2" />
+    </svg>
+  )
+}
+
 // export function check() {
 //     return (
 
