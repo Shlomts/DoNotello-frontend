@@ -9,6 +9,7 @@ function getEmptyUser() {
     return {
         fullname: '',
         username: '',
+        mail:'',
         password: '',
         imgUrl: '',
         mentions: []

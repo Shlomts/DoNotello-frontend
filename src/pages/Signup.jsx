@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import {useState} from 'react'
+import {useNavigate} from 'react-router'
 
-import { signup } from '../store/actions/user.actions'
+import {signup} from '../store/actions/user.actions'
 
-import { ImgUploader } from '../cmps/ImgUploader'
-import { userService } from '../services/user'
+import {ImgUploader} from '../cmps/ImgUploader'
+import {userService} from '../services/user'
 
 export function Signup() {
   const [credentials, setCredentials] = useState(userService.getEmptyUser())
@@ -13,18 +13,18 @@ export function Signup() {
   const navigate = useNavigate()
 
   function clearState() {
-    setCredentials({ username: '', password: '', fullname: '', imgUrl: '' })
+    setCredentials(userService.getEmptyUser())
   }
 
   function handleChange(ev) {
     const type = ev.target.type
 
-    const { name, value } = ev.target
-    if (name === 'username') {
+    const {name, value} = ev.target
+    if (name === 'mail') {
       const isValid = /\S+@\S+\.\S+/.test(value)
-      setIsEmailValid(isValid || value === '')
+      setIsEmailValid(isValid)
     }
-    setCredentials({ ...credentials, [name]: value })
+    setCredentials({...credentials, [name]: value})
   }
 
   async function onSignup(ev = null) {
@@ -38,16 +38,25 @@ export function Signup() {
   }
 
   function onUploaded(imgUrl) {
-    setCredentials({ ...credentials, imgUrl })
+    setCredentials({...credentials, imgUrl})
   }
 
   return (
     <form className="signup-form-input-container" onSubmit={onSignup}>
       <div className="input-container">
         <input
-          type="email"
+          type="text"
           name="username"
           value={credentials.username || ''}
+          placeholder="Enter your username"
+          onChange={handleChange}
+          required
+          className="signup-input"
+        />
+        <input
+          type="email"
+          name="mail"
+          value={credentials.mail || ''}
           placeholder="Enter your email"
           onChange={handleChange}
           required
