@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { EditCard, Labels } from '../../SvgContainer'
 import Checkbox from '@mui/material/Checkbox'
 import { blue, blueGrey, lightBlue } from '@mui/material/colors'
@@ -9,7 +9,16 @@ export function LabelPicker({ info, onUpdate }) {
 	if (!info || !info.boardLabels) return
 
 	const [boardLabelsList, setBoardLabelsList] = useState(addIsInCard())
+	const [srchPrm, setSrchPrm] = useState('')
 	const [isEditMode, setIsEditMode] = useState(false)
+
+	useEffect(() => {
+		setBoardLabelsList(
+			addIsInCard().filter(label =>
+				label.title.toUpperCase().includes(srchPrm.toUpperCase())
+			)
+		)
+	}, [srchPrm])
 
 	function addIsInCard() {
 		const newBoardLabels = info.boardLabels.map(label => ({
@@ -17,6 +26,11 @@ export function LabelPicker({ info, onUpdate }) {
 			isInCard: info.cardLabels.includes(label.id),
 		}))
 		return newBoardLabels
+	}
+
+	function onSearchLabel(ev) {
+		const prm = ev.target.value
+		setSrchPrm(prm)
 	}
 
 	function onUpdateLabels(id) {
@@ -40,7 +54,13 @@ export function LabelPicker({ info, onUpdate }) {
 
 	return (
 		<section className='label-picker'>
-			<input type='text' className='search' placeholder='Search labels' />
+			<input
+				type='text'
+				className='search'
+				placeholder='Search labels'
+				value={srchPrm}
+				onChange={ev => onSearchLabel(ev)}
+			/>
 			{info.boardLabels.length > 0 && (
 				<section className='labels-list'>
 					<thead>Labels</thead>
@@ -72,8 +92,8 @@ export function LabelPicker({ info, onUpdate }) {
 									{label.title}
 								</div>
 								<div
-									onClick={(ev) => {
-										onEditLabelName(label.id,label.title)
+									onClick={ev => {
+										onEditLabelName(label.id, label.title)
 										setIsEditMode(true)
 									}}
 								>
