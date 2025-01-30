@@ -61,6 +61,8 @@ function getDefaultFilter() {
     }
 }
 
+
+
 const service = VITE_LOCAL === 'true' ? local : remote
 export const boardService = { getEmptyBoard, getEmptyGroup, getEmptyCard, getDefaultFilter, ...service }
 

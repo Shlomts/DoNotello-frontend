@@ -1,21 +1,19 @@
-import {Link, NavLink} from 'react-router-dom'
-import {useNavigate} from 'react-router'
-import {useSelector} from 'react-redux'
-import {showErrorMsg, showSuccessMsg} from '../services/event-bus.service'
-import {logout} from '../store/actions/user.actions'
-import { useState} from 'react'
-import {AddBoard} from './board/AddBoard'
-import {onToggleModal} from '../store/actions/system.actions'
-import {Members} from './SvgContainer'
+import { Link, NavLink } from 'react-router-dom'
+import { useNavigate } from 'react-router'
+import { useSelector } from 'react-redux'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { logout } from '../store/actions/user.actions'
+import { useState } from 'react'
+import { AddBoard } from './board/AddBoard'
+import { onToggleModal } from '../store/actions/system.actions'
+import { Members } from './SvgContainer'
 import { googleLogout } from '@react-oauth/google'
 
 export function AppHeader() {
-    const user = useSelector((storeState) => storeState.userModule.user)
+  const user = useSelector((storeState) => storeState.userModule.user)
   const navigate = useNavigate()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const logoUrl = '/imgs/Logo.png'
-console.log(user);
-
 
   async function onLogout() {
     try {
@@ -68,7 +66,7 @@ console.log(user);
         {user && (
           <div className="user-info" onClick={toggleDropdown}>
             <div className="user-avatar">
-             <img src={user.imgUrl} alt="" />
+              <img src={user.imgUrl} alt="" />
             </div>
             {isDropdownOpen && (
               <ul className="user-dropdown">
@@ -76,12 +74,12 @@ console.log(user);
                   <h2>Account</h2>
                   <div className="user-container">
                     <Members />
-                    </div>
-                    <div className="user-info">
-                      <p className="user-name">{user.fullname}</p>
-                      <p className="user-email">{user.email}</p>
-                    </div>
-                
+                  </div>
+                  <div className="user-info">
+                    <p className="user-name">{user.fullname}</p>
+                    <p className="user-email">{user.email}</p>
+                  </div>
+
                 </li>
                 <li>
                   <Link to={`user/${user._id}`}>Profile and visibility</Link>

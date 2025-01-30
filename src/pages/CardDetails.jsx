@@ -332,7 +332,7 @@ export function CardDetails() {
 							<div className='members-container'>
 								<CardMembers
 									members={board.members.filter(member =>
-										card.memberIds.includes(member.id)
+										card.memberIds.includes(member._id)
 									)}
 									// members={boardService.getCardMembers(
 									// 	board,

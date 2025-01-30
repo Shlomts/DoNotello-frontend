@@ -19,7 +19,7 @@ export function MemberPicker({ info, onUpdate }) {
 	function addIsInCard() {
 		const newBoardMembers = info.boardMembers.map(member => ({
 			...member,
-			isInCard: info.cardMembers.includes(member.id),
+			isInCard: info.cardMembers.includes(member._id),
 		}))
 		return newBoardMembers
 	}
@@ -35,7 +35,7 @@ export function MemberPicker({ info, onUpdate }) {
 	function onUpdateMembers(id) {
 		setBoardMembersList(prevMembers =>
 			prevMembers.map(member => {
-				if (member.id === id) member.isInCard = !member.isInCard
+				if (member._id === id) member.isInCard = !member.isInCard
 				return member
 			})
 		)
@@ -69,10 +69,10 @@ export function MemberPicker({ info, onUpdate }) {
 					<ul>
 						{getMembersInCard().map(member => (
 							<li
-								key={member.id}
+								key={member._id}
 								className='member'
 								onClick={() => {
-									onUpdateMembers(member.id)
+									onUpdateMembers(member._id)
 								}}
 							>
 								<img
@@ -96,10 +96,10 @@ export function MemberPicker({ info, onUpdate }) {
 					<ul>
 						{getMembersNotInCard().map(member => (
 							<li
-								key={member.id}
+								key={member._id}
 								className='member'
 								onClick={() => {
-									onUpdateMembers(member.id)
+									onUpdateMembers(member._id)
 								}}
 							>
 								<img

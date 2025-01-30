@@ -118,10 +118,10 @@ function _createUsers() {
     }
 }
 
-function _createUser(id, fullname, email, imgUrl) {
+function _createUser(_id, fullname, email, imgUrl) {
     const username = '@' + email.split('@')[0].replace(/\./g, '')
     return {
-        id,
+        _id,
         fullname,
         username,
         // password,

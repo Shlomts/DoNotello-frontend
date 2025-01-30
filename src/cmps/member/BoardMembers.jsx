@@ -12,7 +12,7 @@ export function BoardMembers({ members }) {
         <section>
             <ul className="board-members">
                 {membersToDisplay.map((member) => (
-                    <li key={member.id} className="member-stacking">
+                    <li key={member._id} className="member-stacking">
                         <span className="member-img">
                             {member.imgUrl ? (
                                 <img src={member.imgUrl} alt={member.fullname} />

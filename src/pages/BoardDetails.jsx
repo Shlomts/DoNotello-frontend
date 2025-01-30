@@ -89,6 +89,7 @@ export function BoardDetails() {
     }
 
     async function onAddGroup() {
+        console.log('onaddgroup')
         const groupToSave = boardService.getEmptyGroup()
         if (groupName === '') return
         groupToSave.title = groupName

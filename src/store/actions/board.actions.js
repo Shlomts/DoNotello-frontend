@@ -8,11 +8,11 @@ import {
   SET_BOARD,
   UPDATE_BOARD,
   ADD_BOARD_MSG,
-TOGGLE_BOARD_STAR,
+  TOGGLE_BOARD_STAR,
 } from '../reducers/board.reducer'
 
 export async function loadBoards() {
-  
+
   try {
     const boards = await boardService.query()
     store.dispatch(getCmdSetBoards(boards))
@@ -109,6 +109,7 @@ export async function addCardToGroup(board, group, cardToSave) {
 }
 
 export async function updateCard(board, group, cardToSave) {
+  console.log("inside of update card:", cardToSave)
   const cardToCut = group.cards.findIndex(currCard => cardToSave.id === currCard.id)
   group.cards.splice(cardToCut, 1, cardToSave)
 
@@ -240,25 +241,25 @@ function getCmdAddBoardMsg(msg) {
 }
 
 export async function toggleBoardStar(boardId) {
-try {
-// Get the current boards from the store
-const state = store.getState()
-const board = state.boardModule.boards.find((b) => b._id === boardId)
-if (!board) throw new Error('Board not found')
+  try {
+    // Get the current boards from the store
+    const state = store.getState()
+    const board = state.boardModule.boards.find((b) => b._id === boardId)
+    if (!board) throw new Error('Board not found')
 
-// Toggle the isStarred property
-const updatedBoard = {...board, isStarred: !board.isStarred}
+    // Toggle the isStarred property
+    const updatedBoard = { ...board, isStarred: !board.isStarred }
 
-// Update the board in the backend
-await boardService.saveBoard(updatedBoard)
-// console.log(updatedBoard , 'from toggle star')
+    // Update the board in the backend
+    await boardService.saveBoard(updatedBoard)
+    // console.log(updatedBoard , 'from toggle star')
 
-// Dispatch the action to update the board in the store
-store.dispatch({type: TOGGLE_BOARD_STAR, board: updatedBoard})
-} catch (err) {
-console.error('Failed to toggle board star:', err)
-}
+    // Dispatch the action to update the board in the store
+    store.dispatch({ type: TOGGLE_BOARD_STAR, board: updatedBoard })
+  } catch (err) {
+    console.error('Failed to toggle board star:', err)
   }
+}
 
 // unitTestActions()
 async function unitTestActions() {
