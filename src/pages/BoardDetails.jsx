@@ -22,18 +22,25 @@ import { loadUsers } from "../store/actions/user.actions"
 import { CardFilter } from "../cmps/card/CardFilter"
 import { GroupList } from "../cmps/group/GroupList"
 import { BoardMembers } from "../cmps/member/BoardMembers"
-import { Plus, Close, Star, Unstar } from "../cmps/SvgContainer"
+import { Plus, Close, Star, Unstar, ListActionsIcon } from "../cmps/SvgContainer"
 import { boardService } from "../services/board"
+import { BoardMenu } from "../cmps/board/BoardMenu"
 
 export function BoardDetails() {
     const { boardId } = useParams()
+
     const users = useSelector((storeState) => storeState.userModule.users)
     const board = useSelector((storeState) => storeState.boardModule.board)
+
     const [filterBy, setFilterBy] = useState(boardService.getDefaultFilter())
+
     const [isAddingGroup, setIsAddingGroup] = useState(false)
     const [groupName, setGroupName] = useState("")
+
     const [isEditingBoardName, setIsEditingBoardName] = useState(false)
     const [boardTitle, setBoardTitle] = useState(board?.title || '')
+
+    const [isBoardMenuOpen, setIsBoardMenuOpen] = useState(false)
 
     useEffect(() => {
         loadBoard(boardId)
@@ -111,6 +118,10 @@ export function BoardDetails() {
         }
     }
 
+    function toggleBoardMenu() {
+        setIsBoardMenuOpen(prevState => !prevState)
+    }
+
     if (!board) return <div>Loading...</div>
 
     return (
@@ -141,80 +152,87 @@ export function BoardDetails() {
                             onClick={() => onSetStar(board)}>
                             {board.isStarred ? <Unstar /> : <Star />}
                         </div>
-                        {/* <div className="change-icon">
-                        change
-                    </div>
-                    <div className="table-icon">
-                        table
-                    </div>
-                    <div className="customize-icon">
-                        customize
-                    </div> */}
                     </section>
                     <section className="right-header">
                         <BoardMembers
                             members={board.members}
                         />
+                        {!isBoardMenuOpen &&
+                            <div className="board-actions-menu"
+                                onClick={toggleBoardMenu}>
+                                <ListActionsIcon />
+                            </div>
+                        }
                     </section>
                 </header>
-                <main className="board-content">
-                    <DragDropHandler board={board}>
-                        <GroupList
-                            board={board}
-                            groups={board.groups}
-                            onRemoveGroup={onRemoveGroup}
-                        />
-                    </DragDropHandler>
-                    <section className="add-group">
-                        {isAddingGroup ? (
-                            <div className="add-group-form" >
-                                <textarea
-                                    value={groupName}
-                                    onChange={onSetGroupName}
-                                    placeholder="Enter list name..."
-                                    rows={1}
-                                    autoFocus
-                                    onKeyDown={ev => {
-                                        if (ev.key === 'Enter') {
-                                            ev.preventDefault()
-                                            onAddGroup()
-                                        }
-                                    }}
-                                />
-                                <div className="add-group-actions">
-                                    <button
-                                        className="save-group-btn"
-                                        onClick={() => {
-                                            onAddGroup()
+
+                <section className={`board-main ${isBoardMenuOpen ? 'menu-open' : ''}`}>
+                    <main className="board-content">
+                        <DragDropHandler board={board}>
+                            <GroupList
+                                board={board}
+                                groups={board.groups}
+                                onRemoveGroup={onRemoveGroup}
+                            />
+                        </DragDropHandler>
+                        <section className="add-group">
+                            {isAddingGroup ? (
+                                <div className="add-group-form" >
+                                    <textarea
+                                        value={groupName}
+                                        onChange={onSetGroupName}
+                                        placeholder="Enter list name..."
+                                        rows={1}
+                                        autoFocus
+                                        onKeyDown={ev => {
+                                            if (ev.key === 'Enter') {
+                                                ev.preventDefault()
+                                                onAddGroup()
+                                            }
                                         }}
-                                    >
-                                        Add list
-                                    </button>
-                                    <button
-                                        className="cancel-add-btn"
-                                        onClick={() => {
-                                            setIsAddingGroup(false)
-                                            setGroupName("")
-                                        }}
-                                    >
-                                        <Close />
-                                    </button>
+                                    />
+                                    <div className="add-group-actions">
+                                        <button
+                                            className="save-group-btn"
+                                            onClick={() => {
+                                                onAddGroup()
+                                            }}
+                                        >
+                                            Add list
+                                        </button>
+                                        <button
+                                            className="cancel-add-btn"
+                                            onClick={() => {
+                                                setIsAddingGroup(false)
+                                                setGroupName("")
+                                            }}
+                                        >
+                                            <Close />
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        ) : (
-                            <button
-                                className="add-group-btn"
-                                onClick={() => {
-                                    setIsAddingGroup(true)
-                                }}
-                            >
-                                <Plus />
-                                Add another list
-                            </button>
-                        )}
-                    </section>
-                </main>
+                            ) : (
+                                <button
+                                    className="add-group-btn"
+                                    onClick={() => {
+                                        setIsAddingGroup(true)
+                                    }}
+                                >
+                                    <Plus />
+                                    Add another list
+                                </button>
+                            )}
+                        </section>
+                    </main>
+
+                </section>
             </section>
+            {isBoardMenuOpen &&
+                <BoardMenu
+                    board={board}
+                    onClose={toggleBoardMenu}
+                />
+            }
         </section>
     )
 }

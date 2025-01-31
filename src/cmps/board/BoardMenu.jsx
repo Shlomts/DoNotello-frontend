@@ -1,14 +1,14 @@
-import {useSelector} from 'react-redux'
-import {Fragment, useEffect, useRef, useState} from 'react'
-import {useParams} from 'react-router'
-import {Close, Description, InfoIcon, LeftArrow, Members} from '../SvgContainer'
-import {updateBoard} from '../../store/actions/board.actions'
-import {showErrorMsg, showSuccessMsg} from '../../services/event-bus.service'
+import { useSelector } from 'react-redux'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import { useParams } from 'react-router'
+import { Close, Description, InfoIcon, LeftArrow, Members } from '../SvgContainer'
+import { updateBoard } from '../../store/actions/board.actions'
+import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
 
-export function BoardMenu() {
-  const {boardId} = useParams()
+export function BoardMenu({ board, onClose }) {
+  const { boardId } = useParams()
   const users = useSelector((storeState) => storeState.userModule.users)
-  const board = useSelector((storeState) => storeState.boardModule.board)
+  // const board = useSelector((storeState) => storeState.boardModule.board)
   const [menuView, setMenuView] = useState('main')
   const [isOpen, setIsOpen] = useState(true)
   const [boardDescriptionInput, setBoardDescriptionInput] = useState(board?.description || '')
@@ -48,7 +48,7 @@ export function BoardMenu() {
     try {
       const updatedBoard = {
         ...board,
-        style: {...board.style, backgroundImage: newImageUrl},
+        style: { ...board.style, backgroundImage: newImageUrl },
       }
       console.log(updatedBoard)
 
@@ -78,7 +78,7 @@ export function BoardMenu() {
       return
     }
 
-    const updatedBoard = {...board, description: desInEdit}
+    const updatedBoard = { ...board, description: desInEdit }
     console.log(updatedBoard, 'before updating in the action ')
 
     try {
@@ -98,7 +98,7 @@ export function BoardMenu() {
     if (!comment.trim()) return
     const updatedBoard = {
       ...board,
-      comments: [...(board.comments || []), {text: comment, createdAt: Date.now()}], // ✅ Adds new comment properly
+      comments: [...(board.comments || []), { text: comment, createdAt: Date.now() }], // ✅ Adds new comment properly
     }
     console.log(updatedBoard)
 
@@ -110,6 +110,7 @@ export function BoardMenu() {
       showErrorMsg('Error adding comment')
     }
   }
+
   function renderContent() {
     switch (menuView) {
       case 'background':
@@ -141,12 +142,12 @@ export function BoardMenu() {
               <div className="admin-info">
                 {/* add here hen`s member modal */}
                 <img
-                  src={board?.createdBy?.imgUrl }
+                  src={board?.createdBy?.imgUrl}
                   alt="Admin img"
                 />
                 <div className="name">
-                  <h3>{board?.createdBy?.fullname }</h3>
-                  <p>@{board?.createdBy?.username }</p>
+                  <h3>{board?.createdBy?.fullname}</h3>
+                  <p>@{board?.createdBy?.username}</p>
                 </div>
               </div>
             </div>
@@ -244,7 +245,7 @@ export function BoardMenu() {
             <hr />
             <li>
               <button className="board-background-container" onClick={() => setMenuView('background')}>
-                <div className="icon" style={{backgroundImage: `url(${board?.style?.backgroundImage})`}}></div>
+                <div className="icon" style={{ backgroundImage: `url(${board?.style?.backgroundImage})` }}></div>
                 <p>Change Background</p>
               </button>
             </li>
@@ -265,7 +266,7 @@ export function BoardMenu() {
             <h3 className="title">
               {menuView === 'main' ? 'Menu' : menuView === 'background' ? 'Photos from Cloudinary' : 'About this board'}
             </h3>
-            <button className="close-btn" onClick={() => setIsOpen(false)}>
+            <button className="close-btn" onClick={onClose}>
               <span className="icon">
                 <Close />
               </span>

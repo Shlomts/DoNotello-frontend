@@ -1,6 +1,6 @@
 .board-details {
-    // display: flex;
-    // flex-direction: column;
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     min-height: 0;
 
@@ -15,7 +15,7 @@
         justify-content: space-between;
         align-items: center;
 
-        height: rem(56px);
+        min-height: rem(56px);
         padding-inline: rem(12px);
 
         backdrop-filter: blur(6px);
@@ -89,6 +89,36 @@
         .right-header {
             display: flex;
             align-items: center;
+
+            .board-actions-menu {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: rem(32px);
+                width: rem(32px);
+                padding: rem(6px);
+
+                &:hover {
+                    border-radius: rem(3px);
+                    background-color: rgba(255, 255, 255, 0.20);
+                    cursor: pointer;
+                }
+                svg {
+                    height: rem(20px);
+                    width: rem(20px);
+                }
+
+
+            }
+        }
+    }
+
+    .board-main{
+        display: flex;
+        flex-grow: 1;
+
+        &.menu-open{
+            width: calc(100%-rem(339px));
         }
     }
 
