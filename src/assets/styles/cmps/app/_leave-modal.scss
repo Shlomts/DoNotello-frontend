@@ -7,7 +7,7 @@
     max-height: 719.017px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.3s ease;
-    z-index: 10000; // Ensure the modal is above everything
+    z-index: 100; // Ensure the modal is above everything
 
     .modal-title-remove {
       display: grid;

@@ -1,19 +1,19 @@
 .modal-overlay {
-  inset: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1000;
-  color: #b6c2cf;
-
+  // inset: 0;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
+  // z-index: 1000;
+  
   &.centered {
     display: flex;
     align-items: center;
     justify-content: center;
   }
-
+  
   .add-board-modal {
+    color: #b6c2cf;
     box-shadow: rgb(57, 66, 74) 0px 0px 0px 1px, rgba(3, 4, 4, 0.36);
     box-sizing: border-box;
     width: 304px;
