@@ -153,6 +153,7 @@ export function SideBar({board, onSetStar}) {
                   ev.stopPropagation()
                   ev.preventDefault()
                   onSetStar(board)
+                  navigate(`/board/${board._id}`)
                 }}
                 onMouseEnter={() => setHoveredBoard(board._id)}
                 onMouseLeave={() => setHoveredBoard(null)}
