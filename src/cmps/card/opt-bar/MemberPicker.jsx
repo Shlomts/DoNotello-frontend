@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Close } from '../../SvgContainer'
-import { use } from 'react'
 
 export function MemberPicker({ info, onUpdate }) {
 	if (!info || !info.boardMembers) return
@@ -46,13 +45,6 @@ export function MemberPicker({ info, onUpdate }) {
 		const prm = ev.target.value
 		setSrchPrm(prm)
 	}
-
-	// FOR LATER >> implement search
-
-	// const regex = new RegExp(filterBy.txt, 'i')
-	// boards = boards.filter(
-	// 	board => regex.test(board.vendor) || regex.test(board.description)
-	// )
 
 	return (
 		<section className='member-picker'>

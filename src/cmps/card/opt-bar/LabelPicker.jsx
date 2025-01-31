@@ -5,12 +5,13 @@ import { blue, blueGrey, lightBlue } from '@mui/material/colors'
 import { light } from '@mui/material/styles/createPalette'
 
 export function LabelPicker({ info, onUpdate }) {
-	console.log('info:', info)
 	if (!info || !info.boardLabels) return
 
 	const [boardLabelsList, setBoardLabelsList] = useState(addIsInCard())
 	const [srchPrm, setSrchPrm] = useState('')
+
 	const [isEditMode, setIsEditMode] = useState(false)
+	const [labelInEdit, setLabelInEdit] = useState(null)
 
 	useEffect(() => {
 		setBoardLabelsList(
@@ -19,6 +20,7 @@ export function LabelPicker({ info, onUpdate }) {
 			)
 		)
 	}, [srchPrm])
+
 
 	function addIsInCard() {
 		const newBoardLabels = info.boardLabels.map(label => ({
@@ -33,23 +35,43 @@ export function LabelPicker({ info, onUpdate }) {
 		setSrchPrm(prm)
 	}
 
-	function onUpdateLabels(id) {
+	function onUpdateLabels(idToEdit) {
 		setBoardLabelsList(prevLabels =>
 			prevLabels.map(label => {
-				if (label.id === id) label.isInCard = !label.isInCard
+				if (label.id === idToEdit) label.isInCard = !label.isInCard
 				return label
 			})
 		)
-		onUpdate(id)
+		onUpdate({ id: idToEdit, isRename: false })
 	}
 
-	function onEditLabelName(id, name) {
+	function onEditLabelTitle(ev) {
+		const name = ev.target.value
+		const newLabel = { ...labelInEdit, title: name }
+		setLabelInEdit(newLabel)
+	}
+
+	function onSaveLabelTitle() {
 		setBoardLabelsList(prevLabels =>
 			prevLabels.map(label => {
-				if (label.id === id) label.title = name
+				if (label.id === labelInEdit.id) label.title = labelInEdit.title
 				return label
 			})
 		)
+
+		onUpdate({
+			id: labelInEdit.id,
+			isRename: true,
+			name: labelInEdit.title,
+		})
+		setLabelInEdit(null)
+		setIsEditMode(false)
+	}
+
+	function onKeyDown(ev) {
+		if (ev.key === 'Enter') {
+			onSaveLabelTitle()
+		}
 	}
 
 	return (
@@ -72,7 +94,6 @@ export function LabelPicker({ info, onUpdate }) {
 										onUpdateLabels(label.id)
 									}}
 									checked={label.isInCard}
-									// onChange={() => onUpdateLabels(label.id)}
 									inputProps={{ 'aria-label': 'controlled' }}
 									sx={{
 										color: '#738496',
@@ -82,18 +103,30 @@ export function LabelPicker({ info, onUpdate }) {
 										},
 									}}
 								/>
+								{isEditMode && label.id === labelInEdit.id ? (
+									<input
+										type='text'
+										value={labelInEdit.title}
+										onChange={onEditLabelTitle}
+										// onBlur={onSaveLabelTitle}
+										onKeyDown={onKeyDown}
+										autoFocus
+									/>
+								) : (
+									<div
+										onClick={() => {
+											onUpdateLabels(label.id)
+										}}
+										className='label'
+										style={{ backgroundColor: label.color }}
+									>
+										{label.title}
+									</div>
+								)}
+
 								<div
 									onClick={() => {
-										onUpdateLabels(label.id)
-									}}
-									className='label'
-									style={{ backgroundColor: label.color }}
-								>
-									{label.title}
-								</div>
-								<div
-									onClick={ev => {
-										onEditLabelName(label.id, label.title)
+										setLabelInEdit(label)
 										setIsEditMode(true)
 									}}
 								>

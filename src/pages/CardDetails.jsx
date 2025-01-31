@@ -9,6 +9,8 @@ import {
 	removeCardFromGroup,
 	loadGroup,
 	updateCard,
+	updateBoard,
+	updateBoardOptimistic,
 } from '../store/actions/board.actions'
 import {
 	Card,
@@ -161,24 +163,33 @@ export function CardDetails() {
 		updateCard(board, group, card)
 	}
 
-	function onSetLabels(id) {
-		console.log('onsetlabels: ', id)
+	function onSetLabels(data) {
+		const { id, isRename, name } = data
 		const updatedCardLabels = [...cardLabels]
-		console.log('updatedCardLabels', updatedCardLabels)
 		const index = updatedCardLabels.indexOf(id)
-		console.log('index', index)
 
-		if (index !== -1) {
-			updatedCardLabels.splice(index, 1)
+		if (isRename) {
+			const newLabels = [...board.labels]
+			const labelToSave = newLabels.find(label => {
+				return label.id === id
+			})
+			labelToSave.title = name
+			const newBoard = { ...board, labels: newLabels }
+			updateBoard(newBoard)
 		} else {
-			updatedCardLabels.push(id)
+			if (index !== -1) {
+				updatedCardLabels.splice(index, 1)
+			} else {
+				updatedCardLabels.push(id)
+			}
+
+			setCardLabels(updatedCardLabels)
+			setCard(card => {
+				card.labelIds = updatedCardLabels
+				return card
+			})
+			updateCard(board, group, card)
 		}
-		setCardLabels(updatedCardLabels)
-		setCard(card => {
-			card.labelIds = updatedCardLabels
-			return card
-		})
-		updateCard(board, group, card)
 	}
 
 	// function handleInput() {
@@ -334,10 +345,6 @@ export function CardDetails() {
 									members={board.members.filter(member =>
 										card.memberIds.includes(member.id)
 									)}
-									// members={boardService.getCardMembers(
-									// 	board,
-									// 	card
-									// )}
 								/>
 								<span className='add-member-icon'>
 									<Plus />
@@ -358,7 +365,9 @@ export function CardDetails() {
 							<h4>Labels</h4>
 							<div className='labels-container'>
 								<CardLabels
-									labels={board.labels.filter(label => card.labelIds.includes(label.id))}
+									labels={board.labels.filter(label =>
+										card.labelIds.includes(label.id)
+									)}
 									showTitles
 									onLableCick={onSetLabels}
 									onPlusIcon={onSetLabels}
