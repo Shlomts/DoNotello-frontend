@@ -1,66 +1,152 @@
-.card-filter {
-    display: grid;
-    grid-template-columns: 1fr 5em 5em auto;
-    align-items: center;
-    gap: 0 .5em;
-
-    background-color: $clr4;
-    padding: .5em;
-
-    h3 {
-        grid-column: 1 / -1;
-        font-size: rem(14px);
-        margin: 0;
-    }
-
-    & :not(h3) {
-        cursor: pointer;
-    }
-
-    input:is([type="text"], [type="number"]){
-        height: 1.8em;
-        border: none;
-        border-block-end: 1px solid $gray1;
-    
-        &:focus {
-            outline: none;
-            background-color: $gray1;
-        }
-    }
-
-
-    .btn-clear {
-        grid-column: 4;
-    }
-
-    .sort-field, .sort-dir {
-        display: flex;
-        align-items: center;
-        gap: 1em;
-
-        // margin-inline-start: .4em;
-
-        font-size: .8em;
-    }
-
-    .sort-dir {
-        grid-column: 2 / 3;
-    }
-
-    input[type="radio"] {
-        display: none;
-    }
-
-    label {
-        span {
-            font-size: .9em;
-            padding: 0.1em 0.3em;
-            outline: 1px solid $gray1;
-        }
-
-        &:has(:checked) span  {
-            background-color: $clr3;
-            color: $gray1;
-        }
-    }
+.space {
+  display: inherit;
+  height: 16px;
+  margin: 0 8px;
+  border-left: 1px solid hsla(0, 0%, 100%, 0.16);
 }
+.filter-section {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  line-height: 20px;
+  height: 40px;
+  .card-filter-popover {
+    min-width: 32px;
+    min-height: 32px;
+    margin: 12px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border-radius: 3px;
+    color: rgb(255, 255, 255);
+    font-weight: 500;
+
+    span.filter-piramid {
+      flex-shrink: 0;
+      // padding: 8px;
+      padding-inline:2px  8px;
+      padding-block-end: 2px;
+      svg {
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+      }
+      div.btn-title {
+        width: 38.078;
+        height: 20px;
+        border: none;
+      }
+    }
+
+    .filter-popover-btn-count {
+      display: block;
+      margin-left: 8px;
+      padding-right: 6px;
+      padding-left: 4px;
+      border-radius: 20px;
+      background-color: #ffffff;
+      color: #172b4d;
+      &::before {
+        content: '';
+        display: inline-flex;
+        position: relative;
+        top: 1px;
+        width: 12px;
+        height: 12px;
+        margin-right: 6px;
+        border-radius: 50%;
+        background-color: #0c66e4;
+      }
+
+      span.counter {
+        color: #172b4d;
+      }
+    }
+    button.clear-all-btn {
+      font-weight: 500;
+      background-color: #dcdfe4;
+      color: rgb(23, 43, 77);
+
+      &:hover {
+        background-color: #dcdfe4;
+      }
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    &.active {
+      background-color: #dcdfe4;
+      color: #172b4d;
+    }
+  }
+}
+
+// .card-filter {
+//     display: grid;
+//     grid-template-columns: 1fr 5em 5em auto;
+//     align-items: center;
+//     gap: 0 .5em;
+
+//     background-color: $clr4;
+//     padding: .5em;
+
+//     h3 {
+//         grid-column: 1 / -1;
+//         font-size: rem(14px);
+//         margin: 0;
+//     }
+
+//     & :not(h3) {
+//         cursor: pointer;
+//     }
+
+//     input:is([type="text"], [type="number"]){
+//         height: 1.8em;
+//         border: none;
+//         border-block-end: 1px solid $gray1;
+
+//         &:focus {
+//             outline: none;
+//             background-color: $gray1;
+//         }
+//     }
+
+//     .btn-clear {
+//         grid-column: 4;
+//     }
+
+//     .sort-field, .sort-dir {
+//         display: flex;
+//         align-items: center;
+//         gap: 1em;
+
+//         // margin-inline-start: .4em;
+
+//         font-size: .8em;
+//     }
+
+//     .sort-dir {
+//         grid-column: 2 / 3;
+//     }
+
+//     input[type="radio"] {
+//         display: none;
+//     }
+
+//     label {
+//         span {
+//             font-size: .9em;
+//             padding: 0.1em 0.3em;
+//             outline: 1px solid $gray1;
+//         }
+
+//         &:has(:checked) span  {
+//             background-color: $clr3;
+//             color: $gray1;
+//         }
+//     }
+// }

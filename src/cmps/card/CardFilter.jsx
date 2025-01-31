@@ -8,6 +8,9 @@ export function CardFilter({board}) {
   const modalData = useSelector((state) => state.systemModule.modalData)
   const isActive = modalData && modalData.cmp === CardFilterModal
   const filterdCards = false
+  const [filterCount, setFilterCount] = useState(20)
+
+  
 
   function toggleFilterModal(event) {
     onToggleModal(
@@ -16,6 +19,7 @@ export function CardFilter({board}) {
         props: {
           onClose: () => onToggleModal(null),
           board,
+          setFilterCount 
         },
         trigger: 'card-filter',
       },
@@ -35,11 +39,11 @@ export function CardFilter({board}) {
             <>
             <div className="filter-popover-btn-count">
               <span className="counter">
-                12
+                {filterCount}
                 {/* here need to add the count of the results what change it do if there any filterd return the number here */}
               </span>
             </div>
-            <button className="clear-all-btn">Clear all</button>
+            <button className="clear-all-btn" onClick={() => setFilterCount(0)}>Clear all</button>
             </>
           )}
         </button>
