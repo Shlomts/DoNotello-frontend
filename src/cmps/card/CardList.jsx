@@ -48,7 +48,7 @@ export function CardList({ cards, board, group }) {
                                 >
                                     <CardPreview
                                         card={card}
-                                        cardMembers={board.members.filter(member => card.memberIds.includes(member.id))}
+                                        cardMembers={board.members.filter(member => card.memberIds.includes(member._id))}
                                         cardLabels={board.labels.filter(label => card.labelIds.includes(label.id))}
                                     />
                                 </li>

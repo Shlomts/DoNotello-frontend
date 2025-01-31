@@ -14,10 +14,10 @@ export function CardMembers({ members }) {
         const newPopupPosition = getPopupPosition(ev.currentTarget)
 
         setSelectedMember(prevMember =>
-            prevMember && prevMember.id === member.id ? null : member
+            prevMember && prevMember._id === member._id ? null : member
         )
 
-        if (!selectedMember || selectedMember.id !== member.id) {
+        if (!selectedMember || selectedMember._id !== member._id) {
             setPopupPosition(newPopupPosition)
         }
     }
@@ -28,7 +28,7 @@ export function CardMembers({ members }) {
         <div className="card-members">
             {members.map(member => (
                 <div
-                    key={member.id}
+                    key={member._id}
                     className="card-member-img-container"
                     onClick={(ev) => toggleMemberPopup(ev, member)}
                 >
@@ -39,7 +39,7 @@ export function CardMembers({ members }) {
                         className="card-member-img"
                     />
 
-                    {selectedMember && selectedMember.id === member.id &&
+                    {selectedMember && selectedMember._id === member._id &&
                         createPortal(
                             <div
                                 className="member-details-popup"
