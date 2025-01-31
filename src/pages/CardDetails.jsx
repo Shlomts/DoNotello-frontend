@@ -164,6 +164,7 @@ export function CardDetails() {
 	}
 
 	function onSetLabels(data) {
+		if(!data || !data.id) return
 		const { id, isRename, name } = data
 		const updatedCardLabels = [...cardLabels]
 		const index = updatedCardLabels.indexOf(id)
