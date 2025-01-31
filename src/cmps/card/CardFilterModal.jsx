@@ -1,10 +1,10 @@
-import {useSearchParams} from 'react-router-dom'
-import {Close, Members} from '../SvgContainer'
+import { useSearchParams } from 'react-router-dom'
+import { Close, Members } from '../SvgContainer'
 import Checkbox from '@mui/material/Checkbox'
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 
-export function CardFilterModal({onClose, board, setFilterCount}) {
-  const {labels, members} = board
+export function CardFilterModal({ onClose, board, filterMenuPosition, setFilterCount }) {
+  const { labels, members } = board
   // const [searchParams, setSearchParams] = useSearchParams()
   // const [searchQuery, setSearchQuery] = useState(searchParams.get('filter') || '')
   // const [filteredBoards, setFilteredBoards] = useState([])
@@ -26,7 +26,12 @@ export function CardFilterModal({onClose, board, setFilterCount}) {
   //   setSearchParams(searchParams)
   // }, [searchQuery, setSearchParams])
   return (
-    <section className="filter-modal">
+    <section className="filter-modal"
+      style={{
+        position: "absolute",
+        top: filterMenuPosition?.top || 0,
+        left: filterMenuPosition?.left || 0,
+      }}>
       <header className="modal-header">
         <h2>Filter</h2>
         <button className="close-btn" onClick={onClose}>
@@ -42,11 +47,11 @@ export function CardFilterModal({onClose, board, setFilterCount}) {
             className="search-by-name"
             type="text"
             placeholder="Enter a keyword..."
-            // value={searchQuery}
-            // onChange={(e) => setSearchQuery(e.target.value)}
+          // value={searchQuery}
+          // onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <p class="filter-op-desc">Search cards, members, labels, and more.</p>
+        <p className="filter-op-desc">Search cards, members, labels, and more.</p>
 
         <div className="filter-section-members-filter">
           <p className='members-title'>Members</p>
@@ -97,7 +102,7 @@ export function CardFilterModal({onClose, board, setFilterCount}) {
                   <label>
                     <input type="checkbox" value={label.id} />
                     <span className="checkbox-icon icon"></span>
-                    <span className="label-color" style={{background: label.color}}></span>
+                    <span className="label-color" style={{ background: label.color }}></span>
                     {label.name}
                   </label>
                 </li>

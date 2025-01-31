@@ -154,6 +154,8 @@ export function BoardDetails() {
                         </div>
                     </section>
                     <section className="right-header">
+                        <CardFilter
+                            board={board} />
                         <BoardMembers
                             members={board.members}
                         />

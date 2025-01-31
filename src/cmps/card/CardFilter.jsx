@@ -1,25 +1,28 @@
-import {useState, useEffect} from 'react'
-import {CardFilterIcon} from '../SvgContainer'
-import {onToggleModal} from '../../store/actions/system.actions'
-import {CardFilterModal} from './CardFilterModal'
-import {useSelector} from 'react-redux'
+import { useState, useEffect } from 'react'
+import { CardFilterIcon } from '../SvgContainer'
+import { onToggleModal } from '../../store/actions/system.actions'
+import { CardFilterModal } from './CardFilterModal'
+import { useSelector } from 'react-redux'
+import {getPopupPosition} from '../../services/util.service'
 
-export function CardFilter({board}) {
+export function CardFilter({ board }) {
   const modalData = useSelector((state) => state.systemModule.modalData)
   const isActive = modalData && modalData.cmp === CardFilterModal
   const filterdCards = false
   const [filterCount, setFilterCount] = useState(20)
 
-  
 
   function toggleFilterModal(event) {
+    const filterMenuPosition = getPopupPosition(event.currentTarget)
+
     onToggleModal(
       {
         cmp: CardFilterModal, // The modal component
         props: {
           onClose: () => onToggleModal(null),
           board,
-          setFilterCount 
+          setFilterCount,
+          filterMenuPosition
         },
         trigger: 'card-filter',
       },
@@ -37,13 +40,13 @@ export function CardFilter({board}) {
           <div className="btn-title">Filters</div>
           {filterdCards && (
             <>
-            <div className="filter-popover-btn-count">
-              <span className="counter">
-                {filterCount}
-                {/* here need to add the count of the results what change it do if there any filterd return the number here */}
-              </span>
-            </div>
-            <button className="clear-all-btn" onClick={() => setFilterCount(0)}>Clear all</button>
+              <div className="filter-popover-btn-count">
+                <span className="counter">
+                  {filterCount}
+                  {/* here need to add the count of the results what change it do if there any filterd return the number here */}
+                </span>
+              </div>
+              <button className="clear-all-btn" onClick={() => setFilterCount(0)}>Clear all</button>
             </>
           )}
         </button>

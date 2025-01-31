@@ -11,7 +11,6 @@ export function CardList({ cards, board, group }) {
                 ...style,
                 transform: `${style?.transform || ""} rotate(5deg)`,
                 transition: "transform 0.2 ease",
-                // zIndex: 10,
             }
         }
 
