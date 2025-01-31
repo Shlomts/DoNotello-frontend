@@ -9,6 +9,8 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
+    
 
     header {
         display: flex;
@@ -103,6 +105,7 @@
                     background-color: rgba(255, 255, 255, 0.20);
                     cursor: pointer;
                 }
+
                 svg {
                     height: rem(20px);
                     width: rem(20px);
@@ -113,13 +116,9 @@
         }
     }
 
-    .board-main{
+    .board-main {
         display: flex;
         flex-grow: 1;
-
-        &.menu-open{
-            width: calc(100%-rem(339px));
-        }
     }
 
     .board-content {
@@ -127,7 +126,8 @@
         flex-grow: 1;
         height: 86vh;
         align-items: flex-start;
-        margin-block-end: 8px;
+        margin-inline-start: rem(12px);
+        margin-block-end: rem(8px);
 
         overflow-x: auto;
         // overflow-y: hidden;

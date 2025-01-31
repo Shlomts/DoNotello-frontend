@@ -1,14 +1,11 @@
 .group-list {
     display: flex;
-    padding-inline: rem(6px);
+    padding-inline-end: rem(12px);
     margin-block-start: rem(12px);
+    gap: rem(6px);
 
     &.dragging-over {
         border-radius: rem(8px);
-    }
-
-    li {
-        padding-inline: rem(6px);
     }
 
     .draggable-container {
