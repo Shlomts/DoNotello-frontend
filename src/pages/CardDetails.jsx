@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
+import { makeId } from '../services/util.service'
 
 import {
 	loadCard,
@@ -27,8 +28,12 @@ import {
 import { DynamicCmp } from '../cmps/card/opt-bar/DynamicCmp'
 import { MemberPicker } from '../cmps/card/opt-bar/MemberPicker'
 import { LabelPicker } from '../cmps/card/opt-bar/LabelPicker'
+import { AddChecklist } from '../cmps/card/opt-bar/AddChecklist'
+
 import { CardMembers } from '../cmps/group/miniCmps/CardMembers'
 import { CardLabels } from '../cmps/group/miniCmps/CardLabels'
+
+import { ChecklistsContainer } from '../cmps/card/ChecklistsContainer'
 
 export function CardDetails() {
 	const navigate = useNavigate()
@@ -56,7 +61,8 @@ export function CardDetails() {
 
 	const [boardMembers, setBoardMembers] = useState(board.members)
 	const [cardMembers, setCardMembers] = useState(card?.memberIds || [])
-	const [cardLabels, setCardLabels] = useState(card?.memberIds || [])
+	const [cardLabels, setCardLabels] = useState([])
+	const [cardChecklists, setCardChecklists] = useState([])
 
 	useEffect(() => {
 		getCard()
@@ -68,6 +74,8 @@ export function CardDetails() {
 		setCardTitle(card?.title || '')
 		setCardMembers(card?.memberIds || [])
 		setCardLabels(card?.labelIds || [])
+		setCardChecklists(card?.checklists || [])
+		console.log('card in useEffect >>>>>>>>>', card)
 	}, [card])
 
 	async function getCard() {
@@ -116,6 +124,14 @@ export function CardDetails() {
 		setDesInEdit(ev.target.value)
 	}
 
+	// function handleInput() {
+	// 	const editTextarea = textareaRef.current
+	// 	if (editTextarea) {
+	// 		editTextarea.style.height = 'auto'
+	// 		editTextarea.style.height = `${textarea.scrollHeight}px`
+	// 	}
+	// }
+
 	function onSaveDescription() {
 		setDescriptionInput(desInEdit)
 		setCard(card => {
@@ -132,13 +148,16 @@ export function CardDetails() {
 		setIsShowModal(false)
 	}
 
-	async function onUpdateDynamicInfo(data) {
+	function onUpdateDynamicInfo(data) {
 		switch (currDynamic) {
 			case MemberPicker:
 				onSetMembers(data)
 				break
 			case LabelPicker:
 				onSetLabels(data)
+				break
+			case AddChecklist:
+				onAddChecklist(data)
 				break
 			default:
 				;<div>UNKNOWM</div>
@@ -164,10 +183,8 @@ export function CardDetails() {
 	}
 
 	function onSetLabels(data) {
-		if(!data || !data.id) return
+		if (!data || !data.id) return
 		const { id, isRename, name } = data
-		const updatedCardLabels = [...cardLabels]
-		const index = updatedCardLabels.indexOf(id)
 
 		if (isRename) {
 			const newLabels = [...board.labels]
@@ -178,6 +195,8 @@ export function CardDetails() {
 			const newBoard = { ...board, labels: newLabels }
 			updateBoard(newBoard)
 		} else {
+			const updatedCardLabels = [...cardLabels]
+			const index = updatedCardLabels.indexOf(id)
 			if (index !== -1) {
 				updatedCardLabels.splice(index, 1)
 			} else {
@@ -193,13 +212,16 @@ export function CardDetails() {
 		}
 	}
 
-	// function handleInput() {
-	// 	const editTextarea = textareaRef.current
-	// 	if (editTextarea) {
-	// 		editTextarea.style.height = 'auto'
-	// 		editTextarea.style.height = `${textarea.scrollHeight}px`
-	// 	}
-	// }
+	function onAddChecklist(data) {
+		const newChecklist = { id: makeId(), title: data, tasks: [] }
+		const updatedChecklists = [...cardChecklists, newChecklist]
+		const newCard = { ...card, checklists: updatedChecklists }
+
+		setCardChecklists(updatedChecklists)
+		setCard(newCard)
+		updateCard(board, group, card)
+		setIsShowModal(false)
+	}
 
 	if (!card) return <div>Loading...</div>
 
@@ -273,7 +295,7 @@ export function CardDetails() {
 							</li>
 							<li
 								className='opt-card'
-								onClick={ev => {
+								onClick={() => {
 									dataRef.current = {
 										title: 'Labels',
 										data: {
@@ -291,7 +313,22 @@ export function CardDetails() {
 								<Labels />
 								<div className='name'>Labels</div>
 							</li>
-							<li className='opt-card'>
+							<li
+								className='opt-card'
+								onClick={() => {
+									dataRef.current = {
+										title: 'Add checklist',
+										data: {
+											checklists: cardChecklists,
+										},
+									}
+									setCurrDynamic(
+										prevDynamic =>
+											(prevDynamic = AddChecklist)
+									)
+									setIsShowModal(true)
+								}}
+							>
 								<Checklist />
 								<div className='name'>Checklist</div>
 							</li>
@@ -437,27 +474,14 @@ export function CardDetails() {
 							Add a more detailed description...
 						</div>
 					)}
-
-					{/* {isEditMode && (
-						<div className='desbtns'>
-							<button
-								className='save'
-								onClick={onSaveDescription}
-							>
-								Save
-							</button>
-							<button
-								className='cancel'
-								onClick={() => {
-									setIsEditMode(false)
-									setDesInEdit(descriptionInput)
-								}}
-							>
-								Cancel
-							</button>
-						</div>
-					)} */}
 				</section>
+
+				{cardChecklists.length > 0 && (
+					<ChecklistsContainer
+						checklists={card.checklists}
+						card={card}
+					/>
+				)}
 
 				{/* <div className="activity icon">📰</div>
                 <section className="activity">

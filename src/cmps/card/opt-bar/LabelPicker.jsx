@@ -1,5 +1,5 @@
-import { useRef, useState, useEffect } from 'react'
-import { EditCard, Labels } from '../../SvgContainer'
+import { useState, useEffect } from 'react'
+import { EditCard } from '../../SvgContainer'
 import Checkbox from '@mui/material/Checkbox'
 import { blue, blueGrey, lightBlue } from '@mui/material/colors'
 import { light } from '@mui/material/styles/createPalette'

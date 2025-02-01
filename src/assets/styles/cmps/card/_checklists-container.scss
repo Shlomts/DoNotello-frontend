@@ -1,0 +1,21 @@
+.checklists-container {
+	display: grid;
+	grid-area: els;
+	grid-template-columns: subgrid;
+
+	.ul {
+        display: grid;
+
+        .checklist {
+            grid-template-columns: subgrid;
+
+            &.icon {
+                grid-column: 1;
+                background-color: antiquewhite;
+                size: 30px;
+            }
+        }
+
+
+	}
+}
