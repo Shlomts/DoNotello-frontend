@@ -11,7 +11,6 @@ export function GroupList({ board, groups, onRemoveGroup }) {
                 ...style,
                 transform: `${style?.transform || ""} rotate(5deg)`,
                 transition: "transform 0.2 ease",
-                zIndex: 10,
             }
         }
 
@@ -22,8 +21,8 @@ export function GroupList({ board, groups, onRemoveGroup }) {
             return {
                 ...style,
                 transform: translate,
-                transition: `all ${curve} ${duration}s`,
-            };
+                transition: `transform ${curve} ${duration}s`,
+            }
         }
 
         return style
