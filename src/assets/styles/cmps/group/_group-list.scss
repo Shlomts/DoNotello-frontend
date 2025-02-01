@@ -2,6 +2,7 @@
     display: flex;
     padding-inline-end: rem(12px);
     margin-block-start: rem(12px);
+    max-height: calc(100% - rem(24px));
 
     >li {
         margin-right: rem(6px);

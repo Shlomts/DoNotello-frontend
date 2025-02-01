@@ -168,7 +168,6 @@ export function BoardDetails() {
                     </section>
                 </header>
 
-                <section className={`board-main ${isBoardMenuOpen ? 'menu-open' : ''}`}>
                     <main className="board-content">
                         <DragDropHandler board={board}>
                             <GroupList
@@ -226,8 +225,6 @@ export function BoardDetails() {
                             )}
                         </section>
                     </main>
-
-                </section>
             </section>
             {isBoardMenuOpen &&
                 <BoardMenu

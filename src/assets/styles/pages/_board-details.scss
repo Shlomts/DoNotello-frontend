@@ -1,16 +1,14 @@
 .board-details {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    min-height: 0;
+    // flex-grow: 1;
+    height: 100%;
 
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow: hidden;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    
 
     header {
         display: flex;
@@ -116,22 +114,16 @@
         }
     }
 
-    .board-main {
-        display: flex;
-        flex-grow: 1;
-    }
-
     .board-content {
         display: flex;
-        flex-grow: 1;
-        height: 86vh;
+        flex-wrap: nowrap;
+        // flex-grow: 1;
+        height: 100%;
         align-items: flex-start;
-        margin-inline-start: rem(12px);
-        margin-block-end: rem(8px);
-
+        padding-inline-start: rem(12px);
+        margin-bottom: 8px;
         overflow-x: auto;
-        // overflow-y: hidden;
-
+        overflow-y: hidden;
 
         &::-webkit-scrollbar {
             height: 10px;
