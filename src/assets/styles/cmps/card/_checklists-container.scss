@@ -1,21 +1,37 @@
 .checklists-container {
-	display: grid;
 	grid-area: els;
-	grid-template-columns: subgrid;
+    padding:0;
 
-	.ul {
-        display: grid;
+	.checklist {
+		display: grid;
+        grid-template-columns: max-content 1fr;
 
-        .checklist {
-            grid-template-columns: subgrid;
-
-            &.icon {
-                grid-column: 1;
-                background-color: antiquewhite;
-                size: 30px;
-            }
+        &>* {
+            align-content: center;
         }
 
+        .check {
+            width: max-content
+        }
 
+        .delete{
+            grid-row: 2;
+            justify-self: end;
+        }
+
+		h4 {
+            display: inline;
+			grid-column: 2;
+		}
+
+
+        .tasks {
+            grid-column: subgrid;
+        }
+
+        .add {
+            grid-column: 2;
+            justify-self: baseline;
+        }
 	}
 }

@@ -1,48 +1,60 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Checklist, ListActions } from '../SvgContainer'
 import { Checkbox } from '@mui/material'
 
-export function ChecklistsContainer({checklists, card }) {
-	const [cardChecklists, setCardChecklists] = useState(checklists || [])
-	const [percent, setPercent] = useState(0)
+export function ChecklistsContainer({ checklists, removeChecklist }) {
 
-    console.log(checklists, 'checklists')
-    console.log(cardChecklists, 'cardChecklists')
-
-    const a = cardChecklists.length
-    console.log('a', a)
-
-	useEffect(() => {
-		setCardChecklists(checklists || [])
-	}, [])
-
+    function onDeleteChecklist(id) {
+        if( confirm('Sure?')) removeChecklist(id)
+    }
 
 	return (
 		<section className='checklists-container'>
-			{cardChecklists.length > 0 ? (
+			{checklists.length > 0 ? (
 				<ul>
-					{cardChecklists.map(checklist => (
+					{checklists.map(checklist => (
 						<li key={checklist.id} className='checklist'>
-							<div className='checklist icon'>
-								<Checklist />
-							</div>
+							<Checklist />
 
-							<h4 className='title'>{checklist.title}</h4>
+							<h4 className='title'>
+								{checklist.title}
+								<button
+									onClick={() => onDeleteChecklist(checklist.id)}
+									className='delete'
+								>
+									Delete
+								</button>
+							</h4>
 
-							<button
-							// onClick={() => setIsEditMode(true)}
-							// className='edit-des'
-							>
-								Delete
-							</button>
-
-							<div className='percent'>{percent}%</div>
+							<div className='percent'>0%</div>
 							<div className='bar'>-------------------</div>
 
-							<section className='tasks'>
-								<ul>
-									<li>task</li>
-									{/* {checklist.tasks?.map(task => (
+							{/* <input
+								type='text'
+								// onChange={onEditLabelTitle}
+								// onBlur={onSaveLabelTitle}
+								// onKeyDown={onKeyDown}
+								autoFocus
+							/> */}
+
+							{checklist.tasks &&
+								checklist.tasks.map(task => {
+									<Fragment>
+										<Checkbox className='check' />
+										<div className='details'>
+											{task.details}
+										</div>
+									</Fragment>
+								})}
+
+							<button
+								// onClick={() => setIsEditMode(true)}
+								className='add'
+							>
+								Add an item
+							</button>
+
+							{/* {checklist.tasks?.map(task => (
                                             <div className='task'>
                                                 <Checkbox
                                                     // onClick={() => {
@@ -66,8 +78,6 @@ export function ChecklistsContainer({checklists, card }) {
                                                 </button>
                                             </div>
                                         ))} */}
-								</ul>
-							</section>
 
 							{/* {isEditMode && label.id === labelInEdit.id ? (
                                     <input

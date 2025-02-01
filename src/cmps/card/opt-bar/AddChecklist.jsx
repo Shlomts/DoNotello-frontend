@@ -21,6 +21,7 @@ export function AddChecklist({ info, onUpdate }) {
 					onKeyDown={ev => {
 						if (ev.key === 'Enter') onSaveTitle()
 					}}
+				autoFocus
 				/>
 			</li>
 			<button className='add' onClick={onSaveTitle}>
