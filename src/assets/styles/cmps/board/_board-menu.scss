@@ -3,11 +3,11 @@
   // top: 48px;
   // right: 0;
   // bottom: 0;
-  min-width: 339px;
+  min-width: 308px;
   // max-width: 339px;
   z-index: 30;
   background: #282e33;
-  box-shadow: 0 8px 12px #091e4226, 0 0 1px #091e424f;
+  box-shadow: $ds-shadow-overlay;
   -webkit-transform: translateX(339px);
   transform: translateX(339px);
   transition: transform 0.1s ease-in, width 0.1s ease-in;
@@ -133,6 +133,9 @@
         padding: 0;
         margin: 0;
         list-style: none;
+        hr{
+          margin-top: 30px ;
+        }
 
         li {
           margin-bottom: 4px;
@@ -148,7 +151,9 @@
             height: 32px;
             border-radius: 8px;
             padding: 6px 12px;
+            color: $app-title;
 
+       
             &.board-info-container {
               height: 52px;
               width: 100%;
@@ -156,7 +161,7 @@
               .boaed-info-icon {
                 flex-shrink: 0;
                 margin-right: 8px;
-                margin-block: 12px;
+                margin-block: 11px;
                 justify-content: center;
               }
               div.title {
@@ -253,9 +258,8 @@
 }
 
 .board-details-menu {
-  width: 320px;
+  width: 308px;
   flex: 1 auto;
-  width: 100%;
   min-height: 0;
   color: $app-title;
 
@@ -372,7 +376,7 @@
     }
     .grdatxt {
       background-color: #22272b;
-      width: 100%;
+      width: 90%;
       padding: 8px 12px 32px;
       border: none;
       border-radius: 3px;

@@ -1,12 +1,12 @@
-import { useSelector } from 'react-redux'
-import { Fragment, useEffect, useRef, useState } from 'react'
-import { useParams } from 'react-router'
-import { Close, Description, InfoIcon, LeftArrow, Members } from '../SvgContainer'
-import { updateBoard } from '../../store/actions/board.actions'
-import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
+import {useSelector} from 'react-redux'
+import {Fragment, useEffect, useRef, useState} from 'react'
+import {useParams} from 'react-router'
+import {Close, Description, InfoIcon, LeftArrow, Members} from '../SvgContainer'
+import {updateBoard} from '../../store/actions/board.actions'
+import {showErrorMsg, showSuccessMsg} from '../../services/event-bus.service'
 
-export function BoardMenu({ board, onClose }) {
-  const { boardId } = useParams()
+export function BoardMenu({board, onClose}) {
+  const {boardId} = useParams()
   const users = useSelector((storeState) => storeState.userModule.users)
   // const board = useSelector((storeState) => storeState.boardModule.board)
   const [menuView, setMenuView] = useState('main')
@@ -29,9 +29,11 @@ export function BoardMenu({ board, onClose }) {
   }, [desInEdit])
 
   const images = [
+    'https://res.cloudinary.com/dphepumae/image/upload/v1738518634/freestocks-Y9mWkERHYCU-unsplash_dlelwk.jpg',
     'https://res.cloudinary.com/dphepumae/image/upload/v1738062039/coffeMag_vezhli.jpg',
     'https://res.cloudinary.com/dphepumae/image/upload/v1738062049/cityFizza_kml6re.jpg',
     'https://res.cloudinary.com/dphepumae/image/upload/v1738062046/citySunset_nsfwyh.jpg',
+    'https://res.cloudinary.com/dphepumae/image/upload/v1734955441/cld-sample-2.jpg',
     'https://res.cloudinary.com/dphepumae/image/upload/v1734955438/samples/balloons.jpg',
     'https://res.cloudinary.com/dphepumae/image/upload/v1734955440/samples/cup-on-a-table.jpg',
     'https://res.cloudinary.com/dphepumae/image/upload/v1734955432/samples/landscapes/beach-boat.jpg',
@@ -48,7 +50,7 @@ export function BoardMenu({ board, onClose }) {
     try {
       const updatedBoard = {
         ...board,
-        style: { ...board.style, backgroundImage: newImageUrl },
+        style: {...board.style, backgroundImage: newImageUrl},
       }
       console.log(updatedBoard)
 
@@ -78,7 +80,7 @@ export function BoardMenu({ board, onClose }) {
       return
     }
 
-    const updatedBoard = { ...board, description: desInEdit }
+    const updatedBoard = {...board, description: desInEdit}
     console.log(updatedBoard, 'before updating in the action ')
 
     try {
@@ -98,7 +100,7 @@ export function BoardMenu({ board, onClose }) {
     if (!comment.trim()) return
     const updatedBoard = {
       ...board,
-      comments: [...(board.comments || []), { text: comment, createdAt: Date.now() }], // ✅ Adds new comment properly
+      comments: [...(board.comments || []), {text: comment, createdAt: Date.now()}],
     }
     console.log(updatedBoard)
 
@@ -141,10 +143,7 @@ export function BoardMenu({ board, onClose }) {
 
               <div className="admin-info">
                 {/* add here hen`s member modal */}
-                <img
-                  src={board?.createdBy?.imgUrl}
-                  alt="Admin img"
-                />
+                <img src={board?.createdBy?.imgUrl} alt="Admin img" />
                 <div className="name">
                   <h3>{board?.createdBy?.fullname}</h3>
                   <p>@{board?.createdBy?.username}</p>
@@ -230,23 +229,23 @@ export function BoardMenu({ board, onClose }) {
 
       default:
         return (
-          <ul>
+          <ul className='default-list'>
             <li>
               <button className="board-info-container" onClick={() => setMenuView('boardDetails')}>
                 <div className="boaed-info-icon icon">
                   <InfoIcon />
                 </div>
                 <div className="title">
-                  Board Details
+                  About this board
                   <div className="sub-title">Add a description to your board</div>
                 </div>
               </button>
             </li>
-            <hr />
+            <hr className='saperete'/>
             <li>
               <button className="board-background-container" onClick={() => setMenuView('background')}>
-                <div className="icon" style={{ backgroundImage: `url(${board?.style?.backgroundImage})` }}></div>
-                <p>Change Background</p>
+                <div className="icon" style={{backgroundImage: `url(${board?.style?.backgroundImage})`}}></div>
+                <p>Change background</p>
               </button>
             </li>
           </ul>
