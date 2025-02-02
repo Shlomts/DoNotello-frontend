@@ -219,9 +219,9 @@ export function CardDetails() {
 		setCardChecklists(updatedChecklists)
 		setCard(card => {
 			card.checklists = updatedChecklists
+			updateCard(board, group, card)
 			return card
 		})
-		updateCard(board, group, card)
 		onCloseModal()
 	}
 
@@ -229,14 +229,14 @@ export function CardDetails() {
 		const editList = cardChecklists.filter(
 			checklist => checklist.id !== newChecklist.id
 		)
-		const updatedChecklists = [ ...editList, newChecklist]
+		const updatedChecklists = [...editList, newChecklist]
 
 		setCardChecklists(updatedChecklists)
 		setCard(card => {
 			card.checklists = updatedChecklists
+			updateCard(board, group, card)
 			return card
 		})
-		updateCard(board, group, card)
 	}
 
 	function removeChecklist(id) {

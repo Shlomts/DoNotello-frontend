@@ -1,41 +1,46 @@
 .checklists-container {
 	grid-area: els;
-    padding:0;
+	padding: 0;
 
 	.checklist {
 		display: grid;
-        grid-template-columns: max-content 1fr;
+		grid-template-columns: max-content 1fr;
 
-        &>* {
-            align-content: center;
-        }
+		& > * {
+			align-content: center;
+		}
 
-        .check {
-            width: max-content
-        }
+		.check {
+			width: max-content;
+		}
 
-        .delete{
-            grid-row: 2;
-            justify-self: end;
-        }
+		.delete {
+			grid-row: 2;
+			justify-self: end;
+		}
 
 		h4 {
-            display: inline;
+			display: inline;
 			grid-column: 2;
 		}
 
+		.tasks {
+			grid-column: subgrid;
+		}
 
-        .tasks {
-            grid-column: subgrid;
-        }
+		.task {
+			display: grid;
+			grid-column: 1/-1;
+		}
 
-        .add {
-            grid-column: 2;
-            justify-self: baseline;
-        }
+		.add {
+			grid-column: 2;
+			justify-self: baseline;
+		}
 
-        .details {
-            grid-column: 2;
-        }
+		.details {
+			grid-column: 2;
+            
+		}
 	}
 }
