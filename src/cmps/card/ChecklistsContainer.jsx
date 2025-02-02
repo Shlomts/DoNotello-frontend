@@ -1,12 +1,27 @@
 import { Fragment, useEffect, useState } from 'react'
 import { Checklist, ListActions } from '../SvgContainer'
 import { Checkbox } from '@mui/material'
+import { makeId } from '../../services/util.service'
 
 export function ChecklistsContainer({ checklists, removeChecklist }) {
+	
+	const [ isEditMode, setIsEditMode ] = useState(true)
+	const [ currChecklist, setCurrChecklist ] = useState(null)
+	
+	function onEditDetails(ev) {
+		const todo = ev.target.value
+		const newTask = { id: makeId(), details: todo, isDone: false }
+		const newTasks = [...currChecklist.tasks, newTask]
+		// newTasks.push(newTask)
+		console.log('newTask-----------', newTask)
+		setCurrChecklist(prev => prev.tasks = newTasks)
+		console.log('currChecklist-----------', currChecklist)
 
-    function onDeleteChecklist(id) {
-        if( confirm('Sure?')) removeChecklist(id)
-    }
+	}
+	
+	function onDeleteChecklist(id) {
+		if (confirm('Sure?')) removeChecklist(id)
+	}
 
 	return (
 		<section className='checklists-container'>
@@ -19,7 +34,9 @@ export function ChecklistsContainer({ checklists, removeChecklist }) {
 							<h4 className='title'>
 								{checklist.title}
 								<button
-									onClick={() => onDeleteChecklist(checklist.id)}
+									onClick={() =>
+										onDeleteChecklist(checklist.id)
+									}
 									className='delete'
 								>
 									Delete
@@ -29,15 +46,7 @@ export function ChecklistsContainer({ checklists, removeChecklist }) {
 							<div className='percent'>0%</div>
 							<div className='bar'>-------------------</div>
 
-							{/* <input
-								type='text'
-								// onChange={onEditLabelTitle}
-								// onBlur={onSaveLabelTitle}
-								// onKeyDown={onKeyDown}
-								autoFocus
-							/> */}
-
-							{checklist.tasks &&
+							{checklist.tasks?.length > 0  ? (
 								checklist.tasks.map(task => {
 									<Fragment>
 										<Checkbox className='check' />
@@ -45,7 +54,21 @@ export function ChecklistsContainer({ checklists, removeChecklist }) {
 											{task.details}
 										</div>
 									</Fragment>
-								})}
+								})
+							) : (
+								<input
+									type='text'
+									className='details'
+									onChange={ev => {
+										setCurrChecklist(prev => prev = checklist )
+										onEditDetails(ev)
+									}
+									}
+									// onBlur={onSaveLabelTitle}
+									// onKeyDown={onKeyDown}
+									autoFocus
+								/>
+							)}
 
 							<button
 								// onClick={() => setIsEditMode(true)}

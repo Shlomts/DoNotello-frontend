@@ -91,6 +91,8 @@ export function CardDetails() {
 	}
 
 	async function onRemoveCard() {
+		if (!confirm('Sure?')) return
+
 		const groupId = await getGroupId(board, cardId)
 
 		try {
@@ -214,26 +216,20 @@ export function CardDetails() {
 
 	function onAddChecklist(data) {
 		const newChecklist = { id: makeId(), title: data, tasks: [] }
-		// console.log('----------in add, newChecklist:', newChecklist)
-
 		const updatedChecklists = [...cardChecklists, newChecklist]
-		// console.log('----------in add, updatedChecklists:', updatedChecklists)
-
-		// const newCard = { ...card, checklists: updatedChecklists }
-		// console.log('----------in add, newCard:', newCard)
-
 		setCardChecklists(updatedChecklists)
 		setCard(card => {
 			card.checklists = updatedChecklists
 			return card
 		})
-		// setCard(prev => prev = newCard)
 		updateCard(board, group, card)
 		onCloseModal()
 	}
 
 	function removeChecklist(id) {
-		const newChecklists = cardChecklists.filter(checklist => checklist.id !== id)
+		const newChecklists = cardChecklists.filter(
+			checklist => checklist.id !== id
+		)
 		setCardChecklists(newChecklists)
 		setCard(card => {
 			card.checklists = newChecklists
@@ -243,6 +239,7 @@ export function CardDetails() {
 	}
 
 	if (!card) return <div>Loading...</div>
+	
 	return (
 		<section className='card-details-outlet'>
 			{isShowModal && currDynamic && dataRef.current && (

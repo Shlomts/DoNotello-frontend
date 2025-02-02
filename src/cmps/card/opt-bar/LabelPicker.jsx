@@ -7,11 +7,11 @@ import { light } from '@mui/material/styles/createPalette'
 export function LabelPicker({ info, onUpdate }) {
 	if (!info || !info.boardLabels) return
 
-	const [boardLabelsList, setBoardLabelsList] = useState(addIsInCard())
-	const [srchPrm, setSrchPrm] = useState('')
+	const [ boardLabelsList, setBoardLabelsList ] = useState(addIsInCard())
+	const [ srchPrm, setSrchPrm ] = useState('')
 
-	const [isEditMode, setIsEditMode] = useState(false)
-	const [labelInEdit, setLabelInEdit] = useState(null)
+	const [ isEditMode, setIsEditMode ] = useState(false)
+	const [ labelInEdit, setLabelInEdit ] = useState(null)
 
 	useEffect(() => {
 		setBoardLabelsList(
