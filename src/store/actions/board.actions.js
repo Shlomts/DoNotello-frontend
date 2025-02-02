@@ -109,17 +109,37 @@ export async function addCardToGroup(board, group, cardToSave) {
 }
 
 export async function updateCard(board, group, cardToSave) {
-  console.log("inside of update card:", cardToSave)
-  const cardToCut = group.cards.findIndex(currCard => cardToSave.id === currCard.id)
-  group.cards.splice(cardToCut, 1, cardToSave)
+  const groupIdx = board.groups.findIndex(prevGroup => prevGroup.id === group.id)
+  if (groupIdx === -1) {
+    console.error('Group not found for updating card')
+    return
+  }
+
+  const cardIdx = board.groups[groupIdx].cards.findIndex(prevCard => prevCard.id === cardToSave.id)
+  if (cardIdx === -1) {
+    console.error('Card not found in group')
+    return
+  }
+
+  const updatedGroup = {
+    ...board.groups[groupIdx],
+    cards: board.groups[groupIdx].cards.map((card, idx) =>
+      idx === cardIdx ? { ...card, ...cardToSave } : card
+    ),
+  }
+
+  const updatedBoard = {
+    ...board,
+    groups: board.groups.map((group, idx) => (idx === groupIdx ? updatedGroup : group)),
+  }
 
   try {
-    await updateBoard(board)
+    await updateBoard(updatedBoard)
   } catch (err) {
-    console.log("Cannot add card", err)
-    throw err
+    console.log('Cannot update card', err)
   }
 }
+
 
 
 export async function loadCard(board, cardId) {

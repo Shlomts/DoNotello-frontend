@@ -19,7 +19,7 @@ export function LabelPicker({ info, onUpdate }) {
 				label.title.toUpperCase().includes(srchPrm.toUpperCase())
 			)
 		)
-	}, [srchPrm])
+	}, [srchPrm, info.cardLabels])
 
 
 	function addIsInCard() {
@@ -37,10 +37,9 @@ export function LabelPicker({ info, onUpdate }) {
 
 	function onUpdateLabels(idToEdit) {
 		setBoardLabelsList(prevLabels =>
-			prevLabels.map(label => {
-				if (label.id === idToEdit) label.isInCard = !label.isInCard
-				return label
-			})
+			prevLabels.map(label =>
+				label.id === idToEdit ? { ...label, isInCard: !label.isInCard } : label
+			)
 		)
 		onUpdate({ id: idToEdit, isRename: false })
 	}
