@@ -26,7 +26,7 @@ async function remove(boardId) {
     return httpService.delete(`board/${boardId}`)
 }
 async function saveBoard(board) {
-    var savedBoard
+    let savedBoard
     if (board._id) {
         savedBoard = await httpService.put(`board/${board._id}`, board)
     } else {
@@ -36,7 +36,7 @@ async function saveBoard(board) {
 }
 
 async function addBoardMsg(boardId, txt) {
-    const savedMsg = await httpService.post(`board/${boardId}/msg`, {txt})
+    const savedMsg = await httpService.post(`board/${boardId}/msg`, { txt })
     return savedMsg
 }
 

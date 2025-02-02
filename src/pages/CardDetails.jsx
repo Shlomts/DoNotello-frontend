@@ -141,7 +141,7 @@ export function CardDetails() {
 				onSetLabels(data)
 				break
 			default:
-				;<div>UNKNOWM</div>
+				; <div>UNKNOWM</div>
 				break
 		}
 	}
@@ -158,13 +158,13 @@ export function CardDetails() {
 		setCardMembers(updatedCardMembers)
 		setCard(card => {
 			card.memberIds = updatedCardMembers
+			updateCard(board, group, card)
 			return card
 		})
-		updateCard(board, group, card)
 	}
 
 	function onSetLabels(data) {
-		if(!data || !data.id) return
+		if (!data || !data.id) return
 		const { id, isRename, name } = data
 		const updatedCardLabels = [...cardLabels]
 		const index = updatedCardLabels.indexOf(id)
