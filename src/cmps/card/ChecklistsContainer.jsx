@@ -3,22 +3,32 @@ import { Checklist, ListActions } from '../SvgContainer'
 import { Checkbox } from '@mui/material'
 import { makeId } from '../../services/util.service'
 
-export function ChecklistsContainer({ checklists, removeChecklist }) {
-	
-	const [ isEditMode, setIsEditMode ] = useState(true)
-	const [ currChecklist, setCurrChecklist ] = useState(null)
-	
+export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
+	const [isEditMode, setIsEditMode] = useState(true)
+	const [currChecklist, setCurrChecklist] = useState(null)
+	const [detailsInEdit, setDetailsInEdit] = useState('')
+
 	function onEditDetails(ev) {
 		const todo = ev.target.value
-		const newTask = { id: makeId(), details: todo, isDone: false }
-		const newTasks = [...currChecklist.tasks, newTask]
-		// newTasks.push(newTask)
-		console.log('newTask-----------', newTask)
-		setCurrChecklist(prev => prev.tasks = newTasks)
-		console.log('currChecklist-----------', currChecklist)
-
+		// if(!currChecklist) setCurrChecklist()
+		setDetailsInEdit(todo)
 	}
-	
+
+	function onSaveDetails() {
+		const newTask = { id: makeId(), details: detailsInEdit, isDone: false }
+		const newTasks = [...currChecklist.tasks, newTask]
+		setCurrChecklist(prev => (prev.tasks = newTasks))
+
+		onUpdate(currChecklist)
+		setDetailsInEdit('')
+	}
+
+	function onKeyDown(ev) {
+		if (ev.key === 'Enter') {
+			onSaveDetails()
+		}
+	}
+
 	function onDeleteChecklist(id) {
 		if (confirm('Sure?')) removeChecklist(id)
 	}
@@ -30,7 +40,6 @@ export function ChecklistsContainer({ checklists, removeChecklist }) {
 					{checklists.map(checklist => (
 						<li key={checklist.id} className='checklist'>
 							<Checklist />
-
 							<h4 className='title'>
 								{checklist.title}
 								<button
@@ -42,41 +51,50 @@ export function ChecklistsContainer({ checklists, removeChecklist }) {
 									Delete
 								</button>
 							</h4>
-
 							<div className='percent'>0%</div>
 							<div className='bar'>-------------------</div>
-
-							{checklist.tasks?.length > 0  ? (
+							{console.log(checklist)}
+							{checklist.tasks.length > 0 &&
 								checklist.tasks.map(task => {
-									<Fragment>
+									<div>
 										<Checkbox className='check' />
 										<div className='details'>
 											{task.details}
 										</div>
-									</Fragment>
-								})
-							) : (
-								<input
-									type='text'
-									className='details'
-									onChange={ev => {
-										setCurrChecklist(prev => prev = checklist )
-										onEditDetails(ev)
-									}
-									}
-									// onBlur={onSaveLabelTitle}
-									// onKeyDown={onKeyDown}
-									autoFocus
-								/>
-							)}
+									</div>
+								})}
 
+							{isEditMode &&
+								checklist.id === currChecklist?.id && (
+									<div className='details'>
+										<input
+											type='text'
+											value={detailsInEdit}
+											onChange={ev => {
+												setCurrChecklist(
+													prev => (prev = checklist)
+												)
+												console.log(currChecklist)
+												onEditDetails(ev)
+											}}
+											onKeyDown={onKeyDown}
+											autoFocus
+										/>
+										<button onClick={onSaveDetails}>
+											Save
+										</button>
+										<button>Cancel</button>
+									</div>
+								)}
 							<button
-								// onClick={() => setIsEditMode(true)}
+								onClick={() => {
+									setCurrChecklist(checklist)
+									setIsEditMode(true)
+								}}
 								className='add'
 							>
 								Add an item
 							</button>
-
 							{/* {checklist.tasks?.map(task => (
                                             <div className='task'>
                                                 <Checkbox
@@ -101,7 +119,6 @@ export function ChecklistsContainer({ checklists, removeChecklist }) {
                                                 </button>
                                             </div>
                                         ))} */}
-
 							{/* {isEditMode && label.id === labelInEdit.id ? (
                                     <input
                                         type='text'
@@ -122,7 +139,6 @@ export function ChecklistsContainer({ checklists, removeChecklist }) {
                                         {label.title}
                                     </div>
                                 )} */}
-
 							{/* <div
                                     onClick={() => {
                                         setLabelInEdit(label)
@@ -180,62 +196,4 @@ export function ChecklistsContainer({ checklists, removeChecklist }) {
 			)} */}
 		</section>
 	)
-
-	// if (!cards || cards.length === 0) return null
-
-	// function getStyle(style, snapshot) {
-	//     if (snapshot.isDragging) {
-	//         return {
-	//             ...style,
-	//             transform: `${style?.transform || ""} rotate(5deg)`,
-	//             transition: "transform 0.2 ease",
-	//             // zIndex: 10,
-	//         }
-	//     }
-
-	//     if (snapshot.isDropAnimating) {
-	//         const { moveTo, curve, duration } = snapshot.dropAnimation
-	//         const translate = `translate(${moveTo.x}px, ${moveTo.y}px)`
-
-	//         return {
-	//             ...style,
-	//             transform: translate,
-	//             transition: `all ${curve} ${duration}s`,
-	//         };
-	//     }
-
-	//     return style
-	// }
-
-	// return (
-	//     <Droppable droppableId={group.id} direction='vertical' type='card'>
-	//         {(provided, snapshot) => (
-	//             <ul className=
-	//                 {`card-list ${snapshot.isDraggingOver ? "dragging-over" : ""}`}
-	//                 {...provided.droppableProps}
-	//                 ref={provided.innerRef}>
-	//                 {cards.map((card, index) => (
-	//                     <Draggable key={card.id} draggableId={card.id} index={index} type='card'>
-	//                         {(provided, snapshot) => (
-	//                             <li
-	//                                 ref={provided.innerRef}
-	//                                 {...provided.draggableProps}
-	//                                 {...provided.dragHandleProps}
-	//                                 style={getStyle(provided.draggableProps.style, snapshot)}
-	//                                 className={`draggable-container ${snapshot.isDragging ? "isDragging" : ""}`}
-	//                             >
-	//                                 <CardPreview
-	//                                     card={card}
-	//                                     cardMembers={board.members.filter(member => card.memberIds.includes(member._id))}
-	//                                     cardLabels={board.labels.filter(label => card.labelIds.includes(label.id))}
-	//                                 />
-	//                             </li>
-	//                         )}
-	//                     </Draggable>
-	//                 ))}
-	//                 {provided.placeholder}
-	//             </ul>
-	//         )}
-	//     </Droppable>
-	// )
 }

@@ -75,7 +75,6 @@ export function CardDetails() {
 		setCardMembers(card?.memberIds || [])
 		setCardLabels(card?.labelIds || [])
 		setCardChecklists(card?.checklists || [])
-		console.log('card in useEffect >>>>>>>>>', card)
 	}, [card])
 
 	async function getCard() {
@@ -226,6 +225,20 @@ export function CardDetails() {
 		onCloseModal()
 	}
 
+	function onEditChecklist(newChecklist) {
+		const editList = cardChecklists.filter(
+			checklist => checklist.id !== newChecklist.id
+		)
+		const updatedChecklists = [ ...editList, newChecklist]
+
+		setCardChecklists(updatedChecklists)
+		setCard(card => {
+			card.checklists = updatedChecklists
+			return card
+		})
+		updateCard(board, group, card)
+	}
+
 	function removeChecklist(id) {
 		const newChecklists = cardChecklists.filter(
 			checklist => checklist.id !== id
@@ -239,7 +252,7 @@ export function CardDetails() {
 	}
 
 	if (!card) return <div>Loading...</div>
-	
+
 	return (
 		<section className='card-details-outlet'>
 			{isShowModal && currDynamic && dataRef.current && (
@@ -494,8 +507,8 @@ export function CardDetails() {
 				{cardChecklists.length > 0 && (
 					<ChecklistsContainer
 						checklists={cardChecklists}
-						card={card}
 						removeChecklist={removeChecklist}
+						onUpdate={onEditChecklist}
 					/>
 				)}
 
