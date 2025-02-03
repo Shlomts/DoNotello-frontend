@@ -21,8 +21,8 @@ export function CardList({ cards, board, group }) {
             return {
                 ...style,
                 transform: translate,
-                transition: `all ${curve} ${duration}s`,
-            };
+                transition: `transform ${curve} ${duration}s`,
+            }
         }
 
         return style

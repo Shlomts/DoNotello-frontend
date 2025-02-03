@@ -13,7 +13,8 @@ export function MemberPicker({ info, onUpdate }) {
 				member.fullname.toUpperCase().includes(srchPrm.toUpperCase())
 			)
 		)
-	}, [srchPrm])
+	}, [srchPrm, info.cardMembers])
+	
 
 	function addIsInCard() {
 		const newBoardMembers = info.boardMembers.map(member => ({
@@ -33,13 +34,12 @@ export function MemberPicker({ info, onUpdate }) {
 
 	function onUpdateMembers(id) {
 		setBoardMembersList(prevMembers =>
-			prevMembers.map(member => {
-				if (member._id === id) member.isInCard = !member.isInCard
-				return member
-			})
+		  prevMembers.map(member =>
+			member._id === id ? { ...member, isInCard: !member.isInCard } : member
+		  )
 		)
 		onUpdate(id)
-	}
+	  }
 
 	function onSearchMember(ev) {
 		const prm = ev.target.value

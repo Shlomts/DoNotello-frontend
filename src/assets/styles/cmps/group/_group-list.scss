@@ -2,21 +2,17 @@
     display: flex;
     padding-inline-end: rem(12px);
     margin-block-start: rem(12px);
-    gap: rem(6px);
+    max-height: calc(100% - rem(24px));
+
+    >li {
+        margin-right: rem(12px);
+    }
+
+    >li:last-child {
+        margin-right: 0;
+    }
 
     &.dragging-over {
         border-radius: rem(8px);
-    }
-
-    .draggable-container {
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.2s;
-
-        &.isDragging {
-            background-color: transparent;
-            opacity: 0.8;
-            z-index: 10;
-        }
     }
 }

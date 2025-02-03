@@ -13,7 +13,6 @@
     border: 2px solid transparent;
 
     background-color: #22272b;
-    // overflow: hidden;
     position: relative;
 
     h3 {
@@ -46,11 +45,6 @@
 
         border: 2px solid #99c8ff;
         cursor: pointer;
-    }
-
-    .card-preview.expanded {
-        // max-height: rem(100px);
-        // padding: rem(10px) rem(12px);
     }
 
     .card-labels .card-label {

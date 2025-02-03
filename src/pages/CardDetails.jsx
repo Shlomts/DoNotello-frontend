@@ -99,10 +99,10 @@ export function CardDetails() {
 
 		setCard(card => {
 			card.title = name
+			updateCard(board, group, card)
 			return card
 		})
 
-		updateCard(board, group, card)
 		setIsEditCardTitle(false)
 	}
 
@@ -120,9 +120,9 @@ export function CardDetails() {
 		setDescriptionInput(desInEdit)
 		setCard(card => {
 			card.description = desInEdit
+			updateCard(board, group, card)
 			return card
 		})
-		updateCard(board, group, card)
 		setIsEditMode(false)
 	}
 
@@ -141,33 +141,33 @@ export function CardDetails() {
 				onSetLabels(data)
 				break
 			default:
-				;<div>UNKNOWM</div>
+				; <div>UNKNOWM</div>
 				break
 		}
 	}
 
-	function onSetMembers(id) {
-		const updatedCardMembers = [...cardMembers]
-		const index = updatedCardMembers.indexOf(id)
+	function onSetMembers(memberId) {
+		if (!card) return
+		console.log('Toggling member:', memberId)
 
-		if (index !== -1) {
-			updatedCardMembers.splice(index, 1)
-		} else {
-			updatedCardMembers.push(id)
-		}
+
+		const updatedCardMembers = card?.memberIds?.includes(memberId)
+			? card.memberIds.filter(id => id !== memberId)
+			: [...(card.memberIds || []), memberId]
+
 		setCardMembers(updatedCardMembers)
-		setCard(card => {
-			card.memberIds = updatedCardMembers
-			return card
+
+		setCard(prevCard => {
+			const updatedCard = { ...prevCard, memberIds: updatedCardMembers }
+			updateCard(board, group, updatedCard)
+			return updatedCard
 		})
-		updateCard(board, group, card)
 	}
 
+
 	function onSetLabels(data) {
-		if(!data || !data.id) return
+		if (!data || !data.id) return
 		const { id, isRename, name } = data
-		const updatedCardLabels = [...cardLabels]
-		const index = updatedCardLabels.indexOf(id)
 
 		if (isRename) {
 			const newLabels = [...board.labels]
@@ -178,6 +178,8 @@ export function CardDetails() {
 			const newBoard = { ...board, labels: newLabels }
 			updateBoard(newBoard)
 		} else {
+			const updatedCardLabels = [...cardLabels]
+			const index = updatedCardLabels.indexOf(id)
 			if (index !== -1) {
 				updatedCardLabels.splice(index, 1)
 			} else {
@@ -187,9 +189,9 @@ export function CardDetails() {
 			setCardLabels(updatedCardLabels)
 			setCard(card => {
 				card.labelIds = updatedCardLabels
+				updateCard(board, group, card)
 				return card
 			})
-			updateCard(board, group, card)
 		}
 	}
 

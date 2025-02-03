@@ -38,5 +38,5 @@
 
 .board-page{
     display: flex;
-    height: 100vh;
+    height: calc(100vh - rem(48px));
 }

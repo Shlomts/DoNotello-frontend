@@ -7,7 +7,8 @@
     align-items: stretch;
     padding-block-end: rem(8px);
     width: rem(272px);
-    max-height: rem(660px);
+    max-height: 100%;
+    // margin-block-end: 10px;
 
     border-radius: rem(12px);
 
@@ -42,7 +43,6 @@
         svg {
             width: rem(16px);
             height: rem(16px);
-
         }
     }
 
@@ -50,10 +50,10 @@
         display: flex;
         flex-direction: column;
         flex-grow: 0;
-        min-height: 0;
+        // min-height: 0;
         // max-height: calc(100% - rem(48px));
+        // height: 100%;
         overflow-y: auto;
-        scrollbar-gutter: stable;
 
         &.empty {
             align-items: center;
@@ -78,8 +78,6 @@
         align-items: center;
         padding: rem(8px) rem(8px) 0 rem(8px);
         gap: 8px;
-
-
 
         .add-card {
             gap: 8px;
@@ -178,6 +176,5 @@
                 background-color: #282f27;
             }
         }
-
     }
 }

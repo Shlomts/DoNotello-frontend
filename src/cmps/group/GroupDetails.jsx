@@ -2,12 +2,11 @@ import { Plus } from "../SvgContainer.jsx"
 import { useState } from "react"
 
 import { CardList } from "../card/CardList.jsx"
-import {
-    showSuccessMsg,
-    showErrorMsg,
-} from "../../services/event-bus.service.js"
+import { showSuccessMsg, showErrorMsg, } from "../../services/event-bus.service.js"
 import { Close } from "../SvgContainer.jsx"
 import { addCardToGroup } from "../../store/actions/board.actions.js"
+import { boardService } from "../../services/board"
+
 
 export function GroupDetails({ board, group, onRemoveGroup }) {
     const [isAddingCard, setIsAddingCard] = useState(false)
@@ -43,7 +42,10 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
             <div className="group-header">
                 <h3>{group.title}</h3>
                 <button className="remove-group-btn"
-                    onClick={() => onRemoveGroup(group.id)}>
+                    onClick={() => {
+                        if (!confirm('Sure?')) return
+                        onRemoveGroup(group.id)
+                    }}>
                     <Close />
                 </button>
             </div>
