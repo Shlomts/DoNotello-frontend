@@ -105,6 +105,7 @@ export function LabelPicker({ info, onUpdate }) {
 								{isEditMode && label.id === labelInEdit.id ? (
 									<input
 										type='text'
+										className='name-input'
 										value={labelInEdit.title}
 										onChange={onEditLabelTitle}
 										// onBlur={onSaveLabelTitle}

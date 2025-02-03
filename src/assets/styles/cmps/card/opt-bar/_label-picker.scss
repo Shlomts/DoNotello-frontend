@@ -29,10 +29,6 @@
         }
     }
 
-    // .checkbox {
-    //     background-color: #579dff;
-    // }
-
     .labels-list {
         margin-top: 15px;
 
@@ -47,6 +43,14 @@
             line-height: 32px;
             width: 188px;
             padding-inline: 12px;
+
+            .name-input{
+                background-color: #8c9baa;
+                color: #22272b;
+                width: 164px;
+                height: 42px;
+                padding-inline: 12px;
+            }
         }
     }
 
