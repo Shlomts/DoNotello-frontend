@@ -13,10 +13,11 @@
 		grid-template-areas:
 			'i    h         btn'
 			'.    usropt    opt'
-			'des   des      opt';
+			'des   des      opt'
+			'els   els      opt';
 
 		grid-template-columns: auto 1fr auto;
-		grid-template-rows: 70px min-content auto;
+		grid-template-rows: 70px min-content min-content;
 
 		min-height: 100vh;
 		border-radius: 12px;
@@ -180,111 +181,6 @@
 			gap: rem(8px);
 		}
 
-		.description {
-			display: grid;
-			grid-area: des;
-
-			grid-template-areas:
-				'di  desh       '
-				'.   txt        ';
-
-			grid-template-columns: subgrid;
-			grid-template-rows: min-content 325px;
-
-			gap: 10px;
-			row-gap: 12px;
-
-			&.icon {
-				display: block;
-				grid-area: di;
-
-				svg {
-					font-size: 24px;
-				}
-			}
-
-			h4 {
-				grid-area: desh;
-				font-size: 16px;
-				margin-bottom: 0;
-				padding-top: 4px;
-			}
-
-
-			.grdatxt {
-				grid-area: txt;
-				margin-top: 8px;
-				align-self: baseline;
-				width: 100%;
-				border-radius: 3px;
-			}
-
-			textarea {
-				min-height: 274px;
-
-				background-color: #22272b;
-				border: 1px solid #8c9baa;
-
-				padding-inline: 20px;
-				padding-top: 8px;
-
-				font-weight: 400;
-				font-size: 1em;
-
-				resize: none;
-				overflow: auto;
-				// scrollbar-color: black;  // Y NOT WORKKKK
-
-				&:focus {
-					outline: none;
-					border: 2px solid #579dff;
-				}
-
-				&::placeholder {
-					color: #8c9baa;
-				}
-			}
-
-			.no-des-plchldr {
-				padding: 8px 12px 32px;
-				height: 60px;
-				background-color: #3b444c;
-				font-weight: 500;
-				cursor: pointer;
-
-				&:hover {
-					background-color: rgb(69 80 90);
-				}
-			}
-
-			.desbtns {
-				grid-area: txt;
-				bottom: 0;
-				position: relative;
-				align-self: end;
-				padding-top: 2px;
-
-				button {
-					line-height: 2rem;
-					margin-top: 10px;
-					padding-inline: 12px;
-					font-weight: 30px;
-					border-radius: 3px;
-					border: none;
-					margin-inline-end: 8px;
-				}
-
-				.save {
-					background-color: #579dff;
-					color: #22272b;
-
-					&:hover {
-						background-color: #85b8ff;
-					}
-				}
-			}
-		}
-
 		.members h4 {
 			font-size: rem(12px);
 			font-weight: 600;
@@ -413,7 +309,111 @@
 
 		}
 
-
+		.description {
+			display: grid;
+			grid-area: des;
+		
+			grid-template-areas:
+				'di  desh       '
+				'.   txt        ';
+		
+			grid-template-columns: subgrid;
+			// grid-template-rows: min-content minmax(325px 500px);
+			grid-template-rows: min-content 325px;
+		
+			gap: 10px;
+			row-gap: 12px;
+		
+			&.icon {
+				display: block;
+				grid-area: di;
+		
+				svg {
+					font-size: 24px;
+				}
+			}
+		
+			h4 {
+				grid-area: desh;
+				font-size: 16px;
+				margin-bottom: 0;
+				padding-top: 4px;
+			}
+		
+		
+			.grdatxt {
+				grid-area: txt;
+				margin-top: 8px;
+				align-self: baseline;
+				width: 100%;
+				border-radius: 3px;
+			}
+		
+			textarea {
+				min-height: 274px;
+		
+				background-color: #22272b;
+				border: 1px solid #8c9baa;
+		
+				padding-inline: 20px;
+				padding-top: 8px;
+		
+				font-weight: 400;
+				font-size: 1em;
+		
+				resize: none;
+				overflow: auto;
+				// scrollbar-color: black;  // Y NOT WORKKKK
+		
+				&:focus {
+					outline: none;
+					border: 2px solid #579dff;
+				}
+		
+				&::placeholder {
+					color: #8c9baa;
+				}
+			}
+		
+			.no-des-plchldr {
+				padding: 8px 12px 32px;
+				height: 60px;
+				background-color: #3b444c;
+				font-weight: 500;
+				cursor: pointer;
+		
+				&:hover {
+					background-color: rgb(69 80 90);
+				}
+			}
+		
+			.desbtns {
+				grid-area: txt;
+				bottom: 0;
+				position: relative;
+				align-self: end;
+				padding-top: 2px;
+		
+				button {
+					line-height: 2rem;
+					margin-top: 10px;
+					padding-inline: 12px;
+					font-weight: 30px;
+					border-radius: 3px;
+					border: none;
+					margin-inline-end: 8px;
+				}
+		
+				.save {
+					background-color: #579dff;
+					color: #22272b;
+		
+					&:hover {
+						background-color: #85b8ff;
+					}
+				}
+			}
+		}
 
 
 		// .activity {
