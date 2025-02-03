@@ -1,28 +1,32 @@
-import { useState, useEffect } from 'react'
-import { CardFilterIcon } from '../SvgContainer'
-import { onToggleModal } from '../../store/actions/system.actions'
-import { CardFilterModal } from './CardFilterModal'
-import { useSelector } from 'react-redux'
+import {useState, useEffect} from 'react'
+import {CardFilterIcon} from '../SvgContainer'
+import {onToggleModal} from '../../store/actions/system.actions'
+import {CardFilterModal} from './CardFilterModal'
+import {useSelector} from 'react-redux'
 import {getPopupPosition} from '../../services/util.service'
 
-export function CardFilter({ board }) {
+export function CardFilter({board ,filterBy,  onSetFilter}) {
+  const [Cards, setCards] = useState(board.groups.flatMap((group) => group.cards))
+
   const modalData = useSelector((state) => state.systemModule.modalData)
   const isActive = modalData && modalData.cmp === CardFilterModal
-  const filterdCards = false
-  const [filterCount, setFilterCount] = useState(20)
+  var filterdCards 
+  let filterCount = filterBy
 
+  
 
   function toggleFilterModal(event) {
     const filterMenuPosition = getPopupPosition(event.currentTarget)
-
+    
     onToggleModal(
       {
         cmp: CardFilterModal, // The modal component
         props: {
           onClose: () => onToggleModal(null),
           board,
-          setFilterCount,
-          filterMenuPosition
+          filterBy,
+          onSetFilter,
+          filterMenuPosition,
         },
         trigger: 'card-filter',
       },
@@ -46,7 +50,9 @@ export function CardFilter({ board }) {
                   {/* here need to add the count of the results what change it do if there any filterd return the number here */}
                 </span>
               </div>
-              <button className="clear-all-btn" onClick={() => setFilterCount(0)}>Clear all</button>
+              <button className="clear-all-btn" onClick={() => filterCount = 0}>
+                Clear all
+              </button>
             </>
           )}
         </button>

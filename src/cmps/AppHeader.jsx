@@ -81,12 +81,12 @@ export function AppHeader() {
                   </div>
 
                 </li>
-                <li>
+                {/* <li>
                   <Link to={`user/${user._id}`}>Profile and visibility</Link>
                 </li>
                 <li>
                   <Link to="/activity">Activity</Link>
-                </li>
+                </li> */}
                 <li className="log-out">
                   <p onClick={onLogout}>Log out</p>
                 </li>

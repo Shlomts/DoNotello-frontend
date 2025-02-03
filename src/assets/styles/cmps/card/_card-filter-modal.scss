@@ -1,8 +1,9 @@
 .filter-modal {
   position: fixed;
-  top: 100px;
-  right: 4px;
-  width: 384px;
+  // top: 100px;
+  // right: 4px;
+  // width: 384px;
+  left: 30px;
   min-height: 350px;
   background-color: #22272b;
   border-radius: 8px;
@@ -72,6 +73,9 @@
     padding: 0 12px 12px 12px;
     max-height: 472px;
     color: rgb(159, 173, 188);
+    width: 270px;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     p {
       font-size: 12px;
@@ -87,14 +91,14 @@
       padding: 0;
       li {
         margin: 0;
-        padding: 8px;
+        // padding: 8px;
         padding-right: 0;
         cursor: pointer;
       }
     }
     label {
       margin: 0;
-      padding: 8px;
+      padding: 8px 0;
       padding-right: 0;
       cursor: pointer;
       font-size: 12px;
@@ -108,13 +112,14 @@
 
     .filter-section {
       padding: 0;
-      input.search-by-name {
+      input.search-by-txt {
         width: 100%;
         padding: 8px 12px;
         background-color: #22272b;
         border: 1px solid #9fadbc;
         color: #b6c2cf;
         transition: border 0.2s ease-in-out;
+        box-shadow: inset 0 0 0 1px #091e4224;
 
         &:focus {
           box-shadow: inset 0 0 0 2px #85b8ff;
@@ -136,6 +141,153 @@
 
     .filter-section-members-filter {
       padding: 0;
+
+      .members-title {
+        font-size: 12px;
+        line-height: 16px;
+        font-weight: 600;
+        margin-top: 16px;
+        margin-bottom: 8px;
+      }
+
+      label.checkbox-label,
+      .loggedin-member {
+        input.checkbox {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+        }
+      }
+      .chackbox-icon {
+        position: relative;
+        padding: 0;
+        margin: 0;
+      }
+    }
+    .member-input-container {
+      flex-grow: 1;
+      min-width: 0;
+      margin-left: 16px;
+.member-info{
+  font-size: 14px;
+  font-weight: 400;
+}
+      .members-icon-container {
+        flex-shrink: 0;
+        margin-right: 8px;
+        .icon-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background-color: #323940;
+          span {
+            display: inline-block;
+            line-height: 1;
+            svg {
+              width: 16px;
+              height: 16px;
+            }
+          }
+        }
+      }
+
+      .member-input-field {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        min-width: 0;
+      }
+    }
+
+    .filter-section-labels-filter {
+      padding: 0;
+      .checkbox-label{
+        padding-top: 0;
+      }
+      .label-icon-container {
+        flex-shrink: 0;
+        margin-right: 8px;
+        .icon-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background-color: #323940;
+          span {
+            display: inline-block;
+            line-height: 1;
+            svg {
+              width: 16px;
+              height: 16px;
+            }
+          }
+        }
+      }
+
+      .labels-input-container {
+        flex-grow: 1;
+        min-width: 0;
+        margin-left: 16px;
+
+        .labels-info{
+          font-size: 14px;
+          font-weight: 400;
+        }
+        .labels-icon-container {
+          flex-shrink: 0;
+          margin-right: 8px;
+          .icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: #323940;
+            span {
+              display: inline-block;
+              line-height: 1;
+              svg {
+                width: 16px;
+                height: 16px;
+              }
+            }
+          }
+        }
+      }
+      .labels-input-field {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        min-width: 0;
+
+        .label-color{
+          display: inline-block;
+          position: relative;
+          min-width: 48px;
+          height: 32px;
+          margin-bottom: 0;
+          padding: 0 12px;
+          overflow: hidden;
+          border-radius: 3px;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 32px;
+          text-align: left;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: white;
+        }
+      }
+
+
     }
 
     &::-webkit-scrollbar {
