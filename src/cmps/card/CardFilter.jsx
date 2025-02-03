@@ -6,12 +6,12 @@ import {useSelector} from 'react-redux'
 import {getPopupPosition} from '../../services/util.service'
 
 export function CardFilter({board ,filterBy,  onSetFilter}) {
-  const [Cards, setCards] = useState(board.groups.flatMap((group) => group.cards))
+  const [cards, setCards] = useState(board.groups.flatMap((group) => group.cards))
 
   const modalData = useSelector((state) => state.systemModule.modalData)
   const isActive = modalData && modalData.cmp === CardFilterModal
   var filterdCards 
-  let filterCount = filterBy
+  let filterCount = cards.length
 
   
 

@@ -1,0 +1,133 @@
+.custom-select {
+  position: relative;
+  width: 240px;
+  padding: 2px;
+  //   margin: 2px;
+  margin-left: 4px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+
+  .select-trigger {
+    padding: 10px 12px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    font-weight: 400;
+    border: 1px solid transparent;
+  
+
+    &:hover {
+      &:hover {
+        border-color: #738496;
+      }
+    }
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #22272b;
+    border: 1px solid #3d4b5b;
+    padding-inline: 15px;
+
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    padding: 6px 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 200px;
+
+    
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #424242;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #686868;
+      border: 1px solid #424242;
+      position: relative;
+      z-index: 10000;
+      border-radius: 6px;
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+      color: #b6c2cf;
+      font-weight: 300;
+
+      &.labels-op {
+        padding-block: 0;
+      }
+
+      &:hover {
+        background-color: $app-sidebar-dark-hover;
+      }
+
+      .checkbox {
+        margin-inline: 10px;
+      }
+
+      .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        margin-inline: 10px;
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+
+        .name {
+          font-size: 14px;
+        }
+
+        .username {
+          font-size: 12px;
+          font-weight: 200;
+        }
+      }
+
+      .labels-input-container-op {
+        display: flex;
+        flex-grow: 1; 
+        align-items: center;
+      }
+
+      .labels-input-field {
+        flex-grow: 1; 
+      }
+
+      .label-color {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1; 
+        width: 100%; 
+        height: 32px;
+        color: white;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+  }
+}

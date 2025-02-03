@@ -73,7 +73,9 @@
     padding: 0 12px 12px 12px;
     max-height: 472px;
     color: rgb(159, 173, 188);
-    width: 270px;
+    //  width: 384px;
+
+    width: 280px;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -96,7 +98,9 @@
         cursor: pointer;
       }
     }
-    label {
+    label,
+    .member-group-label,
+    .label-group-select {
       margin: 0;
       padding: 8px 0;
       padding-right: 0;
@@ -149,7 +153,6 @@
         margin-top: 16px;
         margin-bottom: 8px;
       }
-
       label.checkbox-label,
       .loggedin-member {
         input.checkbox {
@@ -170,10 +173,10 @@
       flex-grow: 1;
       min-width: 0;
       margin-left: 16px;
-.member-info{
-  font-size: 14px;
-  font-weight: 400;
-}
+      .member-info {
+        font-size: 14px;
+        font-weight: 400;
+      }
       .members-icon-container {
         flex-shrink: 0;
         margin-right: 8px;
@@ -206,7 +209,7 @@
 
     .filter-section-labels-filter {
       padding: 0;
-      .checkbox-label{
+      .checkbox-label {
         padding-top: 0;
       }
       .label-icon-container {
@@ -236,7 +239,7 @@
         min-width: 0;
         margin-left: 16px;
 
-        .labels-info{
+        .labels-info {
           font-size: 14px;
           font-weight: 400;
         }
@@ -268,7 +271,7 @@
         align-items: center;
         min-width: 0;
 
-        .label-color{
+        .label-color {
           display: inline-block;
           position: relative;
           min-width: 48px;
@@ -286,8 +289,6 @@
           color: white;
         }
       }
-
-
     }
 
     &::-webkit-scrollbar {
