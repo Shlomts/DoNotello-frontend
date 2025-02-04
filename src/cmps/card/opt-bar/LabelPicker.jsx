@@ -7,11 +7,11 @@ import { light } from '@mui/material/styles/createPalette'
 export function LabelPicker({ info, onUpdate }) {
 	if (!info || !info.boardLabels) return
 
-	const [ boardLabelsList, setBoardLabelsList ] = useState(addIsInCard())
-	const [ srchPrm, setSrchPrm ] = useState('')
+	const [boardLabelsList, setBoardLabelsList] = useState(addIsInCard())
+	const [srchPrm, setSrchPrm] = useState('')
 
-	const [ isEditMode, setIsEditMode ] = useState(false)
-	const [ labelInEdit, setLabelInEdit ] = useState(null)
+	const [isEditMode, setIsEditMode] = useState(false)
+	const [labelInEdit, setLabelInEdit] = useState(null)
 
 	useEffect(() => {
 		setBoardLabelsList(
@@ -20,7 +20,6 @@ export function LabelPicker({ info, onUpdate }) {
 			)
 		)
 	}, [srchPrm, info.cardLabels])
-
 
 	function addIsInCard() {
 		const newBoardLabels = info.boardLabels.map(label => ({
@@ -38,7 +37,9 @@ export function LabelPicker({ info, onUpdate }) {
 	function onUpdateLabels(idToEdit) {
 		setBoardLabelsList(prevLabels =>
 			prevLabels.map(label =>
-				label.id === idToEdit ? { ...label, isInCard: !label.isInCard } : label
+				label.id === idToEdit
+					? { ...label, isInCard: !label.isInCard }
+					: label
 			)
 		)
 		onUpdate({ id: idToEdit, isRename: false })
@@ -81,11 +82,12 @@ export function LabelPicker({ info, onUpdate }) {
 				placeholder='Search labels'
 				value={srchPrm}
 				onChange={ev => onSearchLabel(ev)}
+				autoFocus
 			/>
 			{info.boardLabels.length > 0 && (
 				<section className='labels-list'>
 					<thead>Labels</thead>
-					<ul>
+					<ul className='list'>
 						{boardLabelsList.map(label => (
 							<li key={label.id} className='label'>
 								<Checkbox
@@ -96,9 +98,14 @@ export function LabelPicker({ info, onUpdate }) {
 									inputProps={{ 'aria-label': 'controlled' }}
 									sx={{
 										color: '#738496',
-										// '&:hover': { bgcolor: 'red' },
+										'&:hover': { fillOpacity: '85%' },
 										'&.Mui-checked': {
 											color: '#579dff',
+										},
+										'& .MuiSvgIcon-root': {
+											fontSize: '20px', // Reduce size of the checkbox (default is 24px)
+											stroke: '#738496', // Adds stroke to outline
+											strokeWidth: 0.5, // Make the border thinner
 										},
 									}}
 								/>
@@ -108,6 +115,7 @@ export function LabelPicker({ info, onUpdate }) {
 										className='name-input'
 										value={labelInEdit.title}
 										onChange={onEditLabelTitle}
+										style={{ backgroundColor: label.color }}
 										// onBlur={onSaveLabelTitle}
 										onKeyDown={onKeyDown}
 										autoFocus
@@ -117,7 +125,7 @@ export function LabelPicker({ info, onUpdate }) {
 										onClick={() => {
 											onUpdateLabels(label.id)
 										}}
-										className='label'
+										className='label-name'
 										style={{ backgroundColor: label.color }}
 									>
 										{label.title}
@@ -125,6 +133,7 @@ export function LabelPicker({ info, onUpdate }) {
 								)}
 
 								<div
+									className='edit'
 									onClick={() => {
 										setLabelInEdit(label)
 										setIsEditMode(true)
