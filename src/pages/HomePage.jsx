@@ -1,5 +1,7 @@
-import {useEffect, useState} from 'react'
-import {Link, NavLink, useNavigate} from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
+import { userService } from '../services/user'
+import { loginAsGuest } from '../store/actions/user.actions'
 
 export function HomePage() {
   const [isImgLoaded, setIsImgLoaded] = useState(false)
@@ -21,13 +23,19 @@ export function HomePage() {
     return <div className="loader">Loading...</div>
   }
 
-  function TryDemo() {
-    navigate('/board')
+  async function handleGuestLogin() {
+    try {
+      await loginAsGuest()
+      navigate('/board')
+    } catch (err) {
+      console.error("Guest login failed", err)
+    }
   }
+
   return (
     <section className="home-page">
       <header className="home-app-header full">
-        
+
         <nav>
           <NavLink to="/" className="logo">
             <img src={logoUrl} alt="DoNotello Logo" />{' '}
@@ -37,7 +45,7 @@ export function HomePage() {
             Log in
           </NavLink>
 
-          <button className="header-demo-btn" onClick={TryDemo}>
+          <button className="header-demo-btn" onClick={handleGuestLogin}>
             Get Started now
           </button>
         </nav>
@@ -47,10 +55,10 @@ export function HomePage() {
           <div className="content">
             <div className="description">
               <h1>DoNotello brings all your tasks, teammates,
-                 and tools together</h1>
+                and tools together</h1>
               <p>Keep everything in the same place—even if your team isn’t.</p>
               {/* here need to link to demo board */}
-              <button className="body-demo-btn" onClick={TryDemo}>
+              <button className="body-demo-btn" onClick={handleGuestLogin}>
                 Try Our Demo!
               </button>
             </div>

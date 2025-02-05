@@ -29,6 +29,9 @@ import { BoardMenu } from "../cmps/board/BoardMenu"
 export function BoardDetails() {
     const { boardId } = useParams()
 
+    //emit socket to join a room when cmp mounted
+    //listen to socket that updates board
+
     const users = useSelector((storeState) => storeState.userModule.users)
     const board = useSelector((storeState) => storeState.boardModule.board)
 
