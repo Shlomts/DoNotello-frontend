@@ -11,7 +11,6 @@ import {
 	loadGroup,
 	updateCard,
 	updateBoard,
-	updateBoardOptimistic,
 } from '../store/actions/board.actions'
 import {
 	Card,
@@ -161,8 +160,7 @@ export function CardDetails() {
 				onAddChecklist(data)
 				break
 			default:
-				; <div>UNKNOWM</div>
-				break
+				throw new Error('No current dynamic cmp')
 		}
 	}
 
@@ -447,7 +445,7 @@ export function CardDetails() {
 				</div>
 
 				<section className='description'>
-					<div className='description icon'>
+					<div className='icon'>
 						<Description />
 					</div>
 					<h4 className='title'>
@@ -462,9 +460,8 @@ export function CardDetails() {
 						)}
 					</h4>
 					{isEditMode ? (
-						<Fragment>
+						<div className='grdatxt'>
 							<textarea
-								className='grdatxt'
 								value={desInEdit}
 								onChange={onChangeDescription}
 								placeholder='Add a more detailed description...'
@@ -487,7 +484,7 @@ export function CardDetails() {
 									Cancel
 								</button>
 							</div>
-						</Fragment>
+						</div>
 					) : descriptionInput ? (
 						<div
 							className='des-input grdatxt'
