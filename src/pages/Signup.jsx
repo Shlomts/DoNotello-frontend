@@ -20,7 +20,7 @@ export function Signup() {
     const type = ev.target.type
 
     const {name, value} = ev.target
-    if (name === 'mail') {
+    if (name === 'username') {
       const isValid = /\S+@\S+\.\S+/.test(value)
       setIsEmailValid(isValid)
     }
@@ -46,17 +46,17 @@ export function Signup() {
       <div className="input-container">
         <input
           type="text"
-          name="username"
-          value={credentials.username || ''}
-          placeholder="Enter your username"
+          name="nickname"
+          value={credentials.nickname || ''}
+          placeholder="Enter your nickname"
           onChange={handleChange}
           required
           className="signup-input"
         />
         <input
           type="email"
-          name="mail"
-          value={credentials.mail || ''}
+          name="username"
+          value={credentials.username || ''}
           placeholder="Enter your email"
           onChange={handleChange}
           required
