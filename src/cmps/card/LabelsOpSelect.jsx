@@ -1,27 +1,26 @@
 import {useState} from 'react'
 import {Checkbox} from '@mui/material'
-import { DownArrow } from '../SvgContainer'
+import {DownArrow} from '../SvgContainer'
 
 export function LabelsOpSelect({labels, onSelect, placeholder = 'Select labels'}) {
   const [open, setOpen] = useState(false)
   const [selectedLabels, setSelectedLabels] = useState([])
-  console.log(labels)
 
-  const handleSelect = (label) => {
+  function handleSelect(label) {
     const isSelected = selectedLabels.includes(label.id)
     const newSelection = isSelected ? selectedLabels.filter((id) => id !== label.id) : [...selectedLabels, label.id]
-
     setSelectedLabels(newSelection)
-    onSelect(newSelection)
+    onSelect({target: {name: 'labelIds', value: newSelection}})
   }
+
 
   return (
     <div className="custom-select">
       <div className="select-trigger" onClick={() => setOpen(!open)}>
         {selectedLabels.length > 0 ? `${selectedLabels.length} selected` : placeholder}
-         <span className='icon'>
-                  <DownArrow/>
-              </span>
+        <span className="icon">
+          <DownArrow />
+        </span>
       </div>
 
       {open && (

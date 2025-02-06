@@ -55,7 +55,8 @@ function getEmptyCard() {
 function getDefaultFilter() {
     return {
         txt: '',
-       members:[],
+        memberIds:[],
+       labelIds:[],
     }
 }
 

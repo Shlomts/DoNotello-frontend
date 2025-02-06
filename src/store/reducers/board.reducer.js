@@ -1,3 +1,5 @@
+import { boardService } from "../../services/board"
+
 export const SET_BOARDS = 'SET_BOARDS'
 export const SET_BOARD = 'SET_BOARD'
 export const REMOVE_BOARD = 'REMOVE_BOARD'
@@ -5,10 +7,13 @@ export const ADD_BOARD = 'ADD_BOARD'
 export const UPDATE_BOARD = 'UPDATE_BOARD'
 export const ADD_BOARD_MSG = 'ADD_BOARD_MSG'
 export const TOGGLE_BOARD_STAR = 'TOGGLE_BOARD_STAR'
+export const SET_FILTER_BY = 'SET_FILTER_BY'
+
 
 const initialState = {
   boards: [],
   board: null,
+  filterBy:boardService.getDefaultFilter(),
 }
 
 export function boardReducer(state = initialState, action) {
@@ -42,6 +47,8 @@ export function boardReducer(state = initialState, action) {
         )
         newState = {...state, boards}
         break
+        case SET_FILTER_BY:
+          return { ...state, filterBy: {  ...action.filterBy } }
     default:
   }
   return newState

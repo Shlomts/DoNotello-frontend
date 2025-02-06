@@ -6,35 +6,19 @@ import {useSelector} from 'react-redux'
 import {debounce} from '../../services/util.service'
 import {MemeberOpSelect} from './MemberOpSelect'
 import {LabelsOpSelect} from './LabelsOpSelect'
+import {boardService} from '../../services/board'
 
 export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, onSetFilter}) {
-  // const [searchParams, setSearchParams] = useSearchParams()
-
-  const {labels, members, groups} = board
+  const {labels, members} = board
   const user = useSelector((storeState) => storeState.userModule.user)
 
   const [filterByToEdit, setFilterByToEdit] = useState({...filterBy})
 
   onSetFilter = useRef(debounce(onSetFilter))
 
-  // const cards = groups.flatMap((group) => group.cards)
-
   useEffect(() => {
-    console.log('Updated filter:', filterByToEdit)
-
     onSetFilter.current(filterByToEdit)
   }, [filterByToEdit])
-
-  // const [filterState, setFilterState] = useState({
-  //   searchQuery: '',
-  //   selectedLabels: [],
-  //   selectedMembers: [],
-  //   showNoLabels: false,
-  //   showNoMembers: false,
-  //   showOnlyMyCards: false,
-  //   selectAllLabels: false,
-  //   selectAllMembers: false,
-  // })
 
   function handleChange({target}) {
     let {value, name: field, type} = target
@@ -43,25 +27,66 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
     console.log(field, 'field')
     console.log(value, 'value')
 
+    
+
+    if (field === 'selectAllLabels') {
+      const isChecked = target.checked
+
+      setFilterByToEdit((prevFilter) => {
+        const allLabelIds = isChecked ? labels.map((label) => label.id) : []
+        return {...prevFilter, labelIds: allLabelIds}
+      })
+
+      return
+    }
+
+    if (field === 'selectAllMembers') {
+      const isChecked = target.checked
+
+      const memberIds = members.map((member) => member._id)
+      console.log(memberIds)
+
+      const allMemberIds = isChecked ? memberIds : []
+
+      setFilterByToEdit((prevFilter) => ({...prevFilter, memberIds: allMemberIds}))
+      return
+    }
+
     if (type === 'checkbox') {
       const isChecked = target.checked
 
       setFilterByToEdit((prevFilter) => {
-        if (field === 'memberIds' || field === 'labelIds') {
-          const updateCards = isChecked
+        if (field === 'labelIds') {
+          const updatedLabels = isChecked
             ? [...(prevFilter[field] || []), value]
-            : prevFilter[field].filter((id) => id !== value)
+            : (prevFilter[field] || []).filter((id) => id !== value)
 
-          return {...prevFilter, [field]: updateCards}
+          return {...prevFilter, [field]: updatedLabels}
         }
+
+        if (field === 'memberIds') {
+          const updatedMembers = isChecked
+            ? [...(prevFilter[field] || []), value]
+            : (prevFilter[field] || []).filter((id) => id !== value)
+
+          return {...prevFilter, [field]: updatedMembers}
+        }
+
+        if (field === 'loggedInUser') {
+          return {...prevFilter, loggedInUser: isChecked}
+        }
+
         return {...prevFilter, [field]: isChecked}
       })
     } else {
       setFilterByToEdit((prevFilter) => ({...prevFilter, [field]: value}))
     }
 
-    console.log(filterByToEdit)
+    // console.log(filterByToEdit)
+    boardService.getFilterdBoard(board, filterByToEdit)
   }
+
+  console.log('Updated filter:', filterByToEdit)
 
   return (
     <section
@@ -99,12 +124,12 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
             <p className="members-title">Members</p>
             <ul>
               <li>
-                <label className="checkbox-label">
+                <label className="checkbox-label no-members">
                   <input className="checkbox" type="checkbox" />
                   <span className="chackbox-icon icon">
                     <Checkbox
                       inputProps={{'aria-label': 'No members'}}
-                      checked={!!filterByToEdit.noMembers}
+                      checked={filterByToEdit.noMembers}
                       onChange={(e) =>
                         handleChange({
                           target: {
@@ -143,7 +168,18 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
                   <input className="checkbox" type="checkbox" />
                   <span className="chackbox-icon icon">
                     <Checkbox
-                      inputProps={{'aria-label': 'controlled'}}
+                      inputProps={{'aria-label': 'loggedInUser'}}
+                      checked={filterBy.loggedInUser}
+                      onChange={(e) =>
+                        handleChange({
+                          target: {
+                            name: 'loggedInUser',
+                            value: e.target.checked,
+                            type: 'checkbox',
+                            checked: e.target.checked,
+                          },
+                        })
+                      }
                       sx={{
                         color: '#738496',
                         padding: '12px',
@@ -178,10 +214,12 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
                 </label>
               </li>
               <li className="member-group">
-                {/* Select All Members Checkbox */}
-                <labal className="member-group-label">
+                <label className="member-group-label">
                   <Checkbox
-                    inputProps={{'aria-label': 'Select all members'}}
+                    inputProps={{'aria-label': 'allMembers'}}
+                    name="selectAllMembers"
+                    checked={filterByToEdit.memberIds?.length === members.length}
+                    onChange={handleChange}
                     sx={{
                       color: '#738496',
                       padding: '12px',
@@ -190,10 +228,8 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
                       '&.Mui-checked': {color: '#579dff'},
                     }}
                   />
-
-                  {/* Members Dropdown */}
                   <MemeberOpSelect members={members} onSelect={handleChange} />
-                </labal>
+                </label>
               </li>
             </ul>
           </div>
@@ -207,6 +243,17 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
                   <span className="chackbox-icon icon">
                     <Checkbox
                       inputProps={{'aria-label': 'No labels'}}
+                      checked={!!filterByToEdit.noLabels}
+                      onChange={(e) =>
+                        handleChange({
+                          target: {
+                            name: 'noLabels',
+                            value: e.target.checked,
+                            type: 'checkbox',
+                            checked: e.target.checked,
+                          },
+                        })
+                      }
                       sx={{
                         color: '#738496',
                         padding: '12px',
@@ -230,12 +277,24 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
                   </span>
                 </label>
               </li>
+
               {labels?.slice(0, 3).map((label) => (
                 <li key={label.id}>
                   <label className="checkbox-label">
                     <span className="chackbox-icon icon">
                       <Checkbox
                         inputProps={{'aria-label': label.title}}
+                        checked={filterByToEdit.labelIds?.includes(label.id)}
+                        onChange={(e) =>
+                          handleChange({
+                            target: {
+                              name: 'labelIds',
+                              value: label.id,
+                              type: 'checkbox',
+                              checked: e.target.checked,
+                            },
+                          })
+                        }
                         sx={{
                           color: '#738496',
                           padding: '12px',
@@ -263,11 +322,15 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
                   </label>
                 </li>
               ))}
+
               {/* Select All Checkbox + Dropdown at the Bottom */}
               <li className="label-group">
                 <label className="label-group-select">
                   <Checkbox
                     inputProps={{'aria-label': 'Select all labels'}}
+                    name="selectAllLabels"
+                    checked={filterByToEdit.labelIds?.length === labels.length}
+                    onChange={handleChange}
                     sx={{
                       color: '#738496',
                       padding: '12px',

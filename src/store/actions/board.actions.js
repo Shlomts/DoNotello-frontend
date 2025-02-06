@@ -1,6 +1,6 @@
-import { boardService } from '../../services/board'
-import { store } from '../store'
-import { makeId } from '../../services/util.service'
+import {boardService} from '../../services/board'
+import {store} from '../store'
+import {makeId} from '../../services/util.service'
 import {
   ADD_BOARD,
   REMOVE_BOARD,
@@ -9,7 +9,10 @@ import {
   UPDATE_BOARD,
   ADD_BOARD_MSG,
   TOGGLE_BOARD_STAR,
+  SET_FILTER_BY,
 } from '../reducers/board.reducer'
+
+
 
 export async function loadBoards() {
 
@@ -23,8 +26,14 @@ export async function loadBoards() {
 }
 
 export async function loadBoard(boardId) {
+  const { filterBy } = store.getState().boardModule
+
   try {
     const board = await boardService.getById(boardId)
+    console.log(board,"from action");
+    console.log(filterBy,'filter');
+    
+
     store.dispatch(getCmdSetBoard(board))
   } catch (err) {
     console.log('Cannot load board', err)
@@ -60,7 +69,7 @@ export async function updateBoard(board) {
     store.dispatch(getCmdUpdateBoard(savedBoard))
     return savedBoard
   } catch (err) {
-    console.log("Cannot update board", err)
+    console.log('Cannot update board', err)
     throw err
   }
 }
@@ -71,15 +80,14 @@ export async function updateBoardOptimistic(board) {
     const savedBoard = await boardService.saveBoard(board)
     return savedBoard
   } catch (err) {
-    console.log("Cannot update board", err)
+    console.log('Cannot update board', err)
     throw err
   }
 }
 
 export async function onSetStar(board) {
-
   try {
-    const updatedBoard = { ...board, isStarred: !board.isStarred }
+    const updatedBoard = {...board, isStarred: !board.isStarred}
     await updateBoard(updatedBoard)
   } catch (err) {
     console.error('cant change star')
@@ -92,13 +100,16 @@ export async function addGroupToBoard(board, groupToSave) {
   try {
     await updateBoard(board)
   } catch (err) {
-    console.log("Cannot add group", err)
+    console.log('Cannot add group', err)
     throw err
   }
 }
 
 export async function addCardToGroup(board, group, cardToSave) {
-  group.cards.push(cardToSave)
+  const ogGroup = board.groups.find(g => g.id === group.id )
+  console.log(ogGroup,'addcard to grod');
+  
+  ogGroup.cards.push(cardToSave)
 
   try {
     await updateBoard(board)
@@ -109,13 +120,13 @@ export async function addCardToGroup(board, group, cardToSave) {
 }
 
 export async function updateCard(board, group, cardToSave) {
-  const groupIdx = board.groups.findIndex(prevGroup => prevGroup.id === group.id)
+  const groupIdx = board.groups.findIndex((prevGroup) => prevGroup.id === group.id)
   if (groupIdx === -1) {
     console.error('Group not found for updating card')
     return
   }
 
-  const cardIdx = board.groups[groupIdx].cards.findIndex(prevCard => prevCard.id === cardToSave.id)
+  const cardIdx = board.groups[groupIdx].cards.findIndex((prevCard) => prevCard.id === cardToSave.id)
   if (cardIdx === -1) {
     console.error('Card not found in group')
     return
@@ -123,9 +134,7 @@ export async function updateCard(board, group, cardToSave) {
 
   const updatedGroup = {
     ...board.groups[groupIdx],
-    cards: board.groups[groupIdx].cards.map((card, idx) =>
-      idx === cardIdx ? { ...card, ...cardToSave } : card
-    ),
+    cards: board.groups[groupIdx].cards.map((card, idx) => (idx === cardIdx ? {...card, ...cardToSave} : card)),
   }
 
   const updatedBoard = {
@@ -140,15 +149,13 @@ export async function updateCard(board, group, cardToSave) {
   }
 }
 
-
-
 export async function loadCard(board, cardId) {
   try {
     const card = await boardService.getCardById(board, cardId)
     // store.dispatch(getCmdSetBoard(board))
     return card
   } catch (err) {
-    console.log("Cannot load card", err)
+    console.log('Cannot load card', err)
     throw err
   }
 }
@@ -159,7 +166,7 @@ export async function loadGroup(board, cardId) {
     // store.dispatch(getCmdSetBoard(board))
     return group
   } catch (err) {
-    console.log("Cannot load group", err)
+    console.log('Cannot load group', err)
     throw err
   }
 }
@@ -170,15 +177,13 @@ export async function getGroupId(board, cardId) {
     // store.dispatch(getCmdSetBoard(board))
     return group.id
   } catch (err) {
-    console.log("Cannot load group", err)
+    console.log('Cannot load group', err)
     throw err
   }
 }
 
-
-
 export async function removeGroupFromBoard(board, groupId) {
-  const groupIdx = board.groups.findIndex(group => group.id === groupId)
+  const groupIdx = board.groups.findIndex((group) => group.id === groupId)
   if (groupIdx === -1) throw new Error('Group not found')
 
   board.groups.splice(groupIdx, 1)
@@ -186,18 +191,18 @@ export async function removeGroupFromBoard(board, groupId) {
   try {
     await updateBoard(board)
   } catch (err) {
-    console.log("Cannot remove group", err)
+    console.log('Cannot remove group', err)
     throw err
   }
 }
 
 export async function removeCardFromGroup(board, groupId, cardId) {
   console.log(board)
-  const group = board.groups.find(group => group.id === groupId)
-  console.log("in remove group:", group)
+  const group = board.groups.find((group) => group.id === groupId)
+  console.log('in remove group:', group)
   if (!group) throw new Error('Group not found')
 
-  const cardIdx = group.cards.findIndex(card => card.id === cardId)
+  const cardIdx = group.cards.findIndex((card) => card.id === cardId)
   if (cardIdx === -1) throw new Error('Card not found')
 
   group.cards.splice(cardIdx, 1)
@@ -205,11 +210,10 @@ export async function removeCardFromGroup(board, groupId, cardId) {
   try {
     await updateBoard(board)
   } catch (err) {
-    console.log("Cannot remove card", err)
+    console.log('Cannot remove card', err)
     throw err
   }
 }
-
 
 export async function addBoardMsg(boardId, txt) {
   try {
@@ -220,6 +224,10 @@ export async function addBoardMsg(boardId, txt) {
     console.log('Cannot add board msg', err)
     throw err
   }
+}
+
+export function setFilter(filterBy = boardService.getDefaultFilter()) {
+  store.dispatch(getCmdSetFilter(filterBy))
 }
 
 // Command Creators:
@@ -260,6 +268,13 @@ function getCmdAddBoardMsg(msg) {
   }
 }
 
+function getCmdSetFilter(filterBy) {
+  return {
+    type: SET_FILTER_BY,
+    filterBy: filterBy,
+  }
+}
+
 export async function toggleBoardStar(boardId) {
   try {
     // Get the current boards from the store
@@ -268,14 +283,14 @@ export async function toggleBoardStar(boardId) {
     if (!board) throw new Error('Board not found')
 
     // Toggle the isStarred property
-    const updatedBoard = { ...board, isStarred: !board.isStarred }
+    const updatedBoard = {...board, isStarred: !board.isStarred}
 
     // Update the board in the backend
     await boardService.saveBoard(updatedBoard)
     // console.log(updatedBoard , 'from toggle star')
 
     // Dispatch the action to update the board in the store
-    store.dispatch({ type: TOGGLE_BOARD_STAR, board: updatedBoard })
+    store.dispatch({type: TOGGLE_BOARD_STAR, board: updatedBoard})
   } catch (err) {
     console.error('Failed to toggle board star:', err)
   }
