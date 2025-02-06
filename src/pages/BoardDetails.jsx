@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import { DragDropHandler } from "../cmps/DragDropHandler"
 import { SideBar } from "../cmps/SideBar"
@@ -25,12 +25,11 @@ import { BoardMembers } from "../cmps/member/BoardMembers"
 import { Plus, Close, Star, Unstar, ListActionsIcon } from "../cmps/SvgContainer"
 import { boardService } from "../services/board"
 import { BoardMenu } from "../cmps/board/BoardMenu"
+import { socketService, SOCKET_EMIT_JOIN_BOARD, SOCKET_EVENT_BOARD_UPDATED } from "../services/socket.service.js"
 
 export function BoardDetails() {
     const { boardId } = useParams()
-
-    //emit socket to join a room when cmp mounted
-    //listen to socket that updates board
+    const dispatch = useDispatch()
 
     const users = useSelector((storeState) => storeState.userModule.users)
     const board = useSelector((storeState) => storeState.boardModule.board)
@@ -48,6 +47,7 @@ export function BoardDetails() {
     useEffect(() => {
         loadBoard(boardId)
         loadUsers()
+
     }, [boardId])
 
     useEffect(() => {
@@ -55,6 +55,24 @@ export function BoardDetails() {
             setBoardTitle(board.title)
         }
     }, [board])
+
+    useEffect(() => {
+        if (!board) return
+        socketService.emit(SOCKET_EMIT_JOIN_BOARD, boardId)
+        socketService.on(SOCKET_EVENT_BOARD_UPDATED, onBoardUpdate)
+
+    }, [board])
+
+    function onBoardUpdate(updatedGroups) {
+        if (!board) return
+
+        const updatedBoard = { ...board, groups: updatedGroups }
+
+        dispatch({
+            type: "UPDATE_BOARD",
+            board: updatedBoard
+        })
+    }
 
     function onSetGroupName(ev) {
         const name = ev.target.value
@@ -99,7 +117,6 @@ export function BoardDetails() {
     }
 
     async function onAddGroup() {
-        console.log('onaddgroup')
         const groupToSave = boardService.getEmptyGroup()
         if (groupName === '') return
         groupToSave.title = groupName
@@ -171,63 +188,63 @@ export function BoardDetails() {
                     </section>
                 </header>
 
-                    <main className="board-content">
-                        <DragDropHandler board={board}>
-                            <GroupList
-                                board={board}
-                                groups={board.groups}
-                                onRemoveGroup={onRemoveGroup}
-                            />
-                        </DragDropHandler>
-                        <section className="add-group">
-                            {isAddingGroup ? (
-                                <div className="add-group-form" >
-                                    <textarea
-                                        value={groupName}
-                                        onChange={onSetGroupName}
-                                        placeholder="Enter list name..."
-                                        rows={1}
-                                        autoFocus
-                                        onKeyDown={ev => {
-                                            if (ev.key === 'Enter') {
-                                                ev.preventDefault()
-                                                onAddGroup()
-                                            }
-                                        }}
-                                    />
-                                    <div className="add-group-actions">
-                                        <button
-                                            className="save-group-btn"
-                                            onClick={() => {
-                                                onAddGroup()
-                                            }}
-                                        >
-                                            Add list
-                                        </button>
-                                        <button
-                                            className="cancel-add-btn"
-                                            onClick={() => {
-                                                setIsAddingGroup(false)
-                                                setGroupName("")
-                                            }}
-                                        >
-                                            <Close />
-                                        </button>
-                                    </div>
-                                </div>
-                            ) : (
-                                <button
-                                    className="add-group-btn"
-                                    onClick={() => {
-                                        setIsAddingGroup(true)
+                <main className="board-content">
+                    <DragDropHandler board={board}>
+                        <GroupList
+                            board={board}
+                            groups={board.groups}
+                            onRemoveGroup={onRemoveGroup}
+                        />
+                    </DragDropHandler>
+                    <section className="add-group">
+                        {isAddingGroup ? (
+                            <div className="add-group-form" >
+                                <textarea
+                                    value={groupName}
+                                    onChange={onSetGroupName}
+                                    placeholder="Enter list name..."
+                                    rows={1}
+                                    autoFocus
+                                    onKeyDown={ev => {
+                                        if (ev.key === 'Enter') {
+                                            ev.preventDefault()
+                                            onAddGroup()
+                                        }
                                     }}
-                                >
-                                    <Plus />
-                                    Add another list
-                                </button>
-                            )}
-                        </section>
-                    </main>
+                                />
+                                <div className="add-group-actions">
+                                    <button
+                                        className="save-group-btn"
+                                        onClick={() => {
+                                            onAddGroup()
+                                        }}
+                                    >
+                                        Add list
+                                    </button>
+                                    <button
+                                        className="cancel-add-btn"
+                                        onClick={() => {
+                                            setIsAddingGroup(false)
+                                            setGroupName("")
+                                        }}
+                                    >
+                                        <Close />
+                                    </button>
+                                </div>
+                            </div>
+                        ) : (
+                            <button
+                                className="add-group-btn"
+                                onClick={() => {
+                                    setIsAddingGroup(true)
+                                }}
+                            >
+                                <Plus />
+                                Add another list
+                            </button>
+                        )}
+                    </section>
+                </main>
             </section>
             {isBoardMenuOpen &&
                 <BoardMenu

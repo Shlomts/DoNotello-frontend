@@ -16,9 +16,9 @@ export function AppHeader() {
   const logoUrl = '/imgs/Logo.png'
 
   async function onLogout() {
+    console.log('does it happens?')
     try {
       await logout()
-      //   can make login page so itll go there
       googleLogout()
       navigate('/login')
       showSuccessMsg(`Login out`)
@@ -77,7 +77,7 @@ export function AppHeader() {
                   </div>
                   <div className="user-info">
                     <p className="user-name">{user.fullname}</p>
-                    <p className="user-email">{user.email}</p>
+                    <p className="user-email">{user.username}</p>
                   </div>
 
                 </li>
