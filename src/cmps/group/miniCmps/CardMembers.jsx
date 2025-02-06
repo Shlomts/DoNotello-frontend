@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { createPortal } from "react-dom"
 import { getPopupPosition } from "../../../services/util.service"
-import { Close } from "../../SvgContainer.jsx"
+import { Close } from "../../svgContainer"
 
 export function CardMembers({ members }) {
     const [popupPosition, setPopupPosition] = useState(null)

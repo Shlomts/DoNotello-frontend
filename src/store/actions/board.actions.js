@@ -9,6 +9,7 @@ import {
   UPDATE_BOARD,
   ADD_BOARD_MSG,
   TOGGLE_BOARD_STAR,
+  SET_BOARD_FILTER
 } from '../reducers/board.reducer'
 
 export async function loadBoards() {
@@ -216,6 +217,22 @@ export async function addBoardMsg(boardId, txt) {
     const msg = await boardService.addBoardMsg(boardId, txt)
     store.dispatch(getCmdAddBoardMsg(msg))
     return msg
+  } catch (err) {
+    console.log('Cannot add board msg', err)
+    throw err
+  }
+}
+
+export async function setBoardFilter(filterBy) {
+  try {
+    console.log(filterBy);
+    
+    
+    store.dispatch({
+      type: SET_BOARD_FILTER,
+      filterBy,
+    })
+
   } catch (err) {
     console.log('Cannot add board msg', err)
     throw err

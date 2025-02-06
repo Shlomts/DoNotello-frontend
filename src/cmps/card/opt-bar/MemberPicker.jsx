@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Close } from '../../SvgContainer'
+import { Close } from '../../svgContainer'
 
 export function MemberPicker({ info, onUpdate }) {
 	if (!info || !info.boardMembers) return

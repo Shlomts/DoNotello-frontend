@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from 'react'
-import { Checklist, ListActions } from '../SvgContainer'
+import { Checklist, ListActions } from '../svgContainer'
 import { Checkbox } from '@mui/material'
 import { makeId } from '../../services/util.service'
 

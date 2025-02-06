@@ -1,7 +1,7 @@
 import {useSelector} from 'react-redux'
 import {Fragment, useEffect, useRef, useState} from 'react'
 import {useParams} from 'react-router'
-import {Close, Description, InfoIcon, LeftArrow, Members} from '../SvgContainer'
+import {Close, Description, InfoIcon, LeftArrow, Members} from './../svgContainer'
 import {updateBoard} from '../../store/actions/board.actions'
 import {showErrorMsg, showSuccessMsg} from '../../services/event-bus.service'
 

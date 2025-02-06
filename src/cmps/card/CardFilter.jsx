@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {CardFilterIcon} from '../SvgContainer'
+import {CardFilterIcon} from './../svgContainer'
 import {onToggleModal} from '../../store/actions/system.actions'
 import {CardFilterModal} from './CardFilterModal'
 import {useSelector} from 'react-redux'

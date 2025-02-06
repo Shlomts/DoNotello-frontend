@@ -1,5 +1,5 @@
 import {Link, useNavigate} from 'react-router-dom'
-import {Star, Unstar} from '../SvgContainer'
+import {Star, Unstar} from './../svgContainer'
 import {useDispatch} from 'react-redux'
 import {updateBoard} from '../../store/actions/board.actions'
 

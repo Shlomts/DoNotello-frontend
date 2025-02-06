@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Plus } from "../../SvgContainer"
+import { Plus } from "../../svgContainer"
 
 export function CardLabels({ labels, className, showTitles = false, onLableCick, onPlusIcon }) {
     const [showLabelTitle, setShowLabelTitle] = useState(showTitles)

@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react'
 import {Outlet, useNavigate} from 'react-router'
 import {Login} from './Login'
 import {signup} from '../store/actions/user.actions'
-import {GoogleIcon} from '../cmps/SvgContainer'
+import {GoogleIcon} from '../cmps/svgContainer'
 import {Signup} from './Signup'
 
 export function LoginSignup() {

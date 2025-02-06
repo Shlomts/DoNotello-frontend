@@ -1,36 +1,42 @@
 import {useSearchParams} from 'react-router-dom'
-import {Close, Labels, Members} from '../SvgContainer'
+import {Close, Labels, Members} from './../svgContainer'
 import Checkbox from '@mui/material/Checkbox'
 import {useEffect, useRef, useState} from 'react'
 import {useSelector} from 'react-redux'
 import {debounce} from '../../services/util.service'
+
+import {setBoardFilter} from '../../store/actions/board.actions' 
 
 export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, onSetFilter}) {
   // const [searchParams, setSearchParams] = useSearchParams()
 
   const {labels, members, groups} = board
   const user = useSelector((storeState) => storeState.userModule.user)
+  // const board = useSelector((storeState) => storeState.boardModule.board)
+console.log(labels);
 
-  const [filterByToEdit, setFilterByToEdit] = useState({...filterBy})
+const [filterByToEdit, setFilterByToEdit] = useState({
+  searchQuery: '',
+  selectedLabels: [],
+  selectedMembers: [],
+})
+  // const [filterByToEdit, setFilterByToEdit] = useState({...filterBy})
   
-  onSetFilter = useRef(debounce(onSetFilter))
+  // onSetFilter = useRef(debounce(onSetFilter))
 
-  const cards = groups.flatMap((group) => group.cards)
+  // const cards = groups.flatMap((group) => group.cards)
 
   useEffect(() => {
-    onSetFilter.current(filterByToEdit)
+    // onSetFilter.current(filterByToEdit)
+
+    // console.log(filterByToEdit);
+    setBoardFilter(filterByToEdit)
+
+    console.log('send filter to store');
+    
+    
   }, [filterByToEdit])
 
-  // const [filterState, setFilterState] = useState({
-  //   searchQuery: '',
-  //   selectedLabels: [],
-  //   selectedMembers: [],
-  //   showNoLabels: false,
-  //   showNoMembers: false,
-  //   showOnlyMyCards: false,
-  //   selectAllLabels: false,
-  //   selectAllMembers: false,
-  // })
 
   function handleChange({target}) {
     let {value, name: field, type} = target
@@ -61,9 +67,9 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
           <input
             className="search-by-txt"
             type="text"
-             name="txt"
+             name="searchQuery"
             placeholder="Enter a keyword..."
-            value={filterByToEdit.txt}
+            value={filterByToEdit.searchQuery}
             onChange={handleChange}
           />
         </div>

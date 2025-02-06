@@ -1,4 +1,4 @@
-import { Description } from "../../SvgContainer"
+import { Description } from "./../../svgContainer"
 
 export function CardIcons({ card }) {
     if (!card.description) return

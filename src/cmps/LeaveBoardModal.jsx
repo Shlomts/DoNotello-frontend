@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {Close, RightArrow} from './SvgContainer'
+import {Close, RightArrow} from './svgContainer'
 
 export function LeaveBoardModal({onClose, onLeave, boardTitle}) {
   const [isConfirming, setIsConfirming] = useState(false)

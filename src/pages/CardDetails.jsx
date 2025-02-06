@@ -23,7 +23,7 @@ import {
 	Close,
 	Delete,
 	Plus,
-} from '../cmps/SvgContainer'
+} from '../cmps/svgContainer'
 
 import { DynamicCmp } from '../cmps/card/opt-bar/DynamicCmp'
 import { MemberPicker } from '../cmps/card/opt-bar/MemberPicker'

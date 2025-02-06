@@ -1,4 +1,4 @@
-import { Close } from '../../SvgContainer'
+import { Close } from '../../svgContainer'
 
 export function DynamicCmp({ Cmp, title, onCloseModal, data, onUpdateCmp }) {
 	return (

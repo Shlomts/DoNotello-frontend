@@ -6,7 +6,7 @@ import { logout } from '../store/actions/user.actions'
 import { useState } from 'react'
 import { AddBoard } from './board/AddBoard'
 import { onToggleModal } from '../store/actions/system.actions'
-import { Members } from './SvgContainer'
+import { Members } from './svgContainer'
 import { googleLogout } from '@react-oauth/google'
 
 export function AppHeader() {

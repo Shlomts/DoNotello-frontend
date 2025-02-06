@@ -3,7 +3,7 @@ import {addBoard} from '../../store/actions/board.actions'
 import {showErrorMsg, showSuccessMsg} from '../../services/event-bus.service'
 import {BackgroundSelector} from '../BackgroundSelector'
 import {boardService} from '../../services/board'
-import {Close} from '../SvgContainer'
+import {Close} from '../svgContainer'
 import {onToggleModal} from '../../store/actions/system.actions'
 import {useNavigate} from 'react-router'
 //as i can see the cmp isnt keep the data when you close the tab
