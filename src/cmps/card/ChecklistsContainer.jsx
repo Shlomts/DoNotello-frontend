@@ -57,6 +57,15 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 		return task.isDone ? 'details done' : 'details'
 	}
 
+	function calcPercent(tasks) {
+		if (!tasks || tasks.length === 0) return 0
+
+		const progressPercentage =
+			(tasks.filter(tsk => tsk.isDone).length / tasks.length) * 100
+
+		return Math.round(progressPercentage)
+	}
+
 	return (
 		<section className='checklists-container'>
 			{checklists.length > 0 ? (
@@ -83,8 +92,21 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 									Delete
 								</button>
 							</h4>
-							<div className='percent'>0%</div>
-							<div className='bar'>-------------------</div>
+
+							<div className='percent'>
+								{calcPercent(checklist.tasks)}%
+							</div>
+							<div class='progress-bar-container'>
+								<div
+									class='progress-bar'
+									style={{
+										width: `${calcPercent(
+											checklist.tasks
+										)}%`,
+									}}
+								></div>
+							</div>
+
 							{checklist.tasks.length > 0 &&
 								checklist.tasks.map(task => (
 									<div className='task' key={task.id}>
