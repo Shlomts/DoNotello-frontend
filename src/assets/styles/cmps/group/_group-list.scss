@@ -15,4 +15,8 @@
     &.dragging-over {
         border-radius: rem(8px);
     }
+
+    .draggable-container{
+        cursor: default;
+    }
 }
