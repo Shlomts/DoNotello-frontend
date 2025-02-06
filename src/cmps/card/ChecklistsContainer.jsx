@@ -22,7 +22,7 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 	}
 
 	function onSaveDetails() {
-		if(!detailsInEdit) return
+		if (!detailsInEdit) return
 		const newTask = { id: makeId(), details: detailsInEdit, isDone: false }
 		const newTasks = [...currChecklist.tasks, newTask]
 		setCurrChecklist(prev => (prev.tasks = newTasks))
@@ -43,7 +43,10 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 				<ul>
 					{checklists.map(checklist => (
 						<li key={checklist.id} className='checklist'>
-							<Checklist />
+							<div className='svg'>
+								<Checklist />
+							</div>
+
 							<h4 className='title'>
 								{checklist.title}
 								<button
@@ -51,7 +54,7 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 										if (confirm('Sure?'))
 											removeChecklist(checklist.id)
 									}}
-									className='delete'
+									className='delete btn'
 								>
 									Delete
 								</button>
@@ -61,7 +64,17 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 							{checklist.tasks.length > 0 &&
 								checklist.tasks.map(task => (
 									<div className='task' key={task.id}>
-										<Checkbox className='check' />
+										<Checkbox
+											sx={{
+												color: '#738496',
+												width: '14px',
+												height: '14px',
+												alignSelf: 'center',
+												'&.Mui-checked': {
+													color: '#579dff',
+												},
+											}}
+										/>
 										<div className='details'>
 											{task.details}
 										</div>
@@ -71,8 +84,7 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 							{isEditMode &&
 								checklist.id === currChecklist?.id && (
 									<div className='details'>
-										<input
-											type='text'
+										<textarea
 											value={detailsInEdit}
 											onChange={ev => {
 												setCurrChecklist(
@@ -81,12 +93,37 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 												onEditDetails(ev)
 											}}
 											onKeyDown={onKeyDown}
+											placeholder='Add an item'
 											autoFocus
 										/>
-										<button onClick={onSaveDetails}>
-											Save
+										<div className='detbtns'>
+											<button
+												className='save'
+												onClick={onSaveDetails}
+											>
+												Add
+											</button>
+											<button
+												className='cancel'
+												onClick={() => {
+													setIsEditMode(false)
+													setDetailsInEdit('')
+													setCurrChecklist(
+														null
+													)
+												}}
+											>
+												Cancel
+											</button>
+										</div>
+
+										{/* <button
+											className='btn'
+											onClick={onSaveDetails}
+										>
+											Add
 										</button>
-										<button>Cancel</button>
+										<button className='btn'>Cancel</button> */}
 									</div>
 								)}
 							<button
@@ -94,7 +131,7 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 									setCurrChecklist(checklist)
 									setIsEditMode(true)
 								}}
-								className='add'
+								className='add btn'
 							>
 								Add an item
 							</button>
