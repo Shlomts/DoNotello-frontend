@@ -124,14 +124,6 @@ export function CardDetails() {
 		setDesInEdit(ev.target.value)
 	}
 
-	// function handleInput() {
-	// 	const editTextarea = textareaRef.current
-	// 	if (editTextarea) {
-	// 		editTextarea.style.height = 'auto'
-	// 		editTextarea.style.height = `${textarea.scrollHeight}px`
-	// 	}
-	// }
-
 	function onSaveDescription() {
 		setDescriptionInput(desInEdit)
 		setCard(card => {

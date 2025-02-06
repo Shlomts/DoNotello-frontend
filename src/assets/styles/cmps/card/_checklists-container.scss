@@ -17,7 +17,6 @@
 		.svg {
 			display: flex;
 			align-items: center;
-
 		}
 
 		.check {
@@ -25,7 +24,7 @@
 			// align-items: center;
 		}
 
-		.btn{
+		.btn {
 			position: relative;
 			background-color: #3b444c;
 			font-size: 14px;
@@ -47,11 +46,9 @@
 			// margin-bottom: 0;
 		}
 
-
 		.tasks {
 			grid-column: subgrid;
 			gap: 0;
-
 		}
 
 		.task {
@@ -61,18 +58,20 @@
 			gap: 0;
 
 			max-width: 100%;
-
 		}
 
 		.add {
 			grid-column: 2;
 			justify-self: baseline;
-
 		}
 
 		.details {
 			grid-column: 2;
-            padding: 9px;
+			padding: 9px;
+
+			&.done {
+				text-decoration: line-through;
+			}
 
 			textarea {
 				display: flex;
@@ -120,7 +119,5 @@
 				}
 			}
 		}
-
-		
 	}
 }
