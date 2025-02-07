@@ -27,9 +27,14 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 	function onSaveDetails() {
 		const newTask = { id: makeId(), details: detailsInEdit, isDone: false }
 		const newTasks = [...currChecklist.tasks, newTask]
-		setCurrChecklist(prev => (prev.tasks = newTasks))
 
-		onUpdate(currChecklist)
+
+		setCurrChecklist(prev => {
+			const updatedChecklist = { ...prev, tasks: newTasks }
+			return updatedChecklist
+		})
+
+		onUpdate({ ...currChecklist, tasks: newTasks })
 		setDetailsInEdit('')
 	}
 
@@ -39,18 +44,17 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 		}
 	}
 
-	function onToggleIsDone(task) {
-		if (!task) return
+	function onToggleIsDone(task, checklist) {
+		if (!checklist || !task) return
 
-		const oldList = [...currChecklist.tasks]
-		const newList = oldList.map(tsk =>
+		const newList = checklist.tasks.map(tsk =>
 			tsk.id === task.id ? { ...tsk, isDone: !tsk.isDone } : tsk
 		)
 
-		const newChecklist = { ...currChecklist, tasks: newList }
+		const newChecklist = { ...checklist, tasks: newList }
 
-		setCurrChecklist(prev => (prev = newChecklist))
-		onUpdate(currChecklist)
+		setCurrChecklist(newChecklist)
+		onUpdate(newChecklist)
 	}
 
 	function checkIsDone(task) {
@@ -74,7 +78,7 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 						<li
 							key={checklist.id}
 							className='checklist'
-							// onClick={() => setCurrChecklist(checklist)}
+						// onClick={() => setCurrChecklist(checklist)}
 						>
 							<div className='svg'>
 								<Checklist />
@@ -96,9 +100,9 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 							<div className='percent'>
 								{calcPercent(checklist.tasks)}%
 							</div>
-							<div class='progress-bar-container'>
+							<div className='progress-bar-container'>
 								<div
-									class='progress-bar'
+									className='progress-bar'
 									style={{
 										width: `${calcPercent(
 											checklist.tasks
@@ -112,10 +116,10 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 									<div className='task' key={task.id}>
 										<Checkbox
 											onClick={() => {
-												setCurrChecklist(
-													prev => (prev = checklist)
-												)
-												onToggleIsDone(task)
+												// setCurrChecklist(
+												// 	prev => (prev = checklist)
+												// )
+												onToggleIsDone(task, checklist)
 											}}
 											checked={task.isDone}
 											sx={{

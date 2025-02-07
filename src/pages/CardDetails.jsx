@@ -208,12 +208,14 @@ export function CardDetails() {
 	function onAddChecklist(data) {
 		const newChecklist = { id: makeId(), title: data, tasks: [] }
 		const updatedChecklists = [...cardChecklists, newChecklist]
-		setCardChecklists(updatedChecklists)
-		setCard(card => {
-			card.checklists = updatedChecklists
-			updateCard(board, group, card)
+		setCard(prevCard => {
+			const updatedCard = {
+				...prevCard, checklists: updatedChecklists
+			}
+			updateCard(board, group, updatedCard)
 			return card
 		})
+		setCardChecklists(updatedChecklists)
 		onCloseModal()
 	}
 
@@ -222,25 +224,29 @@ export function CardDetails() {
 			checklist => checklist.id !== newChecklist.id
 		)
 		const updatedChecklists = [...editList, newChecklist]
-
-		setCardChecklists(updatedChecklists)
-		setCard(card => {
-			card.checklists = updatedChecklists
-			updateCard(board, group, card)
+		
+		setCard(prevCard => {
+			const updatedCard = {
+				...prevCard, checklists: updatedChecklists
+			}
+			updateCard(board, group, updatedCard)
 			return card
 		})
+		setCardChecklists(updatedChecklists)
 	}
 
 	function removeChecklist(id) {
 		const newChecklists = cardChecklists.filter(
 			checklist => checklist.id !== id
 		)
-		setCardChecklists(newChecklists)
-		setCard(card => {
-			card.checklists = newChecklists
+		setCard(prevCard => {
+			const updatedCard = {
+				...prevCard, checklists: newChecklists
+			}
+			updateCard(board, group, updatedCard)
 			return card
 		})
-		updateCard(board, group, card)
+		setCardChecklists(newChecklists)
 	}
 
 	if (!card) return <div>Loading...</div>
