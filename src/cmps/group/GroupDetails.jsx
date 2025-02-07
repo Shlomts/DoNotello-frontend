@@ -66,6 +66,7 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
                             onChange={onSetCardName}
                             placeholder="Enter a title or paste link"
                             autoFocus
+                            onBlur={() => setIsAddingCard(false)}
                             onKeyDown={ev => {
                                 if (ev.key === 'Enter') {
                                     ev.preventDefault()
@@ -76,14 +77,14 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
                         <div className="add-card-actions">
                             <button
                                 className="save-card-btn"
-                                onClick={() => {
-                                    onAddCard()
-                                }}
+                                onMouseDown={ev => ev.preventDefault()}
+                                onClick={() => { onAddCard() }}
                             >
                                 Add card
                             </button>
                             <button
                                 className="cancel-add-btn"
+                                onMouseDown={ev => ev.preventDefault()}
                                 onClick={() => {
                                     setIsAddingCard(false)
                                     setCardName('')

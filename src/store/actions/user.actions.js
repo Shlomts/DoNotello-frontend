@@ -43,6 +43,20 @@ export async function login(credentials) {
     }
 }
 
+export async function loginAsGuest() {
+    try {
+        const guestUser = await userService.loginGuest()
+        store.dispatch({
+            type: SET_USER,
+            user: guestUser
+        })
+        socketService.login(guestUser._id)
+        return guestUser
+    } catch (err) {
+        throw err
+    }
+}
+
 export async function signup(credentials) {
     console.log('singup in action', credentials);
 

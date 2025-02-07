@@ -25,6 +25,7 @@ function getById(boardId) {
 async function remove(boardId) {
     return httpService.delete(`board/${boardId}`)
 }
+
 async function saveBoard(board) {
     let savedBoard
     if (board._id) {

@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react'
-import {useParams} from 'react-router-dom'
-import {useSelector} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {DragDropHandler} from '../cmps/DragDropHandler'
-import {SideBar} from '../cmps/SideBar'
+import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { Link } from "react-router-dom"
+import { DragDropHandler } from "../cmps/DragDropHandler"
+import { SideBar } from "../cmps/SideBar"
 
-import {showSuccessMsg, showErrorMsg} from '../services/event-bus.service'
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import {
   loadBoard,
   loadBoards,
@@ -18,17 +18,19 @@ import {
   setFilter,
 } from '../store/actions/board.actions'
 
-import {loadUsers} from '../store/actions/user.actions'
+import { loadUsers } from '../store/actions/user.actions'
 
-import {CardFilter} from '../cmps/card/CardFilter'
-import {GroupList} from '../cmps/group/GroupList'
-import {BoardMembers} from '../cmps/member/BoardMembers'
-import {Plus, Close, Star, Unstar, ListActionsIcon} from '../cmps/SvgContainer'
-import {boardService} from '../services/board'
-import {BoardMenu} from '../cmps/board/BoardMenu'
+import { CardFilter } from "../cmps/card/CardFilter"
+import { GroupList } from "../cmps/group/GroupList"
+import { BoardMembers } from "../cmps/member/BoardMembers"
+import { Plus, Close, Star, Unstar, ListActionsIcon } from "../cmps/SvgContainer"
+import { boardService } from "../services/board"
+import { BoardMenu } from "../cmps/board/BoardMenu"
+import { socketService, SOCKET_EMIT_JOIN_BOARD, SOCKET_EVENT_BOARD_UPDATED } from "../services/socket.service.js"
 
 export function BoardDetails() {
-  const {boardId} = useParams()
+  const { boardId } = useParams()
+  const dispatch = useDispatch()
 
   const users = useSelector((storeState) => storeState.userModule.users)
   const board = useSelector((storeState) => storeState.boardModule.board)
@@ -43,20 +45,39 @@ export function BoardDetails() {
   const [filteredBoard, setFilteredBoard] = useState()
 
   useEffect(() => {
-    loadBoard(boardId)
-    loadUsers()
-  }, [boardId])
-
-  useEffect(() => {
     const filterdBoard = boardService.getFilterdBoard(board, filterBy)
     setFilteredBoard(filterdBoard)
   }, [filterBy, board])
+
+  useEffect(() => {
+    loadBoard(boardId)
+    loadUsers()
+
+  }, [boardId])
 
   useEffect(() => {
     if (board && board.title !== boardTitle) {
       setBoardTitle(board.title)
     }
   }, [board])
+
+  useEffect(() => {
+    if (!board) return
+    socketService.emit(SOCKET_EMIT_JOIN_BOARD, boardId)
+    socketService.on(SOCKET_EVENT_BOARD_UPDATED, onBoardUpdate)
+
+  }, [board])
+
+  function onBoardUpdate(updatedGroups) {
+    if (!board) return
+
+    const updatedBoard = { ...board, groups: updatedGroups }
+
+    dispatch({
+      type: "UPDATE_BOARD",
+      board: updatedBoard
+    })
+  }
 
   function onSetGroupName(ev) {
     const name = ev.target.value
@@ -72,7 +93,7 @@ export function BoardDetails() {
     if (board.title === '') return
 
     try {
-      const updatedBoard = {...board, title: boardTitle}
+      const updatedBoard = { ...board, title: boardTitle }
       await updateBoard(updatedBoard)
       showSuccessMsg('Board updated')
       setIsEditingBoardName(false)
@@ -83,7 +104,7 @@ export function BoardDetails() {
 
   async function onSetStar(board) {
     try {
-      const updatedBoard = {...board, isStarred: !board.isStarred}
+      const updatedBoard = { ...board, isStarred: !board.isStarred }
       await updateBoard(updatedBoard)
       showSuccessMsg('Board updated')
     } catch (err) {
@@ -130,15 +151,13 @@ export function BoardDetails() {
     setFilter(filterBy)
   }
 
-  console.log(filteredBoard,'fiterd board in the details');
-
   if (!board) return <div>Loading...</div>
   if (!filteredBoard) return <div>Loading...</div>
 
   return (
     <section className="board-page">
       <SideBar board={board} onSetStar={onSetStar} />
-      <section className="board-details" style={{backgroundImage: `url(${board.style.backgroundImage})`}}>
+      <section className="board-details" style={{ backgroundImage: `url(${board.style.backgroundImage})` }}>
         <header>
           <section className="left-header">
             {isEditingBoardName ? (
@@ -157,7 +176,7 @@ export function BoardDetails() {
             <div className="isStarred" onClick={() => onSetStar(board)}>
               {board.isStarred ? <Unstar /> : <Star />}
             </div>
-          </section>
+          </section >
           <section className="right-header">
             <CardFilter board={board} filterBy={filterBy} onSetFilter={onSetFilter} />
             <BoardMembers members={board.members} />
@@ -167,7 +186,7 @@ export function BoardDetails() {
               </div>
             )}
           </section>
-        </header>
+        </header >
 
         <main className="board-content">
           <DragDropHandler board={board}>
@@ -222,8 +241,9 @@ export function BoardDetails() {
             )}
           </section>
         </main>
-      </section>
-      {isBoardMenuOpen && <BoardMenu board={board} onClose={toggleBoardMenu} />}
-    </section>
+      </section >
+      {isBoardMenuOpen && <BoardMenu board={board} onClose={toggleBoardMenu} />
+      }
+    </section >
   )
 }
