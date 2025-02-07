@@ -1,6 +1,7 @@
 import { Description, Checklist } from "../../SvgContainer"
 
 export function CardIcons({ card }) {
+    if(!card.checklists) return
     const hasDescription = card.description
 
     let totalTasks = 0
