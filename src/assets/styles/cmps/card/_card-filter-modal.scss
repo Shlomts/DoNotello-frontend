@@ -5,7 +5,7 @@
   // width: 384px;
   left: 30px;
   min-height: 350px;
-  background-color: #22272b;
+  background-color: #282e33;
   border-radius: 8px;
   box-shadow: $ds-shadow-overlay;
   font-size: 14px;
@@ -13,6 +13,7 @@
   line-height: 20px;
   overflow: hidden;
   cursor: default;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
 
   z-index: 100;
   color: #9fadbc;
@@ -24,7 +25,7 @@
     align-items: center;
     padding: 4px 8px;
     text-align: center;
-    color: $app-title;
+    color: #9fadbc;
 
     h2 {
       display: block;
@@ -58,7 +59,7 @@
         width: 16px;
         display: flex;
         align-items: center;
-        color: $app-title;
+        color: #9fadbc;
       }
 
       &:hover {
@@ -72,10 +73,10 @@
   .filter-modal-container {
     padding: 0 12px 12px 12px;
     max-height: 472px;
-    color: rgb(159, 173, 188);
-    //  width: 384px;
+    color:  #9fadbc;
+     width: 384px;
 
-    width: 280px;
+    // width: 280px;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -98,11 +99,10 @@
         cursor: pointer;
       }
     }
-    label,
-    .member-group-label,
-    .label-group-select {
+
+    label {
       margin: 0;
-      padding: 8px 0;
+      padding: 10px 0;
       padding-right: 0;
       cursor: pointer;
       font-size: 12px;
@@ -120,8 +120,9 @@
         width: 100%;
         padding: 8px 12px;
         background-color: #22272b;
-        border: 1px solid #9fadbc;
-        color: #b6c2cf;
+        border: 0.2px solid #738496;
+        border-radius: 3px;
+        color: #738496;
         transition: border 0.2s ease-in-out;
         box-shadow: inset 0 0 0 1px #091e4224;
 
@@ -161,6 +162,9 @@
           cursor: pointer;
           height: 0;
           width: 0;
+          transition-property: background-color, border-color, box-shadow;
+          transition-duration: 85ms;
+          transition-timing-function: ease;
         }
       }
       .chackbox-icon {
