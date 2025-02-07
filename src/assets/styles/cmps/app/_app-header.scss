@@ -25,7 +25,7 @@
       align-items: center;
       text-decoration: none;
       width: rem(165px);
-            height: rem(31px);
+      height: rem(31px);
       padding: 8px 0;
 
       .logo-container {
@@ -101,12 +101,10 @@
     margin-inline-start: auto;
     cursor: pointer;
 
-    .user-avatar {
+    .user-img {
       width: rem(32px);
       height: rem(32px);
-      // border-radius: 50%;
       overflow: hidden;
-      // border: 1px solid;
       padding: 4px;
 
       img {
@@ -125,7 +123,6 @@
         position: relative;
         width: rem(32px);
         height: rem(32px);
-
       }
     }
   }
@@ -133,70 +130,98 @@
     position: absolute;
     top: 48px;
     right: 2px;
-    min-width: 304px;
+    min-width: 280px;
     max-height: 755px;
-    padding: rem(12px);
+    padding: 12px;
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
     list-style: none;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 0.5px solid rgba(255, 255, 255, 0.1);
+    box-shadow: $ds-shadow-overlay;
     border-radius: 8px;
-    background-color: #242526;
+    background-color: #282e33;
     z-index: 100;
     overflow-x: hidden;
     overflow-y: auto;
-    color: #b6c2cf;
+    color: #8c9bab;
 
     li {
-      padding: 8px 20px;
-      cursor: pointer;
-      // border-bottom: 1px solid #414548;
-      &.account {
-        border-bottom: 1px solid #414548;
-      }
-      &.log-out {
-        border-top: 1px solid #414548;
-      }
+      padding: 8px 12px;
+      cursor: default;
 
       a {
         color: #b6c2cf;
         text-decoration: none;
       }
 
-      &:hover {
-        background-color: #333c43;
-        border-radius: 3px;
+      &.log-out {
+        background: none;
+        font-size: 14px;
+        margin-top: 9px;
+        cursor: pointer;
+
+        span {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          column-gap: 4px;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 20px;
+        }
+        &:hover {
+          background-color: #a1bdd914;
+          padding: 8px 24px;
+          margin-inline: -12px;
+        }
       }
 
-      .account {
+      &.account {
+        border-bottom: 1px solid #414548;
+
         h2 {
-          font-size: 14px;
-          margin-block: 4px;
+          font-size: 11px;
+          font-weight: 700;
+          line-height: 16px;
+          text-transform: uppercase;
         }
         .user-container {
           display: flex;
+          max-width: 100%;
+          padding: 8px;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 20px;
 
           .user-avatar {
             margin-right: 8px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
           }
-          .user-info {
+
+          .user-info-dropdown {
             display: flex;
             flex-direction: column;
-            padding: 0;
+            margin: 0;
+            justify-content: space-around;
+            align-items: flex-start;
+            cursor: default;
 
-            .user-name,
+            .user-name {
+              margin-top: 2px;
+            }
+
             .user-email {
+              overflow: hidden;
               font-size: 12px;
+              // line-height: 16px;
+              text-overflow: ellipsis;
+              white-space: nowrap;
             }
           }
         }
-      }
-      .log-out {
-        background: none;
-        border: none;
-        font-size: 14px;
-        margin: 0;
       }
     }
   }
