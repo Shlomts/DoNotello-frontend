@@ -52,6 +52,8 @@ export function CardFilter({board, filterBy, onSetFilter}) {
     ev.stopPropagation()
     onSetFilter({})
     setFilterCount(0)
+    onToggleModal(null)
+
   }
   return (
     <>

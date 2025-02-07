@@ -41,13 +41,13 @@ export function DynaminModal() {
   } else if (trigger === 'sidebar-add-board') {
     modalStyle = {
       ...modalStyle,
-      top: position.top,
+      top: position.top ,
       left: position.left + 25,
     }
   } else if (trigger === 'sidebar-leave-modal') {
     modalStyle = {
       ...modalStyle,
-      top: position.top - 255,
+      top: '250px' ,
       left: 215,
     }
   } else if (trigger === 'board-index') {
