@@ -48,7 +48,8 @@ export function CardFilter({board, filterBy, onSetFilter}) {
     }
   }
 
-  function clearFilters() {
+  function clearFilters(ev) {
+    ev.stopPropagation()
     onSetFilter({})
     setFilterCount(0)
   }
@@ -65,7 +66,7 @@ export function CardFilter({board, filterBy, onSetFilter}) {
               <div className="filter-popover-btn-count">
                 <span className="counter">{filterCount}</span>
               </div>
-              <button className="clear-all-btn" onClick={clearFilters}>
+              <button className="clear-all-btn" onClick={(ev)=> clearFilters(ev)}>
                 Clear all
               </button>
             </>
