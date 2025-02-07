@@ -1,6 +1,6 @@
-import {boardService} from '../../services/board'
-import {store} from '../store'
-import {makeId} from '../../services/util.service'
+import { boardService } from '../../services/board'
+import { store } from '../store'
+import { makeId } from '../../services/util.service'
 import {
   ADD_BOARD,
   REMOVE_BOARD,
@@ -10,6 +10,7 @@ import {
   ADD_BOARD_MSG,
   TOGGLE_BOARD_STAR,
   SET_FILTER_BY,
+  TOGGLE_LABEL_VISIBILITY,
 } from '../reducers/board.reducer'
 
 
@@ -30,9 +31,9 @@ export async function loadBoard(boardId) {
 
   try {
     const board = await boardService.getById(boardId)
-    console.log(board,"from action");
-    console.log(filterBy,'filter');
-    
+    console.log(board, "from action");
+    console.log(filterBy, 'filter');
+
 
     store.dispatch(getCmdSetBoard(board))
   } catch (err) {
@@ -87,7 +88,7 @@ export async function updateBoardOptimistic(board) {
 
 export async function onSetStar(board) {
   try {
-    const updatedBoard = {...board, isStarred: !board.isStarred}
+    const updatedBoard = { ...board, isStarred: !board.isStarred }
     await updateBoard(updatedBoard)
   } catch (err) {
     console.error('cant change star')
@@ -106,9 +107,9 @@ export async function addGroupToBoard(board, groupToSave) {
 }
 
 export async function addCardToGroup(board, group, cardToSave) {
-  const ogGroup = board.groups.find(g => g.id === group.id )
-  console.log(ogGroup,'addcard to grod');
-  
+  const ogGroup = board.groups.find(g => g.id === group.id)
+  console.log(ogGroup, 'addcard to grod');
+
   ogGroup.cards.push(cardToSave)
 
   try {
@@ -134,7 +135,7 @@ export async function updateCard(board, group, cardToSave) {
 
   const updatedGroup = {
     ...board.groups[groupIdx],
-    cards: board.groups[groupIdx].cards.map((card, idx) => (idx === cardIdx ? {...card, ...cardToSave} : card)),
+    cards: board.groups[groupIdx].cards.map((card, idx) => (idx === cardIdx ? { ...card, ...cardToSave } : card)),
   }
 
   const updatedBoard = {
@@ -275,6 +276,12 @@ function getCmdSetFilter(filterBy) {
   }
 }
 
+export function toggleLabelVisibility() {
+  return {
+    type: TOGGLE_LABEL_VISIBILITY
+  }
+}
+
 export async function toggleBoardStar(boardId) {
   try {
     // Get the current boards from the store
@@ -283,14 +290,14 @@ export async function toggleBoardStar(boardId) {
     if (!board) throw new Error('Board not found')
 
     // Toggle the isStarred property
-    const updatedBoard = {...board, isStarred: !board.isStarred}
+    const updatedBoard = { ...board, isStarred: !board.isStarred }
 
     // Update the board in the backend
     await boardService.saveBoard(updatedBoard)
     // console.log(updatedBoard , 'from toggle star')
 
     // Dispatch the action to update the board in the store
-    store.dispatch({type: TOGGLE_BOARD_STAR, board: updatedBoard})
+    store.dispatch({ type: TOGGLE_BOARD_STAR, board: updatedBoard })
   } catch (err) {
     console.error('Failed to toggle board star:', err)
   }

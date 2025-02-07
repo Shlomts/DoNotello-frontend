@@ -448,8 +448,8 @@ export function CardDetails() {
 									labels={board.labels.filter(label =>
 										card.labelIds.includes(label.id)
 									)}
-									showTitles
-									onLableCick={onSetLabels}
+									// showTitles
+									// onLableCick={onSetLabels}
 									onPlusIcon={onSetLabels}
 									className='card-details-labels'
 								/>

@@ -23,6 +23,7 @@ export function CardPreview({ card, cardMembers, cardLabels }) {
                     <CardLabels
                         labels={cardLabels}
                         className='card-preview-labels'
+                        isCardPreview={true}
                     />
                     <h3>{card.title}</h3>
                     <section className="bottom-card-preview">
