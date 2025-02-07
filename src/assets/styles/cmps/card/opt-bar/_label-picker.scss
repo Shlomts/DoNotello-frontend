@@ -1,64 +1,100 @@
 .label-picker {
 	width: 100%;
-	
-    .search {
-        box-sizing: border-box;
-        border: 1px solid #8c9baa;
-        border-radius: 3px;
 
-        outline: none;
+	.search {
+		box-sizing: border-box;
+		border: 1px solid #8c9baa;
+		border-radius: 3px;
 
-        width: 100%;
-        margin-bottom: 0;
-        line-height: 20px;
+		outline: none;
 
-        transition-timing-function: ease;
-        padding: 8px 12px;
-        background-color: #22272b;
-        color: #8c9baa;
-        box-shadow: inset 0 0 0 1px var(--ds-border-input, #091e4224);
-        transition-duration: 85ms;
+		width: 100%;
+		margin-bottom: 0;
+		line-height: 20px;
 
-        &:focus {
-            outline: none;
-            border: 2px solid #579dff;
-        }
+		transition-timing-function: ease;
+		padding: 8px 12px;
+		background-color: #22272b;
+		color: #8c9baa;
+		box-shadow: inset 0 0 0 1px var(--ds-border-input, #091e4224);
+		transition-duration: 85ms;
 
-        &::placeholder {
-            color: #8c9baa;
-        }
-    }
+		&:focus {
+			outline: none;
+			border: 2px solid #579dff;
+		}
 
-    .labels-list {
-        margin-top: 15px;
+		&::placeholder {
+			color: #8c9baa;
+		}
+	}
 
-        thead {
-            padding-bottom: 10px;
-        }
+	.labels-list {
+		margin-top: 12px;
 
-        .label {
-            display: grid;
-            grid-template-columns: auto 1fr auto;
+		thead {
+			padding-bottom: 10px;
+		}
 
-            line-height: 32px;
-            width: 188px;
-            padding-inline: 12px;
+		.list {
+			padding: 2px;
+		}
 
-            .name-input{
-                background-color: #8c9baa;
-                color: #22272b;
-                width: 164px;
-                height: 42px;
-                padding-inline: 12px;
-            }
-        }
-    }
+		.label {
+			display: grid;
+			grid-template-columns: 24px 212px 30px;
+			gap: 6px;
+			align-items: center;
 
+			span {
+				width: 16px;
+			}
 
-	.card-member-img {
-	    width: rem(23px);
-	    height: rem(23px);
-	    border-radius: 50%;
-	    object-fit: cover;
+			.name-input {
+				color: white;
+				padding-inline: 12px;
+				width: 212px;
+				overflow: hidden;
+
+				&:focus {
+					border: 2px solid #579dff;
+				}
+			}
+
+			.label-name {
+				padding-inline: 12px;
+				align-content: center;
+				line-height: 32px;
+				width: 212px;
+				color: white;
+				font-weight: 500;
+
+				border-radius: 3px;
+				margin-top: 2px;
+			}
+
+			&:hover {
+				filter: brightness(85%);
+			}
+
+			.edit {
+                display: block;
+                text-align: center;
+                padding: 3px 4px;
+                height: 30px;
+
+				svg {
+					width: 16px;
+                    height: 16px;
+				}
+
+                &:hover {
+                    background-color: #8c9baa;
+                    border-radius: 3px;
+                    max-height: 24x;
+
+                }
+			}
+		}
 	}
 }

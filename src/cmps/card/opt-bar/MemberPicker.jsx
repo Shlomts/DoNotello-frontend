@@ -54,6 +54,7 @@ export function MemberPicker({ info, onUpdate }) {
 				value={srchPrm}
 				placeholder='Search members'
 				onChange={ev => onSearchMember(ev)}
+				autoFocus
 			/>
 			{getMembersInCard().length > 0 && (
 				<section className='members-list'>
