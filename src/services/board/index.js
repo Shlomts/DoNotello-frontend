@@ -46,17 +46,26 @@ function getEmptyCard() {
     return {
         id: makeId(),
         title: '',
-        memberIds: [],
+        status: '',
+        priority: '',
+        dueDate: '',
         description: '',
+        activity: [],
+        checklists: [],
+        memberIds: [],
         labelIds: [],
+        byMember: {},
+        style: {
+            backgroundColor: '',
+        },
     }
 }
 
 function getDefaultFilter() {
     return {
         txt: '',
-        memberIds:[],
-       labelIds:[],
+        memberIds: [],
+        labelIds: [],
     }
 }
 

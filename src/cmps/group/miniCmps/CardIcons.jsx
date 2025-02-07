@@ -1,10 +1,33 @@
-import { Description } from "../../SvgContainer"
+import { Description, Checklist } from "../../SvgContainer"
 
 export function CardIcons({ card }) {
-    if (!card.description) return
+    const hasDescription = card.description
+
+    let totalTasks = 0
+    let totalDoneTasks = 0
+
+    card.checklists.forEach(checklist => {
+        checklist.tasks.forEach(task => {
+            totalTasks++
+            if (task.isDone) totalDoneTasks++
+        })
+    })
+
+    const hasChecklists = totalTasks > 0
+    if (!hasDescription && !hasChecklists) return null
+
+    console.log(card.checklists)
     return (
         <div className="card-icons">
-            {card.description && <span className="icon-description"><Description /></span>}
+            {hasDescription &&
+                (<span className="icon-description"><Description /></span>)}
+            {hasChecklists &&
+                (<span className="icon-checklist"><Checklist />
+                    <span className="checklist-progress">
+                        {totalDoneTasks}/{totalTasks}
+                    </span>
+                </span>
+                )}
         </div>
     )
 }

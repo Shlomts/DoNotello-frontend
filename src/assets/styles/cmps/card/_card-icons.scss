@@ -1,4 +1,14 @@
 .card-icons {
+    display: flex;
+    align-items: center;
+    gap: rem(12px);
+
+    .checklist-progress{
+        padding-inline-start: 2px;
+        font-size: 12px;
+        color: #9fadbc;
+    }
+
 
     svg {
         height: 16px;
