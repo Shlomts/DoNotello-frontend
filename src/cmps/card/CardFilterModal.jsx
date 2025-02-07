@@ -101,7 +101,7 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
       </header>
       <form>
         <div className="filter-modal-container">
-          <p className="keyword">keyword</p>
+          <p className="keyword">Keyword</p>
           <div className="filter-section search-bar">
             <input
               className="search-by-txt"
@@ -333,7 +333,7 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
                       '&.Mui-checked': {color: '#579dff'},
                     }}
                   />
-                  <LabelsOpSelect labels={labels} onSelect={handleChange} placeholder="Select Labels" />
+                  <LabelsOpSelect labels={labels} onSelect={handleChange} placeholder="Select labels" />
                 </div>
               </li>
             </ul>

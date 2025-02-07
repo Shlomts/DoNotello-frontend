@@ -1,4 +1,4 @@
-import { httpService } from '../http.service'
+import {httpService} from '../http.service'
 
 export const boardService = {
     query,
@@ -12,7 +12,7 @@ export const boardService = {
 }
 
 async function query(filterBy = {}) {
-    return httpService.get(`board`, filterBy)
+  return httpService.get(`board`, filterBy)
 }
 
 // async function query(filterBy = { txt: '', price: 0 }) {
@@ -124,61 +124,61 @@ function countFilteredCards(groups) {
 }
 
 function getById(boardId) {
-    return httpService.get(`board/${boardId}`)
+  return httpService.get(`board/${boardId}`)
 }
 
 async function remove(boardId) {
-    return httpService.delete(`board/${boardId}`)
+  return httpService.delete(`board/${boardId}`)
 }
 
 async function saveBoard(board) {
-    let savedBoard
-    if (board._id) {
-        savedBoard = await httpService.put(`board/${board._id}`, board)
-    } else {
-        savedBoard = await httpService.post('board', board)
-    }
-    return savedBoard
+  let savedBoard
+  if (board._id) {
+    savedBoard = await httpService.put(`board/${board._id}`, board)
+  } else {
+    savedBoard = await httpService.post('board', board)
+  }
+  return savedBoard
 }
 
 async function addBoardMsg(boardId, txt) {
-    const savedMsg = await httpService.post(`board/${boardId}/msg`, { txt })
-    return savedMsg
+  const savedMsg = await httpService.post(`board/${boardId}/msg`, {txt})
+  return savedMsg
 }
 
 function getCardById(board, cardId) {
-    if (!board.groups || board.groups.length === 0) return "No cards available"
+  if (!board.groups || board.groups.length === 0) return 'No cards available'
 
-    for (let i = 0; i < board.groups.length; i++) {
-        const card = _getCardInGroup(board.groups[i], cardId)
-        if (card) return card
-    }
+  for (let i = 0; i < board.groups.length; i++) {
+    const card = _getCardInGroup(board.groups[i], cardId)
+    if (card) return card
+  }
 
-    return new Error("Cannot find card: ", cardId)
+  return new Error('Cannot find card: ', cardId)
 }
 
 function _getCardInGroup(group, cardId) {
-    const card = group.cards.find((card) => card.id === cardId)
+  const card = group.cards.find((card) => card.id === cardId)
 
-    if (!card) return
-    return card
+  if (!card) return
+  return card
 }
 
 function getGroup(board, cardId) {
-    if (!board.groups || board.groups.length === 0) return "No cards available"
+  if (!board.groups || board.groups.length === 0) return 'No cards available'
 
-    for (let i = 0; i < board.groups.length - 1; i++) {
-        const group = _getGroupByCard(board.groups[i], cardId)
-        if (group) {
-            return group
-        }
+  for (let i = 0; i < board.groups.length - 1; i++) {
+    const group = _getGroupByCard(board.groups[i], cardId)
+    if (group) {
+      return group
     }
+  }
 
-    return new Error("Cannot find group ")
+  return new Error('Cannot find group ')
 }
 
 function _getGroupByCard(group, cardId) {
-    const card = group.cards.find((card) => card.id === cardId)
-    if (!card) return
-    return group
+  const card = group.cards.find((card) => card.id === cardId)
+  if (!card) return
+  return group
 }

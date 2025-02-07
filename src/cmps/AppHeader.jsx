@@ -1,13 +1,14 @@
-import { Link, NavLink } from 'react-router-dom'
-import { useNavigate } from 'react-router'
-import { useSelector } from 'react-redux'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { logout } from '../store/actions/user.actions'
-import { useState } from 'react'
-import { AddBoard } from './board/AddBoard'
-import { onToggleModal } from '../store/actions/system.actions'
-import { Members } from './SvgContainer'
-import { googleLogout } from '@react-oauth/google'
+import {Link, NavLink} from 'react-router-dom'
+import {useNavigate} from 'react-router'
+import {useSelector} from 'react-redux'
+import {showErrorMsg, showSuccessMsg} from '../services/event-bus.service'
+import {logout} from '../store/actions/user.actions'
+import {useState} from 'react'
+import {AddBoard} from './board/AddBoard'
+import {onToggleModal} from '../store/actions/system.actions'
+import {Members} from './SvgContainer'
+import {googleLogout} from '@react-oauth/google'
+import {Avatar} from '@mui/material'
 
 export function AppHeader() {
   const user = useSelector((storeState) => storeState.userModule.user)
@@ -65,7 +66,7 @@ export function AppHeader() {
 
         {user && (
           <div className="user-info" onClick={toggleDropdown}>
-            <div className="user-avatar">
+            <div className="user-img">
               <img src={user.imgUrl} alt="" />
             </div>
             {isDropdownOpen && (
@@ -73,13 +74,14 @@ export function AppHeader() {
                 <li className="account">
                   <h2>Account</h2>
                   <div className="user-container">
-                    <Members />
+                    <span className="user-avatar">
+                      <Avatar src={user.imgUrl} alt={user.fullname} className="avatar" />
+                    </span>
+                    <div className="user-info-dropdown">
+                      <div className="user-name">{user.fullname} </div>
+                      <div className="user-email">{user.username}</div>
+                    </div>
                   </div>
-                  <div className="user-info">
-                    <p className="user-name">{user.fullname}</p>
-                    <p className="user-email">{user.username}</p>
-                  </div>
-
                 </li>
                 {/* <li>
                   <Link to={`user/${user._id}`}>Profile and visibility</Link>
@@ -88,7 +90,7 @@ export function AppHeader() {
                   <Link to="/activity">Activity</Link>
                 </li> */}
                 <li className="log-out">
-                  <p onClick={onLogout}>Log out</p>
+                  <span onClick={onLogout}>Log out</span>
                 </li>
               </ul>
             )}

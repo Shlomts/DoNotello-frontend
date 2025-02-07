@@ -1015,6 +1015,28 @@ export function ListActionsIcon() {
   )
 }
 
+export function SmallDownArrow() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      role="presentation"
+      focusable="false"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M11 17L4 10C3.6 9.6 3.6 9 4 8.6C4.4 8.2 5 8.2 5.4 8.6L12 14.6L18.6 8.6C19 8.2 19.6 8.2 20 8.6C20.4 9 20.4 9.6 20 10L13 17C12.6 17.4 11.4 17.4 11 17Z"
+        fill="currentColor"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 // export function check() {
 //     return (
 
