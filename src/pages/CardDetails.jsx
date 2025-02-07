@@ -34,6 +34,7 @@ import { CardLabels } from '../cmps/group/miniCmps/CardLabels'
 
 import { ChecklistsContainer } from '../cmps/card/ChecklistsContainer'
 import { DatesPicker } from '../cmps/card/opt-bar/DatesPicker'
+import { CardDates } from '../cmps/card/CardDates'
 
 export function CardDetails() {
 	const navigate = useNavigate()
@@ -154,6 +155,9 @@ export function CardDetails() {
 			case AddChecklist:
 				onAddChecklist(data)
 				break
+			case DatesPicker:
+				onSetDates(data)
+				break
 			default:
 				throw new Error('No current dynamic cmp')
 		}
@@ -211,7 +215,8 @@ export function CardDetails() {
 		const updatedChecklists = [...cardChecklists, newChecklist]
 		setCard(prevCard => {
 			const updatedCard = {
-				...prevCard, checklists: updatedChecklists
+				...prevCard,
+				checklists: updatedChecklists,
 			}
 			updateCard(board, group, updatedCard)
 			return card
@@ -225,10 +230,11 @@ export function CardDetails() {
 			checklist => checklist.id !== newChecklist.id
 		)
 		const updatedChecklists = [...editList, newChecklist]
-		
+
 		setCard(prevCard => {
 			const updatedCard = {
-				...prevCard, checklists: updatedChecklists
+				...prevCard,
+				checklists: updatedChecklists,
 			}
 			updateCard(board, group, updatedCard)
 			return card
@@ -242,12 +248,27 @@ export function CardDetails() {
 		)
 		setCard(prevCard => {
 			const updatedCard = {
-				...prevCard, checklists: newChecklists
+				...prevCard,
+				checklists: newChecklists,
 			}
 			updateCard(board, group, updatedCard)
 			return card
 		})
 		setCardChecklists(newChecklists)
+	}
+
+	function onSetDates(newDates) {
+		// const { dueDate, startDate } = newDates
+		const updatedDates = {...cardDates, ...newDates }
+	
+		setCard(prevCard => {
+			const updatedCard = {
+				...prevCard, dates: updatedDates
+			}
+			updateCard(board, group, updatedCard)
+			return card
+		})
+		setCardDates(updatedDates)
 	}
 
 	if (!card) return <div>Loading...</div>
@@ -378,14 +399,10 @@ export function CardDetails() {
 								<Dates />
 								<div className='name'>Dates</div>
 							</li>
-							{/* <li className='opt-card'>
+							<li className='opt-card'>
 								<div>📎</div>
 								<div>Attachment</div>
 							</li>
-							<li className='opt-card'>
-								<div>📌</div>
-								<div>Location</div>
-							</li> */}
 						</ul>
 					</section>
 					<section className='actions'>
@@ -400,23 +417,6 @@ export function CardDetails() {
 				</section>
 
 				<div className='user-opt'>
-					{/* <section className="notifications">
-                        Notifications
-                        <div className="notifications">
-                            <form>
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        name="isWatch"
-                                        value="false"
-                                    />
-                                    Watch{" "}
-                                </label>
-                            </form>
-                            <span className="btn icon">👁️</span>
-                            <span className="btn txt">Watch</span>
-                        </div>
-                    </section> */}
 					{cardMembers.length > 0 ? (
 						<section className='members'>
 							<h4>Members</h4>
@@ -452,6 +452,21 @@ export function CardDetails() {
 									onLableCick={onSetLabels}
 									onPlusIcon={onSetLabels}
 									className='card-details-labels'
+								/>
+							</div>
+						</section>
+					)}
+
+					{cardDates?.dueDate?.length > 0 && (
+						<section className='dates'>
+							<h4>Due date</h4>
+							<div className='dates-container'>
+								<CardDates
+									dates={cardDates}
+									// showTitles
+									// onLableCick={onSetLabels}
+									// onPlusIcon={onSetLabels}
+									// className='card-dates'
 								/>
 							</div>
 						</section>
