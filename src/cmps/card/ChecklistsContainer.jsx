@@ -4,16 +4,19 @@ import { Checkbox } from '@mui/material'
 import { makeId } from '../../services/util.service'
 
 export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
-	// const [checklistsInContainer, setChecklistsInContainer] = useState(checklists)
-	const [isEditMode, setIsEditMode] = useState(true)
+	const [isEditMode, setIsEditMode] = useState(false)
 	const [currChecklist, setCurrChecklist] = useState(null)
 	const [detailsInEdit, setDetailsInEdit] = useState('')
 
-	console.log('checklists', checklists)
-	console.log(JSON.stringify(checklists))
+	// console.log('checklists', checklists)
+	// console.log(JSON.stringify(checklists))
 	// useEffect(() => {
 	// 	setChecklistsInContainer(checklists)
 	// }, [srchPrm, cardMembers])
+
+	// useEffect(() => {
+	// 	if(checklists.length <= 1 ) setIsEditMode(true)
+	// }, [])
 
 	function onEditDetails(ev) {
 		const todo = ev.target.value
@@ -22,7 +25,6 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 	}
 
 	function onSaveDetails() {
-		if(!detailsInEdit) return
 		const newTask = { id: makeId(), details: detailsInEdit, isDone: false }
 		const newTasks = [...currChecklist.tasks, newTask]
 		setCurrChecklist(prev => (prev.tasks = newTasks))
@@ -37,13 +39,47 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 		}
 	}
 
+	function onToggleIsDone(task) {
+		if (!task) return
+
+		const oldList = [...currChecklist.tasks]
+		const newList = oldList.map(tsk =>
+			tsk.id === task.id ? { ...tsk, isDone: !tsk.isDone } : tsk
+		)
+
+		const newChecklist = { ...currChecklist, tasks: newList }
+
+		setCurrChecklist(prev => (prev = newChecklist))
+		onUpdate(currChecklist)
+	}
+
+	function checkIsDone(task) {
+		return task.isDone ? 'details done' : 'details'
+	}
+
+	function calcPercent(tasks) {
+		if (!tasks || tasks.length === 0) return 0
+
+		const progressPercentage =
+			(tasks.filter(tsk => tsk.isDone).length / tasks.length) * 100
+
+		return Math.round(progressPercentage)
+	}
+
 	return (
 		<section className='checklists-container'>
 			{checklists.length > 0 ? (
 				<ul>
 					{checklists.map(checklist => (
-						<li key={checklist.id} className='checklist'>
-							<Checklist />
+						<li
+							key={checklist.id}
+							className='checklist'
+							// onClick={() => setCurrChecklist(checklist)}
+						>
+							<div className='svg'>
+								<Checklist />
+							</div>
+
 							<h4 className='title'>
 								{checklist.title}
 								<button
@@ -51,18 +87,48 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 										if (confirm('Sure?'))
 											removeChecklist(checklist.id)
 									}}
-									className='delete'
+									className='delete btn'
 								>
 									Delete
 								</button>
 							</h4>
-							<div className='percent'>0%</div>
-							<div className='bar'>-------------------</div>
+
+							<div className='percent'>
+								{calcPercent(checklist.tasks)}%
+							</div>
+							<div class='progress-bar-container'>
+								<div
+									class='progress-bar'
+									style={{
+										width: `${calcPercent(
+											checklist.tasks
+										)}%`,
+									}}
+								></div>
+							</div>
+
 							{checklist.tasks.length > 0 &&
 								checklist.tasks.map(task => (
 									<div className='task' key={task.id}>
-										<Checkbox className='check' />
-										<div className='details'>
+										<Checkbox
+											onClick={() => {
+												setCurrChecklist(
+													prev => (prev = checklist)
+												)
+												onToggleIsDone(task)
+											}}
+											checked={task.isDone}
+											sx={{
+												color: '#738496',
+												width: '14px',
+												height: '14px',
+												alignSelf: 'center',
+												'&.Mui-checked': {
+													color: '#579dff',
+												},
+											}}
+										/>
+										<div className={checkIsDone(task)}>
 											{task.details}
 										</div>
 									</div>
@@ -71,8 +137,7 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 							{isEditMode &&
 								checklist.id === currChecklist?.id && (
 									<div className='details'>
-										<input
-											type='text'
+										<textarea
 											value={detailsInEdit}
 											onChange={ev => {
 												setCurrChecklist(
@@ -81,12 +146,27 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 												onEditDetails(ev)
 											}}
 											onKeyDown={onKeyDown}
+											placeholder='Add an item'
 											autoFocus
 										/>
-										<button onClick={onSaveDetails}>
-											Save
-										</button>
-										<button>Cancel</button>
+										<div className='detbtns'>
+											<button
+												className='save'
+												onClick={onSaveDetails}
+											>
+												Add
+											</button>
+											<button
+												className='cancel'
+												onClick={() => {
+													setIsEditMode(false)
+													setDetailsInEdit('')
+													setCurrChecklist(null)
+												}}
+											>
+												Cancel
+											</button>
+										</div>
 									</div>
 								)}
 							<button
@@ -94,7 +174,7 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 									setCurrChecklist(checklist)
 									setIsEditMode(true)
 								}}
-								className='add'
+								className='add btn'
 							>
 								Add an item
 							</button>

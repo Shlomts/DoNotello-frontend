@@ -1,5 +1,4 @@
 .card-details-outlet {
-	display: grid;
 	z-index: 999;
 	position: fixed;
 	inset: 0;
@@ -19,25 +18,26 @@
 		grid-template-columns: auto 1fr auto;
 		grid-template-rows: 70px min-content min-content;
 
-		min-height: 100vh;
+		height: fit-content;
+		min-height: 700px;
 		border-radius: 12px;
 		border-color: transparent;
 		background-color: #323940;
 		color: #b6c2cf;
 
 		position: absolute;
-		// z-index: 1000;
 
 		inset: 0;
-		margin-top: 48px;
+		margin-block: 48px;
 		max-width: 770px;
 
 		width: 100%;
-		height: 845px;
 		padding: 18px;
-		gap: 10px;
+		gap: 15px;
+		column-gap: 12px;
 		overflow: auto;
-		// row-gap: 30px;
+
+
 
 		button {
 			background-color: transparent;
@@ -91,22 +91,21 @@
 			}
 
 			input {
-                margin: 0;
-                padding-inline: rem(10px);
-                line-height: rem(32px);
-                font-size: rem(18px);
-                font-weight: bold;
-                color: #b6c2cf;
-                background-color: transparent;
+				margin: 0;
+				padding-inline: rem(10px);
+				line-height: rem(32px);
+				font-size: rem(18px);
+				font-weight: bold;
+				color: #b6c2cf;
+				background-color: transparent;
 				border: 1px solid #8c9baa;
-                width: 100%;
+				width: 100%;
 
-				
 				&:focus {
 					outline: none;
 					border: 2px solid #579dff;
 				}
-            }
+			}
 
 			div {
 				display: block;
@@ -122,7 +121,6 @@
 			svg {
 				color: #9fadbc;
 			}
-
 		}
 
 		.opt-card {
@@ -158,7 +156,6 @@
 		.icon {
 			padding: 2px 2px;
 		}
-
 
 		.opt-bar {
 			grid-area: opt;
@@ -216,7 +213,7 @@
 				}
 
 				&:hover {
-					background-color: #A6C5E229;
+					background-color: #a6c5e229;
 					cursor: pointer;
 				}
 			}
@@ -247,7 +244,7 @@
 				}
 
 				&:hover {
-					background-color: #A6C5E229;
+					background-color: #a6c5e229;
 					cursor: pointer;
 				}
 			}
@@ -264,7 +261,6 @@
 			}
 
 			.labels-container {
-
 				.card-label {
 					display: flex;
 					align-items: center;
@@ -274,7 +270,7 @@
 					transition: filter ease;
 
 					&:hover {
-						filter: brightness(-1)
+						filter: brightness(-1);
 					}
 				}
 
@@ -301,99 +297,117 @@
 					}
 
 					&:hover {
-						background-color: #A6C5E229;
+						background-color: #a6c5e229;
 						cursor: pointer;
 					}
 				}
 			}
-
 		}
 
 		.description {
 			display: grid;
 			grid-area: des;
-		
 			grid-template-areas:
 				'di  desh       '
 				'.   txt        ';
-		
+
 			grid-template-columns: subgrid;
-			// grid-template-rows: min-content minmax(325px 500px);
-			grid-template-rows: min-content 325px;
-		
+
 			gap: 10px;
 			row-gap: 12px;
-		
-			&.icon {
+
+			// margin-bottom: 24px;
+
+			.icon {
 				display: block;
 				grid-area: di;
-		
+
 				svg {
 					font-size: 24px;
 				}
 			}
-		
+
 			h4 {
 				grid-area: desh;
 				font-size: 16px;
 				margin-bottom: 0;
 				padding-top: 4px;
 			}
-		
-		
+
 			.grdatxt {
 				grid-area: txt;
+				line-height: 32px;
+				// margin-top: 8px;
+				// align-self: baseline;
+				// width: 100%;
+				// border-radius: 3px;
+			}
+
+			textarea {
 				margin-top: 8px;
 				align-self: baseline;
 				width: 100%;
 				border-radius: 3px;
-			}
-		
-			textarea {
+
 				min-height: 274px;
-		
 				background-color: #22272b;
 				border: 1px solid #8c9baa;
-		
+
 				padding-inline: 20px;
 				padding-top: 8px;
-		
+
 				font-weight: 400;
 				font-size: 1em;
-		
+
 				resize: none;
 				overflow: auto;
 				// scrollbar-color: black;  // Y NOT WORKKKK
-		
+
 				&:focus {
 					outline: none;
 					border: 2px solid #579dff;
 				}
-		
+
 				&::placeholder {
 					color: #8c9baa;
 				}
+
+				&::-webkit-scrollbar {
+					width: 10px;
+				}
+
+				&::-webkit-scrollbar-track {
+					background-color: #323940;
+				}
+
+				&::-webkit-scrollbar-thumb {
+					background-color: #45505a;
+					transition: background-color 0.3s ease;
+					border: 1px solid #424242;
+					position: relative;
+					z-index: 10000;
+				}
 			}
-		
+
 			.no-des-plchldr {
 				padding: 8px 12px 32px;
 				height: 60px;
 				background-color: #3b444c;
 				font-weight: 500;
 				cursor: pointer;
-		
+
 				&:hover {
 					background-color: rgb(69 80 90);
 				}
 			}
-		
+
 			.desbtns {
 				grid-area: txt;
 				bottom: 0;
 				position: relative;
 				align-self: end;
 				padding-top: 2px;
-		
+
 				button {
 					line-height: 2rem;
 					margin-top: 10px;
@@ -403,18 +417,17 @@
 					border: none;
 					margin-inline-end: 8px;
 				}
-		
+
 				.save {
 					background-color: #579dff;
 					color: #22272b;
-		
+
 					&:hover {
 						background-color: #85b8ff;
 					}
 				}
 			}
 		}
-
 
 		// .activity {
 		//     &.icon {
@@ -435,5 +448,30 @@
 
 		// .comments {
 		// }
+	}
+
+	&::-webkit-scrollbar {
+		width: 15px; /* Slim width */
+		// height: 10px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: #424242;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: #686868;
+		transition: background-color 0.3s ease;
+		border: 2px solid #424242;
+		position: relative;
+		z-index: 10000;
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		background-color: #7b7b7b !important;
+	}
+
+	&::-webkit-scrollbar-thumb:active {
+		background-color: #bbb7b7;
 	}
 }

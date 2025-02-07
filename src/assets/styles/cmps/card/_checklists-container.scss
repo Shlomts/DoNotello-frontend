@@ -1,17 +1,32 @@
 .checklists-container {
 	grid-area: els;
 	padding: 0;
+	padding-left: 4px;
 
 	.checklist {
 		display: grid;
 		grid-template-columns: max-content 1fr;
+		column-gap: 9px;
 
-		& > * {
-			align-content: center;
+		margin-top: 24px;
+
+		.title {
+			margin: 0;
+			padding-inline: 3px;
 		}
 
-		.check {
-			width: max-content;
+		.svg {
+			display: flex;
+			align-items: center;
+		}
+
+		.btn {
+			position: relative;
+			background-color: #3b444c;
+			font-size: 14px;
+			padding: 3px 11px;
+			border-radius: 4px;
+			margin-inline: 0px;
 		}
 
 		.delete {
@@ -22,15 +37,51 @@
 		h4 {
 			display: inline;
 			grid-column: 2;
+
+			font-size: 16px;
+			align-items: center;
+			// margin-bottom: 0;
+		}
+
+		.percent {
+			grid-column: 1;
+			font-size: smaller;
+			align-self: center;
+			justify-self: end;
+			padding-top: 6px;
+		}
+
+		.progress-bar-container {
+			grid-column: 2;
+
+			margin-top: 12px;
+			margin-bottom: 0;
+			height: 6px;
+			background-color: #3b444c;
+			border-radius: 4px;
+			overflow: hidden;
+
+			.progress-bar {
+				height: 100%;
+				background-color: #8c9baa;
+				border-radius: 4px;
+				width: 50%;
+				transition: width 0.3s ease;
+			}
 		}
 
 		.tasks {
 			grid-column: subgrid;
+			gap: 0;
 		}
 
 		.task {
 			display: grid;
 			grid-column: 1/-1;
+			grid-template-columns: subgrid;
+			gap: 0;
+
+			max-width: 100%;
 		}
 
 		.add {
@@ -40,7 +91,57 @@
 
 		.details {
 			grid-column: 2;
-            
+			padding: 9px;
+
+			&.done {
+				text-decoration: line-through;
+			}
+
+			textarea {
+				display: flex;
+				align-self: baseline;
+				width: 100%;
+				border-radius: 3px;
+				line-height: 12px;
+
+				background-color: #22272b;
+				border: 1px solid #8c9baa;
+
+				padding-inline: 12px;
+				padding-block: 8px;
+
+				font-weight: 400;
+
+				resize: none;
+				overflow: hidden;
+			}
+
+			.detbtns {
+				grid-area: txt;
+				bottom: 0;
+				position: relative;
+				align-self: end;
+				padding-top: 2px;
+
+				button {
+					line-height: 2rem;
+					margin-top: 10px;
+					padding-inline: 12px;
+					font-weight: 30px;
+					border-radius: 3px;
+					border: none;
+					margin-inline-end: 8px;
+				}
+
+				.save {
+					background-color: #579dff;
+					color: #22272b;
+
+					&:hover {
+						background-color: #85b8ff;
+					}
+				}
+			}
 		}
 	}
 }
