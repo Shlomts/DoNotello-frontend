@@ -33,6 +33,7 @@ import { CardMembers } from '../cmps/group/miniCmps/CardMembers'
 import { CardLabels } from '../cmps/group/miniCmps/CardLabels'
 
 import { ChecklistsContainer } from '../cmps/card/ChecklistsContainer'
+import { DatesPicker } from '../cmps/card/opt-bar/DatesPicker'
 
 export function CardDetails() {
 	const navigate = useNavigate()
@@ -62,6 +63,7 @@ export function CardDetails() {
 	const [cardMembers, setCardMembers] = useState(card?.memberIds || [])
 	const [cardLabels, setCardLabels] = useState(card?.labelIds || [])
 	const [cardChecklists, setCardChecklists] = useState(card?.checklists || [])
+	const [cardDates, setCardDates] = useState(card?.dates || {})
 
 	useEffect(() => {
 		getCard()
@@ -74,6 +76,7 @@ export function CardDetails() {
 		setCardMembers(card?.memberIds || [])
 		setCardLabels(card?.labelIds || [])
 		setCardChecklists(card?.checklists || [])
+		setCardDates(card?.dates || {})
 	}, [card])
 
 	async function getCard() {
@@ -160,7 +163,6 @@ export function CardDetails() {
 		if (!card) return
 		console.log('Toggling member:', memberId)
 
-
 		const updatedCardMembers = card?.memberIds?.includes(memberId)
 			? card.memberIds.filter(id => id !== memberId)
 			: [...(card.memberIds || []), memberId]
@@ -173,7 +175,6 @@ export function CardDetails() {
 			return updatedCard
 		})
 	}
-
 
 	function onSetLabels(data) {
 		if (!data || !data.id) return
@@ -358,7 +359,22 @@ export function CardDetails() {
 								<Checklist />
 								<div className='name'>Checklist</div>
 							</li>
-							<li className='opt-card'>
+							<li
+								className='opt-card'
+								onClick={() => {
+									dataRef.current = {
+										title: 'Dates',
+										data: {
+											dates: cardDates,
+										},
+									}
+									setCurrDynamic(
+										prevDynamic =>
+											(prevDynamic = DatesPicker)
+									)
+									setIsShowModal(true)
+								}}
+							>
 								<Dates />
 								<div className='name'>Dates</div>
 							</li>
