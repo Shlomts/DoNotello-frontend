@@ -181,27 +181,30 @@ export function CardDetails() {
 		const { id, isRename, name } = data
 
 		if (isRename) {
-			const newLabels = [...board.labels]
-			const labelToSave = newLabels.find(label => {
-				return label.id === id
-			})
-			labelToSave.title = name
-			const newBoard = { ...board, labels: newLabels }
+			const updatedLabels = board.labels.map(label =>
+				label.id === id ?
+					{ ...label, title: name }
+					:
+					label
+			)
+			const newBoard = { ...board, labels: updatedLabels }
 			updateBoard(newBoard)
-		} else {
-			const updatedCardLabels = [...cardLabels]
-			const index = updatedCardLabels.indexOf(id)
-			if (index !== -1) {
-				updatedCardLabels.splice(index, 1)
-			} else {
-				updatedCardLabels.push(id)
-			}
 
-			setCardLabels(updatedCardLabels)
-			setCard(card => {
-				card.labelIds = updatedCardLabels
-				updateCard(board, group, card)
-				return card
+		} else {
+			
+			setCardLabels(prevLabels => {
+				const updatedLabels = prevLabels.includes(id) ?
+					prevLabels.filter(labelId => labelId !== id)
+					:
+					[...prevLabels, id]
+
+				setCard(prevCard => {
+					const updatedCard = { ...prevCard, labelIds: updatedLabels }
+					updateCard(board, group, updatedCard)
+					return updatedCard
+				})
+
+				return updatedLabels
 			})
 		}
 	}
@@ -225,7 +228,7 @@ export function CardDetails() {
 			checklist => checklist.id !== newChecklist.id
 		)
 		const updatedChecklists = [...editList, newChecklist]
-		
+
 		setCard(prevCard => {
 			const updatedCard = {
 				...prevCard, checklists: updatedChecklists
