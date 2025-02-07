@@ -16,7 +16,6 @@ export function CardIcons({ card }) {
     const hasChecklists = totalTasks > 0
     if (!hasDescription && !hasChecklists) return null
 
-    console.log(card.checklists)
     return (
         <div className="card-icons">
             {hasDescription &&

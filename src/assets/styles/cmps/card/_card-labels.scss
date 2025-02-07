@@ -6,7 +6,9 @@
     .card-label {
         min-height: rem(7px);
         min-width: rem(40px);
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         padding-inline: rem(8px);
 
         border-radius: rem(4px);

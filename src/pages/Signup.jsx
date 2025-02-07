@@ -1,10 +1,10 @@
-import {useState} from 'react'
-import {useNavigate} from 'react-router'
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
 
-import {signup} from '../store/actions/user.actions'
+import { signup } from '../store/actions/user.actions'
 
-import {ImgUploader} from '../cmps/ImgUploader'
-import {userService} from '../services/user'
+import { ImgUploader } from '../cmps/ImgUploader'
+import { userService } from '../services/user'
 
 export function Signup() {
   const [credentials, setCredentials] = useState(userService.getEmptyUser())
@@ -19,17 +19,18 @@ export function Signup() {
   function handleChange(ev) {
     const type = ev.target.type
 
-    const {name, value} = ev.target
+    const { name, value } = ev.target
     if (name === 'username') {
       const isValid = /\S+@\S+\.\S+/.test(value)
       setIsEmailValid(isValid)
     }
-    setCredentials({...credentials, [name]: value})
+    setCredentials({ ...credentials, [name]: value })
   }
 
   async function onSignup(ev = null) {
-    console.log('onSignUp', credentials)
     if (ev) ev.preventDefault()
+
+    console.log('onSignUp', credentials)
 
     if (!credentials.username || !credentials.password || !credentials.fullname) return
     await signup(credentials)
@@ -38,7 +39,7 @@ export function Signup() {
   }
 
   function onUploaded(imgUrl) {
-    setCredentials({...credentials, imgUrl})
+    setCredentials((prevCreds) => ({ ...prevCreds, imgUrl }))
   }
 
   return (

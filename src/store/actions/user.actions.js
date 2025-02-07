@@ -58,7 +58,6 @@ export async function loginAsGuest() {
 }
 
 export async function signup(credentials) {
-    console.log('singup in action', credentials);
 
     try {
         const user = await userService.signup(credentials)
