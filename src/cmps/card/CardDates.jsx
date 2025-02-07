@@ -7,7 +7,7 @@ export function CardDates({dates}) {
 	const {dueDate} = dates
 
 	return(
-		<div>
+		<div >
 			{dueDate}
 		</div>
 	)
