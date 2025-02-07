@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 export function AddChecklist({ info, onUpdate }) {
 	const [checklistTitle, setChecklistTitle] = useState('Checklist')

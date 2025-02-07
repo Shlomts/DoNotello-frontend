@@ -1,5 +1,5 @@
-import { Fragment, useEffect, useState } from 'react'
-import { Checklist, ListActions } from '../SvgContainer'
+import { useState } from 'react'
+import { Checklist } from '../SvgContainer'
 import { Checkbox } from '@mui/material'
 import { makeId } from '../../services/util.service'
 
@@ -8,26 +8,14 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 	const [currChecklist, setCurrChecklist] = useState(null)
 	const [detailsInEdit, setDetailsInEdit] = useState('')
 
-	// console.log('checklists', checklists)
-	// console.log(JSON.stringify(checklists))
-	// useEffect(() => {
-	// 	setChecklistsInContainer(checklists)
-	// }, [srchPrm, cardMembers])
-
-	// useEffect(() => {
-	// 	if(checklists.length <= 1 ) setIsEditMode(true)
-	// }, [])
-
 	function onEditDetails(ev) {
 		const todo = ev.target.value
-		// if(!currChecklist) setCurrChecklist()
 		setDetailsInEdit(todo)
 	}
 
 	function onSaveDetails() {
 		const newTask = { id: makeId(), details: detailsInEdit, isDone: false }
 		const newTasks = [...currChecklist.tasks, newTask]
-
 
 		setCurrChecklist(prev => {
 			const updatedChecklist = { ...prev, tasks: newTasks }
@@ -75,11 +63,7 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 			{checklists.length > 0 ? (
 				<ul>
 					{checklists.map(checklist => (
-						<li
-							key={checklist.id}
-							className='checklist'
-						// onClick={() => setCurrChecklist(checklist)}
-						>
+						<li key={checklist.id} className='checklist'>
 							<div className='svg'>
 								<Checklist />
 							</div>
@@ -116,9 +100,6 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 									<div className='task' key={task.id}>
 										<Checkbox
 											onClick={() => {
-												// setCurrChecklist(
-												// 	prev => (prev = checklist)
-												// )
 												onToggleIsDone(task, checklist)
 											}}
 											checked={task.isDone}
@@ -173,15 +154,17 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 										</div>
 									</div>
 								)}
-							<button
-								onClick={() => {
-									setCurrChecklist(checklist)
-									setIsEditMode(true)
-								}}
-								className='add btn'
-							>
-								Add an item
-							</button>
+							{!isEditMode && (
+								<button
+									onClick={() => {
+										setCurrChecklist(checklist)
+										setIsEditMode(true)
+									}}
+									className='add btn'
+								>
+									Add an item
+								</button>
+							)}
 						</li>
 					))}
 				</ul>
