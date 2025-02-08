@@ -1,12 +1,12 @@
-import {useSelector} from 'react-redux'
-import {Fragment, useEffect, useRef, useState} from 'react'
-import {useParams} from 'react-router'
-import {Close, Description, InfoIcon, LeftArrow, Members} from '../SvgContainer'
-import {updateBoard} from '../../store/actions/board.actions'
-import {showErrorMsg, showSuccessMsg} from '../../services/event-bus.service'
+import { useSelector } from 'react-redux'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import { useParams } from 'react-router'
+import { Close, Description, InfoIcon, LeftArrow, Members } from '../SvgContainer'
+import { updateBoard } from '../../store/actions/board.actions'
+import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service'
 
-export function BoardMenu({board, onClose}) {
-  const {boardId} = useParams()
+export function BoardMenu({ board, onClose }) {
+  const { boardId } = useParams()
   const users = useSelector((storeState) => storeState.userModule.users)
   // const board = useSelector((storeState) => storeState.boardModule.board)
   const [menuView, setMenuView] = useState('main')
@@ -29,7 +29,7 @@ export function BoardMenu({board, onClose}) {
   }, [desInEdit])
 
   const images = [
-    'https://res.cloudinary.com/dphepumae/image/upload/v1738518634/freestocks-Y9mWkERHYCU-unsplash_dlelwk.jpg',
+    'https://res.cloudinary.com/dtyqjifzy/image/upload/v1739041156/jamie-street-hBzrr6m6-pc-unsplash_bip7mg.jpg',
     'https://res.cloudinary.com/dphepumae/image/upload/v1738062039/coffeMag_vezhli.jpg',
     'https://res.cloudinary.com/dphepumae/image/upload/v1738062049/cityFizza_kml6re.jpg',
     'https://res.cloudinary.com/dphepumae/image/upload/v1738062046/citySunset_nsfwyh.jpg',
@@ -50,7 +50,7 @@ export function BoardMenu({board, onClose}) {
     try {
       const updatedBoard = {
         ...board,
-        style: {...board.style, backgroundImage: newImageUrl},
+        style: { ...board.style, backgroundImage: newImageUrl },
       }
       console.log(updatedBoard)
 
@@ -80,7 +80,7 @@ export function BoardMenu({board, onClose}) {
       return
     }
 
-    const updatedBoard = {...board, description: desInEdit}
+    const updatedBoard = { ...board, description: desInEdit }
     console.log(updatedBoard, 'before updating in the action ')
 
     try {
@@ -100,7 +100,7 @@ export function BoardMenu({board, onClose}) {
     if (!comment.trim()) return
     const updatedBoard = {
       ...board,
-      comments: [...(board.comments || []), {text: comment, createdAt: Date.now()}],
+      comments: [...(board.comments || []), { text: comment, createdAt: Date.now() }],
     }
     console.log(updatedBoard)
 
@@ -241,10 +241,10 @@ export function BoardMenu({board, onClose}) {
                 </div>
               </button>
             </li>
-            <hr className='saperete'/>
+            <hr className='saperete' />
             <li>
               <button className="board-background-container" onClick={() => setMenuView('background')}>
-                <div className="icon" style={{backgroundImage: `url(${board?.style?.backgroundImage})`}}></div>
+                <div className="icon" style={{ backgroundImage: `url(${board?.style?.backgroundImage})` }}></div>
                 <p>Change background</p>
               </button>
             </li>
