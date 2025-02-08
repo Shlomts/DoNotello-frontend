@@ -25,7 +25,7 @@ export function CardFilter({board, filterBy, onSetFilter}) {
   }
 
   function toggleFilterModal(event) {
-    const filterMenuPosition = getPopupPosition(event.currentTarget)
+    const filterMenuPosition = getPopupPosition(event.currentTarget, 384, 350)
     setIsModalOpen(!isModalOpen)
     if (!isModalOpen) {
       onToggleModal(

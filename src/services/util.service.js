@@ -58,12 +58,13 @@ export function getPopupPosition(element, popupWidth, popupHeight) {
     const rect = element.getBoundingClientRect()
     const viewportHeight = window.innerHeight
     const viewportWidth = window.innerWidth
+    const gap = 8
 
-    let top = rect.bottom + window.scrollY
+    let top = rect.bottom + window.scrollY + gap
     let left = rect.left + window.scrollX
 
-    if (rect.bottom + popupHeight > viewportHeight) {
-        top = rect.top - popupHeight + window.scrollY
+    if (rect.bottom + popupHeight + gap > viewportHeight) {
+        top = rect.top - popupHeight - gap + window.scrollY
     }
 
     if (rect.left + popupWidth > viewportWidth) {
