@@ -23,10 +23,15 @@ export function HomePage() {
     return <div className="loader">Loading...</div>
   }
 
-  async function handleGuestLogin() {
+  async function handleLogin() {
     try {
-      await loginAsGuest()
-      navigate('/board')
+      const loggedInUser = userService.getLoggedinUser()
+      if (loggedInUser) {
+        navigate('/board')
+      } else {
+        await loginAsGuest()
+        navigate('/board')
+      }
     } catch (err) {
       console.error("Guest login failed", err)
     }
@@ -45,7 +50,7 @@ export function HomePage() {
             Log in
           </NavLink>
 
-          <button className="header-demo-btn" onClick={handleGuestLogin}>
+          <button className="header-demo-btn" onClick={handleLogin}>
             Get Started now
           </button>
         </nav>
@@ -58,7 +63,7 @@ export function HomePage() {
                 and tools together</h1>
               <p>Keep everything in the same place—even if your team isn’t.</p>
               {/* here need to link to demo board */}
-              <button className="body-demo-btn" onClick={handleGuestLogin}>
+              <button className="body-demo-btn" onClick={handleLogin}>
                 Try Our Demo!
               </button>
             </div>

@@ -52,12 +52,23 @@ export function loadFromStorage(key) {
     return (data) ? JSON.parse(data) : undefined
 }
 
-export function getPopupPosition(element) {
+export function getPopupPosition(element, popupWidth, popupHeight) {
     if (!element) return { top: 0, left: 0 }
 
     const rect = element.getBoundingClientRect()
-    return {
-        top: rect.bottom + window.scrollY,
-        left: rect.left + window.scrollX
+    const viewportHeight = window.innerHeight
+    const viewportWidth = window.innerWidth
+
+    let top = rect.bottom + window.scrollY
+    let left = rect.left + window.scrollX
+
+    if (rect.bottom + popupHeight > viewportHeight) {
+        top = rect.top - popupHeight + window.scrollY
     }
+
+    if (rect.left + popupWidth > viewportWidth) {
+        left = viewportWidth - popupWidth + window.scrollX
+    }
+
+    return { top, left }
 }
