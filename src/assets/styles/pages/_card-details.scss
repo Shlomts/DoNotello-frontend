@@ -6,6 +6,45 @@
 	background-color: hsla(252, 100%, 1%, 0.055);
 	overflow-y: auto;
 
+	.card-cover {
+		height: 116px;
+		width: 770px;
+		justify-self: center;
+		margin-block-start: 43px;
+		z-index: 1000;
+		position: relative;
+		border-top-right-radius: 12px;
+		border-top-left-radius: 12px;
+
+		display: flex;
+
+		.cover-button {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			position: absolute;
+			bottom: 0;
+			right: 0;
+
+			font-size: 14px;
+
+			margin-inline-end: 12px;
+			margin-block-end: 12px;
+			padding: 6px 12px;
+			border-radius: 3px;
+
+			svg{
+				width: 16px;
+				height: 16px;
+			}
+
+			&:hover{
+				background-color: rgba(0, 0, 0, 0.16);
+				;
+			}
+		}
+	}
+
 	.card-details {
 		justify-self: center;
 		display: grid;
@@ -28,7 +67,7 @@
 		position: absolute;
 
 		inset: 0;
-		margin-block: 48px;
+		// margin-block-end: 48px;
 		max-width: 770px;
 
 		width: 100%;
@@ -36,8 +75,6 @@
 		gap: 15px;
 		column-gap: 12px;
 		overflow: auto;
-
-
 
 		button {
 			background-color: transparent;
@@ -456,7 +493,8 @@
 	}
 
 	&::-webkit-scrollbar {
-		width: 15px; /* Slim width */
+		width: 15px;
+		/* Slim width */
 		// height: 10px;
 	}
 

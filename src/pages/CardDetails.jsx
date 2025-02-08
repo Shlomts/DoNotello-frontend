@@ -22,6 +22,7 @@ import {
 	Close,
 	Delete,
 	Plus,
+	Cover
 } from '../cmps/SvgContainer'
 
 import { DynamicCmp } from '../cmps/card/opt-bar/DynamicCmp'
@@ -35,6 +36,7 @@ import { CardLabels } from '../cmps/group/miniCmps/CardLabels'
 import { ChecklistsContainer } from '../cmps/card/ChecklistsContainer'
 import { DatesPicker } from '../cmps/card/opt-bar/DatesPicker'
 import { CardDates } from '../cmps/card/CardDates'
+import { CoverPicker } from '../cmps/card/opt-bar/CoverPicker'
 
 export function CardDetails() {
 	const navigate = useNavigate()
@@ -65,6 +67,8 @@ export function CardDetails() {
 	const [cardLabels, setCardLabels] = useState(card?.labelIds || [])
 	const [cardChecklists, setCardChecklists] = useState(card?.checklists || [])
 	const [cardDates, setCardDates] = useState(card?.dates || {})
+	const [cardCover, setCardCover] = useState(card?.style || {})
+
 
 	useEffect(() => {
 		getCard()
@@ -78,6 +82,8 @@ export function CardDetails() {
 		setCardLabels(card?.labelIds || [])
 		setCardChecklists(card?.checklists || [])
 		setCardDates(card?.dates || {})
+		setCardCover(card?.style || {})
+
 	}, [card])
 
 	async function getCard() {
@@ -158,6 +164,9 @@ export function CardDetails() {
 			case DatesPicker:
 				onSetDates(data)
 				break
+			case CoverPicker:
+				onSetCover(data)
+				break
 			default:
 				throw new Error('No current dynamic cmp')
 		}
@@ -195,7 +204,7 @@ export function CardDetails() {
 			updateBoard(newBoard)
 
 		} else {
-			
+
 			setCardLabels(prevLabels => {
 				const updatedLabels = prevLabels.includes(id) ?
 					prevLabels.filter(labelId => labelId !== id)
@@ -222,7 +231,7 @@ export function CardDetails() {
 				checklists: updatedChecklists,
 			}
 			updateCard(board, group, updatedCard)
-			return card
+			return updatedCard
 		})
 		setCardChecklists(updatedChecklists)
 		onCloseModal()
@@ -240,7 +249,7 @@ export function CardDetails() {
 				checklists: updatedChecklists,
 			}
 			updateCard(board, group, updatedCard)
-			return card
+			return updatedCard
 		})
 		setCardChecklists(updatedChecklists)
 	}
@@ -255,15 +264,15 @@ export function CardDetails() {
 				checklists: newChecklists,
 			}
 			updateCard(board, group, updatedCard)
-			return card
+			return updatedCard
 		})
 		setCardChecklists(newChecklists)
 	}
 
 	function onSetDates(newDates) {
 		// const { dueDate, startDate } = newDates
-		const updatedDates = {...cardDates, ...newDates }
-	
+		const updatedDates = { ...cardDates, ...newDates }
+
 		setCard(prevCard => {
 			const updatedCard = {
 				...prevCard, dates: updatedDates
@@ -272,6 +281,25 @@ export function CardDetails() {
 			return card
 		})
 		setCardDates(updatedDates)
+	}
+
+	function onSetCover(newStyle) {
+
+		const updatedCardCover = newStyle.backgroundColor ?
+			{ ...card.style, backgroundColor: newStyle.backgroundColor }
+			:
+			{}
+
+		setCard(prevCard => {
+			const updatedCard = {
+				...prevCard,
+				style: updatedCardCover
+			}
+			updateCard(board, group, updatedCard)
+			return updatedCard
+		})
+		setCardCover(updatedCardCover)
+		setIsShowModal(false)
 	}
 
 	if (!card) return <div>Loading...</div>
@@ -288,7 +316,28 @@ export function CardDetails() {
 				/>
 			)}
 
-			<div open className='card-details'>
+			{card.style?.backgroundColor && (
+				<div className='card-cover'
+					style={{
+						backgroundColor: card.style.backgroundColor,
+					}}
+				>
+					<div className='cover-button'>
+						<Cover />
+						<span>Cover</span>
+					</div>
+				</div>
+			)}
+
+			<div
+				open
+				className='card-details'
+				style={
+					card.style?.backgroundColor
+						? { marginBlockStart: '152px' }
+						: { marginBlockStart: '48px' }
+				}
+			>
 				<button
 					className='close'
 					onClick={ev => {
@@ -406,6 +455,23 @@ export function CardDetails() {
 								<div>📎</div>
 								<div>Attachment</div>
 							</li>
+							<li
+								className='opt-card'
+								onClick={() => {
+									dataRef.current = {
+										title: 'Cover',
+										data: { style: card.style || {} },
+									}
+									setCurrDynamic(
+										prevDynamic =>
+											(prevDynamic = CoverPicker)
+									)
+									setIsShowModal(true)
+								}}
+							>
+								<Cover />
+								<div className='name'>Cover</div>
+							</li>
 						</ul>
 					</section>
 					<section className='actions'>
@@ -466,10 +532,10 @@ export function CardDetails() {
 							<div className='dates-container'>
 								<CardDates
 									dates={cardDates}
-									// showTitles
-									// onLableCick={onSetLabels}
-									// onPlusIcon={onSetLabels}
-									// className='card-dates'
+								// showTitles
+								// onLableCick={onSetLabels}
+								// onPlusIcon={onSetLabels}
+								// className='card-dates'
 								/>
 							</div>
 						</section>
@@ -559,6 +625,6 @@ export function CardDetails() {
                 <span className="avatar">😢</span>
                 <div className="comments">NOOOOOO</div> */}
 			</div>
-		</section>
+		</section >
 	)
 }
