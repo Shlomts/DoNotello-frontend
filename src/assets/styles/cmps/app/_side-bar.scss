@@ -61,7 +61,7 @@
     }
 
     .toggle-btn {
-      color: #ffffff;
+      color:#6B778C;
       background: none;
       border: none;
       padding: 6px;
@@ -236,6 +236,7 @@
     .btn-actions {
       display: flex;
       margin-right: 8px;
+      gap: 4px;
 
       button {
         display: none;
