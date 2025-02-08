@@ -44,28 +44,28 @@ export function BoardDetails() {
   const [isBoardMenuOpen, setIsBoardMenuOpen] = useState(false)
   const [filteredBoard, setFilteredBoard] = useState()
 
-  useEffect(() => {
-    const filterdBoard = boardService.getFilterdBoard(board, filterBy)
-    setFilteredBoard(filterdBoard)
-  }, [filterBy, board])
+  // useEffect(() => {
+  //   const filterdBoard = boardService.getFilterdBoard(board, filterBy)
+  //   setFilteredBoard(filterdBoard)
+  // }, [filterBy, board])
 
   useEffect(() => {
     loadBoard(boardId)
     loadUsers()
-
   }, [boardId])
 
   useEffect(() => {
-    if (board && board.title !== boardTitle) {
+    if (board) {
       setBoardTitle(board.title)
+      const filterdBoard = boardService.getFilterdBoard(board, filterBy)
+      setFilteredBoard(filterdBoard)
     }
-  }, [board])
+  }, [board, filterBy])
 
   useEffect(() => {
     if (!board) return
     socketService.emit(SOCKET_EMIT_JOIN_BOARD, boardId)
     socketService.on(SOCKET_EVENT_BOARD_UPDATED, onBoardUpdate)
-
   }, [board])
 
   function onBoardUpdate(updatedGroups) {
