@@ -261,17 +261,27 @@ export function CardDetails() {
 	}
 
 	function onSetDates(newDates) {
-		// const { dueDate, startDate } = newDates
 		const updatedDates = {...cardDates, ...newDates }
 	
 		setCard(prevCard => {
 			const updatedCard = {
-				...prevCard, dates: updatedDates
+				...prevCard, dates: updatedDates, isDone: false
 			}
 			updateCard(board, group, updatedCard)
 			return card
 		})
 		setCardDates(updatedDates)
+	}
+
+	function onCardDateDone() {
+		console.log(cardDates)
+		setCard(prevCard => {
+			const updatedCard = {
+				...prevCard, isDone: !prevCard.isDone
+			}
+			updateCard(board, group, updatedCard)
+			return card
+		})
 	}
 
 	if (!card) return <div>Loading...</div>
@@ -466,10 +476,8 @@ export function CardDetails() {
 							<div className='dates-container'>
 								<CardDates
 									dates={cardDates}
-									// showTitles
-									// onLableCick={onSetLabels}
-									// onPlusIcon={onSetLabels}
-									// className='card-dates'
+									isDone={card.isDone}
+									onDone={onCardDateDone}
 								/>
 							</div>
 						</section>
