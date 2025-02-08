@@ -1,4 +1,41 @@
 .card-preview {
+    border-radius: rem(8px);
+    border: 2px solid transparent;
+    background-color: #22272b;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+
+    &:hover {
+        box-shadow:
+            rgba(0, 0, 0, 0) 0px 0px 0px 1px,
+            rgba(3, 4, 4, 0.5) 0px 1px 1px 0px,
+            rgba(3, 4, 4, 0.5) 0px 0px 1px 0px;
+        border: 2px solid #99c8ff;
+        cursor: pointer;
+    }
+
+
+    .card-labels .card-label {
+        transition: filter ease;
+
+        &:hover {
+            filter: brightness(-1);
+        }
+    }
+}
+
+.card-cover {
+    width: 100%;
+    height: rem(36px);
+    border-top-left-radius: rem(8px);
+    border-top-right-radius: rem(8px);
+    margin-bottom: rem(4px);
+}
+
+.card-preview-content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -8,21 +45,14 @@
     min-height: rem(24px);
     min-width: rem(256px);
 
-
-    border-radius: rem(8px);
-    border: 2px solid transparent;
-
-    background-color: #22272b;
-    position: relative;
-
     h3 {
         font-size: 14px;
         font-weight: 400;
         margin: 0;
         line-height: rem(20px);
-
         color: $txt-clr;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     }
 
     .bottom-card-preview {
@@ -34,24 +64,5 @@
 
     a {
         text-decoration: none;
-    }
-
-
-    &:hover {
-        box-shadow:
-            rgba(0, 0, 0, 0) 0px 0px 0px 1px,
-            rgba(3, 4, 4, 0.5) 0px 1px 1px 0px,
-            rgba(3, 4, 4, 0.5) 0px 0px 1px 0px;
-
-        border: 2px solid #99c8ff;
-        cursor: pointer;
-    }
-
-    .card-labels .card-label {
-        transition: filter ease;
-
-        &:hover {
-            filter: brightness(-1)
-        }
     }
 }

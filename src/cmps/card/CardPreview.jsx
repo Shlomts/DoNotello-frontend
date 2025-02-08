@@ -12,6 +12,7 @@ export function CardPreview({ card, cardMembers, cardLabels }) {
     if (!card) return null
 
     const cardHasContent = card.memberIds.length > 0
+    const hasCover = card.style && card.style.backgroundColor
 
     return (
         <Fragment>
@@ -20,16 +21,28 @@ export function CardPreview({ card, cardMembers, cardLabels }) {
                 state={{ cardMembers, cardLabels }}
             >
                 <div className={`card-preview ${cardHasContent ? 'expanded' : ''}`}>
-                    <CardLabels
-                        labels={cardLabels}
-                        className='card-preview-labels'
-                        isCardPreview={true}
-                    />
-                    <h3>{card.title}</h3>
-                    <section className="bottom-card-preview">
-                        <CardIcons card={card} />
-                        <CardMembers members={cardMembers} />
-                    </section>
+                    {hasCover && (
+                        <div
+                            className="card-cover"
+                            style={{
+                                backgroundColor: card.style.backgroundColor,
+                                border: `2px solid ${card.style.backgroundColor}`
+                            }}
+                        />
+                    )}
+
+                    <div className="card-preview-content">
+                        <CardLabels
+                            labels={cardLabels}
+                            className='card-preview-labels'
+                            isCardPreview={true}
+                        />
+                        <h3>{card.title}</h3>
+                        <section className="bottom-card-preview">
+                            <CardIcons card={card} />
+                            <CardMembers members={cardMembers} />
+                        </section>
+                    </div>
                 </div>
             </NavLink>
             {/* <section> */}
