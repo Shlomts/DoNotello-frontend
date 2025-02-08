@@ -54,6 +54,7 @@
         // max-height: calc(100% - rem(48px));
         // height: 100%;
         overflow-y: auto;
+        scrollbar-gutter: stable;
 
         &.empty {
             align-items: center;

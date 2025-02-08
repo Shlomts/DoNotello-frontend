@@ -1,0 +1,39 @@
+.cover-picker {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+    gap: 8px;
+
+
+    thead {
+        font-weight: bold;
+        font-size: small;
+    }
+
+    li {
+        padding-block: 10px;
+    }
+
+    .list {
+        display: flex;
+        flex-wrap: wrap;
+        width: 288px;
+        gap: 8px;
+    }
+
+    .cover-color {
+        width: 50px;
+        height: 32px;
+
+        border-radius: 3px;
+
+        transition: all 0.2s ease-in-out;
+
+        &:hover{
+            cursor: pointer;
+            filter: brightness(65%);
+
+        }
+    }
+}

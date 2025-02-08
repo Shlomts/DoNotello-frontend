@@ -1,14 +1,14 @@
-import {httpService} from '../http.service'
+import { httpService } from '../http.service'
 
 export const boardService = {
-    query,
-    getById,
-    saveBoard,
-    remove,
-    addBoardMsg,
-    getCardById,
-    getGroup,
-    getFilterdBoard,
+  query,
+  getById,
+  saveBoard,
+  remove,
+  addBoardMsg,
+  getCardById,
+  getGroup,
+  getFilterdBoard,
 }
 
 async function query(filterBy = {}) {
@@ -20,15 +20,15 @@ async function query(filterBy = {}) {
 // }
 
 function getFilterdBoard(board, filterBy = { txt: '' }) {
-    let filteredBoard = JSON.parse(JSON.stringify(board))
-    const loggedInUser = userService.getLoggedinUser()
+  let filteredBoard = JSON.parse(JSON.stringify(board))
+  const loggedInUser = userService.getLoggedinUser()
 
-    if (!filteredBoard || !filteredBoard.groups) {
-        return null
-    }
+  if (!filteredBoard || !filteredBoard.groups) {
+    return null
+  }
 
-    if (filterBy.txt) {
-        const regex = new RegExp(filterBy.txt, 'i')
+  if (filterBy.txt) {
+    const regex = new RegExp(filterBy.txt, 'i')
 
         const filteredGroups = filteredBoard.groups.map((group) => {
             const filteredCards = group.cards.filter((card) => regex.test(card.title))
@@ -38,89 +38,89 @@ function getFilterdBoard(board, filterBy = { txt: '' }) {
         return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
     }
 
-    if (filterBy.noMembers) {
-        const filteredGroups = filteredBoard.groups.map((group) => {
-            const filteredCards = group.cards.filter((card) => card.memberIds.length === 0)
+  if (filterBy.noMembers) {
+    const filteredGroups = filteredBoard.groups.map((group) => {
+      const filteredCards = group.cards.filter((card) => card.memberIds.length === 0)
 
-            return { ...group, cards: filteredCards }
-        })
-        const totalFilteredCards = countFilteredCards(filteredGroups)
+      return { ...group, cards: filteredCards }
+    })
+    const totalFilteredCards = countFilteredCards(filteredGroups)
 
-        return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
-    }
+    return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
+  }
 
-    if (filterBy.loggedInUser) {
-        console.log(filteredBoard)
-        const userId = loggedInUser._id
-        console.log(userId)
+  if (filterBy.loggedInUser) {
+    console.log(filteredBoard)
+    const userId = loggedInUser._id
+    console.log(userId)
 
-        const filteredGroups = filteredBoard.groups.map((group) => {
-            console.log(group.cards)
-            const filteredCards = group.cards.filter((card) => card.memberIds.find((memberId) => memberId === userId))
+    const filteredGroups = filteredBoard.groups.map((group) => {
+      console.log(group.cards)
+      const filteredCards = group.cards.filter((card) => card.memberIds.find((memberId) => memberId === userId))
 
-            return { ...group, cards: filteredCards }
-        })
-        const totalFilteredCards = countFilteredCards(filteredGroups)
-        return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
-    }
+      return { ...group, cards: filteredCards }
+    })
+    const totalFilteredCards = countFilteredCards(filteredGroups)
+    return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
+  }
 
-    if (filterBy.memberIds && filterBy.memberIds.length > 0) {
-        const memberIds = filterBy.memberIds
+  if (filterBy.memberIds && filterBy.memberIds.length > 0) {
+    const memberIds = filterBy.memberIds
 
-        const filteredGroups = filteredBoard.groups.map((group) => {
-            const filteredCards = group.cards.filter((card) => card.memberIds.find((id) => memberIds.includes(id)))
+    const filteredGroups = filteredBoard.groups.map((group) => {
+      const filteredCards = group.cards.filter((card) => card.memberIds.find((id) => memberIds.includes(id)))
 
-            return { ...group, cards: filteredCards }
-        })
-        const totalFilteredCards = countFilteredCards(filteredGroups)
-        return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
-    }
+      return { ...group, cards: filteredCards }
+    })
+    const totalFilteredCards = countFilteredCards(filteredGroups)
+    return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
+  }
 
-    if (filterBy.labelIds && filterBy.labelIds.length > 0) {
-        const filteredGroups = filteredBoard.groups.map((group) => {
-            const filteredCards = group.cards.filter((card) => {
-                return card.labelIds.some((labelId) => filterBy.labelIds.includes(labelId))
-            })
+  if (filterBy.labelIds && filterBy.labelIds.length > 0) {
+    const filteredGroups = filteredBoard.groups.map((group) => {
+      const filteredCards = group.cards.filter((card) => {
+        return card.labelIds.some((labelId) => filterBy.labelIds.includes(labelId))
+      })
 
-            return { ...group, cards: filteredCards }
-        })
-        const totalFilteredCards = countFilteredCards(filteredGroups)
-        return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
-    }
+      return { ...group, cards: filteredCards }
+    })
+    const totalFilteredCards = countFilteredCards(filteredGroups)
+    return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
+  }
 
-    if (filterBy.noLabels) {
-        const filteredGroups = filteredBoard.groups.map((group) => {
-            const filteredCards = group.cards.filter((card) => card.labelIds.length === 0)
+  if (filterBy.noLabels) {
+    const filteredGroups = filteredBoard.groups.map((group) => {
+      const filteredCards = group.cards.filter((card) => card.labelIds.length === 0)
 
-            return { ...group, cards: filteredCards }
-        })
-        const totalFilteredCards = countFilteredCards(filteredGroups)
-        return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
-    }
+      return { ...group, cards: filteredCards }
+    })
+    const totalFilteredCards = countFilteredCards(filteredGroups)
+    return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
+  }
 
-    if (filterBy.labelIds && filterBy.labelIds.length > 0) {
-        const filteredGroups = filteredBoard.groups.map((group) => {
-            const filteredCards = group.cards.filter((card) => {
-                return card.labelIds.some((labelId) => filterBy.labelIds.includes(labelId))
-            })
+  if (filterBy.labelIds && filterBy.labelIds.length > 0) {
+    const filteredGroups = filteredBoard.groups.map((group) => {
+      const filteredCards = group.cards.filter((card) => {
+        return card.labelIds.some((labelId) => filterBy.labelIds.includes(labelId))
+      })
 
-            return { ...group, cards: filteredCards }
-        })
-        const totalFilteredCards = countFilteredCards(filteredGroups)
-        return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
-    }
+      return { ...group, cards: filteredCards }
+    })
+    const totalFilteredCards = countFilteredCards(filteredGroups)
+    return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
+  }
 
-    return filteredBoard
+  return filteredBoard
 }
 
 function countFilteredCards(groups) {
-    let totalCount = 0
+  let totalCount = 0
 
-    groups.forEach((group) => {
-        totalCount += group.cards.length
-    })
+  groups.forEach((group) => {
+    totalCount += group.cards.length
+  })
 
-    return totalCount
+  return totalCount
 }
 
 function getById(boardId) {
@@ -142,7 +142,7 @@ async function saveBoard(board) {
 }
 
 async function addBoardMsg(boardId, txt) {
-  const savedMsg = await httpService.post(`board/${boardId}/msg`, {txt})
+  const savedMsg = await httpService.post(`board/${boardId}/msg`, { txt })
   return savedMsg
 }
 
@@ -167,7 +167,9 @@ function _getCardInGroup(group, cardId) {
 function getGroup(board, cardId) {
   if (!board.groups || board.groups.length === 0) return 'No cards available'
 
-  for (let i = 0; i < board.groups.length - 1; i++) {
+  // for (let i = 0; i < board.groups.length - 1; i++) {
+  for (let i = 0; i < board.groups.length; i++) {
+
     const group = _getGroupByCard(board.groups[i], cardId)
     if (group) {
       return group
