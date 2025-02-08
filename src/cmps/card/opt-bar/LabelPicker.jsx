@@ -103,9 +103,7 @@ export function LabelPicker({ info, onUpdate }) {
 											color: '#579dff',
 										},
 										'& .MuiSvgIcon-root': {
-											fontSize: '20px', // Reduce size of the checkbox (default is 24px)
-											stroke: '#738496', // Adds stroke to outline
-											strokeWidth: 0.5, // Make the border thinner
+											fontSize: '20px',
 										},
 									}}
 								/>

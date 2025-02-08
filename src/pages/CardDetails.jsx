@@ -22,7 +22,7 @@ import {
 	Close,
 	Delete,
 	Plus,
-	Cover
+	Cover,
 } from '../cmps/SvgContainer'
 
 import { DynamicCmp } from '../cmps/card/opt-bar/DynamicCmp'
@@ -69,7 +69,6 @@ export function CardDetails() {
 	const [cardDates, setCardDates] = useState(card?.dates || {})
 	const [cardCover, setCardCover] = useState(card?.style || {})
 
-
 	useEffect(() => {
 		getCard()
 	}, [params.cardId])
@@ -83,7 +82,6 @@ export function CardDetails() {
 		setCardChecklists(card?.checklists || [])
 		setCardDates(card?.dates || {})
 		setCardCover(card?.style || {})
-
 	}, [card])
 
 	async function getCard() {
@@ -195,21 +193,15 @@ export function CardDetails() {
 
 		if (isRename) {
 			const updatedLabels = board.labels.map(label =>
-				label.id === id ?
-					{ ...label, title: name }
-					:
-					label
+				label.id === id ? { ...label, title: name } : label
 			)
 			const newBoard = { ...board, labels: updatedLabels }
 			updateBoard(newBoard)
-
 		} else {
-
 			setCardLabels(prevLabels => {
-				const updatedLabels = prevLabels.includes(id) ?
-					prevLabels.filter(labelId => labelId !== id)
-					:
-					[...prevLabels, id]
+				const updatedLabels = prevLabels.includes(id)
+					? prevLabels.filter(labelId => labelId !== id)
+					: [...prevLabels, id]
 
 				setCard(prevCard => {
 					const updatedCard = { ...prevCard, labelIds: updatedLabels }
@@ -269,13 +261,31 @@ export function CardDetails() {
 		setCardChecklists(newChecklists)
 	}
 
+	function onSetCover(newStyle) {
+		const updatedCardCover = newStyle.backgroundColor
+			? { ...card.style, backgroundColor: newStyle.backgroundColor }
+			: {}
+
+		setCard(prevCard => {
+			const updatedCard = {
+				...prevCard,
+				style: updatedCardCover,
+			}
+			updateCard(board, group, updatedCard)
+			return updatedCard
+		})
+		setCardCover(updatedCardCover)
+		setIsShowModal(false)
+	}
+
 	function onSetDates(newDates) {
-		// const { dueDate, startDate } = newDates
 		const updatedDates = { ...cardDates, ...newDates }
 
 		setCard(prevCard => {
 			const updatedCard = {
-				...prevCard, dates: updatedDates
+				...prevCard,
+				dates: updatedDates,
+				isDone: false,
 			}
 			updateCard(board, group, updatedCard)
 			return card
@@ -283,23 +293,16 @@ export function CardDetails() {
 		setCardDates(updatedDates)
 	}
 
-	function onSetCover(newStyle) {
-
-		const updatedCardCover = newStyle.backgroundColor ?
-			{ ...card.style, backgroundColor: newStyle.backgroundColor }
-			:
-			{}
-
+	function onCardDateDone() {
+		console.log(cardDates)
 		setCard(prevCard => {
 			const updatedCard = {
 				...prevCard,
-				style: updatedCardCover
+				isDone: !prevCard.isDone,
 			}
 			updateCard(board, group, updatedCard)
-			return updatedCard
+			return card
 		})
-		setCardCover(updatedCardCover)
-		setIsShowModal(false)
 	}
 
 	if (!card) return <div>Loading...</div>
@@ -317,7 +320,8 @@ export function CardDetails() {
 			)}
 
 			{card.style?.backgroundColor && (
-				<div className='card-cover'
+				<div
+					className='card-cover'
 					style={{
 						backgroundColor: card.style.backgroundColor,
 					}}
@@ -532,10 +536,8 @@ export function CardDetails() {
 							<div className='dates-container'>
 								<CardDates
 									dates={cardDates}
-								// showTitles
-								// onLableCick={onSetLabels}
-								// onPlusIcon={onSetLabels}
-								// className='card-dates'
+									isDone={card.isDone}
+									onDone={onCardDateDone}
 								/>
 							</div>
 						</section>
@@ -625,6 +627,6 @@ export function CardDetails() {
                 <span className="avatar">😢</span>
                 <div className="comments">NOOOOOO</div> */}
 			</div>
-		</section >
+		</section>
 	)
 }
