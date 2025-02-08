@@ -35,7 +35,7 @@ function getFilterdBoard(board, filterBy = { txt: '' }) {
             return { ...group, cards: filteredCards }
         })
         const totalFilteredCards = countFilteredCards(filteredGroups)
-        return { ...filteredBoard, groups: filteredGroups }
+        return { ...filteredBoard, groups: filteredGroups, totalFilteredCards }
     }
 
     if (filterBy.noMembers) {

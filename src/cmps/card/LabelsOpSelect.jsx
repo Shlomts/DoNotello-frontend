@@ -1,10 +1,14 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {Checkbox} from '@mui/material'
-import {DownArrow, SmallDownArrow} from '../SvgContainer'
+import {SmallDownArrow} from '../SvgContainer'
 
-export function LabelsOpSelect({labels, onSelect, placeholder = 'Select labels'}) {
+export function LabelsOpSelect({labels, selectedLabelIds, onSelect, placeholder = 'Select labels'}) {
   const [open, setOpen] = useState(false)
   const [selectedLabels, setSelectedLabels] = useState([])
+
+  useEffect(() => {
+    setSelectedLabels(selectedLabelIds || [])
+  }, [selectedLabelIds])
 
   function handleSelect(label) {
     const isSelected = selectedLabels.includes(label.id)
@@ -34,8 +38,8 @@ export function LabelsOpSelect({labels, onSelect, placeholder = 'Select labels'}
                     sx={{
                       color: '#738496',
                       '&.Mui-checked': {color: '#579dff'},
-                      height:'10px',
-                      width:'10px'
+                      height: '10px',
+                      width: '10px',
                     }}
                   />
                 </span>

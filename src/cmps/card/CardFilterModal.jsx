@@ -8,27 +8,34 @@ import {MemeberOpSelect} from './MemberOpSelect'
 import {LabelsOpSelect} from './LabelsOpSelect'
 import {boardService} from '../../services/board'
 
+
 export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, onSetFilter}) {
   const {labels, members} = board
   const user = useSelector((storeState) => storeState.userModule.user)
   const [filterByToEdit, setFilterByToEdit] = useState({...filterBy})
   const [selectAllMembers, setSelectAllMembers] = useState(false)
-  const [openMemberSelect, setOpenMemberSelect] = useState(false) // new state to open close the costum select to prevent allmembers select turn on
+  const [selectAllLabels, setSelectAllLabels] = useState([])
   onSetFilter = useRef(debounce(onSetFilter))
 
   useEffect(() => {
     onSetFilter.current(filterByToEdit)
   }, [filterByToEdit])
 
+  useEffect(() => {
+    setSelectAllMembers(filterByToEdit.memberIds && filterByToEdit.memberIds.length === members.length)
+  }, [filterByToEdit.memberIds, members])
+
+  useEffect(() => {
+    setSelectAllLabels(filterByToEdit.labelIds && filterByToEdit.labelIds.length === labels.length)
+  }, [filterByToEdit.labelIds, labels])
+
   function handleChange({target}) {
     let {value, name: field, type} = target
 
-    console.log(type, 'type')
-    console.log(field, 'field')
-    console.log(value, 'value')
-
     if (field === 'selectAllLabels') {
       const isChecked = target.checked
+
+      setSelectAllLabels(isChecked)
 
       setFilterByToEdit((prevFilter) => {
         const allLabelIds = isChecked ? labels.map((label) => label.id) : []
@@ -70,17 +77,22 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
           return {...prevFilter, loggedInUser: isChecked}
         }
 
+        if (field === 'noMembers') {
+          return {...prevFilter, noMembers: isChecked}
+        }
+
+        if (field === 'noLabels') {
+          return {...prevFilter, noLabels: isChecked}
+        }
+
         return {...prevFilter, [field]: isChecked}
       })
     } else {
       setFilterByToEdit((prevFilter) => ({...prevFilter, [field]: value}))
     }
 
-    // console.log(filterByToEdit)
     boardService.getFilterdBoard(board, filterByToEdit)
   }
-
-  console.log('Updated filter:', filterByToEdit)
 
   return (
     <section
@@ -157,6 +169,7 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
                   </span>
                 </label>
               </li>
+
               <li>
                 <label className="loggedin-member">
                   <input className="checkbox" type="checkbox" />
@@ -207,9 +220,10 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
                   </span>
                 </label>
               </li>
+
               <li className="member-group">
-              <div className="member-group-label">
-              <Checkbox
+                <div className="member-group-label">
+                  <Checkbox
                     inputProps={{'aria-label': 'allMembers'}}
                     name="selectAllMembers"
                     checked={selectAllMembers}
@@ -222,7 +236,11 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
                       '&.Mui-checked': {color: '#579dff'},
                     }}
                   />
-                  <MemeberOpSelect members={members} onSelect={handleChange} />
+                  <MemeberOpSelect
+                    members={members}
+                    selectedMemberIds={filterByToEdit.memberIds}
+                    onSelect={handleChange}
+                  />
                 </div>
               </li>
             </ul>
@@ -231,7 +249,6 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
           <div className="filter-section-labels-filter">
             <p>Labels</p>
             <ul>
-              {/* "No labels" Option */}
               <li>
                 <label className="checkbox-label">
                   <span className="chackbox-icon icon">
@@ -317,7 +334,6 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
                 </li>
               ))}
 
-              {/* Select All Checkbox + Dropdown at the Bottom */}
               <li className="label-group">
                 <div className="label-group-select">
                   <Checkbox
@@ -333,7 +349,12 @@ export function CardFilterModal({onClose, board, filterMenuPosition, filterBy, o
                       '&.Mui-checked': {color: '#579dff'},
                     }}
                   />
-                  <LabelsOpSelect labels={labels} onSelect={handleChange} placeholder="Select labels" />
+                  <LabelsOpSelect
+                    labels={labels}
+                    selectedLabelIds={filterByToEdit.labelIds}
+                    onSelect={handleChange}
+                    placeholder="Select labels"
+                  />{' '}
                 </div>
               </li>
             </ul>

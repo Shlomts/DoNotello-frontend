@@ -4,14 +4,13 @@ import {onToggleModal} from '../../store/actions/system.actions'
 import {CardFilterModal} from './CardFilterModal'
 import {useSelector} from 'react-redux'
 import {getPopupPosition} from '../../services/util.service'
-import { boardService } from '../../services/board'
+import {boardService} from '../../services/board'
 
 export function CardFilter({board, filterBy, onSetFilter}) {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const modalData = useSelector((state) => state.systemModule.modalData)
   const isActive = modalData && modalData.cmp === CardFilterModal
   const [filterCount, setFilterCount] = useState(0)
-
 
   useEffect(() => {
     if (board && filterBy) {
@@ -53,8 +52,10 @@ export function CardFilter({board, filterBy, onSetFilter}) {
     onSetFilter({})
     setFilterCount(0)
     onToggleModal(null)
-
+    setIsModalOpen(false)
   }
+
+  
   return (
     <>
       <span className="filter-section">
@@ -68,7 +69,7 @@ export function CardFilter({board, filterBy, onSetFilter}) {
               <div className="filter-popover-btn-count">
                 <span className="counter">{filterCount}</span>
               </div>
-              <button className="clear-all-btn" onClick={(ev)=> clearFilters(ev)}>
+              <button className="clear-all-btn" onClick={(ev) => clearFilters(ev)}>
                 Clear all
               </button>
             </>
