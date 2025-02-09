@@ -52,26 +52,15 @@ export function CardDetails() {
 	const [group, setGroup] = useState(null)
 	const [card, setCard] = useState(null)
 
-	const [cardTitle, setCardTitle] = useState(card?.title || '')
 	const [isEditCardTitle, setIsEditCardTitle] = useState(false)
 
-	const [descriptionInput, setDescriptionInput] = useState(
-		card?.description || ''
-	)
 	const [isEditMode, setIsEditMode] = useState(false)
-	const [desInEdit, setDesInEdit] = useState(descriptionInput)
+	const [desInEdit, setDesInEdit] = useState(card?.description)
 	const txtareaRef = useRef(null)
 
 	const [isShowModal, setIsShowModal] = useState(false)
 	const [currDynamic, setCurrDynamic] = useState(null)
 	const dataRef = useRef(null)
-
-	const [boardMembers, setBoardMembers] = useState(board.members)
-	const [cardMembers, setCardMembers] = useState(card?.memberIds || [])
-	const [cardLabels, setCardLabels] = useState(card?.labelIds || [])
-	const [cardChecklists, setCardChecklists] = useState(card?.checklists || [])
-	const [cardDates, setCardDates] = useState(card?.dates || {})
-	const [cardCover, setCardCover] = useState(card?.style || {})
 
 	useEffect(() => {
 		getCard()
@@ -85,15 +74,8 @@ export function CardDetails() {
 		console.log('IN USE EFFECTTTTTTTTTT')
 		// console.log('group:', group)
 		// console.log('card:', card)
-		setDescriptionInput(card?.description || '')
 		setDesInEdit(card?.description || '')
-		setCardTitle(card?.title || '')
-		setCardMembers(card?.memberIds || [])
-		setCardLabels(card?.labelIds || [])
-		setCardChecklists(card?.checklists || [])
-		setCardDates(card?.dates || {})
-		setCardCover(card?.style || {})
-	}, [card])	
+	}, [card])
 
 	async function getCard() {
 		try {
@@ -144,11 +126,10 @@ export function CardDetails() {
 	}
 
 	function onSaveDescription() {
-		setDescriptionInput(desInEdit)
-		setCard(card => {
-			card.description = desInEdit
-			updateCard(board, group, card)
-			return card
+		setCard(prevCard => {
+			prevCard.description = desInEdit
+			updateCard(board, group, prevCard)
+			return prevCard
 		})
 		setIsEditMode(false)
 	}
@@ -200,8 +181,6 @@ export function CardDetails() {
 			? card.memberIds.filter(id => id !== memberId)
 			: [...(card.memberIds || []), memberId]
 
-		setCardMembers(updatedCardMembers)
-
 		setCard(prevCard => {
 			const updatedCard = { ...prevCard, memberIds: updatedCardMembers }
 			updateCard(board, group, updatedCard)
@@ -220,25 +199,21 @@ export function CardDetails() {
 			const newBoard = { ...board, labels: updatedLabels }
 			updateBoard(newBoard)
 		} else {
-			setCardLabels(prevLabels => {
-				const updatedLabels = prevLabels.includes(id)
-					? prevLabels.filter(labelId => labelId !== id)
-					: [...prevLabels, id]
+			const updatedLabels = card.labelIds.includes(id)
+				? card.labelIds.filter(labelId => labelId !== id)
+				: [...card.labelIds, id]
 
-				setCard(prevCard => {
-					const updatedCard = { ...prevCard, labelIds: updatedLabels }
-					updateCard(board, group, updatedCard)
-					return updatedCard
-				})
-
-				return updatedLabels
+			setCard(prevCard => {
+				const updatedCard = { ...prevCard, labelIds: updatedLabels }
+				updateCard(board, group, updatedCard)
+				return updatedCard
 			})
 		}
 	}
 
 	function onAddChecklist(data) {
 		const newChecklist = { id: makeId(), title: data, tasks: [] }
-		const updatedChecklists = [...cardChecklists, newChecklist]
+		const updatedChecklists = [...card.checklists || [], newChecklist]
 		setCard(prevCard => {
 			const updatedCard = {
 				...prevCard,
@@ -247,12 +222,11 @@ export function CardDetails() {
 			updateCard(board, group, updatedCard)
 			return updatedCard
 		})
-		setCardChecklists(updatedChecklists)
 		onCloseModal()
 	}
 
 	function onEditChecklist(newChecklist) {
-		const editList = cardChecklists.filter(
+		const editList = card.checklists.filter(
 			checklist => checklist.id !== newChecklist.id
 		)
 		const updatedChecklists = [...editList, newChecklist]
@@ -265,11 +239,10 @@ export function CardDetails() {
 			updateCard(board, group, updatedCard)
 			return updatedCard
 		})
-		setCardChecklists(updatedChecklists)
 	}
 
 	function removeChecklist(id) {
-		const newChecklists = cardChecklists.filter(
+		const newChecklists = card.Checklists.filter(
 			checklist => checklist.id !== id
 		)
 		setCard(prevCard => {
@@ -280,7 +253,6 @@ export function CardDetails() {
 			updateCard(board, group, updatedCard)
 			return updatedCard
 		})
-		setCardChecklists(newChecklists)
 	}
 
 	function onSetCover(newStyle) {
@@ -296,13 +268,12 @@ export function CardDetails() {
 			updateCard(board, group, updatedCard)
 			return updatedCard
 		})
-		setCardCover(updatedCardCover)
 		setIsShowModal(false)
 	}
 
 	function onSetDates(newDates) {
-		const updatedDates = { ...cardDates, ...newDates }
-
+		const updatedDates = { ...card.dates || {}, ...newDates }
+		console.log(updatedDates)
 		setCard(prevCard => {
 			const updatedCard = {
 				...prevCard,
@@ -310,9 +281,8 @@ export function CardDetails() {
 				isDone: false,
 			}
 			updateCard(board, group, updatedCard)
-			return card
+			return updatedCard
 		})
-		setCardDates(updatedDates)
 	}
 
 	function onCardDateDone() {
@@ -344,28 +314,6 @@ export function CardDetails() {
 					onUpdateCmp={onUpdateDynamicInfo}
 					position={dataRef.current.position}
 				/>
-				// <div
-				// 	style={{
-				// 		position: 'absolute',
-				// 		top: popupPosition.top,
-				// 		left: popupPosition.left,
-				// 		zIndex: 1000
-				// 	}}
-				// >
-				// 	<DynamicCmp
-				// 		Cmp={currDynamic}
-				// 		title={dataRef.current.title}
-				// 		onCloseModal={onCloseModal}
-				// 		data={dataRef.current.data}
-				// 		onUpdateCmp={onUpdateDynamicInfo}
-				// 		position ={{
-				// 			position: 'absolute',
-				// 			top: popupPosition.top,
-				// 			left: popupPosition.left,
-				// 			zIndex: 1000
-				// 		}}
-				// 	/>
-				// </div>
 			)}
 
 			{card.style?.backgroundColor && (
@@ -407,8 +355,18 @@ export function CardDetails() {
 					{isEditCardTitle ? (
 						<input
 							type='text'
-							value={cardTitle}
-							onChange={ev => setCardTitle(ev.target.value)}
+							value={card.title}
+							// onChange={ev => setCardTitle(ev.target.value)}
+							onChange={ev =>
+								setCard(prevCard => {
+									const updatedCard = {
+										...prevCard,
+										title: ev.target.value,
+									}
+									updateCard(board, group, updatedCard)
+									return updatedCard
+								})
+							}
 							onBlur={ev => onSaveCardTitle(ev.target.value)}
 							onKeyDown={onKeyDown}
 							autoFocus
@@ -437,8 +395,8 @@ export function CardDetails() {
 									dataRef.current = {
 										title: 'Members',
 										data: {
-											boardMembers: boardMembers,
-											cardMembers: cardMembers,
+											boardMembers: board.members,
+											cardMembers: card.memberIds,
 										},
 										position: {
 											position: 'absolute',
@@ -499,7 +457,7 @@ export function CardDetails() {
 									dataRef.current = {
 										title: 'Add checklist',
 										data: {
-											checklists: cardChecklists,
+											checklists: card.checklists,
 										},
 										position: {
 											position: 'sticky',
@@ -529,7 +487,7 @@ export function CardDetails() {
 									dataRef.current = {
 										title: 'Dates',
 										data: {
-											dates: cardDates,
+											dates: card.dates,
 										},
 										position: {
 											position: 'sticky',
@@ -630,7 +588,7 @@ export function CardDetails() {
 				</section>
 
 				<div className='user-opt'>
-					{cardMembers.length > 0 ? (
+					{card.memberIds?.length > 0 ? (
 						<section className='members'>
 							<h4>Members</h4>
 							<div className='members-container'>
@@ -645,8 +603,8 @@ export function CardDetails() {
 										dataRef.current = {
 											title: 'Members',
 											data: {
-												boardMembers: boardMembers,
-												cardMembers: cardMembers,
+												boardMembers: board.members,
+												cardMembers: card.memberIds,
 											},
 										}
 										setCurrDynamic(
@@ -669,7 +627,7 @@ export function CardDetails() {
 						</section>
 					)}
 
-					{cardLabels.length > 0 && (
+					{card.labelIds?.length > 0 && (
 						<section className='labels'>
 							<h4>Labels</h4>
 							<div className='labels-container'>
@@ -699,12 +657,12 @@ export function CardDetails() {
 						</section>
 					)}
 
-					{cardDates?.dueDate?.length > 0 && (
+					{card.dates?.dueDate?.length > 0 && (
 						<section className='dates'>
 							<h4>Due date</h4>
 							<div className='dates-container'>
 								<CardDates
-									dates={cardDates}
+									dates={card.dates}
 									isDone={card.isDone}
 									onDone={onCardDateDone}
 								/>
@@ -719,7 +677,7 @@ export function CardDetails() {
 					</div>
 					<h4 className='title'>
 						Description
-						{descriptionInput && !isEditMode && (
+						{card.description && !isEditMode && (
 							<button
 								onClick={() => setIsEditMode(true)}
 								className='edit-des'
@@ -748,19 +706,19 @@ export function CardDetails() {
 									className='cancel'
 									onClick={() => {
 										setIsEditMode(false)
-										setDesInEdit(descriptionInput)
+										setDesInEdit(card.description)
 									}}
 								>
 									Cancel
 								</button>
 							</div>
 						</div>
-					) : descriptionInput ? (
+					) : card.description ? (
 						<div
 							className='des-input grdatxt'
 							onClick={() => setIsEditMode(true)}
 							dangerouslySetInnerHTML={{
-								__html: descriptionInput.replace(/\n/g, '<br>'),
+								__html: card.description.replace(/\n/g, '<br>'),
 							}}
 						></div>
 					) : (
@@ -773,9 +731,9 @@ export function CardDetails() {
 					)}
 				</section>
 
-				{cardChecklists.length > 0 && (
+				{card.checklists?.length > 0 && (
 					<ChecklistsContainer
-						checklists={cardChecklists}
+						checklists={card.checklists}
 						removeChecklist={removeChecklist}
 						onUpdate={onEditChecklist}
 					/>

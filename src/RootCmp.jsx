@@ -9,7 +9,7 @@ import {ChatApp} from './pages/Chat.jsx'
 import {AdminIndex} from './pages/AdminIndex.jsx'
 
 import {BoardDetails} from './pages/BoardDetails.jsx'
-import {CardDetails} from './pages/CardDetailsReuse.jsx'
+import {CardDetails} from './pages/CardDetails.jsx'
 import {UserDetails} from './pages/UserDetails'
 
 import {AppHeader} from './cmps/AppHeader'
