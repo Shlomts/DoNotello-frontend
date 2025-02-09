@@ -84,6 +84,15 @@
     }
   }
 }
+.card-filter-popover.filtered{
+  font-weight: 500;
+  background-color: #dcdfe4;
+  color: rgb(23, 43, 77);
+
+  &:hover {
+    background-color: #dcdfe4;
+  }
+}
 
 // .card-filter {
 //     display: grid;

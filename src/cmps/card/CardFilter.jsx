@@ -55,11 +55,13 @@ export function CardFilter({board, filterBy, onSetFilter}) {
     setIsModalOpen(false)
   }
 
-  
   return (
     <>
       <span className="filter-section">
-        <button className={`card-filter-popover ${isActive ? 'active' : ''}`} onClick={toggleFilterModal}>
+        <button
+          className={`card-filter-popover ${isActive ? 'active' : ''} ${filterCount > 0 ? 'filtered' : ''}`}
+          onClick={toggleFilterModal}
+        >
           <span className="filter-piramid icon">
             <CardFilterIcon />
           </span>
