@@ -23,12 +23,16 @@ import {
 	Delete,
 	Plus,
 	Cover,
+	Move,
+	Copy,
+	Boards,
 } from '../cmps/SvgContainer'
 
 import { DynamicCmp } from '../cmps/card/opt-bar/DynamicCmp'
 import { MemberPicker } from '../cmps/card/opt-bar/MemberPicker'
 import { LabelPicker } from '../cmps/card/opt-bar/LabelPicker'
 import { AddChecklist } from '../cmps/card/opt-bar/AddChecklist'
+import { MoveCard } from '../cmps/card/opt-bar/MoveCard'
 
 import { CardMembers } from '../cmps/group/miniCmps/CardMembers'
 import { CardLabels } from '../cmps/group/miniCmps/CardLabels'
@@ -74,6 +78,9 @@ export function CardDetails() {
 	}, [params.cardId])
 
 	useEffect(() => {
+		console.log('IN USE EFFECTTTTTTTTTT')
+		console.log('group:', group)
+		console.log('card:', card)
 		setDescriptionInput(card?.description || '')
 		setDesInEdit(card?.description || '')
 		setCardTitle(card?.title || '')
@@ -165,6 +172,9 @@ export function CardDetails() {
 			case CoverPicker:
 				onSetCover(data)
 				break
+			case MoveCard:
+				onMoveCard(data)
+				break
 			default:
 				throw new Error('No current dynamic cmp')
 		}
@@ -172,7 +182,6 @@ export function CardDetails() {
 
 	function onSetMembers(memberId) {
 		if (!card) return
-		console.log('Toggling member:', memberId)
 
 		const updatedCardMembers = card?.memberIds?.includes(memberId)
 			? card.memberIds.filter(id => id !== memberId)
@@ -303,6 +312,11 @@ export function CardDetails() {
 			updateCard(board, group, updatedCard)
 			return card
 		})
+	}
+
+	function onMoveCard(data) {
+		console.log('im in onMoveCard!! ')
+		console.log('data:', data)
 	}
 
 	if (!card) return <div>Loading...</div>
@@ -455,10 +469,10 @@ export function CardDetails() {
 								<Dates />
 								<div className='name'>Dates</div>
 							</li>
-							<li className='opt-card'>
+							{/* <li className='opt-card'>
 								<div>📎</div>
 								<div>Attachment</div>
-							</li>
+							</li> */}
 							<li
 								className='opt-card'
 								onClick={() => {
@@ -481,7 +495,33 @@ export function CardDetails() {
 					<section className='actions'>
 						<thead>Actions</thead>
 						<ul>
-							<li className='opt-card' onClick={onRemoveCard}>
+							<li
+								className='opt-card'
+								onClick={() => {
+									dataRef.current = {
+										title: 'Move card',
+										data: { board:board, group: group, card: card },
+									}
+									setCurrDynamic(
+										prevDynamic =>
+											(prevDynamic = MoveCard)
+									)
+									setIsShowModal(true)
+								}}
+							>
+								<Move />
+								<div className='name'>Move</div>
+							</li>
+						</ul>
+						<ul>
+							<li className='opt-card' onClick={onMoveCard}>
+								<Copy />
+								<div className='name'>Copy</div>
+							</li>
+						</ul>
+						<hr />
+						<ul>
+							<li className='opt-card' onClick={onMoveCard}>
 								<Close />
 								<div className='name'>Delete</div>
 							</li>
