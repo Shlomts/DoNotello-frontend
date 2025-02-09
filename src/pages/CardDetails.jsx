@@ -213,7 +213,7 @@ export function CardDetails() {
 
 	function onAddChecklist(data) {
 		const newChecklist = { id: makeId(), title: data, tasks: [] }
-		const updatedChecklists = [...card.checklists || [], newChecklist]
+		const updatedChecklists = [...(card.checklists || []), newChecklist]
 		setCard(prevCard => {
 			const updatedCard = {
 				...prevCard,
@@ -272,7 +272,7 @@ export function CardDetails() {
 	}
 
 	function onSetDates(newDates) {
-		const updatedDates = { ...card.dates || {}, ...newDates }
+		const updatedDates = { ...(card.dates || {}), ...newDates }
 		console.log(updatedDates)
 		setCard(prevCard => {
 			const updatedCard = {
@@ -430,7 +430,7 @@ export function CardDetails() {
 											cardLabels: card.labelIds,
 										},
 										position: {
-											position: 'sticky',
+											position: 'absolute',
 											top: pos.top,
 											left: pos.left,
 											zIndex: 1000,
@@ -460,7 +460,7 @@ export function CardDetails() {
 											checklists: card.checklists,
 										},
 										position: {
-											position: 'sticky',
+											position: 'absolute',
 											top: pos.top,
 											left: pos.left,
 											zIndex: 1000,
@@ -518,7 +518,7 @@ export function CardDetails() {
 										title: 'Cover',
 										data: { style: card.style || {} },
 										position: {
-											position: 'sticky',
+											position: 'absolute',
 											top: pos.top,
 											left: pos.left,
 											zIndex: 1000,
@@ -555,7 +555,7 @@ export function CardDetails() {
 											card: card,
 										},
 										position: {
-											position: 'sticky',
+											position: 'absolute',
 											top: pos.top,
 											left: pos.left,
 											zIndex: 1000,
@@ -599,12 +599,23 @@ export function CardDetails() {
 								/>
 								<span
 									className='add-member-icon'
-									onClick={() => {
+									onClick={ev => {
+										const pos = getPopupPosition(
+											ev.currentTarget,
+											305,
+											512
+										)
 										dataRef.current = {
 											title: 'Members',
 											data: {
 												boardMembers: board.members,
 												cardMembers: card.memberIds,
+											},
+											position: {
+												position: 'absolute',
+												top: pos.top,
+												left: pos.left,
+												zIndex: 1000,
 											},
 										}
 										setCurrDynamic(
@@ -637,12 +648,23 @@ export function CardDetails() {
 									)}
 									// showTitles
 									// onLableCick={onSetLabels}
-									onPlusIcon={() => {
+									onPlusIcon={ev => {
+										const pos = getPopupPosition(
+											ev.currentTarget,
+											305,
+											512
+										)
 										dataRef.current = {
 											title: 'Labels',
 											data: {
 												boardLabels: board.labels,
 												cardLabels: card.labelIds,
+											},
+											position: {
+												position: 'absolute',
+												top: pos.top,
+												left: pos.left,
+												zIndex: 1000,
 											},
 										}
 										setCurrDynamic(
