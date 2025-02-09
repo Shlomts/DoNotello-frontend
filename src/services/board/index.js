@@ -1,10 +1,10 @@
-const {DEV, VITE_LOCAL} = import.meta.env
+const { DEV, VITE_LOCAL } = import.meta.env
 
-import {Description} from '../../cmps/SvgContainer'
-import {getRandomIntInclusive, makeId} from '../util.service'
+import { Description } from '../../cmps/SvgContainer'
+import { getRandomIntInclusive, makeId } from '../util.service'
 
-import {boardService as local} from './board.service.local'
-import {boardService as remote} from './board.service.remote'
+import { boardService as local } from './board.service.local'
+import { boardService as remote } from './board.service.remote'
 
 // function getRamdonBoards() {
 //     let boards = []
@@ -47,7 +47,8 @@ function getEmptyCard() {
     title: '',
     status: '',
     priority: '',
-    dueDate: '',
+    dates: '',
+    isDone: false,
     description: '',
     activity: [],
     checklists: [],
@@ -72,7 +73,7 @@ function getDefaultFilter() {
 }
 
 const service = VITE_LOCAL === 'true' ? local : remote
-export const boardService = {getEmptyBoard, getEmptyGroup, getEmptyCard, getDefaultFilter, ...service}
+export const boardService = { getEmptyBoard, getEmptyGroup, getEmptyCard, getDefaultFilter, ...service }
 
 // Easy access to this service from the dev tools console
 // when using script - dev / dev:local
