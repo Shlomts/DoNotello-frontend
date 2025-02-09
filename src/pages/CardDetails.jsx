@@ -57,6 +57,7 @@ export function CardDetails() {
 	)
 	const [isEditMode, setIsEditMode] = useState(false)
 	const [desInEdit, setDesInEdit] = useState(descriptionInput)
+	const txtareaRef = useRef(null)
 
 	const [isShowModal, setIsShowModal] = useState(false)
 	const [currDynamic, setCurrDynamic] = useState(null)
@@ -72,6 +73,10 @@ export function CardDetails() {
 	useEffect(() => {
 		getCard()
 	}, [params.cardId])
+
+	useEffect(() => {
+		handleResize()
+	}, [desInEdit])
 
 	useEffect(() => {
 		setDescriptionInput(card?.description || '')
@@ -140,6 +145,15 @@ export function CardDetails() {
 			return card
 		})
 		setIsEditMode(false)
+	}
+
+	function handleResize() {
+		const txtarea = txtareaRef.current
+
+		if (txtarea) {
+			txtarea.style.height = 'auto'
+			txtarea.style.height = `${txtarea.scrollHeight}px`
+		}
 	}
 
 	function onCloseModal() {
@@ -499,21 +513,22 @@ export function CardDetails() {
 										card.memberIds.includes(member._id)
 									)}
 								/>
-								<span className='add-member-icon' 
-								onClick={() => {
-									dataRef.current = {
-										title: 'Members',
-										data: {
-											boardMembers: boardMembers,
-											cardMembers: cardMembers,
-										},
-									}
-									setCurrDynamic(
-										prevDynamic =>
-											(prevDynamic = MemberPicker)
-									)
-									setIsShowModal(true)
-								}}
+								<span
+									className='add-member-icon'
+									onClick={() => {
+										dataRef.current = {
+											title: 'Members',
+											data: {
+												boardMembers: boardMembers,
+												cardMembers: cardMembers,
+											},
+										}
+										setCurrDynamic(
+											prevDynamic =>
+												(prevDynamic = MemberPicker)
+										)
+										setIsShowModal(true)
+									}}
 								>
 									<Plus />
 								</span>
@@ -590,6 +605,7 @@ export function CardDetails() {
 					{isEditMode ? (
 						<div className='grdatxt'>
 							<textarea
+								ref={txtareaRef}
 								value={desInEdit}
 								onChange={onChangeDescription}
 								placeholder='Add a more detailed description...'
