@@ -7,7 +7,7 @@ import { CardIcons } from "../group/miniCmps/CardIcons.jsx"
 import { CardDates } from "./CardDates.jsx"
 
 export function CardPreview({ card, cardMembers, cardLabels }) {
-    const { boardId } = useParams()
+    const { boardId, cardId } = useParams()
 
     // if (!card || !board.members || board.members.length === 0 || !board.labels || board.labels.length === 0) return
     if (!card) return null
@@ -48,7 +48,7 @@ export function CardPreview({ card, cardMembers, cardLabels }) {
                 </div>
             </NavLink>
             {/* <section> */}
-            <Outlet />
+            {cardId && cardId === card.id && <Outlet />}
             {/* </section> */}
         </Fragment>
     )
