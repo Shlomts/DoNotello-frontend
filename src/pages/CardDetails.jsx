@@ -2,7 +2,7 @@ import { Fragment, useEffect, useState, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
-import { makeId } from '../services/util.service'
+import { getPopupPosition, makeId } from '../services/util.service'
 
 import {
 	loadCard,
@@ -68,6 +68,7 @@ export function CardDetails() {
 	const [cardChecklists, setCardChecklists] = useState(card?.checklists || [])
 	const [cardDates, setCardDates] = useState(card?.dates || {})
 	const [cardCover, setCardCover] = useState(card?.style || {})
+	const [popupPosition, setPopupPosition] = useState({ top: 0, left: 0 })
 
 	useEffect(() => {
 		getCard()
@@ -310,13 +311,22 @@ export function CardDetails() {
 	return (
 		<section className='card-details-outlet'>
 			{isShowModal && currDynamic && dataRef.current && (
-				<DynamicCmp
-					Cmp={currDynamic}
-					title={dataRef.current.title}
-					onCloseModal={onCloseModal}
-					data={dataRef.current.data}
-					onUpdateCmp={onUpdateDynamicInfo}
-				/>
+				<div
+					style={{
+						position: 'absolute',
+						top: popupPosition.top,
+						left: popupPosition.left,
+						zIndex: 1000
+					}}
+				>
+					<DynamicCmp
+						Cmp={currDynamic}
+						title={dataRef.current.title}
+						onCloseModal={onCloseModal}
+						data={dataRef.current.data}
+						onUpdateCmp={onUpdateDynamicInfo}
+					/>
+				</div>
 			)}
 
 			{card.style?.backgroundColor && (
@@ -380,6 +390,8 @@ export function CardDetails() {
 							<li
 								className='opt-card'
 								onClick={ev => {
+									const pos = getPopupPosition(ev.currentTarget, 305, 512)
+									setPopupPosition(pos)
 									dataRef.current = {
 										title: 'Members',
 										data: {
@@ -399,7 +411,9 @@ export function CardDetails() {
 							</li>
 							<li
 								className='opt-card'
-								onClick={() => {
+								onClick={(ev) => {
+									const pos = getPopupPosition(ev.currentTarget, 305, 512)
+									setPopupPosition(pos)
 									dataRef.current = {
 										title: 'Labels',
 										data: {
@@ -419,7 +433,9 @@ export function CardDetails() {
 							</li>
 							<li
 								className='opt-card'
-								onClick={() => {
+								onClick={(ev) => {
+									const pos = getPopupPosition(ev.currentTarget, 305, 512)
+									setPopupPosition(pos)
 									dataRef.current = {
 										title: 'Add checklist',
 										data: {
@@ -438,7 +454,9 @@ export function CardDetails() {
 							</li>
 							<li
 								className='opt-card'
-								onClick={() => {
+								onClick={(ev) => {
+									const pos = getPopupPosition(ev.currentTarget, 305, 512)
+									setPopupPosition(pos)
 									dataRef.current = {
 										title: 'Dates',
 										data: {
@@ -461,7 +479,9 @@ export function CardDetails() {
 							</li>
 							<li
 								className='opt-card'
-								onClick={() => {
+								onClick={(ev) => {
+									const pos = getPopupPosition(ev.currentTarget, 305, 512)
+									setPopupPosition(pos)
 									dataRef.current = {
 										title: 'Cover',
 										data: { style: card.style || {} },

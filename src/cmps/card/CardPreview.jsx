@@ -4,6 +4,7 @@ import { NavLink, Outlet, useParams } from "react-router-dom"
 import { CardLabels } from "../group/miniCmps/CardLabels.jsx"
 import { CardMembers } from "../group/miniCmps/CardMembers.jsx"
 import { CardIcons } from "../group/miniCmps/CardIcons.jsx"
+import { CardDates } from "./CardDates.jsx"
 
 export function CardPreview({ card, cardMembers, cardLabels }) {
     const { boardId } = useParams()
@@ -26,7 +27,6 @@ export function CardPreview({ card, cardMembers, cardLabels }) {
                             className="card-cover"
                             style={{
                                 backgroundColor: card.style.backgroundColor,
-                                border: `2px solid ${card.style.backgroundColor}`
                             }}
                         />
                     )}
@@ -38,7 +38,9 @@ export function CardPreview({ card, cardMembers, cardLabels }) {
                             isCardPreview={true}
                         />
                         <h3>{card.title}</h3>
+
                         <section className="bottom-card-preview">
+                            {/* <CardDates dates={card.dates} isDone={card.isDone} /> */}
                             <CardIcons card={card} />
                             <CardMembers members={cardMembers} />
                         </section>
