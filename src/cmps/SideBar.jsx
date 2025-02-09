@@ -2,7 +2,18 @@ import {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {AddBoard} from './board/AddBoard'
 import {onToggleModal} from '../store/actions/system.actions'
-import {Boards, EllipsisIcon, LeftArrow, Members, Plus, RightArrow, Star, Unstar} from './SvgContainer'
+import {
+  Boards,
+  DownArrow,
+  EllipsisIcon,
+  LeftArrow,
+  Members,
+  Plus,
+  RightArrow,
+  Star,
+  Unstar,
+  UpArrow,
+} from './SvgContainer'
 import {useDispatch, useSelector} from 'react-redux'
 import {loadBoards, removeBoard, updateBoard} from '../store/actions/board.actions'
 import {useNavigate, useParams} from 'react-router'
@@ -15,6 +26,7 @@ export function SideBar({board, onSetStar}) {
   const [selectedBoard, setSelectedBoard] = useState(null)
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [hoveredBoard, setHoveredBoard] = useState(null)
+  const [showAllBoards, setShowAllBoards] = useState(false)
 
   const {boardId} = useParams()
 
@@ -48,7 +60,7 @@ export function SideBar({board, onSetStar}) {
         props: {
           onClose: onToggleModal,
         },
-        trigger: 'sidebar-add-board', // Pass trigger location
+        trigger: 'sidebar-add-board',
       },
       event
     )
@@ -60,8 +72,8 @@ export function SideBar({board, onSetStar}) {
         cmp: LeaveBoardModal,
         props: {
           boardTitle: board.title,
-          onClose: onToggleModal, // Close modal
-          onLeave: () => onRemoveBoard(board._id), // Pass callback instead of executing immediately
+          onClose: onToggleModal,
+          onLeave: () => onRemoveBoard(board._id),
         },
         trigger: 'sidebar-leave-modal',
         position: {top: 0, left: 0},
@@ -91,6 +103,7 @@ export function SideBar({board, onSetStar}) {
     })
   }
   const sortedBoards = sortBoards(boards)
+  const displayedBoards = showAllBoards ? sortedBoards : sortedBoards.slice(0, 7)
 
   return (
     <div
@@ -108,62 +121,76 @@ export function SideBar({board, onSetStar}) {
           {isCollapsed ? <RightArrow /> : <LeftArrow />}
         </button>
       </header>
-
-      <ul className="sidebar-links">
-        <li className="main-board">
-          <Link to="/board">
-            <div>
-              <Boards />
-            </div>
-            <span>Boards</span>
-          </Link>
-        </li>
-        <li className="members">
+      <div className="sidebar-links">
+        <ul>
+          <li className="main-board">
+            <Link to="/board">
+              <div>
+                <Boards />
+              </div>
+              <span>Boards</span>
+            </Link>
+          </li>
+          {/* <li className="members">
           <Link to="/members">
             <div>
               <Members />
             </div>
             <p>Members</p>
           </Link>
-        </li>
-        <div className="boards-action">
-          <h2 className="title">Your boards</h2>
-          <div className="boards-btn-actions">
-            <button className="sort-by">
-              <EllipsisIcon />
-            </button>
-            <button className="add-board" onClick={onAddBoard}>
-              <Plus />
-            </button>
-          </div>
-        </div>
-        {sortedBoards.map((board) => (
-          <li key={board._id} className={`boards-list ${board._id === boardId ? 'active' : ''}`}>
-            <Link to={`/board/${board._id}`}>
-              <div style={{backgroundImage: `url(${board.style.backgroundImage})`}}></div>
-              <span>{board.title}</span>
-            </Link>
-            <div className="btn-actions">
-              <button className="sort-by" onClick={() => openLeaveModal(board)}>
+        </li> */}
+          <div className="boards-action">
+            <h2 className="title">Your boards</h2>
+            <div className="boards-btn-actions">
+              <button className="sort-by">
                 <EllipsisIcon />
               </button>
-              <button
-                className={board.isStarred ? 'star-icon isStarred' : 'star-icon onstar'}
-                onClick={(ev) => {
-                  ev.stopPropagation()
-                  ev.preventDefault()
-                  onSetStar(board)
-                  navigate(`/board/${board._id}`)
-                }}
-                onMouseEnter={() => setHoveredBoard(board._id)}
-                onMouseLeave={() => setHoveredBoard(null)}
-              >
-                {board.isStarred ? hoveredBoard === board._id ? <Star /> : <Unstar /> : <Star />}
+              <button className="add-board" onClick={onAddBoard}>
+                <Plus />
               </button>
             </div>
-          </li>
-        ))}
-      </ul>
+          </div>
+          {displayedBoards.map((board) => (
+            <li key={board._id} className={`boards-list ${board._id === boardId ? 'active' : ''}`}>
+              <Link to={`/board/${board._id}`}>
+                <div style={{backgroundImage: `url(${board.style.backgroundImage})`}}></div>
+                <span>{board.title}</span>
+              </Link>
+              <div className="btn-actions">
+                <button className="sort-by" onClick={() => openLeaveModal(board)}>
+                  <EllipsisIcon />
+                </button>
+                <button
+                  className={board.isStarred ? 'star-icon isStarred' : 'star-icon onstar'}
+                  onClick={(ev) => {
+                    ev.stopPropagation()
+                    ev.preventDefault()
+                    onSetStar(board)
+                    navigate(`/board/${board._id}`)
+                  }}
+                  onMouseEnter={() => setHoveredBoard(board._id)}
+                  onMouseLeave={() => setHoveredBoard(null)}
+                >
+                  {board.isStarred ? hoveredBoard === board._id ? <Star /> : <Unstar /> : <Star />}
+                </button>
+              </div>
+            </li>
+          ))}
+          {sortedBoards.length > 7 && (
+            <button className="show-more" onClick={() => setShowAllBoards(!showAllBoards)}>
+              <span className="container-icon-and-title">
+                <span className="op-show-more-icon icon">{showAllBoards ? <UpArrow /> : <DownArrow />}</span>
+                <span className="op-show-more-txt">{showAllBoards ? 'Show Less' : 'Show More'}</span>
+              </span>
+              {!showAllBoards && (
+                <span className="hidden-board-count">
+                  <span className="number">{sortedBoards.length - 7}</span>
+                </span>
+              )}
+            </button>
+          )}
+        </ul>
+      </div>
     </div>
   )
 }
