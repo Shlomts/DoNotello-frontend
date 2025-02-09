@@ -19,7 +19,7 @@ export function CardPreview({ card, cardMembers, cardLabels }) {
         <Fragment>
             <NavLink
                 to={`/board/${boardId}/card/${card.id}`}
-                state={{ cardMembers, cardLabels }}
+                // state={{ cardMembers, cardLabels }}
             >
                 <div className={`card-preview ${cardHasContent ? 'expanded' : ''}`}>
                     {hasCover && (
