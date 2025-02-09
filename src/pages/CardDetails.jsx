@@ -379,7 +379,7 @@ export function CardDetails() {
 						<ul>
 							<li
 								className='opt-card'
-								onClick={ev => {
+								onClick={() => {
 									dataRef.current = {
 										title: 'Members',
 										data: {
@@ -499,7 +499,22 @@ export function CardDetails() {
 										card.memberIds.includes(member._id)
 									)}
 								/>
-								<span className='add-member-icon'>
+								<span className='add-member-icon' 
+								onClick={() => {
+									dataRef.current = {
+										title: 'Members',
+										data: {
+											boardMembers: boardMembers,
+											cardMembers: cardMembers,
+										},
+									}
+									setCurrDynamic(
+										prevDynamic =>
+											(prevDynamic = MemberPicker)
+									)
+									setIsShowModal(true)
+								}}
+								>
 									<Plus />
 								</span>
 							</div>
@@ -523,7 +538,20 @@ export function CardDetails() {
 									)}
 									// showTitles
 									// onLableCick={onSetLabels}
-									onPlusIcon={onSetLabels}
+									onPlusIcon={() => {
+										dataRef.current = {
+											title: 'Labels',
+											data: {
+												boardLabels: board.labels,
+												cardLabels: card.labelIds,
+											},
+										}
+										setCurrDynamic(
+											prevDynamic =>
+												(prevDynamic = LabelPicker)
+										)
+										setIsShowModal(true)
+									}}
 									className='card-details-labels'
 								/>
 							</div>
