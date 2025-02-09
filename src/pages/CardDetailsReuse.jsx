@@ -272,8 +272,8 @@ export function CardDetails() {
 	}
 
 	function onSetDates(newDates) {
-		const updatedDates = { ...card.dates, ...newDates }
-
+		const updatedDates = { ...card.dates || {}, ...newDates }
+		console.log(updatedDates)
 		setCard(prevCard => {
 			const updatedCard = {
 				...prevCard,
@@ -281,7 +281,7 @@ export function CardDetails() {
 				isDone: false,
 			}
 			updateCard(board, group, updatedCard)
-			return card
+			return updatedCard
 		})
 	}
 
