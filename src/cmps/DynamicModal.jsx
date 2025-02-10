@@ -19,8 +19,6 @@ export function DynaminModal() {
   }
 
   if (!modalData) return null
-  console.log(modalData, 'modal data')
-
   const {trigger, position} = modalData
   const Cmp = modalData.cmp
 

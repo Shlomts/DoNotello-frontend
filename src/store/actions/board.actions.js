@@ -18,7 +18,7 @@ export async function loadBoards() {
     const boards = await boardService.query()
     store.dispatch(getCmdSetBoards(boards))
   } catch (err) {
-    console.log('Cannot load boards', err)
+    console.error('Cannot load boards', err)
     throw err
   }
 }
@@ -28,12 +28,10 @@ export async function loadBoard(boardId) {
 
   try {
     const board = await boardService.getById(boardId)
-    console.log(board, 'from action')
-    console.log(filterBy, 'filter')
 
     store.dispatch(getCmdSetBoard(board))
   } catch (err) {
-    console.log('Cannot load board', err)
+    console.error('Cannot load board', err)
     throw err
   }
 }
@@ -43,7 +41,7 @@ export async function removeBoard(boardId) {
     await boardService.remove(boardId)
     store.dispatch(getCmdRemoveBoard(boardId))
   } catch (err) {
-    console.log('Cannot remove board', err)
+    console.error('Cannot remove board', err)
     throw err
   }
 }
@@ -55,7 +53,7 @@ export async function addBoard(board) {
     store.dispatch(getCmdAddBoard(savedBoard))
     return savedBoard
   } catch (err) {
-    console.log('Cannot add board', err)
+    console.error('Cannot add board', err)
     throw err
   }
 }
@@ -66,7 +64,7 @@ export async function updateBoard(board) {
     store.dispatch(getCmdUpdateBoard(savedBoard))
     return savedBoard
   } catch (err) {
-    console.log('Cannot update board', err)
+    console.error('Cannot update board', err)
     throw err
   }
 }
@@ -77,7 +75,7 @@ export async function updateBoardOptimistic(board) {
     const savedBoard = await boardService.saveBoard(board)
     return savedBoard
   } catch (err) {
-    console.log('Cannot update board', err)
+    console.error('Cannot update board', err)
     throw err
   }
 }
@@ -97,14 +95,13 @@ export async function addGroupToBoard(board, groupToSave) {
   try {
     await updateBoard(board)
   } catch (err) {
-    console.log('Cannot add group', err)
+    console.error('Cannot add group', err)
     throw err
   }
 }
 
 export async function addCardToGroup(board, group, cardToSave) {
   const ogGroup = board.groups.find((g) => g.id === group.id)
-  console.log(ogGroup, 'addcard to grod')
 
   ogGroup.cards.push(cardToSave)
 
@@ -142,7 +139,7 @@ export async function updateCard(board, group, cardToSave) {
   try {
     await updateBoard(updatedBoard)
   } catch (err) {
-    console.log('Cannot update card', err)
+    console.error('Cannot update card', err)
   }
 }
 
@@ -152,7 +149,7 @@ export async function loadCard(board, cardId) {
     // store.dispatch(getCmdSetBoard(board))
     return card
   } catch (err) {
-    console.log('Cannot load card', err)
+    console.error('Cannot load card', err)
     throw err
   }
 }
@@ -163,7 +160,7 @@ export async function loadGroup(board, cardId) {
     // store.dispatch(getCmdSetBoard(board))
     return group
   } catch (err) {
-    console.log('Cannot load group', err)
+    console.error('Cannot load group', err)
     throw err
   }
 }
@@ -174,7 +171,7 @@ export async function getGroupId(board, cardId) {
     // store.dispatch(getCmdSetBoard(board))
     return group.id
   } catch (err) {
-    console.log('Cannot load group', err)
+    console.error('Cannot load group', err)
     throw err
   }
 }
@@ -188,15 +185,13 @@ export async function removeGroupFromBoard(board, groupId) {
   try {
     await updateBoard(board)
   } catch (err) {
-    console.log('Cannot remove group', err)
+    console.error('Cannot remove group', err)
     throw err
   }
 }
 
 export async function removeCardFromGroup(board, groupId, cardId) {
-  console.log(board)
   const group = board.groups.find((group) => group.id === groupId)
-  console.log('in remove group:', group)
   if (!group) throw new Error('Group not found')
 
   const cardIdx = group.cards.findIndex((card) => card.id === cardId)
@@ -207,7 +202,7 @@ export async function removeCardFromGroup(board, groupId, cardId) {
   try {
     await updateBoard(board)
   } catch (err) {
-    console.log('Cannot remove card', err)
+    console.error('Cannot remove card', err)
     throw err
   }
 }
@@ -218,7 +213,7 @@ export async function addBoardMsg(boardId, txt) {
     store.dispatch(getCmdAddBoardMsg(msg))
     return msg
   } catch (err) {
-    console.log('Cannot add board msg', err)
+    console.error('Cannot add board msg', err)
     throw err
   }
 }

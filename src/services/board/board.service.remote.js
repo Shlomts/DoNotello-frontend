@@ -51,12 +51,9 @@ function getFilterdBoard(board, filterBy = { txt: '' }) {
   }
 
   if (filterBy.loggedInUser) {
-    console.log(filteredBoard)
     const userId = loggedInUser._id
-    console.log(userId)
 
     const filteredGroups = filteredBoard.groups.map((group) => {
-      console.log(group.cards)
       const filteredCards = group.cards.filter((card) => card.memberIds.find((memberId) => memberId === userId))
 
       return { ...group, cards: filteredCards }

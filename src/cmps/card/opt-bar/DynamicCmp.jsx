@@ -1,7 +1,6 @@
 import { Close } from '../../SvgContainer'
 
 export function DynamicCmp({ Cmp, title, onCloseModal, data, onUpdateCmp, position }) {
-	console.log('position-------', position)
 	return (
 		<div className='dynamic' style={position}>
 			<section className='dynamic-header'>

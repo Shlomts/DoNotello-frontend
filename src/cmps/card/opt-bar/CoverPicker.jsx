@@ -13,7 +13,6 @@ export function CoverPicker({ info, onUpdate }) {
 	]
 
 	function onSelectCover(selectedColor) {
-		console.log('selected color:', selectedColor)
 		setSelectedCover(selectedColor)
 		onUpdate({ backgroundColor: selectedColor })
 	}

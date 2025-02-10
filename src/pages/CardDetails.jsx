@@ -71,9 +71,6 @@ export function CardDetails() {
 	}, [desInEdit])
 
 	useEffect(() => {
-		console.log('IN USE EFFECTTTTTTTTTT')
-		// console.log('group:', group)
-		// console.log('card:', card)
 		setDesInEdit(card?.description || '')
 	}, [card])
 
@@ -84,7 +81,7 @@ export function CardDetails() {
 			setCard(cardToSet)
 			setGroup(groupToSet)
 		} catch (err) {
-			console.log('Having problmes loading card...', err)
+			console.error('Having problmes loading card...', err)
 			throw err
 		}
 	}
@@ -273,7 +270,6 @@ export function CardDetails() {
 
 	function onSetDates(newDates) {
 		const updatedDates = { ...(card.dates || {}), ...newDates }
-		console.log(updatedDates)
 		setCard(prevCard => {
 			const updatedCard = {
 				...prevCard,
@@ -297,8 +293,9 @@ export function CardDetails() {
 	}
 
 	function onMoveCard(data) {
-		console.log('im in onMoveCard!! ')
-		console.log('data:', data)
+		// console.log('im in onMoveCard!! ')
+		// console.log('data:', data)
+		return
 	}
 
 	if (!card) return <div>Loading...</div>

@@ -52,7 +52,6 @@ export function BoardMenu({ board, onClose }) {
         ...board,
         style: { ...board.style, backgroundImage: newImageUrl },
       }
-      console.log(updatedBoard)
 
       await updateBoard(updatedBoard)
       showSuccessMsg('Board updated')
@@ -81,11 +80,9 @@ export function BoardMenu({ board, onClose }) {
     }
 
     const updatedBoard = { ...board, description: desInEdit }
-    console.log(updatedBoard, 'before updating in the action ')
 
     try {
       await updateBoard(updatedBoard)
-      console.log(updatedBoard, 'after updating in the action ')
 
       showSuccessMsg('Description updated')
       setBoardDescriptionInput(desInEdit)
@@ -102,7 +99,6 @@ export function BoardMenu({ board, onClose }) {
       ...board,
       comments: [...(board.comments || []), { text: comment, createdAt: Date.now() }],
     }
-    console.log(updatedBoard)
 
     try {
       addBoardMsg(updatedBoard)

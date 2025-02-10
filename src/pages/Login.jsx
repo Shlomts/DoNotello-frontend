@@ -48,7 +48,6 @@ export function Login() {
 
   function handleChange(ev) {
     const { name, value } = ev.target
-    console.log(name, value)
 
     if (name === 'email') {
       const isValid = /\S+@\S+\.\S+/.test(value)

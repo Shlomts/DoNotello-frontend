@@ -21,7 +21,6 @@ export function LoginSignup() {
         }
 
         const decodedToken = jwtDecode(response.credential)
-        console.log(decodedToken)
 
         const userData = {
           _id: decodedToken.sub,
@@ -38,7 +37,7 @@ export function LoginSignup() {
       }
     },
     onError: (err) => {
-      console.log('Failed login', err)
+      console.error('Failed login', err)
     },
     useOneTap: true,
   })

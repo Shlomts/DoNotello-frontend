@@ -17,7 +17,6 @@ export function AppHeader() {
   const logoUrl = '/imgs/Logo.png'
 
   async function onLogout() {
-    console.log('does it happens?')
     try {
       await logout()
       googleLogout()
