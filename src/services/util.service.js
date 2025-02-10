@@ -75,9 +75,9 @@ export function getPopupPosition(element, popupWidth, popupHeight) {
     //     top = rect.top - popupHeight - gap + window.scrollY
     // }
 
-    // if (rect.left + popupWidth > viewportWidth) {
-    //     left = viewportWidth - popupWidth + window.scrollX
-    // }
+    if (rect.left + popupWidth > viewportWidth) {
+        left = viewportWidth - popupWidth + window.scrollX
+    }
 
     return { top, left }
 }
