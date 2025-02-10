@@ -1,7 +1,6 @@
 import {Link, NavLink} from 'react-router-dom'
 import {useNavigate} from 'react-router'
 import {useSelector} from 'react-redux'
-import {showErrorMsg, showSuccessMsg} from '../services/event-bus.service'
 import {logout} from '../store/actions/user.actions'
 import {useState} from 'react'
 import {AddBoard} from './board/AddBoard'
@@ -21,9 +20,8 @@ export function AppHeader() {
       await logout()
       googleLogout()
       navigate('/login')
-      showSuccessMsg(`Login out`)
     } catch (err) {
-      showErrorMsg('Cannot logout')
+      console.error('Cannot log in')
     }
   }
 
