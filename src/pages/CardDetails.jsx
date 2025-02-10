@@ -536,7 +536,11 @@ export function CardDetails() {
 					<section className='actions'>
 						<thead>Actions</thead>
 						<ul>
-							<li
+							<li className='opt-card' onClick={onRemoveCard}>
+								<Close />
+								<div className='name'>Delete</div>
+							</li>
+							{/* <li
 								className='opt-card'
 								onClick={() => {
 									const pos = getPopupPosition(
@@ -566,21 +570,14 @@ export function CardDetails() {
 							>
 								<Move />
 								<div className='name'>Move</div>
-							</li>
+							</li> */}
 						</ul>
-						<ul>
+						{/* <ul>
 							<li className='opt-card' onClick={onMoveCard}>
 								<Copy />
 								<div className='name'>Copy</div>
 							</li>
-						</ul>
-						<hr />
-						<ul>
-							<li className='opt-card' onClick={onRemoveCard}>
-								<Close />
-								<div className='name'>Delete</div>
-							</li>
-						</ul>
+						</ul> */}
 					</section>
 				</section>
 
