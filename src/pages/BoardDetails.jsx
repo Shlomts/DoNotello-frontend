@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
@@ -27,6 +27,7 @@ import { Plus, Close, Star, Unstar, ListActionsIcon } from "../cmps/SvgContainer
 import { boardService } from "../services/board"
 import { BoardMenu } from "../cmps/board/BoardMenu"
 import { socketService, SOCKET_EMIT_JOIN_BOARD, SOCKET_EVENT_BOARD_UPDATED } from "../services/socket.service.js"
+import { useClickOutside } from "../customHooks/useClickOutside.js"
 
 export function BoardDetails() {
   const { boardId } = useParams()
@@ -35,19 +36,16 @@ export function BoardDetails() {
   const users = useSelector((storeState) => storeState.userModule.users)
   const board = useSelector((storeState) => storeState.boardModule.board)
   const filterBy = useSelector((storeState) => storeState.boardModule.filterBy)
+
   const [isAddingGroup, setIsAddingGroup] = useState(false)
   const [groupName, setGroupName] = useState('')
+  const addGroupRef = useRef(null)
 
   const [isEditingBoardName, setIsEditingBoardName] = useState(false)
   const [boardTitle, setBoardTitle] = useState(board?.title || '')
 
   const [isBoardMenuOpen, setIsBoardMenuOpen] = useState(false)
   const [filteredBoard, setFilteredBoard] = useState()
-
-  // useEffect(() => {
-  //   const filterdBoard = boardService.getFilterdBoard(board, filterBy)
-  //   setFilteredBoard(filterdBoard)
-  // }, [filterBy, board])
 
   useEffect(() => {
     loadBoard(boardId)
@@ -67,6 +65,8 @@ export function BoardDetails() {
     socketService.emit(SOCKET_EMIT_JOIN_BOARD, boardId)
     socketService.on(SOCKET_EVENT_BOARD_UPDATED, onBoardUpdate)
   }, [board])
+
+  useClickOutside(addGroupRef, () => setIsAddingGroup(false))
 
   function onBoardUpdate(updatedGroups) {
     if (!board) return
@@ -191,7 +191,7 @@ export function BoardDetails() {
           <DragDropHandler board={board}>
             <GroupList board={board} groups={filteredBoard.groups} onRemoveGroup={onRemoveGroup} />
           </DragDropHandler>
-          <section className="add-group">
+          <section className="add-group" ref={addGroupRef}>
             {isAddingGroup ? (
               <div className="add-group-form">
                 <textarea
@@ -209,6 +209,7 @@ export function BoardDetails() {
                 />
                 <div className="add-group-actions">
                   <button
+                    autoFocus
                     className="save-group-btn"
                     onClick={() => {
                       onAddGroup()

@@ -1,16 +1,20 @@
 import { Plus } from "../SvgContainer.jsx"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { CardList } from "../card/CardList.jsx"
 import { showSuccessMsg, showErrorMsg, } from "../../services/event-bus.service.js"
 import { Close } from "../SvgContainer.jsx"
 import { addCardToGroup } from "../../store/actions/board.actions.js"
 import { boardService } from "../../services/board"
+import { useClickOutside } from "../../customHooks/useClickOutside.js"
 
 
 export function GroupDetails({ board, group, onRemoveGroup }) {
     const [isAddingCard, setIsAddingCard] = useState(false)
     const [cardName, setCardName] = useState('')
+    const addCardRef = useRef(null)
+
+    useClickOutside(addCardRef, () => setIsAddingCard(false))
 
     function onSetCardName(ev) {
         const name = ev.target.value
@@ -35,6 +39,7 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
         }
     }
 
+
     if (!group) return <div>Loading...</div>
 
     return (
@@ -58,7 +63,7 @@ export function GroupDetails({ board, group, onRemoveGroup }) {
                     group={group}
                 />
             </div>
-            <div className="group-footer">
+            <div className="group-footer" ref={addCardRef}>
                 {isAddingCard ? (
                     <div className="add-card-form">
                         <textarea
