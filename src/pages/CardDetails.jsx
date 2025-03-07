@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router'
 import { useSelector } from 'react-redux'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 import { getPopupPosition, makeId } from '../services/util.service'
+import { useClickOutside } from "../customHooks/useClickOutside.js"
 
 import {
 	loadCard,
@@ -61,6 +62,8 @@ export function CardDetails() {
 	const [isShowModal, setIsShowModal] = useState(false)
 	const [currDynamic, setCurrDynamic] = useState(null)
 	const dataRef = useRef(null)
+	const cardDetailsRef = useRef(null)
+	const dynamicCmpRef = useRef(null)
 
 	useEffect(() => {
 		getCard()
@@ -73,6 +76,17 @@ export function CardDetails() {
 	useEffect(() => {
 		setDesInEdit(card?.description || '')
 	}, [card])
+
+	useClickOutside(cardDetailsRef, (ev) => {
+		if (dynamicCmpRef.current?.contains(ev.target)) return
+		navigate(`/board/${boardId}`)
+	})
+
+	useClickOutside(dynamicCmpRef, () => {
+		setCurrDynamic(null)
+		dataRef.current = null
+		setIsShowModal(false)
+	})
 
 	async function getCard() {
 		try {
@@ -303,14 +317,16 @@ export function CardDetails() {
 	return (
 		<section className='card-details-outlet'>
 			{isShowModal && currDynamic && dataRef.current && (
-				<DynamicCmp
-					Cmp={currDynamic}
-					title={dataRef.current.title}
-					onCloseModal={onCloseModal}
-					data={dataRef.current.data}
-					onUpdateCmp={onUpdateDynamicInfo}
-					position={dataRef.current.position}
-				/>
+				<div ref={dynamicCmpRef}>
+					<DynamicCmp
+						Cmp={currDynamic}
+						title={dataRef.current.title}
+						onCloseModal={onCloseModal}
+						data={dataRef.current.data}
+						onUpdateCmp={onUpdateDynamicInfo}
+						position={dataRef.current.position}
+					/>
+				</div>
 			)}
 
 			{card.style?.backgroundColor && (
@@ -330,6 +346,7 @@ export function CardDetails() {
 			<div
 				open
 				className='card-details'
+				ref={cardDetailsRef}
 				style={
 					card.style?.backgroundColor
 						? { marginBlockStart: '152px' }
