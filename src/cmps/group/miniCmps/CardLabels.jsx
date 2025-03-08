@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Plus } from "../../SvgContainer"
 import { toggleLabelVisibility } from "../../../store/actions/board.actions"
 import { useDispatch, useSelector } from "react-redux"
@@ -41,7 +40,7 @@ export function CardLabels({ labels, className, isCardPreview = false, onPlusIco
                     className="add-labels-icon"
                     onClick={(ev) => {
                         ev.preventDefault()
-                        if (onPlusIcon) onPlusIcon()
+                        if (onPlusIcon) onPlusIcon(ev)
                     }}
                 >
                     <Plus />
