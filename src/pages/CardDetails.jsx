@@ -239,7 +239,7 @@ export function CardDetails() {
 	}
 
 	function removeChecklist(id) {
-		const newChecklists = card.Checklists.filter(
+		const newChecklists = card.checklists.filter(
 			checklist => checklist.id !== id
 		)
 		setCard(prevCard => {
