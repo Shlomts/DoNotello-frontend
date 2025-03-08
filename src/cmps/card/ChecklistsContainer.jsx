@@ -14,15 +14,13 @@ export function ChecklistsContainer({ checklists, removeChecklist, onUpdate }) {
 	}
 
 	function onSaveDetails() {
+		if(detailsInEdit === '') return
 		const newTask = { id: makeId(), details: detailsInEdit, isDone: false }
 		const newTasks = [...currChecklist.tasks, newTask]
+		const newChecklist = { ...currChecklist, tasks: newTasks }
 
-		setCurrChecklist(prev => {
-			const updatedChecklist = { ...prev, tasks: newTasks }
-			return updatedChecklist
-		})
-
-		onUpdate({ ...currChecklist, tasks: newTasks })
+		setCurrChecklist(newChecklist)
+		onUpdate(newChecklist)
 		setDetailsInEdit('')
 	}
 

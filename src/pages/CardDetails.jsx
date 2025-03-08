@@ -223,15 +223,15 @@ export function CardDetails() {
 	}
 
 	function onEditChecklist(newChecklist) {
-		const editList = card.checklists.filter(
-			checklist => checklist.id !== newChecklist.id
+		const newList = card.checklists.map(list =>
+			list.id === newChecklist.id
+				? { ...list, tasks: newChecklist.tasks }
+				: list
 		)
-		const updatedChecklists = [...editList, newChecklist]
-
 		setCard(prevCard => {
 			const updatedCard = {
 				...prevCard,
-				checklists: updatedChecklists,
+				checklists: newList,
 			}
 			updateCard(board, group, updatedCard)
 			return updatedCard
