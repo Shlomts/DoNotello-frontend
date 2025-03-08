@@ -353,7 +353,6 @@ export function CardDetails() {
 						<input
 							type='text'
 							value={card.title}
-							// onChange={ev => setCardTitle(ev.target.value)}
 							onChange={ev =>
 								setCard(prevCard => {
 									const updatedCard = {
@@ -487,7 +486,7 @@ export function CardDetails() {
 											dates: card.dates,
 										},
 										position: {
-											position: 'sticky',
+											position: 'absolute',
 											top: pos.top,
 											left: pos.left,
 											zIndex: 1000,
