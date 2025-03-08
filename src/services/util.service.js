@@ -55,6 +55,11 @@ export function loadFromStorage(key) {
 export function getPopupPosition(element, popupWidth, popupHeight) {
     if (!element) return { top: 0, left: 0 }
 
+    console.log('element - ', element)
+    console.log('popupWidth - ', popupWidth)
+    console.log('popupHeight - ', popupHeight)
+    console.log('popupHeight - ', popupHeight)
+
     const rect = element.getBoundingClientRect()
 
     const viewportHeight = window.innerHeight
@@ -66,10 +71,11 @@ export function getPopupPosition(element, popupWidth, popupHeight) {
     let left = rect.left + window.scrollX
 
 
-
-    // if (rect.bottom + popupHeight + gap > viewportHeight) {
-    //     top = rect.top - popupHeight - gap + window.scrollY
-    // }
+    if (rect.bottom + popupHeight + gap > viewportHeight) {
+        // top = rect.top - popupHeight - gap + window.scrollY
+        top = window.scrollY + viewportHeight - popupHeight
+        top = Math.max(0, top)
+    }
 
     if (rect.left + popupWidth > viewportWidth) {
         left = viewportWidth - popupWidth + window.scrollX

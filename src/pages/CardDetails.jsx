@@ -386,7 +386,7 @@ export function CardDetails() {
 									const pos = getPopupPosition(
 										ev.currentTarget,
 										305,
-										512
+										431.6
 									)
 									dataRef.current = {
 										title: 'Members',
@@ -417,7 +417,7 @@ export function CardDetails() {
 									const pos = getPopupPosition(
 										ev.currentTarget,
 										305,
-										512
+										446.6
 									)
 									dataRef.current = {
 										title: 'Labels',
@@ -448,7 +448,7 @@ export function CardDetails() {
 									const pos = getPopupPosition(
 										ev.currentTarget,
 										305,
-										512
+										173.6
 									)
 									dataRef.current = {
 										title: 'Add checklist',
@@ -478,7 +478,7 @@ export function CardDetails() {
 									const pos = getPopupPosition(
 										ev.currentTarget,
 										305,
-										512
+										142.1
 									)
 									dataRef.current = {
 										title: 'Dates',
@@ -508,7 +508,7 @@ export function CardDetails() {
 									const pos = getPopupPosition(
 										ev.currentTarget,
 										305,
-										512
+										196.5
 									)
 									dataRef.current = {
 										title: 'Cover',
@@ -596,7 +596,7 @@ export function CardDetails() {
 										const pos = getPopupPosition(
 											ev.currentTarget,
 											305,
-											512
+											431.6
 										)
 										dataRef.current = {
 											title: 'Members',
@@ -631,7 +631,7 @@ export function CardDetails() {
 									const pos = getPopupPosition(
 										ev.currentTarget,
 										305,
-										512
+										431.6
 									)
 									dataRef.current = {
 										title: 'Members',
@@ -672,7 +672,7 @@ export function CardDetails() {
 										const pos = getPopupPosition(
 											ev.currentTarget,
 											305,
-											512
+											446.6
 										)
 										dataRef.current = {
 											title: 'Labels',
