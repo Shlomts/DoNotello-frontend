@@ -626,7 +626,34 @@ export function CardDetails() {
 					) : (
 						<section className='members-empty'>
 							<h4>Members</h4>
-							<span className='add-member-icon'>
+							<span
+								className='add-member-icon'
+								onClick={ev => {
+									const pos = getPopupPosition(
+										ev.currentTarget,
+										305,
+										512
+									)
+									dataRef.current = {
+										title: 'Members',
+										data: {
+											boardMembers: board.members,
+											cardMembers: card.memberIds,
+										},
+										position: {
+											position: 'absolute',
+											top: pos.top,
+											left: pos.left,
+											zIndex: 1000,
+										},
+									}
+									setCurrDynamic(
+										prevDynamic =>
+											(prevDynamic = MemberPicker)
+									)
+									setIsShowModal(true)
+								}}
+							>
 								<Plus />
 							</span>
 						</section>
