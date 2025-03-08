@@ -8,11 +8,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: url(https://images.ctfassets.net/rz1oowkt5gyp/6bFuTiN5YQ78rFkHb3aJlo/b608362…/white-wave-mobile.svg)
-      center bottom -0.5px / 100% 24% no-repeat scroll padding-box border-box,
-    linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto no-repeat scroll padding-box border-box
-      rgb(82, 67, 170);
+  background: url(https://images.ctfassets.net/rz1oowkt5gyp/6bFuTiN5YQ78rFkHb3aJlo/b608362…/white-wave-mobile.svg) center bottom -0.5px / 100% 24% no-repeat scroll padding-box border-box,
+    linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto no-repeat scroll padding-box border-box rgb(82, 67, 170);
   overflow-x: hidden;
+  overflow-y: hidden;
   background-blend-mode: normal, normal;
   z-index: 100;
 
@@ -38,6 +37,7 @@
         padding: 16px;
         // margin-inline: 16px;
       }
+
       .logo {
         width: 200px;
         height: 80px;
@@ -95,6 +95,7 @@
     padding-right: 1rem;
     max-width: 1140px;
     color: rgb(255, 255, 255);
+
     .UI-section-container {
       .content {
         -webkit-box-align: center;
@@ -175,6 +176,7 @@
       }
     }
   }
+
   .wave {
     position: absolute;
     bottom: 0;
@@ -187,6 +189,68 @@
       display: block;
       width: 100%;
       height: auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+
+    .home-app-header {
+      padding: 0;
+      justify-content: center;
+    }
+
+    .home-app-header nav {
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      gap: 10px;
+    }
+
+    .home-app-header .logo {
+      width: 120px;
+      height: auto;
+      padding: 0 !important;
+    }
+
+    .home-app-header .logo img {
+      top: -15px !important;
+    }
+
+    .login-link,
+    .header-demo-btn {
+      font-size: 1em;
+      line-height: normal;
+    }
+
+    .login-link {
+      background-color: #007bff;
+      color: white !important;
+      width: 100%;
+    }
+
+    .home-page-body {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 0;
+    }
+
+    .UI-section-container .content {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .UI-section-container .description {
+      width: 100% !important;
+      text-align: center;
+      padding-bottom: 0 !important;
+      margin: 0;
+    }
+
+    .description h1 {
+      font-size: 2rem !important;
+      margin-block-start: 2.83rem !important;
     }
   }
 }
