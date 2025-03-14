@@ -209,7 +209,6 @@ export function BoardDetails() {
                 />
                 <div className="add-group-actions">
                   <button
-                    autoFocus
                     className="save-group-btn"
                     onClick={() => {
                       onAddGroup()
