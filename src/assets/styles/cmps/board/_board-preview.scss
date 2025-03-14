@@ -82,6 +82,7 @@
       }
     }
   }
+
   &:hover .board-preview-action .star-btn-container {
     opacity: 1;
   }
@@ -91,7 +92,15 @@
   opacity: 1 !important;
   width: 24px !important;
   transform: none !important;
+
   .star-icon {
     color: #e2b203;
+  }
+}
+
+@media (max-width: 768px) {
+  .board-preview-card {
+    width: unset !important;
+    height: inherit;
   }
 }

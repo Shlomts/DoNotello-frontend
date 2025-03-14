@@ -260,4 +260,10 @@
             }
         }
     }
+
+    @media (max-width: 768px) {
+        .board-content {
+            padding-inline-start: 1rem;
+        }
+    }
 }

@@ -3,6 +3,7 @@
 
   .board-list {
     margin-bottom: 30px;
+
     .list {
       display: flex;
       flex-wrap: wrap;
@@ -17,6 +18,7 @@
       }
     }
   }
+
   .add-board {
     width: rem(190px);
     height: rem(96px);
@@ -44,6 +46,51 @@
       background-color: #333c43;
     }
   }
+
+  @media (max-width: 768px) {
+    .board-list {
+      .list.starred-boards {
+
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding: 10px;
+        gap: 10px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        min-width: unset;
+
+        li {
+          flex: 0 0 calc(50% - 10px);
+          scroll-snap-align: start;
+          margin: 0;
+        }
+      }
+
+      .list.full-boards-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem; 
+        min-width: unset;
+        
+        li {
+          width: calc(100% - 30px);
+          height: 3rem;
+          margin: 0;
+        }
+      }
+
+      .list::-webkit-scrollbar {
+        display: none;
+      }
+
+      .add-board{
+        display: none;
+      }
+    }
+  }
+
 }
 
 .boards-container-stared-list {

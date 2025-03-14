@@ -90,6 +90,7 @@ export function BoardIndex() {
                   onRemoveBoard={onRemoveBoard}
                   onUpdateBoard={onUpdateBoard}
                   onAddBoard={onAddBoard}
+                  className='starred-boards'
                 />
               </section>
             )}
@@ -105,6 +106,7 @@ export function BoardIndex() {
                 onRemoveBoard={onRemoveBoard}
                 onUpdateBoard={onUpdateBoard}
                 onAddBoard={onAddBoard}
+                className='full-boards-list'
               />
             </section>
             {/* <section className="boards-container2 ">
