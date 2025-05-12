@@ -237,15 +237,15 @@ export function CardDetails() {
 	}
 
 	function onEditChecklist(newChecklist) {
-		const editList = card.checklists.filter(
-			checklist => checklist.id !== newChecklist.id
+		const newList = card.checklists.map(list =>
+			list.id === newChecklist.id
+				? { ...list, tasks: newChecklist.tasks }
+				: list
 		)
-		const updatedChecklists = [...editList, newChecklist]
-
 		setCard(prevCard => {
 			const updatedCard = {
 				...prevCard,
-				checklists: updatedChecklists,
+				checklists: newList,
 			}
 			updateCard(board, group, updatedCard)
 			return updatedCard
@@ -253,7 +253,7 @@ export function CardDetails() {
 	}
 
 	function removeChecklist(id) {
-		const newChecklists = card.Checklists.filter(
+		const newChecklists = card.checklists.filter(
 			checklist => checklist.id !== id
 		)
 		setCard(prevCard => {
@@ -370,7 +370,6 @@ export function CardDetails() {
 						<input
 							type='text'
 							value={card.title}
-							// onChange={ev => setCardTitle(ev.target.value)}
 							onChange={ev =>
 								setCard(prevCard => {
 									const updatedCard = {
@@ -404,7 +403,7 @@ export function CardDetails() {
 									const pos = getPopupPosition(
 										ev.currentTarget,
 										305,
-										512
+										431.6
 									)
 									dataRef.current = {
 										title: 'Members',
@@ -435,7 +434,7 @@ export function CardDetails() {
 									const pos = getPopupPosition(
 										ev.currentTarget,
 										305,
-										512
+										446.6
 									)
 									dataRef.current = {
 										title: 'Labels',
@@ -466,7 +465,7 @@ export function CardDetails() {
 									const pos = getPopupPosition(
 										ev.currentTarget,
 										305,
-										512
+										173.6
 									)
 									dataRef.current = {
 										title: 'Add checklist',
@@ -496,7 +495,7 @@ export function CardDetails() {
 									const pos = getPopupPosition(
 										ev.currentTarget,
 										305,
-										512
+										142.1
 									)
 									dataRef.current = {
 										title: 'Dates',
@@ -504,7 +503,7 @@ export function CardDetails() {
 											dates: card.dates,
 										},
 										position: {
-											position: 'sticky',
+											position: 'absolute',
 											top: pos.top,
 											left: pos.left,
 											zIndex: 1000,
@@ -526,7 +525,7 @@ export function CardDetails() {
 									const pos = getPopupPosition(
 										ev.currentTarget,
 										305,
-										512
+										196.5
 									)
 									dataRef.current = {
 										title: 'Cover',
@@ -614,7 +613,7 @@ export function CardDetails() {
 										const pos = getPopupPosition(
 											ev.currentTarget,
 											305,
-											512
+											431.6
 										)
 										dataRef.current = {
 											title: 'Members',
@@ -643,7 +642,34 @@ export function CardDetails() {
 					) : (
 						<section className='members-empty'>
 							<h4>Members</h4>
-							<span className='add-member-icon'>
+							<span
+								className='add-member-icon'
+								onClick={ev => {
+									const pos = getPopupPosition(
+										ev.currentTarget,
+										305,
+										431.6
+									)
+									dataRef.current = {
+										title: 'Members',
+										data: {
+											boardMembers: board.members,
+											cardMembers: card.memberIds,
+										},
+										position: {
+											position: 'absolute',
+											top: pos.top,
+											left: pos.left,
+											zIndex: 1000,
+										},
+									}
+									setCurrDynamic(
+										prevDynamic =>
+											(prevDynamic = MemberPicker)
+									)
+									setIsShowModal(true)
+								}}
+							>
 								<Plus />
 							</span>
 						</section>
@@ -663,7 +689,7 @@ export function CardDetails() {
 										const pos = getPopupPosition(
 											ev.currentTarget,
 											305,
-											512
+											446.6
 										)
 										dataRef.current = {
 											title: 'Labels',

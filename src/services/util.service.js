@@ -66,10 +66,11 @@ export function getPopupPosition(element, popupWidth, popupHeight) {
     let left = rect.left + window.scrollX
 
 
-
-    // if (rect.bottom + popupHeight + gap > viewportHeight) {
-    //     top = rect.top - popupHeight - gap + window.scrollY
-    // }
+    if (rect.bottom + popupHeight + gap > viewportHeight) {
+        // top = rect.top - popupHeight - gap + window.scrollY
+        top = window.scrollY + viewportHeight - popupHeight
+        top = Math.max(0, top)
+    }
 
     if (rect.left + popupWidth > viewportWidth) {
         left = viewportWidth - popupWidth + window.scrollX
